@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The KERSHAW LAW FIRM P.C.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Kershaw Law Firm P.C.</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    /* Reset and base styles */
+    /* Basic resets */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    body, html {
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      scroll-behavior: smooth;
-      background-color: #f9f9f9;
+      background-color: #f4f4f4;
       color: #333;
+      line-height: 1.6;
+      padding-top: 60px; /* Space for fixed header */
     }
-    
-    /* Header / Navigation */
+
+    /* Header and Navigation */
     header {
       background: #333;
       color: #fff;
@@ -26,139 +29,130 @@
       position: fixed;
       top: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: 10;
     }
+
     .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
+
     .nav-logo {
       font-size: 1.5em;
       font-weight: bold;
     }
+
     nav ul {
       list-style: none;
       display: flex;
     }
+
     nav ul li {
       margin-left: 20px;
     }
+
     nav ul li a {
       color: #fff;
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
+
     nav ul li a:hover {
       color: #f39c12;
     }
-    .menu-toggle {
-      display: none;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-    
+
     /* Hero Section */
     .hero {
+      background: url('scales-of-justice-austin.jpg') no-repeat center center/cover;
       height: 100vh;
-      background: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('hero-background.jpg') center/cover no-repeat;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding-top: 60px; /* account for fixed header */
-    }
-    .hero-content {
-      color: #fff;
-      max-width: 800px;
-      animation: fadeInUp 1.5s ease;
-    }
-    .hero-content h1 {
-      font-size: 3em;
-      margin-bottom: 0.3em;
-    }
-    .hero-content h2 {
-      font-size: 1.5em;
-      font-weight: 300;
-      margin-bottom: 1em;
-    }
-    
-    /* Information Box */
-    .info-box {
-      background: #fff;
       padding: 20px;
-      border-radius: 5px;
-      margin: 20px auto;
-      max-width: 600px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      color: #333;
+      animation: fadeIn 1.5s ease-in-out;
     }
-    .info-box h3 {
-      margin-top: 0;
-      color: #333;
-    }
-    .info-box p {
-      line-height: 1.5;
+
+    .hero h1 {
+      font-size: 3.5em;
       margin-bottom: 0.5em;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
-    .info-box a {
-      color: #f39c12;
-      text-decoration: none;
+
+    .hero p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     }
-    
+
+    /* Contact Info Section */
+    .contact-info {
+      padding: 20px;
+      background: #fff;
+      text-align: center;
+      margin-top: -5px;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.5em;
+      font-size: 1.1em;
+    }
+
     /* Footer */
     footer {
       background: #333;
       color: #fff;
       text-align: center;
-      padding: 20px;
+      padding: 1em 0;
+      margin-top: 20px;
     }
-    
-    /* Animation */
-    @keyframes fadeInUp {
+
+    /* Animations */
+    @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(20px);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
       }
     }
-    
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
+
+    /* Mobile Adjustments */
+    @media (max-width: 600px) {
+      .nav-container {
+        flex-direction: column;
+        text-align: center;
       }
+
       nav ul {
         flex-direction: column;
-        background: #333;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-        display: none;
+        margin-top: 10px;
       }
+
       nav ul li {
         margin: 10px 0;
+      }
+
+      .hero h1 {
+        font-size: 2.5em;
       }
     }
   </style>
 </head>
+
 <body>
-  <!-- Header with Navigation -->
+  <!-- Header and Navigation -->
   <header>
     <div class="nav-container">
       <div class="nav-logo">Kershaw Law</div>
-      <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
       <nav>
-        <ul id="nav-list">
+        <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="h2b.html">H2B Program</a></li>
           <li><a href="h2a.html">H2A Program</a></li>
@@ -169,40 +163,25 @@
     </div>
   </header>
 
-  <!-- Hero Section with Firm Information -->
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-content">
-      <h1>The KERSHAW LAW FIRM P.C.</h1>
-      <h2>A PROFESSIONAL CORPORATION</h2>
-      <div class="info-box">
-        <h3>ROBERT D. KERSHAW</h3>
-        <p>3355 BEE CAVES RD<br>SUITE 307<br>AUSTIN, TX 78746</p>
-        <p>TEL: 737-204-0093 | FAX: 737-204-0094</p>
-        <p>
-          <a href="mailto:ROBERT.KERSHAW@KERSHAWLAW.COM">
-            ROBERT.KERSHAW@KERSHAWLAW.COM
-          </a>
-        </p>
-      </div>
+    <div>
+      <h1>The Kershaw Law Firm P.C.</h1>
+      <p>Expert legal guidance in navigating visa programs for employers in Austin, Texas.</p>
     </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="contact-info">
+    <p><strong>ROBERT D. KERSHAW</strong></p>
+    <p>3355 Bee Caves Rd, Suite 307, Austin, TX 78746</p>
+    <p>Phone: 737-204-0093 | Fax: 737-204-0094</p>
+    <p>Email: <a href="mailto:robert.kershaw@kershawlaw.com">robert.kershaw@kershawlaw.com</a></p>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> The KERSHAW LAW FIRM P.C. All rights reserved.</p>
+    <p>&copy; 2025 The Kershaw Law Firm P.C. All rights reserved.</p>
   </footer>
-
-  <!-- JavaScript for Mobile Menu Toggle -->
-  <script>
-    function toggleMenu() {
-      var navList = document.getElementById('nav-list');
-      if (navList.style.display === "flex") {
-        navList.style.display = "none";
-      } else {
-        navList.style.display = "flex";
-        navList.style.flexDirection = "column";
-      }
-    }
-  </script>
 </body>
 </html>

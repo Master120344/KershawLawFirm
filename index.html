@@ -1,89 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm - Home</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script defer src="index.js"></script>
-</head>
+/* ======= Reset and Body ======= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
 
-<body>
+body {
+    background: linear-gradient(120deg, #001f33, #003366);
+    color: #ddd;
+    line-height: 1.6;
+    text-align: center;
+}
 
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <h1>The Kershaw Law Firm P.C.</h1>
-            <p>A PROFESSIONAL CORPORATION</p>
-            <p>Robert D. Kershaw</p>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="h2b.html">H2B Program</a></li>
-                    <li><a href="h2a.html">H2A Program</a></li>
-                    <li><a href="costs.html">Costs & Process</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+/* ======= Header Styling ======= */
+header {
+    padding: 30px 20px;
+    background: #003366;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Your Trusted Legal Partner in Austin, TX</h2>
-            <p>Specializing in Employer Visa Solutions: H2A, H2B, and More</p>
-            <a href="contact.html" class="cta-button">Get Legal Help Now</a>
-        </div>
-    </section>
+header h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+}
 
-    <!-- About Section -->
-    <section class="about">
-        <h2>Why Choose The Kershaw Law Firm?</h2>
-        <p>With decades of experience helping employers navigate complex immigration processes, Robert Kershaw ensures your business gets the workforce it needs — fast, efficiently, and legally.</p>
-        <p>We handle everything from filing to compliance, so you can focus on running your business.</p>
-    </section>
+header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
 
-    <!-- Services Section -->
-    <section class="services">
-        <h2>Our Specialized Services</h2>
-        <div class="service-card">H2A Agricultural Visas</div>
-        <div class="service-card">H2B Seasonal Work Visas</div>
-        <div class="service-card">Employer Immigration Advisory</div>
-        <div class="service-card">Legal Compliance Assistance</div>
-    </section>
+/* ======= Navigation Bar ======= */
+.nav-menu {
+    background: #00264d;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
 
-    <!-- Process Breakdown Section -->
-    <section class="process">
-        <h2>Our Proven Process</h2>
-        <div class="process-step">
-            <h3>Step 1: Consultation</h3>
-            <p>We assess your workforce needs and determine the right visa program for your business.</p>
-        </div>
-        <div class="process-step">
-            <h3>Step 2: Application & Compliance</h3>
-            <p>We handle the paperwork, ensuring full legal compliance and smooth processing.</p>
-        </div>
-        <div class="process-step">
-            <h3>Step 3: Workforce Secured</h3>
-            <p>Your employees arrive legally and ready to work — backed by The Kershaw Law Firm.</p>
-        </div>
-    </section>
+.nav-menu a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: 0.3s ease;
+}
 
-    <!-- Call to Action Section -->
-    <section class="cta">
-        <h2>Need Reliable Visa Solutions for Your Business?</h2>
-        <p>Contact Robert Kershaw today to secure your workforce, the legal way.</p>
-        <a href="contact.html" class="cta-button">Schedule a Consultation</a>
-    </section>
+.nav-menu a:hover,
+.nav-menu a.active {
+    background: #00aaff;
+    color: #fff;
+    border-radius: 5px;
+}
 
-    <!-- Footer Section -->
-    <footer>
-        <p>Robert D. Kershaw | 3355 Bee Caves Rd, Suite 307, Austin, TX 78746</p>
-        <p>Tel: <a href="tel:7372040093">737-204-0093</a> | Fax: 737-204-0094 | Email: <a href="mailto:robert.kershaw@kershawlaw.com">robert.kershaw@kershawlaw.com</a></p>
-        <p>&copy; <span id="footer-year"></span> The Kershaw Law Firm P.C. All rights reserved.</p>
-    </footer>
+/* ======= Hero Section ======= */
+.hero {
+    padding: 50px 20px;
+    background: #001f33;
+    color: #fff;
+}
 
-</body>
-</html>
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* ======= Buttons ======= */
+.cta-button,
+.service-button {
+    display: inline-block;
+    background: #00aaff;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.cta-button:hover,
+.service-button:hover {
+    background: #0077cc;
+    transform: scale(1.1);
+}
+
+/* ======= Services Section ======= */
+.services {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.service-card {
+    background: #00264d;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    width: 300px;
+}
+
+/* ======= Footer ======= */
+footer {
+    background: #001f33;
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #ddd;
+}

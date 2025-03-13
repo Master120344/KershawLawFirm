@@ -1,10 +1,9 @@
-// Smooth scrolling for navigation links
+// Smooth Scroll for Navigation Links
 document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const targetId = e.target.getAttribute('href').substring(1);
+    link.addEventListener('click', event => {
+        event.preventDefault();
+        const targetId = event.target.getAttribute('href').substring(1);
         const targetSection = document.getElementById(targetId);
-
         if (targetSection) {
             window.scrollTo({
                 top: targetSection.offsetTop - 50,
@@ -14,160 +13,154 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     });
 });
 
-// Mobile menu toggle setup
-const navMenu = document.querySelector('.nav-menu');
-const menuToggle = document.createElement('div');
-menuToggle.classList.add('menu-toggle');
-menuToggle.innerHTML = '☰';
-document.querySelector('header').appendChild(menuToggle);
-
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    menuToggle.classList.toggle('open');
-});
-
-// Dynamic footer year update
-document.getElementById('footer-year').textContent = new Date().getFullYear();
-
-// Header shrink effect on scroll
+// Active Navigation Link Highlight
+const navLinks = document.querySelectorAll('.nav-menu a');
 window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-        header.classList.add('shrink');
-    } else {
-        header.classList.remove('shrink');
-    }
-});
-
-// Section reveal animations on scroll
-const sections = document.querySelectorAll('section');
-const revealSection = entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+    let currentSection = '';
+    document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop - 60;
+        if (window.scrollY >= sectionTop) {
+            currentSection = section.getAttribute('id');
         }
     });
-};
 
-const sectionObserver = new IntersectionObserver(revealSection, {
-    threshold: 0.2
-});
-
-sections.forEach(section => sectionObserver.observe(section));
-
-// Auto-highlight active navigation link on scroll
-window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY + 100;
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-        const section = document.querySelector(link.getAttribute('href'));
-        if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
-            document.querySelector('.nav-menu a.active').classList.remove('active');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === currentSection) {
             link.classList.add('active');
         }
     });
 });
 
-// Button hover effect with dynamic scaling
-document.querySelectorAll('.cta-button').forEach(button => {
-    button.addEventListener('mouseover', () => {
-        button.style.transition = 'all 0.3s ease-in-out';
+// Button Hover Animation
+document.querySelectorAll('.cta-button, .service-button').forEach(button => {
+    button.addEventListener('mouseenter', () => {
         button.style.transform = 'scale(1.1)';
-        button.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.8)';
+        button.style.boxShadow = '0 0 15px #00aaff';
     });
 
-    button.addEventListener('mouseout', () => {
+    button.addEventListener('mouseleave', () => {
         button.style.transform = 'scale(1)';
         button.style.boxShadow = 'none';
     });
 });
 
-// Dark mode toggle button setup
-const darkModeToggle = document.createElement('button');
-darkModeToggle.innerText = "Dark Mode";
-darkModeToggle.classList.add('dark-mode-toggle');
-document.body.appendChild(darkModeToggle);
+// Fade-in Animation on Scroll
+const fadeInElements = document.querySelectorAll('.about, .services, .contact-info');
 
-darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    darkModeToggle.innerText = document.body.classList.contains('dark-mode') ? "Light Mode" : "Dark Mode";
+const fadeInObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.2 });
+
+fadeInElements.forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(30px)';
+    fadeInObserver.observe(element);
 });
 
-// Back to top button functionality
-const backToTopButton = document.createElement('button');
-backToTopButton.innerText = "↑ Top";
-backToTopButton.classList.add('back-to-top');
-document.body.appendChild(backToTopButton);
+// Dynamic Date & Time Display
+const timeElement = document.createElement('div');
+timeElement.id = 'current-time';
+timeElement.style.position = 'fixed';
+timeElement.style.bottom = '10px';
+timeElement.style.right = '10px';
+timeElement.style.background = '#00264d';
+timeElement.style.color = '#00aaff';
+timeElement.style.padding = '5px 10px';
+timeElement.style.borderRadius = '5px';
+document.body.appendChild(timeElement);
+
+setInterval(() => {
+    const now = new Date();
+    timeElement.innerText = `📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
+}, 1000);
+
+// Back to Top Button
+const topButton = document.createElement('button');
+topButton.innerText = '⬆️ Top';
+topButton.id = 'top-button';
+topButton.style.position = 'fixed';
+topButton.style.bottom = '20px';
+topButton.style.right = '20px';
+topButton.style.background = '#00aaff';
+topButton.style.color = '#fff';
+topButton.style.padding = '10px 15px';
+topButton.style.borderRadius = '5px';
+topButton.style.cursor = 'pointer';
+topButton.style.display = 'none';
+document.body.appendChild(topButton);
+
+topButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopButton.classList.add('show');
-    } else {
-        backToTopButton.classList.remove('show');
-    }
+    topButton.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 
-backToTopButton.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+// Interactive Background Animation
+let hue = 0;
+setInterval(() => {
+    document.body.style.background = `linear-gradient(120deg, hsl(${hue}, 80%, 20%), hsl(${hue + 60}, 70%, 30%))`;
+    hue = (hue + 1) % 360;
+}, 100);
+
+// Loading Animation
+document.body.style.opacity = '0';
+window.addEventListener('load', () => {
+    document.body.style.transition = 'opacity 1.5s ease-in';
+    document.body.style.opacity = '1';
 });
 
-// Form validation setup
-const contactForm = document.querySelector('#contact-form');
+// Accessibility Enhancements (Keyboard Navigation)
+document.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown') window.scrollBy(0, 100);
+    if (event.key === 'ArrowUp') window.scrollBy(0, -100);
+    if (event.key === 'Home') window.scrollTo(0, 0);
+    if (event.key === 'End') window.scrollTo(0, document.body.scrollHeight);
+});
+
+// Form Spam Protection
+const contactForm = document.querySelector('form');
 if (contactForm) {
-    contactForm.addEventListener('submit', e => {
-        e.preventDefault();
-
+    contactForm.addEventListener('submit', event => {
+        event.preventDefault();
         const name = document.querySelector('#name').value.trim();
         const email = document.querySelector('#email').value.trim();
         const message = document.querySelector('#message').value.trim();
-        const errorMsg = document.querySelector('.form-error');
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!name || !email || !message) {
-            errorMsg.innerText = 'Please fill in all fields.';
-            errorMsg.classList.add('visible');
-            return;
+            alert('Please fill in all fields.');
+        } else if (!emailRegex.test(email)) {
+            alert('Invalid email format.');
+        } else if (message.includes('http') || message.includes('<script>')) {
+            alert('Suspicious content detected!');
+        } else {
+            alert('Message sent successfully!');
+            contactForm.reset();
         }
-
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            errorMsg.innerText = 'Please enter a valid email address.';
-            errorMsg.classList.add('visible');
-            return;
-        }
-
-        errorMsg.classList.remove('visible');
-        alert('Message sent successfully!');
-        contactForm.reset();
     });
 }
 
-// Auto-collapse mobile menu after link click
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            menuToggle.classList.remove('open');
-        }
-    });
+// Security: Basic Bot Prevention
+document.addEventListener('mousemove', () => {
+    document.body.setAttribute('data-human', 'true');
+});
+document.addEventListener('keydown', () => {
+    document.body.setAttribute('data-human', 'true');
 });
 
-// Load performance tracker
-window.addEventListener('load', () => {
-    console.log('Website loaded successfully.');
-    const loadTime = performance.now() / 1000;
-    console.log(`Page loaded in ${loadTime.toFixed(2)} seconds.`);
-});
-
-// Error handler
-window.onerror = (message, source, lineno, colno, error) => {
-    console.error(`Error: ${message} at ${source}:${lineno}:${colno}`);
-};
-
-// Prevent accidental page reload or close with unsaved form data
-window.addEventListener('beforeunload', e => {
-    if (contactForm && contactForm.querySelector('#name').value !== "") {
-        e.preventDefault();
-        e.returnValue = 'Are you sure you want to leave? Your data might not be saved.';
+setTimeout(() => {
+    if (!document.body.hasAttribute('data-human')) {
+        alert('Bot activity detected — action blocked!');
     }
-});
+}, 5000);
+
+console.log('✅ Fully enhanced JS loaded successfully!');

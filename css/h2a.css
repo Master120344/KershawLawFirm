@@ -1,0 +1,243 @@
+/* ======== General Reset ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* ======== Body Styling ======== */
+body {
+    color: #f0f0f0;
+    background-color: #0a0a0a;
+    line-height: 1.6;
+}
+
+/* ======== Header Styling ======== */
+header {
+    background: linear-gradient(90deg, #003366, #001f33);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    border-bottom: 3px solid #00509e;
+}
+
+header h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+/* ======== Navigation Menu ======== */
+.nav-menu {
+    margin-top: 10px;
+}
+
+.nav-menu a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-menu a:hover {
+    background: #00509e;
+    color: #fff;
+}
+
+.nav-menu a.active {
+    background: #00264d;
+    color: #fff;
+    box-shadow: 0 0 8px #00aaff;
+}
+
+/* ======== Hero Section ======== */
+.hero-section {
+    padding: 50px 20px;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(120deg, #001f33, #003366);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.hero-section h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-section p {
+    font-size: 1.4rem;
+    opacity: 0.9;
+}
+
+/* ======== Content Sections ======== */
+.content-section {
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    background-color: #0f0f0f;
+}
+
+.content-section h2 {
+    color: #00aaff;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.content-section p {
+    font-size: 1.2rem;
+    width: 80%;
+    margin: 0 auto;
+    color: #ddd;
+}
+
+/* ======== Benefits Cards Section ======== */
+.benefit-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.card {
+    background: #001f33;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.card h3 {
+    color: #00aaff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #ddd;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* ======== Process Steps Section ======== */
+.process ol {
+    list-style: none;
+    counter-reset: step-counter;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.process li {
+    counter-increment: step-counter;
+    padding: 10px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease-in-out;
+    color: #ddd;
+}
+
+.process li.reveal {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.process li::before {
+    content: counter(step-counter);
+    background: #00509e;
+    color: #fff;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 10px;
+}
+
+/* ======== Call-to-Action Section ======== */
+.cta-section {
+    background: #00264d;
+    padding: 50px 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    color: #00aaff;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #00aaff;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background: #0077cc;
+    transform: scale(1.1);
+}
+
+/* ======== Footer ======== */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #001f33;
+    color: #ddd;
+    font-size: 0.9rem;
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section h2 {
+        font-size: 2rem;
+    }
+
+    .content-section p {
+        width: 100%;
+    }
+
+    .benefit-cards {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 80%;
+    }
+}

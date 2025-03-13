@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The KERSHAW LAW FIRM P.C.</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      scroll-behavior: smooth;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    
+    /* Header / Navigation */
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1em 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #f39c12;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('hero-background.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 60px; /* account for fixed header */
+    }
+    .hero-content {
+      color: #fff;
+      max-width: 800px;
+      animation: fadeInUp 1.5s ease;
+    }
+    .hero-content h1 {
+      font-size: 3em;
+      margin-bottom: 0.3em;
+    }
+    .hero-content h2 {
+      font-size: 1.5em;
+      font-weight: 300;
+      margin-bottom: 1em;
+    }
+    
+    /* Information Box */
+    .info-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+    .info-box h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    .info-box p {
+      line-height: 1.5;
+      margin-bottom: 0.5em;
+    }
+    .info-box a {
+      color: #f39c12;
+      text-decoration: none;
+    }
+    
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      nav ul {
+        flex-direction: column;
+        background: #333;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        display: none;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="nav-logo">Kershaw Law</div>
+      <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+      <nav>
+        <ul id="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="h2b.html">H2B Program</a></li>
+          <li><a href="h2a.html">H2A Program</a></li>
+          <li><a href="costs.html">Costs & Process</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section with Firm Information -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>The KERSHAW LAW FIRM P.C.</h1>
+      <h2>A PROFESSIONAL CORPORATION</h2>
+      <div class="info-box">
+        <h3>ROBERT D. KERSHAW</h3>
+        <p>3355 BEE CAVES RD<br>SUITE 307<br>AUSTIN, TX 78746</p>
+        <p>TEL: 737-204-0093 | FAX: 737-204-0094</p>
+        <p>
+          <a href="mailto:ROBERT.KERSHAW@KERSHAWLAW.COM">
+            ROBERT.KERSHAW@KERSHAWLAW.COM
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> The KERSHAW LAW FIRM P.C. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    function toggleMenu() {
+      var navList = document.getElementById('nav-list');
+      if (navList.style.display === "flex") {
+        navList.style.display = "none";
+      } else {
+        navList.style.display = "flex";
+        navList.style.flexDirection = "column";
+      }
+    }
+  </script>
+</body>
+</html>

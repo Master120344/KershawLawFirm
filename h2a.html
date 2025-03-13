@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H2B Program - Kershaw Law Firm P.C.</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Reset styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      padding-top: 60px;
+    }
+
+    /* Header */
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1em 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 600;
+    }
+
+    nav ul li a:hover {
+      color: #f39c12;
+    }
+
+    /* Page Content */
+    .page-content {
+      background: url('h2b-workers.jpg') no-repeat center center/cover;
+      height: 60vh;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .page-content h1 {
+      font-size: 3em;
+      font-weight: bold;
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .content-section {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .content-section h2 {
+      font-size: 2.5em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .content-section p {
+      font-size: 1.2em;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+    }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      color: #fff;
+      background-color: #f39c12;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #e67e22;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1em 0;
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+
+    /* Fade Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {

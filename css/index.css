@@ -1,126 +1,184 @@
-/* General Body Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #0a0a0a;
-    color: #ffffff;
+/* Global Reset */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
-/* Header Styling */
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #001f3f, #003366);
+    color: #f0f0f0;
+    line-height: 1.6;
+    padding-top: 60px;
+}
+
+/* Header & Navbar */
 header {
-    background: linear-gradient(90deg, #001f3f, #003366);
-    padding: 20px 0;
-    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #001f3f;
+    padding: 10px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    z-index: 1000;
 }
 
-header h1 {
-    font-size: 2.5em;
-    margin: 0;
-    color: #ffffff;
-}
-
-header p {
-    margin: 5px 0;
-    color: #cccccc;
-}
-
-/* Navigation Menu */
 .nav-menu {
-    list-style: none;
-    padding: 0;
     display: flex;
     justify-content: center;
     gap: 20px;
-}
-
-.nav-menu li {
-    display: inline;
+    list-style: none;
 }
 
 .nav-menu a {
-    color: #fff;
+    color: #00aaff;
     text-decoration: none;
-    padding: 10px;
+    font-weight: bold;
+    padding: 10px 15px;
     transition: 0.3s ease;
 }
 
 .nav-menu a:hover,
-.nav-menu .active {
-    color: #4cafef;
-    font-weight: bold;
+.nav-menu a.active {
+    background: #00aaff;
+    color: #001f3f;
+    border-radius: 5px;
 }
 
 /* Hero Section */
 .hero {
-    background: url('austin-justice.jpg') no-repeat center center/cover;
-    height: 80vh;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-}
-
-.hero-content h2 {
-    font-size: 3em;
-    text-shadow: 2px 2px 10px #000;
-}
-
-.hero-content p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-}
-
-.cta-button {
-    background-color: #4cafef;
-    color: #0a0a0a;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #003366;
-    color: #fff;
-}
-
-/* About Section */
-.about {
-    padding: 30px;
-    background-color: #111;
-    text-align: center;
-}
-
-/* Services Section */
-.services {
-    display: flex;
     justify-content: center;
-    gap: 20px;
-    padding: 30px;
-    background-color: #0a0a0a;
-}
-
-.service-card {
-    background-color: #003366;
-    padding: 20px;
-    border-radius: 10px;
     text-align: center;
-    font-weight: bold;
+    background: url('law_background.jpg') no-repeat center center/cover;
     color: #fff;
-    box-shadow: 2px 2px 10px #000;
-    transition: transform 0.3s ease;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 5px #000;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-.service-card:hover {
-    transform: scale(1.05);
+/* About, Services, Contact Sections */
+section {
+    padding: 50px;
+    margin: 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    transition: 0.3s ease-in-out;
 }
 
-/* Footer Section */
+section:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px #00aaff;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #00aaff;
+    margin-bottom: 15px;
+}
+
+/* Call to Action Buttons */
+.cta-button, .service-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #00aaff;
+    color: #001f3f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.cta-button:hover, .service-button:hover {
+    background: #005f99;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00aaff;
+}
+
+/* Contact Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+input, textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #00264d;
+    color: #f0f0f0;
+    font-size: 1rem;
+}
+
+input:focus, textarea:focus {
+    outline: 2px solid #00aaff;
+}
+
+form button {
+    background: #00aaff;
+    color: #001f3f;
+}
+
+/* Footer Styling */
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #001f3f;
-    color: #cccccc;
+    padding: 20px;
+    background: #001f3f;
+    color: #00aaff;
+    font-weight: bold;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Scroll-to-Top Button Styling */
+#top-button {
+    transition: 0.3s ease-in-out;
+}
+
+#top-button:hover {
+    transform: scale(1.2);
+    background: #005f99;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media Queries — Mobile Responsive */
+@media (max-width: 768px) {
+    .hero {
+        font-size: 1.5rem;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    form {
+        width: 90%;
+    }
 }

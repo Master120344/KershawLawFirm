@@ -1,91 +1,108 @@
-// ==============================
-// KERSHAW LAW FIRM UI ENHANCEMENTS SCRIPT
-// ==============================
+// Mobile Menu Toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('.nav-menu');
 
-// 🌟 Section 1: Smooth Fade-in Animation on Load
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("fade-in");
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    menuToggle.classList.toggle('active');
 });
 
-// 🌟 Section 2: Back to Top Button
-const backToTopButton = document.createElement("button");
-backToTopButton.innerText = "↑";
-backToTopButton.classList.add("back-to-top");
-document.body.appendChild(backToTopButton);
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTopButton.classList.add("visible");
-  } else {
-    backToTopButton.classList.remove("visible");
-  }
-});
-
-backToTopButton.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-});
-
-// 🌟 Section 3: Dynamic Year in Footer
-const footerYear = document.querySelector("#footer-year");
-if (footerYear) footerYear.textContent = new Date().getFullYear();
-
-// 🌟 Section 4: Mobile Menu Toggle
-const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector(".nav-menu");
-
-if (menuToggle && navMenu) {
-  menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-    menuToggle.classList.toggle("open");
-  });
-
-  // Close menu when clicking a link
-  document.querySelectorAll(".nav-menu a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("active");
-      menuToggle.classList.remove("open");
+// Smooth Scroll Functionality for All Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
-  });
+});
+
+// Year Auto-Updater in Footer
+const yearSpan = document.getElementById('footer-year');
+yearSpan.textContent = new Date().getFullYear();
+
+// Reveal Sections on Scroll (Fade-in Effect)
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+    reveals.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const revealPoint = 150;
+        if (sectionTop < windowHeight - revealPoint) {
+            section.classList.add('active');
+        } else {
+            section.classList.remove('active');
+        }
+    });
 }
 
-// 🌟 Section 5: Scroll Reveal Animations (For Sections)
-const revealElements = document.querySelectorAll(".reveal");
-const revealOnScroll = () => {
-  revealElements.forEach((el) => {
-    const elementTop = el.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-    if (elementTop < windowHeight - 100) {
-      el.classList.add("visible");
-    } else {
-      el.classList.remove("visible");
-    }
-  });
-};
-
-window.addEventListener("scroll", revealOnScroll);
+window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
 
-// 🌟 Section 6: Floating Call Button (For Mobile)
-const callButton = document.createElement("a");
-callButton.href = "tel:7372040093";
-callButton.classList.add("call-button");
-callButton.innerHTML = "📞 Call Us";
-document.body.appendChild(callButton);
+// Back to Top Button
+const backToTopBtn = document.createElement('button');
+backToTopBtn.innerHTML = "⬆";
+backToTopBtn.id = 'backToTop';
+document.body.appendChild(backToTopBtn);
 
-// 🌟 Section 7: Loading Screen Animation (Optional)
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
-  if (loader) {
-    loader.classList.add("fade-out");
-    setTimeout(() => loader.style.display = "none", 1000);
-  }
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+    } else {
+        backToTopBtn.style.display = "none";
+    }
 });
 
-// ==============================
-// END OF UI ENHANCEMENTS SCRIPT
-// ==============================
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 
-console.info("Kershaw Law Firm website UI enhancements loaded successfully!");
+// Form Validation for Contact Page (If Needed Later)
+const contactForm = document.querySelector('form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        const name = document.querySelector('#name').value.trim();
+        const email = document.querySelector('#email').value.trim();
+        const message = document.querySelector('#message').value.trim();
+
+        if (!name || !email || !message) {
+            e.preventDefault();
+            alert('Please fill out all fields.');
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            e.preventDefault();
+            alert('Please enter a valid email.');
+        }
+    });
+}
+
+// Lazy Loading Images for Performance Boost
+const images = document.querySelectorAll('img');
+images.forEach(img => {
+    img.loading = "lazy";
+});
+
+// Light/Dark Mode Toggle (Extra Feature)
+const darkModeToggle = document.createElement('button');
+darkModeToggle.id = 'darkModeToggle';
+darkModeToggle.innerText = "🌙 Dark Mode";
+document.body.appendChild(darkModeToggle);
+
+darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    darkModeToggle.innerText = document.body.classList.contains('dark-mode') ? "☀️ Light Mode" : "🌙 Dark Mode";
+});
+
+// Error Handling for Broken Links or Images
+window.addEventListener('error', (e) => {
+    console.error("Error detected: ", e);
+});
+
+// Performance Boosting Lazy Loading Video (Optional)
+const videos = document.querySelectorAll('video');
+videos.forEach(video => {
+    video.preload = "none";
+});

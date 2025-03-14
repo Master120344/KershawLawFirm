@@ -3,82 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script defer src="index.js"></script>
-    <title>H-2A Program - Kershaw Law Firm P.C.</title>
+    <title>H-2A Visa Experts | The Kershaw Law Firm P.C.</title>
+    
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Background - Scales of Justice with Farm */
+        body {
+            font-family: 'Georgia', serif;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Scales-of-Justice-Farm.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Law Firm Name */
+        .lawfirm-title {
+            font-size: 4em;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-top: 30px;
+            text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Tagline */
+        .headline {
+            font-size: 1.8em;
+            font-style: italic;
+            max-width: 900px;
+            color: #E6E6E6;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+            margin-top: 10px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #1e90ff;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button:hover {
+            background: #0d6efd;
+        }
+
+        /* About Visa */
+        .about-visa {
+            margin-top: 50px;
+            max-width: 900px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .about-visa h2 {
+            color: #FFD700;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .about-visa p {
+            font-size: 1.3em;
+            line-height: 1.6;
+        }
+
+        /* Video Section */
+        .video-section {
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .video-section h2 {
+            color: #FFD700;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .video-section iframe {
+            width: 80%;
+            height: 400px;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            margin-top: 50px;
+            padding: 20px;
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .why-us h2 {
+            color: #FFD700;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .why-us ul {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 1.8;
+        }
+
+        .why-us ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Bottom Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #FFD700;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .lawfirm-title { font-size: 3em; }
+            .headline { font-size: 1.2em; }
+            .cta-button { font-size: 1em; }
+            .about-visa, .why-us { max-width: 90%; }
+            .video-section iframe { width: 90%; height: 300px; }
+            nav { gap: 10px; }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <h1>Kershaw Law Firm P.C.</h1>
-        <p>Specializing in Employment-Based Visas</p>
-        <nav class="nav-menu">
-            <a href="index.html">Home</a>
-            <a href="h2b.html">H-2B Program</a>
-            <a href="h2a.html" class="active">H-2A Program</a>
-            <a href="costs.html">Costs & Process</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section h2a-hero">
-        <h2>H-2A Agricultural Visa Program</h2>
-        <p>Connecting Employers with Seasonal Agricultural Workers — Legally and Efficiently.</p>
+    <!-- Law Firm Name -->
+    <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
+
+    <!-- Tagline -->
+    <h2 class="headline">Protecting Agriculture. Strengthening Businesses.<br> Your Expert in H-2A Visas.</h2>
+
+    <!-- Get Started Button -->
+    <a href="getstarted.html" class="cta-button">Get Started Now</a>
+
+    <!-- About H-2A Visa -->
+    <section class="about-visa">
+        <h2>What is an H-2A Visa?</h2>
+        <p>The **H-2A visa** allows **U.S. agricultural employers** to **legally** hire foreign workers for **temporary or seasonal farm work**. Under **8 U.S. Code § 1101**, this program ensures **compliance** with labor laws while meeting the demands of American agriculture.</p>
     </section>
 
-    <!-- Overview Section -->
-    <section class="content-section">
-        <h2>What is the H-2A Visa Program?</h2>
-        <p>
-            The H-2A program allows U.S. agricultural employers to bring foreign nationals to the U.S. 
-            for seasonal or temporary agricultural jobs. This program ensures farmers and businesses 
-            have the workforce they need while protecting workers’ rights and maintaining compliance 
-            with federal law.
-        </p>
+    <!-- Video Section -->
+    <section class="video-section">
+        <h2>Understanding the H-2A Process</h2>
+        <iframe src="https://www.youtube.com/embed/ZrdV_8GbXMo" frameborder="0" allowfullscreen></iframe>
     </section>
 
-    <!-- Key Benefits Section -->
-    <section class="content-section benefits">
-        <h2>Key Benefits for Employers</h2>
-        <div class="benefit-cards">
-            <div class="card">
-                <h3>Reliable Workforce</h3>
-                <p>Ensure your farm or agricultural business stays productive with a stable, vetted labor force.</p>
-            </div>
-            <div class="card">
-                <h3>Compliance & Protection</h3>
-                <p>We handle the legal processes and paperwork, ensuring you stay compliant with U.S. labor laws.</p>
-            </div>
-            <div class="card">
-                <h3>Timely Processing</h3>
-                <p>Our experts navigate the system efficiently to help you meet peak seasonal demand.</p>
-            </div>
-        </div>
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <h2>Why The Kershaw Law Firm P.C.?</h2>
+        <ul>
+            <li>✔ **Elite Immigration Law Firm**</li>
+            <li>✔ **Unmatched 98% Success Rate** in H-2A Cases</li>
+            <li>✔ **Fast, Efficient, & Compliant Processing**</li>
+            <li>✔ **Mastering the Art of Legal Strategy**</li>
+        </ul>
     </section>
 
-    <!-- Process Breakdown -->
-    <section class="content-section process">
-        <h2>How the Process Works</h2>
-        <ol>
-            <li><strong>Determine Eligibility:</strong> We assess your business’s eligibility and job requirements.</li>
-            <li><strong>Submit Application:</strong> We file necessary paperwork with the Department of Labor and USCIS.</li>
-            <li><strong>Recruit Workers:</strong> Employers can recruit qualified foreign workers or we can help facilitate.</li>
-            <li><strong>Approval and Arrival:</strong> Upon approval, workers receive visas and arrive for work.</li>
-        </ol>
-    </section>
+    <!-- Bottom Navigation -->
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="h2a.html">H-2A Visa</a>
+        <a href="h2b.html">H-2B Visa</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-    <!-- Call to Action -->
-    <section class="cta-section">
-        <h2>Ready to Strengthen Your Workforce?</h2>
-        <p>Contact Kershaw Law Firm today to start the H-2A visa process — efficiently and legally.</p>
-        <a href="contact.html" class="cta-button">Get Started Now</a>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; <span id="footer-year"></span> Kershaw Law Firm P.C. | All Rights Reserved</p>
-    </footer>
 </body>
 </html>

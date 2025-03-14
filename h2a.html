@@ -3,191 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-2A Visa | The Kershaw Law Firm P.C.</title>
-    
-    <!-- Styles -->
-    <style>
-        /* General Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', serif; }
+    <title>H-2A Visa Experts | The Kershaw Law Firm P.C.</title>
 
-        /* Page Background */
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background and General Styling */
         body {
-            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Scales-of-Justice-Farm.jpg') no-repeat center center/cover;
+            font-family: 'Georgia', serif;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/justice-background.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
+            position: relative;
+            min-height: 100vh;
+            transition: background 0.5s ease-in-out;
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 100px 20px;
+        /* Overlay Effect */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            transition: all 0.5s ease-in-out;
         }
 
-        .lawfirm-title {
+        /* Content Wrapper */
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+        }
+
+        /* Law Firm Name */
+        h1 {
             font-size: 3.5em;
-            color: #FFD700;
-            text-transform: uppercase;
-        }
-
-        .headline {
-            font-size: 1.8em;
-            font-style: italic;
-            max-width: 900px;
-            margin: 20px auto;
-        }
-
-        /* Call to Action Button */
-        .cta-button {
-            display: inline-block;
-            padding: 15px 35px;
-            background: #1e90ff;
-            color: white;
             font-weight: bold;
-            text-decoration: none;
-            font-size: 1.2em;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: background 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
         }
 
-        .cta-button:hover { background: #0d6efd; }
+        /* Section Titles */
+        h2 {
+            font-size: 2.2em;
+            margin: 25px 0;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+        }
 
-        /* About H-2A Visa */
-        .about-visa {
-            padding: 40px 20px;
+        /* Description Paragraphs */
+        p {
+            font-size: 1.4em;
+            line-height: 1.8;
+            margin: 15px auto;
             max-width: 900px;
-            margin: 40px auto;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
-        }
-
-        .about-visa h2 {
-            color: #FFD700;
-            font-size: 2.5em;
-        }
-
-        .about-visa p {
-            font-size: 1.3em;
-            line-height: 1.6;
+            text-align: justify;
+            font-style: italic;
         }
 
         /* Video Section */
-        .video-section {
-            padding: 40px 20px;
-        }
-
-        .video-section h2 {
-            color: #FFD700;
-            font-size: 2em;
-        }
-
-        .video-section iframe {
-            width: 80%;
-            height: 400px;
-            max-width: 800px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
-        }
-
-        /* Why Choose Us */
-        .why-us {
-            padding: 40px 20px;
+        .video-container {
+            position: relative;
+            width: 75%;
             max-width: 900px;
             margin: 40px auto;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+            border: 6px solid #fff;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
         }
 
-        .why-us h2 {
-            color: #FFD700;
-            font-size: 2.5em;
+        .video-container iframe {
+            width: 100%;
+            height: 500px;
         }
 
-        .why-us ul {
-            list-style: none;
-            font-size: 1.3em;
-            line-height: 1.8;
+        /* Call-to-Action Button */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #FFD700;
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .why-us ul li { margin-bottom: 10px; }
+        .cta-button:hover {
+            background: #ffcc00;
+        }
 
         /* Footer Navigation */
         nav {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             padding: 15px 0;
+            position: fixed;
+            bottom: 0;
             width: 100%;
             display: flex;
             justify-content: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+            gap: 25px;
+            z-index: 3;
         }
 
         nav a {
-            color: #ddd;
+            color: #FFD700;
             text-decoration: none;
-            font-size: 1.2em;
             font-weight: bold;
             padding: 10px 20px;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease-in-out;
         }
 
-        nav a:hover { color: #FFD700; }
+        nav a:hover {
+            color: #fff;
+        }
+
+        /* Background Blur Effect on Video Play */
+        .blurred {
+            filter: blur(12px);
+            transition: filter 0.5s ease-in-out;
+        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .lawfirm-title { font-size: 3em; }
-            .headline { font-size: 1.2em; }
-            .cta-button { font-size: 1em; }
-            .about-visa, .why-us { max-width: 90%; }
-            .video-section iframe { width: 90%; height: 300px; }
+            h1 {
+                font-size: 2.8em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 1.2em;
+            }
+
+            .video-container iframe {
+                height: 300px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
-        <h2 class="headline">Protecting Agriculture. Strengthening Businesses.<br> Your Expert in H-2A Visas.</h2>
-        <a href="getstarted.html" class="cta-button">Get Started Now</a>
-    </section>
+    <div class="overlay"></div>
 
-    <!-- About H-2A Visa -->
-    <section class="about-visa">
-        <h2>What is an H-2A Visa?</h2>
-        <p>The **H-2A visa** allows **U.S. agricultural employers** to **legally** hire foreign workers for **temporary or seasonal farm work**. Under **8 U.S. Code § 1101**, this program ensures **compliance** with labor laws while meeting the demands of American agriculture.</p>
-    </section>
+    <div class="content">
+        <h1>The Kershaw Law Firm P.C.</h1>
+        <h2>H-2A Visa Services: Bringing Strength to Agriculture</h2>
 
-    <!-- Video Section -->
-    <section class="video-section">
-        <h2>Understanding the H-2A Process</h2>
-        <iframe src="https://www.youtube.com/embed/ZrdV_8GbXMo" frameborder="0" allowfullscreen></iframe>
-    </section>
+        <p>The H-2A visa program is a vital tool for U.S. agricultural employers, allowing them to hire foreign nationals to perform temporary agricultural work. With an increasing demand for seasonal labor, securing the **right workforce** at the **right time** is the key to success.</p>
 
-    <!-- Why Choose Us -->
-    <section class="why-us">
-        <h2>Why The Kershaw Law Firm P.C.?</h2>
-        <ul>
-            <li>✔ **Elite Immigration Law Firm**</li>
-            <li>✔ **Unmatched 98% Success Rate** in H-2A Cases</li>
-            <li>✔ **Fast, Efficient, & Compliant Processing**</li>
-            <li>✔ **Mastering the Art of Legal Strategy**</li>
-        </ul>
-    </section>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/yqIE9GlMbLY" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <p>At **The Kershaw Law Firm P.C.**, we ensure that your **visa applications are approved efficiently and lawfully**. We navigate the complexities of the **Department of Labor**, **USCIS**, and **State Workforce Agencies** with precision and experience.</p>
+
+        <a href="contact.html" class="cta-button">Contact Us Now</a>
+    </div>
 
     <!-- Footer Navigation -->
     <nav>
         <a href="index.html">Home</a>
-        <a href="h2a.html">H-2A Visa</a>
         <a href="h2b.html">H-2B Visa</a>
         <a href="contact.html">Contact</a>
     </nav>
+
+    <script>
+        const video = document.querySelector('.video-container iframe');
+        const overlay = document.querySelector('.overlay');
+        const content = document.querySelector('.content');
+
+        video.addEventListener('load', () => {
+            video.contentWindow.document.querySelector('video').addEventListener('play', () => {
+                overlay.classList.add('blurred');
+                content.classList.add('blurred');
+            });
+
+            video.contentWindow.document.querySelector('video').addEventListener('pause', () => {
+                overlay.classList.remove('blurred');
+                content.classList.remove('blurred');
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -3,68 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - The Kershaw Law Firm</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script defer src="contact.js"></script>
+    <title>Contact Us | The Kershaw Law Firm P.C.</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background & General Styles */
+        body {
+            font-family: 'Georgia', serif;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/law-firm-background.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Contact Form Container */
+        .contact-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 12px;
+            width: 60%;
+            box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .contact-container h1 {
+            font-size: 2.8em;
+            color: #FFD700;
+            text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: none;
+            border-radius: 6px;
+            background: #222;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            background: #333;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: #FFD700;
+            color: #000;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #ffc107;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
+        }
+
+        /* Footer Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #FFD700;
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <h1>The Kershaw Law Firm P.C.</h1>
-            <p>A PROFESSIONAL CORPORATION</p>
-            <p>Robert D. Kershaw</p>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="h2b.html">H2B Program</a></li>
-                    <li><a href="h2a.html">H2A Program</a></li>
-                    <li><a href="costs.html">Costs & Process</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
-                </ul>
-                <div class="menu-toggle">☰</div>
-            </nav>
-        </div>
-    </header>
+    <!-- Contact Form Container -->
+    <div class="contact-container">
+        <h1>Contact The Kershaw Law Firm P.C.</h1>
+        <form action="submit_form.php" method="POST">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name">
 
-    <!-- Contact Section -->
-    <section class="contact-form-section">
-        <h2>Contact The Kershaw Law Firm</h2>
-        <p>Have questions or need help with visas? Reach out to us directly.</p>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
 
-        <form id="contact-form">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
 
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <label for="service">Legal Assistance Needed:</label>
+            <select id="service" name="service" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="h2a">H-2A Visa Assistance</option>
+                <option value="h2b">H-2B Visa Assistance</option>
+                <option value="green-card">Green Card Application</option>
+                <option value="citizenship">U.S. Citizenship Services</option>
+                <option value="other">Other Immigration Law Needs</option>
+            </select>
 
             <label for="message">Your Message:</label>
-            <textarea id="message" name="message" placeholder="Enter your message" rows="6" required></textarea>
+            <textarea id="message" name="message" rows="5" required placeholder="Describe your case or question..."></textarea>
 
-            <button type="submit" class="cta-button">Send Message</button>
-
-            <p id="form-status" class="hidden"></p>
+            <button type="submit" class="submit-btn">Submit Inquiry</button>
         </form>
-    </section>
+    </div>
 
-    <!-- Contact Info Section -->
-    <section class="contact-info">
-        <h3>Contact Information</h3>
-        <p><strong>The Kershaw Law Firm P.C.</strong></p>
-        <p>Robert D. Kershaw</p>
-        <p>3355 Bee Caves Rd, Suite 307, Austin, TX 78746</p>
-        <p>Tel: <a href="tel:7372040093">737-204-0093</a> | Fax: 737-204-0094</p>
-        <p>Email: <a href="mailto:robert.kershaw@kershawlaw.com">robert.kershaw@kershawlaw.com</a></p>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; <span id="footer-year"></span> The Kershaw Law Firm P.C. All rights reserved.</p>
-    </footer>
+    <!-- Footer Navigation -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="h2a.html">H-2A Visa</a>
+        <a href="h2b.html">H-2B Visa</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
 </body>
+
 </html>

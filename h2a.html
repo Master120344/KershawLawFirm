@@ -3,44 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-2A Visa Experts | The Kershaw Law Firm P.C.</title>
+    <title>H-2A Visa | The Kershaw Law Firm P.C.</title>
     
+    <!-- Styles -->
     <style>
-        /* Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* General Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', serif; }
 
-        /* Background - Scales of Justice with Farm */
+        /* Page Background */
         body {
-            font-family: 'Georgia', serif;
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Scales-of-Justice-Farm.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        /* Law Firm Name */
+        /* Hero Section */
+        .hero {
+            padding: 100px 20px;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
         .lawfirm-title {
-            font-size: 4em;
+            font-size: 3.5em;
             color: #FFD700;
             text-transform: uppercase;
-            margin-top: 30px;
-            text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tagline */
         .headline {
             font-size: 1.8em;
             font-style: italic;
             max-width: 900px;
-            color: #E6E6E6;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
-            margin-top: 10px;
+            margin: 20px auto;
         }
 
-        /* CTA Button */
+        /* Call to Action Button */
         .cta-button {
             display: inline-block;
             padding: 15px 35px;
@@ -55,15 +51,13 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .cta-button:hover {
-            background: #0d6efd;
-        }
+        .cta-button:hover { background: #0d6efd; }
 
-        /* About Visa */
+        /* About H-2A Visa */
         .about-visa {
-            margin-top: 50px;
+            padding: 40px 20px;
             max-width: 900px;
-            padding: 20px;
+            margin: 40px auto;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
@@ -72,7 +66,6 @@
         .about-visa h2 {
             color: #FFD700;
             font-size: 2.5em;
-            margin-bottom: 15px;
         }
 
         .about-visa p {
@@ -82,14 +75,12 @@
 
         /* Video Section */
         .video-section {
-            margin-top: 40px;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .video-section h2 {
             color: #FFD700;
             font-size: 2em;
-            margin-bottom: 10px;
         }
 
         .video-section iframe {
@@ -102,9 +93,9 @@
 
         /* Why Choose Us */
         .why-us {
-            margin-top: 50px;
-            padding: 20px;
+            padding: 40px 20px;
             max-width: 900px;
+            margin: 40px auto;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
@@ -113,7 +104,6 @@
         .why-us h2 {
             color: #FFD700;
             font-size: 2.5em;
-            margin-bottom: 15px;
         }
 
         .why-us ul {
@@ -122,11 +112,9 @@
             line-height: 1.8;
         }
 
-        .why-us ul li {
-            margin-bottom: 10px;
-        }
+        .why-us ul li { margin-bottom: 10px; }
 
-        /* Bottom Navigation */
+        /* Footer Navigation */
         nav {
             background: rgba(0, 0, 0, 0.8);
             padding: 15px 0;
@@ -148,9 +136,7 @@
             transition: color 0.3s ease;
         }
 
-        nav a:hover {
-            color: #FFD700;
-        }
+        nav a:hover { color: #FFD700; }
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -159,21 +145,18 @@
             .cta-button { font-size: 1em; }
             .about-visa, .why-us { max-width: 90%; }
             .video-section iframe { width: 90%; height: 300px; }
-            nav { gap: 10px; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Law Firm Name -->
-    <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
-
-    <!-- Tagline -->
-    <h2 class="headline">Protecting Agriculture. Strengthening Businesses.<br> Your Expert in H-2A Visas.</h2>
-
-    <!-- Get Started Button -->
-    <a href="getstarted.html" class="cta-button">Get Started Now</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
+        <h2 class="headline">Protecting Agriculture. Strengthening Businesses.<br> Your Expert in H-2A Visas.</h2>
+        <a href="getstarted.html" class="cta-button">Get Started Now</a>
+    </section>
 
     <!-- About H-2A Visa -->
     <section class="about-visa">
@@ -198,9 +181,9 @@
         </ul>
     </section>
 
-    <!-- Bottom Navigation -->
+    <!-- Footer Navigation -->
     <nav>
-        <a href="home.html">Home</a>
+        <a href="index.html">Home</a>
         <a href="h2a.html">H-2A Visa</a>
         <a href="h2b.html">H-2B Visa</a>
         <a href="contact.html">Contact</a>

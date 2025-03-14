@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Kershaw Law Firm P.C.</title>
+
     <style>
-        /* Reset basic styling */
+        /* Reset default margins/padding */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body styling with full-screen background image */
+        /* Background image styling */
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
@@ -26,30 +27,29 @@
             flex-direction: column;
         }
 
-        /* Header styling — moved way higher */
+        /* Header styling - pushed high up for mobile and desktop */
         h1 {
-            font-size: 4em;
-            color: #FFD700; /* Gold for a powerful, standout look */
+            font-size: 3.8em;
+            color: #FFD700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: -400px; /* Pushed higher */
+            margin-top: -300px; /* Perfectly balanced between mobile and desktop */
             text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tagline styling — pushed down and made bold */
+        /* Tagline styling — pushed down lower */
         p {
-            font-size: 1.8em;
+            font-size: 1.5em;
             line-height: 1.5;
             font-style: italic;
-            margin: 15px 0;
+            margin-top: 200px; /* Positioned lower */
             max-width: 800px;
             font-weight: bold;
-            color: #E6E6E6; /* Light silver-white to pop */
+            color: #E6E6E6;
             text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
-            margin-top: 150px; /* Moved lower */
         }
 
-        /* Buttons styling */
+        /* Button styling — now responsive and doesn’t break on desktop */
         .button {
             display: inline-block;
             padding: 15px 30px;
@@ -59,16 +59,17 @@
             font-weight: bold;
             border-radius: 5px;
             margin: 20px 10px;
+            margin-top: 30px; /* Moved lower */
+            white-space: nowrap; /* Stops text from breaking */
             transition: background 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: 20px; /* Get Started button pushed lower */
         }
 
         .button:hover {
             background: #0d6efd;
         }
 
-        /* Navigation bar at the bottom */
+        /* Bottom navigation bar styling */
         nav {
             background: rgba(0, 0, 0, 0.7);
             padding: 10px 0;
@@ -127,23 +128,43 @@
             display: block;
         }
 
-        /* Responsive styling for smaller screens */
-        @media (max-width: 600px) {
+        /* Mobile and tablet optimization */
+        @media (max-width: 768px) {
             h1 {
-                font-size: 2em;
+                font-size: 2.5em;
+                margin-top: -250px; /* Ensures the text stays visible on small screens */
             }
 
             p {
-                font-size: 1em;
-            }
-
-            nav {
-                flex-direction: row;
-                gap: 10px;
+                font-size: 1.1em;
+                margin-top: 100px; /* Moved further down */
             }
 
             .button {
-                padding: 8px 15px;
+                padding: 10px 20px;
+                margin-top: 10px;
+            }
+
+            nav {
+                gap: 10px;
+            }
+        }
+
+        /* Extra large screens optimization */
+        @media (min-width: 1200px) {
+            h1 {
+                font-size: 4.2em;
+                margin-top: -350px; /* Ensures balance on big monitors */
+            }
+
+            p {
+                font-size: 1.8em;
+                margin-top: 220px;
+            }
+
+            .button {
+                padding: 18px 35px;
+                font-size: 1.1em;
             }
         }
     </style>
@@ -156,7 +177,7 @@
     <p>Empowering employers and navigating immigration law. The Kershaw Law Firm P.C. specializes in helping businesses secure H2B and H2A visas, making the hiring process smooth, compliant, and efficient.</p>
     <a href="#" class="button">Get Started</a>
 
-    <!-- Navigation Bar at the bottom -->
+    <!-- Bottom Navigation Bar -->
     <nav>
         <a href="index.html">Home</a>
         <div class="dropdown">

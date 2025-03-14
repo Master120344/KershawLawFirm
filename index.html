@@ -17,7 +17,6 @@
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
-            background-size: cover;
             color: #fff;
             text-align: center;
             height: 100vh;
@@ -27,46 +26,49 @@
             flex-direction: column;
         }
 
-        /* Header styling */
+        /* Header styling — moved way higher */
         h1 {
             font-size: 4em;
-            color: #E6E6E6;
+            color: #FFD700; /* Gold for a powerful, standout look */
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: -250px;
+            margin-top: -400px; /* Pushed higher */
             text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
         }
 
+        /* Tagline styling — pushed down and made bold */
         p {
-            font-size: 1.5em;
+            font-size: 1.8em;
             line-height: 1.5;
             font-style: italic;
             margin: 15px 0;
             max-width: 800px;
             font-weight: bold;
-            color: #fff;
+            color: #E6E6E6; /* Light silver-white to pop */
             text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+            margin-top: 150px; /* Moved lower */
         }
 
         /* Buttons styling */
         .button {
             display: inline-block;
-            padding: 12px 25px;
+            padding: 15px 30px;
             background: #1e90ff;
             color: #fff;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            margin: 15px 10px;
+            margin: 20px 10px;
             transition: background 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px; /* Get Started button pushed lower */
         }
 
         .button:hover {
             background: #0d6efd;
         }
 
-        /* Navigation bar moved to the bottom */
+        /* Navigation bar at the bottom */
         nav {
             background: rgba(0, 0, 0, 0.7);
             padding: 10px 0;
@@ -94,7 +96,7 @@
             color: #1e90ff;
         }
 
-        /* Dropdown menu styling — now opens UPWARD */
+        /* Dropdown menu styling — opens UPWARD */
         .dropdown {
             position: relative;
         }
@@ -156,15 +158,15 @@
 
     <!-- Navigation Bar at the bottom -->
     <nav>
-        <a href="#">Home</a>
+        <a href="index.html">Home</a>
         <div class="dropdown">
             <a href="#">Visas</a>
             <div class="dropdown-content">
-                <a href="#">H2B Visa</a>
-                <a href="#">H2A Visa</a>
+                <a href="h2b.index">H2B Visa</a>
+                <a href="h2a.index">H2A Visa</a>
             </div>
         </div>
-        <a href="#">Contact</a>
+        <a href="contact.html">Contact</a>
     </nav>
 
 </body>

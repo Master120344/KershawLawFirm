@@ -7,14 +7,14 @@
     <title>The Kershaw Law Firm P.C.</title>
 
     <style>
-        /* Reset default margins/padding */
+        /* Reset margins/padding */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Background image styling */
+        /* Background image setup */
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
@@ -27,29 +27,29 @@
             flex-direction: column;
         }
 
-        /* Header styling - pushed high up for mobile and desktop */
+        /* Law Firm title near the TOP */
         h1 {
-            font-size: 3.8em;
+            font-size: 4em;
             color: #FFD700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: -300px; /* Perfectly balanced between mobile and desktop */
+            margin-top: -450px; /* Raised high */
             text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tagline styling — pushed down lower */
+        /* Tagline pushed near the BOTTOM */
         p {
             font-size: 1.5em;
             line-height: 1.5;
             font-style: italic;
-            margin-top: 200px; /* Positioned lower */
+            margin-top: 250px; /* Lowered significantly */
             max-width: 800px;
             font-weight: bold;
             color: #E6E6E6;
             text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
         }
 
-        /* Button styling — now responsive and doesn’t break on desktop */
+        /* Get Started button styled & moved down */
         .button {
             display: inline-block;
             padding: 15px 30px;
@@ -59,8 +59,8 @@
             font-weight: bold;
             border-radius: 5px;
             margin: 20px 10px;
-            margin-top: 30px; /* Moved lower */
-            white-space: nowrap; /* Stops text from breaking */
+            margin-top: 40px; /* Lowered even more */
+            white-space: nowrap;
             transition: background 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
@@ -69,7 +69,7 @@
             background: #0d6efd;
         }
 
-        /* Bottom navigation bar styling */
+        /* Navigation bar at the bottom */
         nav {
             background: rgba(0, 0, 0, 0.7);
             padding: 10px 0;
@@ -97,7 +97,7 @@
             color: #1e90ff;
         }
 
-        /* Dropdown menu styling — opens UPWARD */
+        /* Dropdown menu styling — opens UP */
         .dropdown {
             position: relative;
         }
@@ -128,16 +128,16 @@
             display: block;
         }
 
-        /* Mobile and tablet optimization */
+        /* Mobile & tablet responsiveness */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5em;
-                margin-top: -250px; /* Ensures the text stays visible on small screens */
+                margin-top: -250px; /* Ensures visibility on small screens */
             }
 
             p {
                 font-size: 1.1em;
-                margin-top: 100px; /* Moved further down */
+                margin-top: 150px;
             }
 
             .button {
@@ -150,16 +150,16 @@
             }
         }
 
-        /* Extra large screens optimization */
+        /* Large screens optimization */
         @media (min-width: 1200px) {
             h1 {
-                font-size: 4.2em;
-                margin-top: -350px; /* Ensures balance on big monitors */
+                font-size: 4.5em;
+                margin-top: -500px; /* Ensures high position on big screens */
             }
 
             p {
                 font-size: 1.8em;
-                margin-top: 220px;
+                margin-top: 280px;
             }
 
             .button {
@@ -172,19 +172,21 @@
 
 <body>
 
-    <!-- Main content -->
+    <!-- Main Content -->
     <h1>THE KERSHAW LAW FIRM P.C.</h1>
+
     <p>Empowering employers and navigating immigration law. The Kershaw Law Firm P.C. specializes in helping businesses secure H2B and H2A visas, making the hiring process smooth, compliant, and efficient.</p>
-    <a href="#" class="button">Get Started</a>
+
+    <a href="getstarted.html" class="button">Get Started</a>
 
     <!-- Bottom Navigation Bar -->
     <nav>
-        <a href="index.html">Home</a>
+        <a href="home.html">Home</a>
         <div class="dropdown">
             <a href="#">Visas</a>
             <div class="dropdown-content">
-                <a href="h2b.index">H2B Visa</a>
-                <a href="h2a.index">H2A Visa</a>
+                <a href="h2b.html">H2B Visa</a>
+                <a href="h2a.html">H2A Visa</a>
             </div>
         </div>
         <a href="contact.html">Contact</a>

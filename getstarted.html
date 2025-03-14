@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - The Kershaw Law Firm P.C.</title>
+    
+    <style>
+        /* Global Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/justice-books.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 10px;
+            width: 50%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        h1 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 1.2em;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            background: #FFD700;
+            color: #000;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #E6B800;
+        }
+
+        .cost-display {
+            font-size: 1.5em;
+            color: #1e90ff;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #1e90ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Start Your Visa Application</h1>
+        <p>Secure your visa today with The Kershaw Law Firm P.C.</p>
+
+        <form id="visaForm">
+            <label for="visaType">Select Visa Type:</label>
+            <select id="visaType" name="visaType" required>
+                <option value="">-- Choose a Visa --</option>
+                <option value="H-2A">H-2A Visa</option>
+                <option value="H-2B">H-2B Visa</option>
+            </select>
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="comments">Additional Comments:</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+
+            <p class="cost-display">Total: $4,050</p>
+            
+            <button type="button" id="payNow">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="h2a.html">H-2A Visa</a>
+        <a href="h2b.html">H-2B Visa</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <script>
+        // Visa Cost Calculation
+        document.getElementById("visaType").addEventListener("change", function() {
+            let baseFee = 250;
+            let visaFee = 3800;
+            let totalCost = baseFee + visaFee;
+            document.querySelector(".cost-display").textContent = "Total: $" + totalCost.toLocaleString();
+        });
+
+        // Placeholder for Stripe Payment API
+        document.getElementById("payNow").addEventListener("click", function() {
+            const visaType = document.getElementById("visaType").value;
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+
+            if (!visaType || !fullName || !email) {
+                alert("Please fill out all required fields.");
+                return;
+            }
+
+            alert("Redirecting to secure payment gateway...");
+            
+            // Simulating API call & DocuSign Trigger
+            setTimeout(() => {
+                alert("Payment successful! DocuSign documents have been emailed to " + email);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

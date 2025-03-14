@@ -4,51 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H-2B Visa Experts | The Kershaw Law Firm P.C.</title>
-    
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        /* Background - Scales of Justice & Books */
+        /* Background & General Styles */
         body {
-            font-family: 'Georgia', serif;
-            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Scales-of-Justice.jpg') no-repeat center center/cover;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/scales-of-justice.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
             height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            transition: filter 0.5s ease-in-out;
         }
 
-        /* Law Firm Name */
+        /* Blur & Dim Effect When Video is Played */
+        body.video-active {
+            filter: blur(8px) brightness(0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
         .lawfirm-title {
-            font-size: 4em;
+            font-size: 3.5em;
             color: #FFD700;
             text-transform: uppercase;
-            margin-top: 30px;
             text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tagline */
         .headline {
-            font-size: 1.8em;
-            font-style: italic;
-            max-width: 900px;
-            color: #E6E6E6;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
-            margin-top: 10px;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px 0;
         }
 
-        /* CTA Button */
         .cta-button {
             display: inline-block;
-            padding: 15px 35px;
+            padding: 15px 30px;
             background: #1e90ff;
-            color: white;
-            font-weight: bold;
+            color: #fff;
             text-decoration: none;
-            font-size: 1.2em;
+            font-weight: bold;
             border-radius: 5px;
             margin-top: 20px;
             transition: background 0.3s ease;
@@ -59,20 +68,19 @@
             background: #0d6efd;
         }
 
-        /* About Visa */
+        /* About Visa Section */
         .about-visa {
-            margin-top: 50px;
-            max-width: 900px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            margin: 30px auto;
             border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+            width: 80%;
+            text-align: left;
         }
 
         .about-visa h2 {
             color: #FFD700;
             font-size: 2.5em;
-            margin-bottom: 15px;
         }
 
         .about-visa p {
@@ -81,130 +89,123 @@
         }
 
         /* Video Section */
-        .video-section {
-            margin-top: 40px;
-            padding: 20px;
+        .video-container {
+            position: relative;
+            text-align: center;
+            margin: 30px 0;
         }
 
-        .video-section h2 {
-            color: #FFD700;
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .video-section iframe {
+        .video-container iframe {
             width: 80%;
             height: 400px;
-            max-width: 800px;
             border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
         }
 
         /* Why Choose Us */
         .why-us {
-            margin-top: 50px;
-            padding: 20px;
-            max-width: 900px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(20, 20, 20, 0.9);
+            padding: 40px;
+            margin: 30px auto;
             border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+            width: 80%;
+            text-align: left;
         }
 
         .why-us h2 {
             color: #FFD700;
             font-size: 2.5em;
-            margin-bottom: 15px;
         }
 
         .why-us ul {
             list-style: none;
-            font-size: 1.3em;
-            line-height: 1.8;
+            padding-left: 20px;
         }
 
         .why-us ul li {
-            margin-bottom: 10px;
+            font-size: 1.3em;
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
         }
 
-        /* Bottom Navigation */
+        .why-us ul li::before {
+            content: "✔️";
+            position: absolute;
+            left: 0;
+            color: #1e90ff;
+        }
+
+        /* Footer Navigation */
         nav {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
             width: 100%;
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 30px;
             position: fixed;
             bottom: 0;
             left: 0;
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+            z-index: 10;
         }
 
         nav a {
             color: #ddd;
             text-decoration: none;
-            font-size: 1.2em;
             font-weight: bold;
             padding: 10px 20px;
             transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: #FFD700;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .lawfirm-title { font-size: 3em; }
-            .headline { font-size: 1.2em; }
-            .cta-button { font-size: 1em; }
-            .about-visa, .why-us { max-width: 90%; }
-            .video-section iframe { width: 90%; height: 300px; }
-            nav { gap: 10px; }
+            color: #1e90ff;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Law Firm Name -->
-    <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
-
-    <!-- Tagline -->
-    <h2 class="headline">Strategic. Powerful. Unstoppable.<br> Your Trusted Guide in Immigration Law.</h2>
-
-    <!-- Get Started Button -->
-    <a href="getstarted.html" class="cta-button">Get Started Now</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
+        <h2 class="headline">Mastering the Art of Immigration Law</h2>
+        <a href="getstarted.html" class="cta-button">Get Started Now</a>
+    </section>
 
     <!-- About H-2B Visa -->
     <section class="about-visa">
         <h2>What is an H-2B Visa?</h2>
-        <p>The **H-2B visa** allows U.S. employers to **legally** hire foreign workers for **temporary** non-agricultural jobs. Under **8 U.S. Code § 1101**, businesses that experience **seasonal surges** or **intermittent labor needs** can **lawfully** secure a skilled workforce.</p>
+        <p>The H-2B visa allows U.S. employers to **strategically** hire foreign nationals for temporary non-agricultural jobs. This program is designed for companies that experience **seasonal, peak-load, or intermittent labor shortages**, ensuring they remain competitive and **never lose their edge** in the market.</p>
     </section>
 
     <!-- Video Section -->
-    <section class="video-section">
+    <section class="video-container">
         <h2>Understanding the H-2B Process</h2>
-        <iframe src="https://www.youtube.com/embed/aCpHkVKldQ8" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/yqIE9GlMbLY" allowfullscreen></iframe>
     </section>
 
-    <!-- Why Choose Us -->
+    <!-- Why Choose Us Section -->
     <section class="why-us">
-        <h2>Why The Kershaw Law Firm P.C.?</h2>
+        <h2>Why Choose The Kershaw Law Firm P.C.?</h2>
         <ul>
-            <li>✔ Unmatched Immigration Law Expertise</li>
-            <li>✔ Proven **98%** Success Rate in H-2B Cases</li>
-            <li>✔ Mastery of **Strategic Applications** to Secure Your Workforce</li>
-            <li>✔ Committed to **Winning for You**</li>
+            <li>Elite expertise in H-2B visa law, ensuring smooth and **ironclad** applications.</li>
+            <li>A **98% success rate**, meaning we **dominate** the competition.</li>
+            <li>We use **legal strategy** to ensure approvals while competitors **struggle**.</li>
+            <li>We handle the complexities, so your business remains **unstoppable**.</li>
         </ul>
     </section>
 
-    <!-- Bottom Navigation -->
+    <!-- Footer Navigation -->
     <nav>
-        <a href="home.html">Home</a>
+        <a href="index.html">Home</a>
         <a href="h2a.html">H-2A Visa</a>
         <a href="h2b.html">H-2B Visa</a>
         <a href="contact.html">Contact</a>
     </nav>
 
 </body>
+
 </html>

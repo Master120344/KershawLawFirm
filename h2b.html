@@ -1,197 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm P.C.</title>
-
-    <style>
-        /* Reset margins/padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Background image setup */
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
-            color: #fff;
-            text-align: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        /* Law Firm title near the TOP */
-        h1 {
-            font-size: 4em;
-            color: #FFD700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: -450px; /* Raised high */
-            text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Tagline pushed near the BOTTOM */
-        p {
-            font-size: 1.5em;
-            line-height: 1.5;
-            font-style: italic;
-            margin-top: 250px; /* Lowered significantly */
-            max-width: 800px;
-            font-weight: bold;
-            color: #E6E6E6;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
-        }
-
-        /* Get Started button styled & moved down */
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #1e90ff;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            margin: 20px 10px;
-            margin-top: 40px; /* Lowered even more */
-            white-space: nowrap;
-            transition: background 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .button:hover {
-            background: #0d6efd;
-        }
-
-        /* Navigation bar at the bottom */
-        nav {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px 20px;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #1e90ff;
-        }
-
-        /* Dropdown menu styling — opens UP */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.9);
-            min-width: 160px;
-            box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.6);
-            z-index: 1;
-            bottom: 100%;
-            text-align: left;
-        }
-
-        .dropdown-content a {
-            color: #ddd;
-            padding: 12px 16px;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background: #1e90ff;
-            color: #fff;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Mobile & tablet responsiveness */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-                margin-top: -250px; /* Ensures visibility on small screens */
-            }
-
-            p {
-                font-size: 1.1em;
-                margin-top: 150px;
-            }
-
-            .button {
-                padding: 10px 20px;
-                margin-top: 10px;
-            }
-
-            nav {
-                gap: 10px;
-            }
-        }
-
-        /* Large screens optimization */
-        @media (min-width: 1200px) {
-            h1 {
-                font-size: 4.5em;
-                margin-top: -500px; /* Ensures high position on big screens */
-            }
-
-            p {
-                font-size: 1.8em;
-                margin-top: 280px;
-            }
-
-            .button {
-                padding: 18px 35px;
-                font-size: 1.1em;
-            }
-        }
-    </style>
+    <title>H-2B Visa Experts | The Kershaw Law Firm P.C.</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="overlay"></div>
+        <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
+        <h2 class="headline">Empowering Employers.<br> Navigating Immigration Law.</h2>
+        <a href="getstarted.html" class="cta-button">Get Started Now</a>
+    </section>
 
-    <!-- Main Content -->
-    <h1>THE KERSHAW LAW FIRM P.C.</h1>
+    <!-- About H-2B Visa -->
+    <section class="about-visa">
+        <h2>What is an H-2B Visa?</h2>
+        <p>The H-2B visa allows U.S. employers to bring foreign nationals to the United States to fill temporary non-agricultural jobs. If you need seasonal, peak-load, or intermittent labor, this visa is your key to maintaining a productive workforce.</p>
+    </section>
 
-    <p>Empowering employers and navigating immigration law. The Kershaw Law Firm P.C. specializes in helping businesses secure H2B and H2A visas, making the hiring process smooth, compliant, and efficient.</p>
+    <!-- Video Section -->
+    <section class="video-section">
+        <h2>Understanding the H-2B Process</h2>
+        <video controls>
+            <source src="h2b-visa-explained.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
 
-    <a href="getstarted.html" class="button">Get Started</a>
+    <!-- Why Choose Us Section -->
+    <section class="why-us">
+        <h2>Why Choose The Kershaw Law Firm P.C.?</h2>
+        <ul>
+            <li>✅ Decades of experience in immigration law.</li>
+            <li>✅ 98% success rate in H-2B visa cases.</li>
+            <li>✅ Personalized guidance for every employer.</li>
+            <li>✅ Fast, compliant, and efficient application process.</li>
+        </ul>
+    </section>
 
-    <!-- Bottom Navigation Bar -->
-    <nav>
+    <!-- Footer Navigation -->
+    <nav class="footer-nav">
         <a href="home.html">Home</a>
-        <div class="dropdown">
-            <a href="#">Visas</a>
-            <div class="dropdown-content">
-                <a href="h2b.html">H2B Visa</a>
-                <a href="h2a.html">H2A Visa</a>
-            </div>
-        </div>
+        <a href="h2a.html">H-2A Visa</a>
+        <a href="h2b.html">H-2B Visa</a>
         <a href="contact.html">Contact</a>
     </nav>
-
 </body>
 
 </html>

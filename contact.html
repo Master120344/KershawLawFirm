@@ -16,6 +16,7 @@
         body {
             font-family: 'Georgia', serif;
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/law-firm-background.jpg') no-repeat center center/cover;
+            background-size: cover;
             color: #fff;
             text-align: center;
             display: flex;
@@ -26,7 +27,7 @@
             padding: 20px;
         }
 
-        .contact-container {
+        .container {
             background: rgba(0, 0, 0, 0.8);
             padding: 40px;
             border-radius: 12px;
@@ -36,10 +37,10 @@
         }
 
         h1 {
-            font-size: 2.8em;
+            font-size: 2.5em;
             color: #FFD700;
-            text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
             margin-bottom: 20px;
+            text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
         }
 
         form {
@@ -61,7 +62,6 @@
             border-radius: 6px;
             background: #222;
             color: #fff;
-            outline: none;
             transition: all 0.3s ease;
         }
 
@@ -87,31 +87,30 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
         }
 
-        .thank-you-message {
+        .thank-you {
             display: none;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             padding: 20px;
             border-radius: 12px;
             margin-top: 20px;
             box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.6);
         }
 
-        .thank-you-message h2 {
+        .thank-you h2 {
             font-size: 2em;
             color: #00FF00;
             margin-bottom: 10px;
         }
 
-        .thank-you-message p {
+        .thank-you p {
             font-size: 1.2em;
         }
-
     </style>
 </head>
 
 <body>
 
-    <div class="contact-container">
+    <div class="container" id="form-container">
         <h1>Contact The Kershaw Law Firm P.C.</h1>
         <form id="contact-form">
             <label for="name">Full Name:</label>
@@ -140,11 +139,12 @@
         </form>
     </div>
 
-    <div class="thank-you-message" id="thank-you-message">
+    <div class="thank-you" id="thank-you-message">
         <h2>Thank You, <span id="user-name"></span>!</h2>
-        <p>Your inquiry has been received. Your ticket number is <span id="ticket-number"></span>. We will reach out to you shortly.</p>
+        <p>Your inquiry has been received.</p>
+        <p>Your ticket number is <span id="ticket-number"></span>.</p>
+        <p>We will reach out to you shortly.</p>
     </div>
 
 </body>
-
 </html>

@@ -33,16 +33,17 @@
             color: #FFD700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: -450px; /* Raised high */
-            text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
+            margin-top: -400px; /* Adjusted positioning */
+            text-shadow: 0px 0px 25px rgba(255, 215, 0, 0.8), 0px 0px 10px rgba(0, 0, 0, 0.9);
         }
 
-        /* Tagline pushed near the BOTTOM */
+        /* Tagline positioned lower */
         p {
             font-size: 1.5em;
             line-height: 1.5;
             font-style: italic;
-            margin-top: 250px; /* Lowered significantly */
+            margin-top: 300px; /* Lowered slightly */
             max-width: 800px;
             font-weight: bold;
             color: #E6E6E6;
@@ -58,21 +59,21 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            margin: 20px 10px;
-            margin-top: 40px; /* Lowered even more */
+            margin-top: 60px; /* Lowered further */
             white-space: nowrap;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         .button:hover {
             background: #0d6efd;
+            transform: scale(1.05);
         }
 
         /* Navigation bar at the bottom */
         nav {
             background: rgba(0, 0, 0, 0.7);
-            padding: 10px 0;
+            padding: 12px 0;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -89,7 +90,7 @@
             color: #ddd;
             text-decoration: none;
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 12px 20px;
             transition: color 0.3s ease;
         }
 
@@ -97,7 +98,7 @@
             color: #1e90ff;
         }
 
-        /* Dropdown menu styling — opens UP */
+        /* Dropdown menu styling */
         .dropdown {
             position: relative;
         }
@@ -131,22 +132,22 @@
         /* Mobile & tablet responsiveness */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5em;
-                margin-top: -250px; /* Ensures visibility on small screens */
+                font-size: 2.8em;
+                margin-top: -250px;
             }
 
             p {
                 font-size: 1.1em;
-                margin-top: 150px;
+                margin-top: 180px;
             }
 
             .button {
-                padding: 10px 20px;
-                margin-top: 10px;
+                padding: 12px 24px;
+                margin-top: 20px;
             }
 
             nav {
-                gap: 10px;
+                gap: 15px;
             }
         }
 
@@ -154,12 +155,12 @@
         @media (min-width: 1200px) {
             h1 {
                 font-size: 4.5em;
-                margin-top: -500px; /* Ensures high position on big screens */
+                margin-top: -450px;
             }
 
             p {
                 font-size: 1.8em;
-                margin-top: 280px;
+                margin-top: 320px;
             }
 
             .button {
@@ -173,7 +174,7 @@
 <body>
 
     <!-- Main Content -->
-    <h1>THE KERSHAW LAW FIRM P.C.</h1>
+    <h1>The Kershaw Law Firm P.C.</h1>
 
     <p>Empowering employers and navigating immigration law. The Kershaw Law Firm P.C. specializes in helping businesses secure H2B and H2A visas, making the hiring process smooth, compliant, and efficient.</p>
 
@@ -181,7 +182,7 @@
 
     <!-- Bottom Navigation Bar -->
     <nav>
-        <a href="home.html">Home</a>
+        <a href="index.html">Home</a>
         <div class="dropdown">
             <a href="#">Visas</a>
             <div class="dropdown-content">

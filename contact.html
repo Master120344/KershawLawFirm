@@ -6,13 +6,16 @@
     <title>Contact Us | The Kershaw Law Firm P.C.</title>
     <link rel="stylesheet" href="css/style.css">
     <script defer src="JS/contactscript.js"></script>
+
     <style>
+        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* Body styling */
         body {
             font-family: 'Georgia', serif;
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/67165613.jpg') no-repeat center center/cover;
@@ -27,6 +30,7 @@
             padding: 20px;
         }
 
+        /* Form container styling */
         .container {
             background: rgba(0, 0, 0, 0.8);
             padding: 40px;
@@ -43,6 +47,7 @@
             text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
         }
 
+        /* Form styling */
         form {
             display: flex;
             flex-direction: column;
@@ -54,7 +59,9 @@
             font-weight: bold;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 12px;
             font-size: 1em;
@@ -65,7 +72,9 @@
             transition: all 0.3s ease;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus,
+        select:focus,
+        textarea:focus {
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
             background: #333;
         }
@@ -87,6 +96,7 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
         }
 
+        /* Thank you message styling */
         .thank-you {
             display: none;
             background: rgba(0, 0, 0, 0.85);
@@ -105,11 +115,71 @@
         .thank-you p {
             font-size: 1.2em;
         }
+
+        /* Navigation bar at the bottom */
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 20px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #1e90ff;
+        }
+
+        /* Dropdown menu styling */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            min-width: 160px;
+            box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            bottom: 100%;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: #ddd;
+            padding: 12px 16px;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background: #1e90ff;
+            color: #fff;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- Contact Form -->
     <div class="container" id="form-container">
         <h1>Contact The Kershaw Law Firm P.C.</h1>
         <form id="contact-form">
@@ -139,12 +209,18 @@
         </form>
     </div>
 
-    <div class="thank-you" id="thank-you-message">
-        <h2>Thank You, <span id="user-name"></span>!</h2>
-        <p>Your inquiry has been received.</p>
-        <p>Your ticket number is <span id="ticket-number"></span>.</p>
-        <p>We will reach out to you shortly.</p>
-    </div>
+    <!-- Bottom Navigation Bar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <a href="#">Visas</a>
+            <div class="dropdown-content">
+                <a href="h2b.html">H2B Visa</a>
+                <a href="h2a.html">H2A Visa</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </nav>
 
 </body>
 </html>

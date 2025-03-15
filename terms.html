@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+    <style>
+        /* Global Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .terms-container {
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .terms-container h2 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .terms-container p {
+            line-height: 1.6;
+        }
+
+        .terms-container ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .terms-agreement {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .terms-agreement input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            background: #FFD700;
+            color: #000;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #E6B800;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #e63946;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .terms-reopen {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #1e90ff;
+            cursor: pointer;
+        }
+
+        .terms-reopen:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="close-button" onclick="closeTerms()">X</button>
+        <h1>Terms and Conditions</h1>
+
+        <div class="terms-container" id="termsContainer">
+            <h2>Agreement to Pay and Legal Terms</h2>
+            <p>By making a payment to The Kershaw Law Firm P.C., you agree to the following terms and conditions:</p>
+
+            <ul>
+                <li><strong>Non-Refundable Payments:</strong> All payments made pursuant to this agreement are non-refundable and non-creditable. Once paid, no refunds will be issued under any circumstances. Payments made for legal services and visa filing will be applied to processing fees, legal consultations, and other required administrative actions as part of the agreement.</li>
+                <li><strong>Full Disclosure of Information:</strong> You agree to provide truthful, accurate, and complete information. Falsifying or withholding information may result in the termination of services or the invalidation of your visa application.</li>
+                <li><strong>Legal Obligations:</strong> You are bound by the terms of this agreement. By accepting and submitting this form, you acknowledge that you fully understand your legal obligations and responsibilities under U.S. law regarding visa applications and legal representation.</li>
+                <li><strong>Payment Authorization:</strong> By proceeding with payment, you authorize The Kershaw Law Firm P.C. to process your payment for the visa services as outlined. This agreement acknowledges that you have agreed to the total payment amount, and the payment is being made voluntarily.</li>
+                <li><strong>Finality of Agreement:</strong> By completing the payment process, you agree that you are legally bound by these terms and conditions. You are further informed that once the payment is made, no withdrawals or cancellations will be allowed.</li>
+            </ul>
+
+            <p>Failure to comply with these terms may result in termination of your visa application process, and you will not be entitled to a refund of any fees paid.</p>
+
+        </div>
+
+        <div class="terms-agreement">
+            <input type="checkbox" id="agreeTerms">
+            <label for="agreeTerms">I agree to the Terms and Conditions</label>
+        </div>
+
+        <button onclick="submitAgreement()" id="submitButton" disabled>Proceed to Payment</button>
+        <p class="terms-reopen" onclick="reopenTerms()">Reopen Terms and Conditions</p>
+    </div>
+
+    <script>
+        // Enable submit button when checkbox is checked
+        document.getElementById('agreeTerms').addEventListener('change', function() {
+            document.getElementById('submitButton').disabled = !this.checked;
+        });
+
+        // Function to close the terms and conditions popup
+        function closeTerms() {
+            window.close();
+        }
+
+        // Function to reopen the terms and conditions popup
+        function reopenTerms() {
+            document.getElementById('termsContainer').style.display = 'block';
+            document.getElementById('submitButton').disabled = true;
+            document.getElementById('agreeTerms').checked = false;
+        }
+
+        // Handle the terms acceptance and proceed to payment
+        function submitAgreement() {
+            if (document.getElementById('agreeTerms').checked) {
+                alert("You have agreed to the terms. Proceeding with payment...");
+                window.close();
+                // Here you can integrate the actual payment system
+            } else {
+                alert("You must agree to the terms to proceed.");
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -3,6 +3,9 @@ document.getElementById("contact-form").addEventListener("submit", function(even
 
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let service = document.getElementById("service").value;
+    let message = document.getElementById("message").value;
 
     // Generate a random ticket number
     let ticketNumber = "KL-" + Math.floor(100000 + Math.random() * 900000);
@@ -13,32 +16,29 @@ document.getElementById("contact-form").addEventListener("submit", function(even
     document.getElementById("user-name").textContent = name;
     document.getElementById("ticket-number").textContent = ticketNumber;
 
-    // Send email confirmation
-    sendEmail(name, email, ticketNumber);
-});
-
-function sendEmail(name, email, ticketNumber) {
+    // Prepare email content
     let emailBody = `
-        Hello ${name},
+        New Contact Form Submission:
 
-        Thank you for reaching out to The Kershaw Law Firm P.C.
+        Name: ${name}
+        Email: ${email}
+        Phone: ${phone}
+        Service Requested: ${service}
+        Message: ${message}
 
-        Your inquiry has been received, and your ticket number is ${ticketNumber}.
-        We will get back to you shortly.
-
-        Best Regards,
-        The Kershaw Law Firm P.C.
+        Ticket Number: ${ticketNumber}
     `;
 
+    // Send data to send_email.php
     fetch("send_email.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            to: email,
-            subject: "Your Inquiry Received - Ticket #" + ticketNumber,
+            to: email, 
+            subject: "New Inquiry - Ticket #" + ticketNumber,
             message: emailBody
         })
-    }).then(response => response.text())
-      .then(data => console.log(data))
+    }).then(response => response.json())
+      .then(data => console.log("Email Status:", data))
       .catch(error => console.error("Error sending email:", error));
-}
+});

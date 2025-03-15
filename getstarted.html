@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - The Kershaw Law Firm P.C.</title>
-    
+
     <style>
-        /* Global Styling */
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
@@ -14,54 +14,75 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
+        /* Body Styling */
         body {
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/justice-books.jpg') no-repeat center center/cover;
+            background-size: cover;
             color: #fff;
             text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
+        /* Dark Overlay for Better Readability */
         .overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
         }
 
+        /* Container Styling */
         .container {
             position: relative;
             z-index: 2;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 40px;
-            border-radius: 10px;
-            width: 50%;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
         }
 
         h1 {
             color: #FFD700;
             margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
         }
 
         label {
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: bold;
             display: block;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         select, input, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 1em;
+            background: #222;
+            color: #fff;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
         button {
@@ -70,16 +91,18 @@
             font-weight: bold;
             padding: 12px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             margin-top: 20px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background 0.3s ease;
+            font-size: 1.1em;
         }
 
         button:hover {
             background: #E6B800;
         }
 
+        /* Total Cost Display */
         .cost-display {
             font-size: 1.5em;
             color: #1e90ff;
@@ -87,7 +110,7 @@
             margin-top: 10px;
         }
 
-        /* Terms & Conditions */
+        /* Terms & Conditions Styling */
         .terms-container {
             margin-top: 15px;
             font-size: 0.9em;
@@ -108,7 +131,7 @@
             text-decoration: underline;
         }
 
-        /* Navigation Bar */
+        /* Navigation Bar (Tabs) */
         nav {
             position: fixed;
             bottom: 0;
@@ -118,18 +141,40 @@
             padding: 10px 0;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
         }
 
         nav a {
             color: #ddd;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s;
+            font-size: 1em;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
             color: #1e90ff;
+        }
+
+        /* Mobile Responsive Tweaks */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .container {
+                width: 100%;
+                padding: 20px;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            nav a {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -194,19 +239,13 @@
 
         // Payment Button Validation
         document.getElementById("payNow").addEventListener("click", function() {
-            const termsChecked = document.getElementById("termsCheckbox").checked;
-
-            if (!termsChecked) {
+            if (!document.getElementById("termsCheckbox").checked) {
                 alert("You must agree to the Terms and Conditions before proceeding.");
                 return;
             }
 
             alert("Redirecting to secure payment gateway...");
-            
-            // Simulating API call & DocuSign Trigger
-            setTimeout(() => {
-                alert("Payment successful! DocuSign documents have been emailed.");
-            }, 2000);
+            setTimeout(() => alert("Payment successful! DocuSign documents have been emailed."), 2000);
         });
     </script>
 </body>

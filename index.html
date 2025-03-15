@@ -1,198 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm P.C.</title>
-
+    <title>The Kershaw Law Firm P.C. - Your Visa Experts</title>
     <style>
-        /* Reset margins/padding */
+        /* Global Styling */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
-        /* Background image setup */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/justice-books.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            padding: 20px;
         }
 
-        /* Law Firm title near the TOP */
+        .container {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            position: relative;
+        }
+
         h1 {
-            font-size: 4em;
             color: #FFD700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            margin-top: -400px; /* Adjusted positioning */
-            text-shadow: 0px 0px 25px rgba(255, 215, 0, 0.8), 0px 0px 10px rgba(0, 0, 0, 0.9);
+            margin-bottom: 20px;
         }
 
-        /* Tagline pushed further down */
         p {
-            font-size: 1.5em;
-            line-height: 1.5;
-            font-style: italic;
-            margin-top: 350px; /* Lowered more */
-            max-width: 800px;
-            font-weight: bold;
-            color: #E6E6E6;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+            font-size: 1.2em;
+            margin-bottom: 20px;
         }
 
-        /* Get Started button pushed further down */
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #1e90ff;
-            color: #fff;
-            text-decoration: none;
+        .cta-button {
+            background: #FFD700;
+            color: #000;
             font-weight: bold;
+            padding: 12px;
+            border: none;
             border-radius: 5px;
-            margin-top: 80px; /* Lowered more */
-            white-space: nowrap;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .button:hover {
-            background: #0d6efd;
-            transform: scale(1.05);
-        }
-
-        /* Navigation bar at the bottom */
-        nav {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 12px 0;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
             width: 100%;
+        }
+
+        .cta-button:hover {
+            background: #E6B800;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
             display: flex;
             justify-content: center;
-            align-items: center;
             gap: 30px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
-            z-index: 10;
         }
 
         nav a {
             color: #ddd;
             text-decoration: none;
             font-weight: bold;
-            padding: 12px 20px;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
 
         nav a:hover {
             color: #1e90ff;
         }
 
-        /* Dropdown menu styling */
-        .dropdown {
-            position: relative;
+        /* Sections */
+        .section {
+            margin-top: 50px;
         }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.9);
-            min-width: 160px;
-            box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.6);
-            z-index: 1;
-            bottom: 100%;
-            text-align: left;
+        .empower-section {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
         }
 
-        .dropdown-content a {
+        .empower-section h2 {
+            color: #FFD700;
+        }
+
+        .empower-section p {
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 0;
             color: #ddd;
-            padding: 12px 16px;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background: #1e90ff;
-            color: #fff;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Mobile & tablet responsiveness */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.8em;
-                margin-top: -250px;
-            }
-
-            p {
-                font-size: 1.1em;
-                margin-top: 220px;
-            }
-
-            .button {
-                padding: 12px 24px;
-                margin-top: 30px;
-            }
-
-            nav {
-                gap: 15px;
-            }
-        }
-
-        /* Large screens optimization */
-        @media (min-width: 1200px) {
-            h1 {
-                font-size: 4.5em;
-                margin-top: -450px;
-            }
-
-            p {
-                font-size: 1.8em;
-                margin-top: 380px;
-            }
-
-            .button {
-                padding: 18px 35px;
-                font-size: 1.1em;
-            }
+            font-size: 0.9em;
+            text-align: center;
         }
     </style>
 </head>
-
 <body>
 
-    <!-- Main Content -->
-    <h1>The Kershaw Law Firm P.C.</h1>
-
-    <p>Empowering employers and navigating immigration law. The Kershaw Law Firm P.C. specializes in helping businesses secure H2B and H2A visas, making the hiring process smooth, compliant, and efficient.</p>
-
-    <a href="getstarted.html" class="button">Get Started</a>
-
-    <!-- Bottom Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav>
         <a href="index.html">Home</a>
-        <div class="dropdown">
-            <a href="#">Visas</a>
-            <div class="dropdown-content">
-                <a href="h2b.html">H2B Visa</a>
-                <a href="h2a.html">H2A Visa</a>
-            </div>
-        </div>
+        <a href="costs.html">Visa Costs</a>
+        <a href="getstarted.html">Get Started</a>
         <a href="contact.html">Contact</a>
     </nav>
 
-</body>
+    <!-- Main Hero Section -->
+    <div class="container">
+        <h1>Welcome to The Kershaw Law Firm P.C.</h1>
+        <p>Your trusted partner in navigating the complexities of immigration law. Whether you're an employer seeking to bring skilled workers or an individual pursuing new opportunities, we're here to guide you every step of the way.</p>
+        <button class="cta-button" onclick="window.location.href='getstarted.html'">Start Your Visa Application Now</button>
+    </div>
 
+    <!-- Empower Employers Section -->
+    <div class="empower-section section">
+        <h2>Empower Employers: Bringing the Best Talent to Your Business</h2>
+        <p>At The Kershaw Law Firm, we don’t just handle visas. We empower employers to scale their businesses with the right talent, efficiently and legally. Our expert legal team navigates the complexities of the H-2A and H-2B visa processes, ensuring that you have access to a workforce that drives your success.</p>
+        <p>We know the challenges employers face in finding skilled workers. That’s why we provide tailored legal solutions that make hiring foreign workers seamless and cost-effective. Don't let bureaucracy hold you back—choose us to ensure your business thrives.</p>
+        <button class="cta-button" onclick="window.location.href='getstarted.html'">Empower Your Business</button>
+    </div>
+
+    <!-- Costs Section -->
+    <div class="container section">
+        <h2>Visa Costs: Why This is an Investment in Your Future</h2>
+        <p>The cost of securing a visa is an investment in opportunity. Our fees are designed to provide you with the highest level of service and expertise. Whether you are applying for an H-2A or H-2B visa, the process is designed to ensure your success.</p>
+        <div class="cost-item">
+            <span>H-2A Visa Filing Fee: $250</span>
+            <p>This basic filing fee ensures your application is processed quickly and without delays. It’s the first step toward a brighter future.</p>
+        </div>
+        <div class="cost-item">
+            <span>Visa Processing Fee: $3,800</span>
+            <p>This comprehensive fee covers everything from document preparation to negotiation, ensuring that you receive the best possible service. Think of it as an investment in your future opportunities.</p>
+        </div>
+        <p>The total cost for both visa types is $4,050. For this price, you get unparalleled service and an expert team guiding you through every step of the process. The value you gain far outweighs the cost—this is an investment in your future.</p>
+        <button class="cta-button" onclick="window.location.href='getstarted.html'">Get Started Now</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 The Kershaw Law Firm P.C. All Rights Reserved. | <a href="terms.html" style="color: #FFD700;">Terms & Conditions</a></p>
+    </footer>
+
+</body>
 </html>

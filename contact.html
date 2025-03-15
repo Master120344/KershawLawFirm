@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | The Kershaw Law Firm P.C.</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
     <style>
-        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Background & General Styles */
         body {
             font-family: 'Georgia', serif;
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/law-firm-background.jpg') no-repeat center center/cover;
@@ -27,23 +26,22 @@
             padding: 20px;
         }
 
-        /* Contact Form Container */
         .contact-container {
             background: rgba(0, 0, 0, 0.8);
             padding: 40px;
             border-radius: 12px;
-            width: 60%;
+            width: 100%;
+            max-width: 600px;
             box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
         }
 
-        .contact-container h1 {
+        h1 {
             font-size: 2.8em;
             color: #FFD700;
             text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
             margin-bottom: 20px;
         }
 
-        /* Form Styles */
         form {
             display: flex;
             flex-direction: column;
@@ -72,7 +70,6 @@
             background: #333;
         }
 
-        /* Submit Button */
         .submit-btn {
             background: #FFD700;
             color: #000;
@@ -90,31 +87,23 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
         }
 
-        /* Footer Navigation */
-        nav {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+        .thank-you-message {
+            display: none;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.6);
         }
 
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px 20px;
-            transition: color 0.3s ease;
+        .thank-you-message h2 {
+            font-size: 2em;
+            color: #00FF00;
+            margin-bottom: 10px;
         }
 
-        nav a:hover {
-            color: #FFD700;
+        .thank-you-message p {
+            font-size: 1.2em;
         }
 
     </style>
@@ -122,10 +111,9 @@
 
 <body>
 
-    <!-- Contact Form Container -->
     <div class="contact-container">
         <h1>Contact The Kershaw Law Firm P.C.</h1>
-        <form action="submit_form.php" method="POST">
+        <form id="contact-form">
             <label for="name">Full Name:</label>
             <input type="text" id="name" name="name" required placeholder="Enter your full name">
 
@@ -152,13 +140,10 @@
         </form>
     </div>
 
-    <!-- Footer Navigation -->
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="h2a.html">H-2A Visa</a>
-        <a href="h2b.html">H-2B Visa</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+    <div class="thank-you-message" id="thank-you-message">
+        <h2>Thank You, <span id="user-name"></span>!</h2>
+        <p>Your inquiry has been received. Your ticket number is <span id="ticket-number"></span>. We will reach out to you shortly.</p>
+    </div>
 
 </body>
 

@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - The Kershaw Law Firm P.C.</title>
-    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe API -->
     
     <style>
-        /* Global Styles */
+        /* Global Styling */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +22,6 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
         }
 
         .overlay {
@@ -32,18 +30,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.7);
         }
 
         .container {
             position: relative;
             z-index: 2;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             padding: 40px;
             border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            width: 50%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
         }
 
         h1 {
@@ -56,7 +53,6 @@
             font-weight: bold;
             display: block;
             margin-top: 15px;
-            text-align: left;
         }
 
         select, input, textarea {
@@ -66,8 +62,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1em;
-            background: #222;
-            color: #fff;
         }
 
         button {
@@ -80,7 +74,6 @@
             margin-top: 20px;
             cursor: pointer;
             transition: 0.3s;
-            width: 100%;
         }
 
         button:hover {
@@ -94,11 +87,25 @@
             margin-top: 10px;
         }
 
-        .error-message {
-            color: red;
+        /* Terms & Conditions */
+        .terms-container {
+            margin-top: 15px;
             font-size: 0.9em;
-            margin-top: 5px;
-            display: none;
+            text-align: left;
+        }
+
+        .terms-container input {
+            margin-right: 10px;
+        }
+
+        .terms-container a {
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .terms-container a:hover {
+            text-decoration: underline;
         }
 
         /* Navigation Bar */
@@ -107,7 +114,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             padding: 10px 0;
             display: flex;
             justify-content: center;
@@ -140,24 +147,29 @@
                 <option value="H-2A">H-2A Visa</option>
                 <option value="H-2B">H-2B Visa</option>
             </select>
-            <div class="error-message" id="visaError">Please select a visa type.</div>
 
             <label for="fullName">Full Name:</label>
             <input type="text" id="fullName" name="fullName" required>
-            <div class="error-message" id="nameError">Full name is required.</div>
 
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
-            <div class="error-message" id="emailError">Enter a valid email.</div>
 
             <label for="phone">Phone Number:</label>
             <input type="tel" id="phone" name="phone" required>
-            <div class="error-message" id="phoneError">Enter a valid phone number.</div>
 
             <label for="comments">Additional Comments:</label>
             <textarea id="comments" name="comments" rows="4"></textarea>
 
             <p class="cost-display">Total: $4,050</p>
+
+            <!-- Terms & Conditions Agreement -->
+            <div class="terms-container">
+                <input type="checkbox" id="termsCheckbox" required>
+                <label for="termsCheckbox">
+                    I have read and agree to the 
+                    <a href="terms.html" target="_blank">Terms and Conditions</a>.
+                </label>
+            </div>
             
             <button type="button" id="payNow">Proceed to Payment</button>
         </form>
@@ -180,38 +192,18 @@
             document.querySelector(".cost-display").textContent = "Total: $" + totalCost.toLocaleString();
         });
 
-        // Form Validation
-        function validateForm() {
-            let valid = true;
-
-            document.querySelectorAll(".error-message").forEach(el => el.style.display = "none");
-
-            if (!document.getElementById("visaType").value) {
-                document.getElementById("visaError").style.display = "block";
-                valid = false;
-            }
-            if (!document.getElementById("fullName").value.trim()) {
-                document.getElementById("nameError").style.display = "block";
-                valid = false;
-            }
-            if (!document.getElementById("email").value.includes("@")) {
-                document.getElementById("emailError").style.display = "block";
-                valid = false;
-            }
-            if (!document.getElementById("phone").value.trim()) {
-                document.getElementById("phoneError").style.display = "block";
-                valid = false;
-            }
-            return valid;
-        }
-
-        // Stripe Payment API Placeholder
+        // Payment Button Validation
         document.getElementById("payNow").addEventListener("click", function() {
-            if (!validateForm()) return;
+            const termsChecked = document.getElementById("termsCheckbox").checked;
+
+            if (!termsChecked) {
+                alert("You must agree to the Terms and Conditions before proceeding.");
+                return;
+            }
 
             alert("Redirecting to secure payment gateway...");
             
-            // Simulating Payment & DocuSign API Trigger
+            // Simulating API call & DocuSign Trigger
             setTimeout(() => {
                 alert("Payment successful! DocuSign documents have been emailed.");
             }, 2000);

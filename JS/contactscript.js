@@ -1,12 +1,12 @@
-document.getElementById("contact-form").addEventListener("submit", function(event) {
+document.getElementById("contact-form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     // Grab form values
-    let name = document.getElementById("name").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let service = document.getElementById("service").value.trim();
-    let message = document.getElementById("message").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const service = document.getElementById("service").value.trim();
+    const message = document.getElementById("message").value.trim();
 
     // Basic validation
     if (!name || !email || !phone || !service || !message) {
@@ -15,16 +15,22 @@ document.getElementById("contact-form").addEventListener("submit", function(even
     }
 
     // Generate a random ticket number
-    let ticketNumber = "KL-" + Math.floor(100000 + Math.random() * 900000);
+    const ticketNumber = `KL-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    // Show loading state
+    const submitButton = document.querySelector(".submit-btn");
+    submitButton.textContent = "Submitting...";
+    submitButton.disabled = true;
 
     // Display thank-you message and hide the form
     document.getElementById("form-container").style.display = "none";
-    document.getElementById("thank-you-message").style.display = "block";
+    const thankYouMessage = document.getElementById("thank-you-message");
+    thankYouMessage.style.display = "block";
     document.getElementById("user-name").textContent = name;
     document.getElementById("ticket-number").textContent = ticketNumber;
 
     // Prepare email content
-    let emailBody = `
+    const emailBody = `
         New Contact Form Submission:
 
         Name: ${name}
@@ -36,29 +42,36 @@ document.getElementById("contact-form").addEventListener("submit", function(even
         Ticket Number: ${ticketNumber}
     `;
 
-    // Send data to PHP file
-    fetch("php/send_email.php", {  // Correct path
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            to: email,
-            subject: `New Inquiry - Ticket #${ticketNumber}`,
-            message: emailBody
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Email Status:", data);
+    try {
+        // Send data to PHP file
+        const response = await fetch("php/send_email.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                to: email,
+                subject: `New Inquiry - Ticket #${ticketNumber}`,
+                message: emailBody
+            })
+        });
+
+        const data = await response.json();
+
         if (data.status !== "success") {
-            alert("Failed to send the email. Please try again later.");
-            document.getElementById("form-container").style.display = "block";
-            document.getElementById("thank-you-message").style.display = "none";
+            throw new Error("Failed to send the email. Please try again later.");
         }
-    })
-    .catch(error => {
+
+        console.log("Email Status:", data);
+
+    } catch (error) {
         console.error("Error sending email:", error);
+
+        // Restore form on error
         alert("There was an error sending your inquiry. Please try again.");
         document.getElementById("form-container").style.display = "block";
-        document.getElementById("thank-you-message").style.display = "none";
-    });
+        thankYouMessage.style.display = "none";
+    } finally {
+        // Reset button
+        submitButton.textContent = "Submit Inquiry";
+        submitButton.disabled = false;
+    }
 });

@@ -131,29 +131,63 @@
             text-decoration: underline;
         }
 
-        /* Navigation Bar (Tabs) */
+        /* Navigation Bar (Matching Index.html) */
         nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+            z-index: 10;
         }
 
         nav a {
             color: #ddd;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1em;
+            padding: 12px 20px;
             transition: color 0.3s ease;
         }
 
         nav a:hover {
             color: #1e90ff;
+        }
+
+        /* Dropdown menu styling */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            min-width: 160px;
+            box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            bottom: 100%;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: #ddd;
+            padding: 12px 16px;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background: #1e90ff;
+            color: #fff;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         /* Mobile Responsive Tweaks */
@@ -170,6 +204,10 @@
             button {
                 font-size: 1em;
                 padding: 10px;
+            }
+
+            nav {
+                gap: 15px;
             }
 
             nav a {
@@ -207,7 +245,6 @@
 
             <p class="cost-display">Total: $4,050</p>
 
-            <!-- Terms & Conditions Agreement -->
             <div class="terms-container">
                 <input type="checkbox" id="termsCheckbox" required>
                 <label for="termsCheckbox">
@@ -220,33 +257,18 @@
         </form>
     </div>
 
-    <!-- Navigation Bar -->
+    <!-- Updated Navigation Bar -->
     <nav>
         <a href="index.html">Home</a>
-        <a href="h2a.html">H-2A Visa</a>
-        <a href="h2b.html">H-2B Visa</a>
+        <div class="dropdown">
+            <a href="#">Visas</a>
+            <div class="dropdown-content">
+                <a href="h2b.html">H2B Visa</a>
+                <a href="h2a.html">H2A Visa</a>
+            </div>
+        </div>
         <a href="contact.html">Contact</a>
     </nav>
 
-    <script>
-        // Visa Cost Calculation
-        document.getElementById("visaType").addEventListener("change", function() {
-            let baseFee = 250;
-            let visaFee = 3800;
-            let totalCost = baseFee + visaFee;
-            document.querySelector(".cost-display").textContent = "Total: $" + totalCost.toLocaleString();
-        });
-
-        // Payment Button Validation
-        document.getElementById("payNow").addEventListener("click", function() {
-            if (!document.getElementById("termsCheckbox").checked) {
-                alert("You must agree to the Terms and Conditions before proceeding.");
-                return;
-            }
-
-            alert("Redirecting to secure payment gateway...");
-            setTimeout(() => alert("Payment successful! DocuSign documents have been emailed."), 2000);
-        });
-    </script>
 </body>
 </html>

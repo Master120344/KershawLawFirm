@@ -1,100 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm P.C.</title>
-    <link rel="stylesheet" href="style.css"> <!-- External CSS for consistency -->
+    <title>Kershaw Law Firm | Empowering Employees</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="JS/contactscript.js"></script>
 
     <style>
-        /* Global Reset */
+        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
-        /* Background & Layout */
+        /* Body styling */
         body {
-            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Farm-Background.jpg') no-repeat center center/cover;
+            font-family: 'Georgia', serif;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/67165613.jpg') no-repeat center center/cover;
+            background-size: cover;
             color: #fff;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        /* Header Section */
-        .header {
+        /* Main content container */
+        .main-content {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        /* Tab Container */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .tab {
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #FFD700;
+        }
+
+        /* Form container styling */
+        .container {
             background: rgba(0, 0, 0, 0.8);
-            padding: 80px 20px 40px; /* Title moved up */
-        }
-
-        .header h1 {
-            font-size: 3.8em;
-            color: #FFD700;
-            text-transform: uppercase;
-            text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.9);
-        }
-
-        .header p {
-            font-size: 1.5em;
-            color: #E6E6E6;
-            max-width: 900px;
-            margin: 40px auto 20px; /* Text moved down */
-            line-height: 1.6;
-        }
-
-        /* Content Section */
-        .content {
-            max-width: 1100px;
-            margin: 50px auto;
             padding: 40px;
-            background: rgba(0, 0, 0, 0.8);
             border-radius: 12px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
         }
 
-        .content h2 {
+        h1 {
             font-size: 2.5em;
             color: #FFD700;
             margin-bottom: 20px;
+            text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
         }
 
-        .content p {
-            font-size: 1.4em;
-            line-height: 1.6;
-            color: #ddd;
-            margin-bottom: 30px;
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        /* CTA Button */
-        .cta-button {
-            display: inline-block;
-            padding: 18px 40px;
-            background: #1e90ff;
-            color: #fff;
-            text-decoration: none;
+        label {
+            font-size: 1.2em;
             font-weight: bold;
-            border-radius: 8px;
-            margin-top: 50px; /* Moved button down */
-            transition: background 0.3s ease, transform 0.2s ease;
-            font-size: 1.3em;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .cta-button:hover {
-            background: #0d6efd;
-            transform: scale(1.05);
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: none;
+            border-radius: 6px;
+            background: #222;
+            color: #fff;
+            transition: all 0.3s ease;
         }
 
-        /* Navigation Tabs */
-        .tabs {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 15px 0;
+        input:focus,
+        select:focus,
+        textarea:focus {
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            background: #333;
+        }
+
+        .submit-btn {
+            background: #FFD700;
+            color: #000;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #ffc107;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
+        }
+
+        /* Thank you message styling */
+        .thank-you {
+            display: none;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.6);
+        }
+
+        .thank-you h2 {
+            font-size: 2em;
+            color: #00FF00;
+            margin-bottom: 10px;
+        }
+
+        .thank-you p {
+            font-size: 1.2em;
+        }
+
+        /* Navigation bar at the bottom */
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 0;
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 60px; /* More spacing for even layout */
+            align-items: center;
+            gap: 30px;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -102,88 +161,106 @@
             z-index: 10;
         }
 
-        .tabs a {
+        nav a {
             color: #ddd;
             text-decoration: none;
-            font-size: 1.3em;
             font-weight: bold;
-            padding: 14px 30px;
-            transition: all 0.3s ease;
+            padding: 12px 20px;
+            transition: color 0.3s ease;
         }
 
-        .tabs a:hover {
+        nav a:hover {
             color: #1e90ff;
         }
 
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.8em;
-            }
+        /* Dropdown menu styling */
+        .dropdown {
+            position: relative;
+        }
 
-            .header p {
-                font-size: 1.3em;
-                margin-bottom: 40px;
-            }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            min-width: 160px;
+            box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            bottom: 100%;
+            text-align: left;
+        }
 
-            .cta-button {
-                font-size: 1.2em;
-                padding: 14px 32px;
-                margin-top: 40px;
-            }
+        .dropdown-content a {
+            color: #ddd;
+            padding: 12px 16px;
+            display: block;
+        }
 
-            .content {
-                padding: 30px;
-            }
+        .dropdown-content a:hover {
+            background: #1e90ff;
+            color: #fff;
+        }
 
-            .content h2 {
-                font-size: 2em;
-            }
-
-            .content p {
-                font-size: 1.2em;
-            }
-
-            .tabs {
-                gap: 30px;
-            }
-
-            .tabs a {
-                font-size: 1.1em;
-                padding: 12px 20px;
-            }
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header Section -->
-    <div class="header">
-        <h1>The Kershaw Law Firm P.C.</h1>
-        <p>Empowering individuals and businesses with expert legal guidance in immigration and visa processing.</p>
+    <div class="main-content">
+        <h1>Kershaw Law Firm</h1>
+        <p>Empowering Employees to Succeed</p>
+
+        <!-- Tabs for H2A Visa, H2B Visa, and Costs -->
+        <div class="tabs">
+            <div class="tab" onclick="location.href='h2a.html'">H2A Visa</div>
+            <div class="tab" onclick="location.href='h2b.html'">H2B Visa</div>
+            <div class="tab" onclick="location.href='costs.html'">Costs</div>
+        </div>
+
+        <div class="container" id="form-container">
+            <h1>Contact The Kershaw Law Firm P.C.</h1>
+            <form id="contact-form">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+
+                <label for="service">Legal Assistance Needed:</label>
+                <select id="service" name="service" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="h2a">H-2A Visa Assistance</option>
+                    <option value="h2b">H-2B Visa Assistance</option>
+                    <option value="green-card">Green Card Application</option>
+                    <option value="citizenship">U.S. Citizenship Services</option>
+                    <option value="other">Other Immigration Law Needs</option>
+                </select>
+
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Describe your case or question..."></textarea>
+
+                <button type="submit" class="submit-btn">Submit Inquiry</button>
+            </form>
+        </div>
     </div>
 
-    <!-- Content Section -->
-    <div class="content">
-        <h2>Welcome to The Kershaw Law Firm</h2>
-        <p>We specialize in helping agricultural employers and workers navigate the complex H-2A and H-2B visa process.</p>
-
-        <h2>How We Can Help</h2>
-        <p>Whether you're an employer seeking seasonal workers or a foreign worker looking for opportunities, our firm provides expert legal assistance to ensure a smooth and compliant process.</p>
-
-        <a href="getstarted.html" class="cta-button">Get Started</a>
-    </div>
-
-    <!-- Footer Navigation -->
-    <nav class="tabs">
+    <!-- Bottom Navigation Bar -->
+    <nav>
         <a href="index.html">Home</a>
-        <a href="h2a.html">H-2A Visa</a>
-        <a href="h2b.html">H-2B Visa</a>
-        <a href="costs.html">Costs</a>
+        <div class="dropdown">
+            <a href="#">Visas</a>
+            <div class="dropdown-content">
+                <a href="h2b.html">H2B Visa</a>
+                <a href="h2a.html">H2A Visa</a>
+            </div>
+        </div>
         <a href="contact.html">Contact</a>
     </nav>
 
 </body>
-
 </html>

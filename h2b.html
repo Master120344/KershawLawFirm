@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H-2B Visa Experts | The Kershaw Law Firm P.C.</title>
-    <link rel="stylesheet" href="style.css"> <!-- External styling for consistency -->
+    <link rel="stylesheet" href="css/style.css"> <!-- External stylesheet for consistency -->
 
     <style>
         /* Global Reset */
@@ -12,15 +12,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Georgia', serif;
         }
 
         /* Background & Layout */
         body {
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/scales-of-justice.jpg') no-repeat center center/cover;
+            background-size: cover;
             color: #fff;
             text-align: center;
-            padding-bottom: 70px; /* Prevent content from being hidden under tabs */
+            padding-bottom: 70px; /* Prevent content from hiding under tabs */
+            transition: background 0.5s ease;
         }
 
         /* Hero Section */
@@ -88,6 +90,7 @@
         .video-container {
             text-align: center;
             margin: 40px auto;
+            position: relative;
         }
 
         .video-container iframe {
@@ -95,6 +98,12 @@
             height: 400px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            transition: filter 0.5s ease;
+        }
+
+        /* Darken Background When Video is Playing */
+        .video-container.fullscreen-bg iframe {
+            filter: brightness(40%);
         }
 
         /* Why Choose Us */
@@ -119,31 +128,35 @@
         }
 
         /* Bottom Navigation Tabs */
-        .tabs {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 15px 0;
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 0;
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            align-items: center;
+            gap: 15px;
             position: fixed;
-            bottom: 0;
+            bottom: 10px;
             left: 0;
-            box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
             z-index: 10;
+            border-radius: 10px;
         }
 
-        .tabs a {
-            color: #ddd;
+        nav a {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
             text-decoration: none;
-            font-size: 1.1em;
             font-weight: bold;
             padding: 12px 20px;
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        .tabs a:hover {
-            color: #1e90ff;
+        nav a:hover {
+            background: #1e90ff;
+            color: #fff;
         }
 
         /* Mobile Optimization */
@@ -178,11 +191,11 @@
                 height: 280px;
             }
 
-            .tabs {
-                gap: 15px;
+            nav {
+                gap: 10px;
             }
 
-            .tabs a {
+            nav a {
                 font-size: 1em;
                 padding: 10px 15px;
             }
@@ -202,33 +215,44 @@
     <!-- About H-2B Visa -->
     <section class="section">
         <h2>What is an H-2B Visa?</h2>
-        <p>The H-2B visa allows U.S. employers to legally hire foreign workers for **temporary non-agricultural jobs**. This program is crucial for businesses experiencing **seasonal labor shortages**, ensuring they remain competitive and fully staffed.</p>
+        <p>The H-2B visa allows U.S. employers to legally hire foreign workers for temporary non-agricultural jobs. This program is crucial for businesses experiencing seasonal labor shortages, ensuring they remain competitive and fully staffed.</p>
     </section>
 
     <!-- Video Section -->
     <section class="video-container">
         <h2>Understanding the H-2B Process</h2>
-        <iframe src="https://www.youtube.com/embed/yqIE9GlMbLY" allowfullscreen></iframe>
+        <iframe id="video" src="https://www.youtube.com/embed/yqIE9GlMbLY" allowfullscreen></iframe>
     </section>
 
     <!-- Why Choose Us Section -->
     <section class="section why-us">
         <h2>Why Choose The Kershaw Law Firm P.C.?</h2>
         <ul>
-            <li>Expert legal guidance ensuring **fast and successful applications**.</li>
-            <li>**98% success rate**, making us a leader in H-2B visa approvals.</li>
-            <li>We handle **all complexities**, so you focus on growing your business.</li>
+            <li>Expert legal guidance ensuring fast and successful applications.</li>
+            <li>98% success rate, making us a leader in H-2B visa approvals.</li>
+            <li>We handle all complexities, so you focus on growing your business.</li>
             <li>We ensure full compliance, preventing costly mistakes or delays.</li>
         </ul>
     </section>
 
     <!-- Footer Navigation Tabs -->
-    <nav class="tabs">
+    <nav>
         <a href="index.html">Home</a>
-        <a href="h2a.html">H-2A Visa</a>
-        <a href="h2b.html">H-2B Visa</a>
+        <a href="h2a.html">H2A Visa</a>
+        <a href="h2b.html">H2B Visa</a>
+        <a href="costs.html">Costs</a>
         <a href="contact.html">Contact</a>
     </nav>
+
+    <script>
+        const video = document.getElementById('video');
+        video.addEventListener('play', () => {
+            document.body.style.background = 'rgba(0, 0, 0, 0.8)';
+        });
+        video.addEventListener('pause', () => {
+            document.body.style.background = '';
+        });
+    </script>
 
 </body>
 </html>

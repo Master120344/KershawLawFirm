@@ -143,37 +143,6 @@
         nav a:hover {
             color: #1e90ff;
         }
-
-        /* Dropdown menu styling */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.9);
-            min-width: 160px;
-            box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.6);
-            z-index: 1;
-            bottom: 100%;
-            text-align: left;
-        }
-
-        .dropdown-content a {
-            color: #ddd;
-            padding: 12px 16px;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background: #1e90ff;
-            color: #fff;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
     </style>
 </head>
 
@@ -212,15 +181,54 @@
     <!-- Bottom Navigation Bar -->
     <nav>
         <a href="index.html">Home</a>
-        <div class="dropdown">
-            <a href="#">Visas</a>
-            <div class="dropdown-content">
-                <a href="h2b.html">H2B Visa</a>
-                <a href="h2a.html">H2A Visa</a>
-            </div>
-        </div>
+        <a href="h2b.html">H2B Visa</a>
+        <a href="h2a.html">H2A Visa</a>
         <a href="contact.html">Contact</a>
     </nav>
+
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            
+            fetch("process_payment.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Payment successful! A DocuSign will be sent to you.");
+                    sendDocuSign(data.email);
+                } else {
+                    alert("Payment failed. An issue email has been sent.");
+                    sendIssueEmail(data.email);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        function sendDocuSign(email) {
+            fetch("send_docusign.php", {
+                method: "POST",
+                body: JSON.stringify({ email: email }),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.json())
+            .then(data => console.log("DocuSign sent:", data));
+        }
+
+        function sendIssueEmail(email) {
+            fetch("send_issue_email.php", {
+                method: "POST",
+                body: JSON.stringify({ email: email }),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.json())
+            .then(data => console.log("Issue email sent:", data));
+        }
+    </script>
 
 </body>
 </html>

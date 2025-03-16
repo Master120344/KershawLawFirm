@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H2A Visa - The Kershaw Law Firm P.C.</title>
+    <title>H-2A Visa - The Kershaw Law Firm P.C.</title>
+    <link rel="stylesheet" href="style.css"> <!-- Keeping external styling for consistency -->
 
     <style>
-        /* Reset and Base Styles */
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
@@ -15,73 +16,72 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
+        /* Background & Layout */
         body {
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Farm-Background.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
         }
 
-        /* Header Section */
-        .header {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 50px 20px;
+        /* Hero Section */
+        .hero {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 60px 20px;
             text-align: center;
         }
 
-        .header h1 {
-            font-size: 3em;
+        .hero h1 {
+            font-size: 3.5em;
             color: #FFD700;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
             text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.9);
         }
 
-        .header p {
-            font-size: 1.4em;
-            margin-top: 10px;
+        .hero p {
+            font-size: 1.5em;
+            margin-top: 15px;
             color: #E6E6E6;
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* Content Section */
-        .content {
-            max-width: 1100px;
-            margin: 50px auto;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.75);
-            border-radius: 10px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
+        /* Section Styling */
+        .section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            text-align: left;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6);
         }
 
-        .content h2 {
-            font-size: 2.2em;
+        .section h2 {
+            font-size: 2.5em;
             color: #FFD700;
             margin-bottom: 20px;
         }
 
-        .content p {
+        .section p {
             font-size: 1.3em;
             line-height: 1.6;
             color: #ddd;
-            margin-bottom: 20px;
         }
 
         /* CTA Button */
         .cta-button {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 15px 35px;
             background: #1e90ff;
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-top: 20px;
-            transition: all 0.3s ease;
-            font-size: 1.2em;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease, transform 0.2s ease;
+            font-size: 1.3em;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
 
         .cta-button:hover {
@@ -89,45 +89,68 @@
             transform: scale(1.05);
         }
 
-        /* Footer */
-        .footer {
-            background: rgba(0, 0, 0, 0.8);
+        /* Tabs Navigation */
+        .tabs {
+            background: rgba(0, 0, 0, 0.9);
             padding: 15px 0;
-            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
             position: fixed;
             bottom: 0;
-            width: 100%;
-            color: #ddd;
-            font-size: 1em;
+            left: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+            z-index: 10;
         }
 
-        /* Mobile Responsive Adjustments */
+        .tabs a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 12px 25px;
+            transition: all 0.3s ease;
+        }
+
+        .tabs a:hover {
+            color: #1e90ff;
+        }
+
+        /* Mobile Optimization */
         @media (max-width: 768px) {
-            .header h1 {
+            .hero h1 {
                 font-size: 2.5em;
             }
 
-            .header p {
-                font-size: 1.2em;
-                max-width: 90%;
-            }
-
-            .content {
-                padding: 20px;
-                margin: 30px auto;
-            }
-
-            .content h2 {
-                font-size: 1.8em;
-            }
-
-            .content p {
-                font-size: 1.1em;
+            .hero p {
+                font-size: 1.3em;
             }
 
             .cta-button {
                 font-size: 1.1em;
                 padding: 12px 24px;
+            }
+
+            .section {
+                padding: 30px;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .section p {
+                font-size: 1.1em;
+            }
+
+            .tabs {
+                gap: 20px;
+            }
+
+            .tabs a {
+                font-size: 1em;
+                padding: 10px 15px;
             }
         }
     </style>
@@ -135,33 +158,44 @@
 
 <body>
 
-    <!-- Header Section -->
-    <div class="header">
-        <h1>H2A Visa Program</h1>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>H-2A Visa Program</h1>
         <p>Helping agricultural businesses legally hire seasonal foreign workers with a streamlined and compliant process.</p>
-    </div>
+    </section>
 
-    <!-- Content Section -->
-    <div class="content">
-        <h2>What is the H2A Visa?</h2>
-        <p>The H2A visa allows U.S. agricultural employers to bring foreign workers for temporary or seasonal agricultural jobs when there are not enough domestic workers available.</p>
+    <!-- About H-2A Visa -->
+    <section class="section">
+        <h2>What is an H-2A Visa?</h2>
+        <p>The H-2A visa allows U.S. agricultural employers to bring foreign workers for **temporary or seasonal agricultural jobs** when there are not enough domestic workers available.</p>
+    </section>
 
-        <h2>Why Choose The Kershaw Law Firm?</h2>
-        <p>We specialize in making the H2A visa application process smooth, efficient, and fully compliant with immigration laws.</p>
+    <!-- Why Choose Us -->
+    <section class="section">
+        <h2>Why Choose The Kershaw Law Firm P.C.?</h2>
+        <p>We specialize in making the H-2A visa application process **smooth, efficient, and fully compliant** with immigration laws.</p>
+    </section>
 
+    <!-- Eligibility Requirements -->
+    <section class="section">
         <h2>Eligibility Requirements</h2>
-        <p>Employers must demonstrate the need for seasonal agricultural workers and meet all labor and wage regulations.</p>
+        <p>Employers must demonstrate the **need for seasonal agricultural workers** and meet all **labor and wage regulations**.</p>
+    </section>
 
+    <!-- Get Started Section -->
+    <section class="section">
         <h2>Get Started Today</h2>
-        <p>Contact us to begin your H2A visa application and ensure your business remains fully staffed and compliant.</p>
-
+        <p>Contact us to begin your **H-2A visa application** and ensure your business remains fully staffed and compliant.</p>
         <a href="getstarted.html" class="cta-button">Apply Now</a>
-    </div>
+    </section>
 
-    <!-- Footer -->
-    <div class="footer">
-        © 2025 The Kershaw Law Firm P.C. | All Rights Reserved
-    </div>
+    <!-- Footer Navigation (Matching index.html Tabs) -->
+    <nav class="tabs">
+        <a href="index.html">Home</a>
+        <a href="h2a.html">H-2A Visa</a>
+        <a href="h2b.html">H-2B Visa</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
 </body>
 

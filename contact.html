@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | The Kershaw Law Firm P.C.</title>
-    <link rel="stylesheet" href="css/contact.css">
-    <script defer src="JS/contactscript.js"></script>
+    <title>Contact Us - The Kershaw Law Firm P.C.</title>
     <style>
-        /* Basic Reset */
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
+        /* Body Styling */
         body {
             background-color: #f4f4f4;
             color: #333;
@@ -24,144 +23,159 @@
             min-height: 100vh;
         }
 
-        /* Hero Section */
-        .hero {
-            background: url('images/lawfirm-bg.jpg') center/cover no-repeat;
-            height: 350px;
+        /* Header Section */
+        header {
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            color: #FFD700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Main Content Wrapper */
+        .content-wrapper {
+            flex: 1;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-            animation: heroFadeIn 1s ease-in-out;
-        }
-
-        @keyframes heroFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-content {
-            position: relative;
-            text-align: center;
-            color: #fff;
-            animation: slideUp 1s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            padding: 20px;
         }
 
         /* Contact Form Section */
-        .container {
+        .contact-form {
             background: #fff;
             max-width: 600px;
-            margin: -50px auto 20px;
-            padding: 20px 30px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            animation: fadeIn 0.8s ease-in;
+            margin-top: 20px;
         }
 
-        h2 {
+        .contact-form h2 {
             text-align: center;
             margin-bottom: 20px;
             font-size: 1.8rem;
             color: #444;
         }
 
-        label {
+        .contact-form label {
             font-weight: bold;
             display: block;
             margin-bottom: 5px;
             color: #555;
         }
 
-        input,
-        select,
-        textarea {
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            transition: border-color 0.3s ease;
+            font-size: 1em;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: #4CAF50;
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: #FFD700;
             outline: none;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
-        textarea {
+        .contact-form textarea {
             resize: none;
         }
 
-        .submit-btn {
+        .contact-form .submit-btn {
             width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: #fff;
+            padding: 12px;
+            background-color: #FFD700;
+            color: #000;
             border: none;
             border-radius: 5px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.3s ease;
         }
 
-        .submit-btn:hover {
-            background-color: #3e8e41;
-            transform: scale(1.05);
+        .contact-form .submit-btn:hover {
+            background-color: #e6b800;
         }
 
-        /* Footer Navigation */
-        .footer-nav {
+        /* Navigation Tabs */
+        .tabs {
+            padding: 15px 0;
+            width: 100%;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            padding: 10px;
-            background: #333;
-            margin-top: auto;
+            gap: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            font-size: 1.2em;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
         }
 
-        .footer-nav a {
-            color: #fff;
+        .tabs a {
+            color: white;
             text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 10px;
+            flex: 1 1 100px;
+            text-align: center;
         }
 
-        .footer-nav a:hover {
-            color: #4CAF50;
+        .tabs a:hover {
+            color: #1E90FF;
+            transform: translateY(-3px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .hero-content h1 {
-                font-size: 2rem;
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em;
             }
 
-            .container {
-                width: 90%;
+            .contact-form h2 {
+                font-size: 1.5rem;
+            }
+
+            .contact-form label {
+                font-size: 0.9em;
+            }
+
+            .contact-form input,
+            .contact-form select,
+            .contact-form textarea {
+                font-size: 0.9em;
+            }
+
+            .contact-form .submit-btn {
+                font-size: 1em;
+            }
+
+            .tabs {
+                gap: 5px;
+                font-size: 1em;
+                padding: 10px 0;
+            }
+
+            .tabs a {
+                padding: 8px;
             }
         }
     </style>
@@ -169,18 +183,17 @@
 
 <body>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="hero-content">
-            <h1>The Kershaw Law Firm P.C.</h1>
-        </div>
-    </div>
+    <!-- Header Section -->
+    <header>
+        <h1>Contact Us</h1>
+    </header>
 
-    <!-- Contact Form Section -->
-    <section>
-        <div class="container" id="form-container">
-            <h2>Contact Us</h2>
-            <form id="contact-form">
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Contact Form Section -->
+        <div class="contact-form">
+            <h2>Get in Touch</h2>
+            <form id="contactForm">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" required placeholder="Enter your full name">
 
@@ -206,19 +219,20 @@
                 <button type="submit" class="submit-btn">Submit Inquiry</button>
             </form>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer Navigation -->
-    <nav class="footer-nav">
+    <!-- Bottom Navigation Bar -->
+    <nav class="tabs">
         <a href="index.html">Home</a>
-        <a href="h2b.html">H2B Visa</a>
         <a href="h2a.html">H2A Visa</a>
+        <a href="h2b.html">H2B Visa</a>
+        <a href="costs.html">Costs</a>
         <a href="contact.html">Contact</a>
     </nav>
 
     <script>
         // Form Handling Script
-        document.getElementById("contact-form").addEventListener("submit", function(event) {
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
             event.preventDefault();
             alert("Your inquiry has been submitted successfully!");
         });

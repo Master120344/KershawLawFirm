@@ -16,20 +16,15 @@
         /* Body Styling */
         body {
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/justice-books.jpg') no-repeat center center/cover;
+            background-size: cover;
             color: #fff;
-            text-align: center;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Dark Overlay for Better Readability */
@@ -151,65 +146,6 @@
             text-decoration: underline;
         }
 
-        /* Navigation Bar */
-        nav {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 12px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 12px 20px;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #1e90ff;
-        }
-
-        /* Dropdown menu styling */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.9);
-            min-width: 160px;
-            box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.6);
-            z-index: 1;
-            bottom: 100%;
-            text-align: left;
-        }
-
-        .dropdown-content a {
-            color: #ddd;
-            padding: 12px 16px;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background: #1e90ff;
-            color: #fff;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
         /* Mobile Responsive Tweaks */
         @media (max-width: 480px) {
             h1 {
@@ -224,14 +160,6 @@
             button {
                 font-size: 1em;
                 padding: 10px;
-            }
-
-            nav {
-                gap: 15px;
-            }
-
-            nav a {
-                font-size: 0.9em;
             }
         }
     </style>
@@ -273,31 +201,17 @@
                 </label>
             </div>
 
-            <button type="button" id="payNow">Proceed to Payment</button>
+            <button type="submit" id="payNow">Proceed to Payment</button>
         </form>
     </div>
 
-    <!-- Updated Navigation Bar -->
-    <nav>
-        <a href="index.html">Home</a>
-        <div class="dropdown">
-            <a href="#">Visas</a>
-            <div class="dropdown-content">
-                <a href="h2b.html">H2B Visa</a>
-                <a href="h2a.html">H2A Visa</a>
-            </div>
-        </div>
-        <a href="contact.html">Contact</a>
-    </nav>
-
     <script>
-        // Form Handling Script
-        document.getElementById("payNow").addEventListener("click", function() {
+        document.getElementById("visaForm").addEventListener("submit", function(event) {
+            event.preventDefault();
             if (document.getElementById("termsCheckbox").checked) {
-                alert("Proceeding to payment...");
-                // Here you can integrate the actual payment system
+                window.location.href = "payment.html";
             } else {
-                alert("Please agree to the terms and conditions.");
+                alert("You must agree to the terms to proceed.");
             }
         });
     </script>

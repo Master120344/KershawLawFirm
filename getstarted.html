@@ -19,6 +19,7 @@
             color: #fff;
             text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -150,7 +151,7 @@
             text-decoration: underline;
         }
 
-        /* Navigation Bar (Matching Index.html) */
+        /* Navigation Bar */
         nav {
             background: rgba(0, 0, 0, 0.7);
             padding: 12px 0;
@@ -288,6 +289,18 @@
         </div>
         <a href="contact.html">Contact</a>
     </nav>
+
+    <script>
+        // Form Handling Script
+        document.getElementById("payNow").addEventListener("click", function() {
+            if (document.getElementById("termsCheckbox").checked) {
+                alert("Proceeding to payment...");
+                // Here you can integrate the actual payment system
+            } else {
+                alert("Please agree to the terms and conditions.");
+            }
+        });
+    </script>
 
 </body>
 </html>

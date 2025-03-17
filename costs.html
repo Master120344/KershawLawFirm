@@ -134,14 +134,36 @@
       transform: scale(1.05);
     }
 
-    /* Footer */
-    footer {
+    /* Navigation Tabs */
+    .tabs {
+      padding: 15px 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      font-size: 1.2em;
+      font-weight: bold;
       background: rgba(0, 0, 0, 0.9);
-      color: #ddd;
+      backdrop-filter: blur(10px);
+    }
+
+    .tabs a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 10px;
+      flex: 1 1 100px;
       text-align: center;
-      padding: 1em 0;
-      margin-top: auto;
-      font-size: 0.9em;
+    }
+
+    .tabs a:hover {
+      color: #1E90FF;
+      transform: translateY(-3px);
     }
 
     /* Mobile Adjustments */
@@ -165,6 +187,16 @@
       .cta-button {
         font-size: 1em;
         padding: 10px 20px;
+      }
+
+      .tabs {
+        gap: 5px;
+        font-size: 1em;
+        padding: 10px 0;
+      }
+
+      .tabs a {
+        padding: 8px;
       }
     }
   </style>
@@ -207,9 +239,13 @@
     <a href="contact.html" class="cta-button">Start Your Application</a>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 The Kershaw Law Firm P.C. All rights reserved.</p>
-  </footer>
+  <!-- Bottom Navigation Bar -->
+  <nav class="tabs">
+    <a href="index.html">Home</a>
+    <a href="h2a.html">H2A Visa</a>
+    <a href="h2b.html">H2B Visa</a>
+    <a href="costs.html">Costs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </body>
 </html>

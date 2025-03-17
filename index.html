@@ -19,36 +19,36 @@
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
             color: white;
             text-align: center;
-            padding-bottom: 80px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        /* Header Styling - Clean Color and Text Effect */
+        /* Header Styling */
         .header {
             padding: 20px;
             font-size: 3em;
             font-weight: bold;
-            color: #00CED1; /* A fresh turquoise-blue that stands out */
+            color: #00CED1; /* Professional turquoise-blue */
             text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9);
         }
 
-        /* Hero Section Styling - No More Ugly Background Box */
+        /* Hero Section Styling - Pushed Down Lower */
         .hero {
             padding: 50px 20px;
-            background: rgba(0, 0, 0, 0.4); /* Subtle transparent overlay */
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 12px;
             max-width: 800px;
             margin: auto;
-            box-shadow: none; /* Removed ugly shadow */
+            box-shadow: none;
+            margin-top: 150px; /* Pushes section down lower */
         }
 
         .hero h2 {
             font-size: 2.2em;
             margin-bottom: 20px;
-            color: #ffffff; /* Clean, bright white text */
+            color: #ffffff;
             text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.8);
         }
 
@@ -72,44 +72,46 @@
             transform: scale(1.08);
         }
 
-        /* Bottom Navigation Tabs - Sleek & Transparent Overhaul */
+        /* Bottom Navigation Tabs - Overhauled, Clean, Sleek */
         .tabs {
-            background: rgba(0, 0, 0, 0.3); /* More transparent now */
-            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.2); /* Sleek transparency */
+            padding: 12px 0;
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             position: fixed;
             bottom: 0;
             left: 0;
-            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.8);
             z-index: 10;
             border-radius: 10px 10px 0 0;
-            backdrop-filter: blur(8px); /* Smooth glass effect */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
         }
 
         .tabs a {
-            color: #ffffff;
+            color: #fff;
             text-decoration: none;
             font-size: 1.2em;
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 12px 25px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             transition: all 0.3s ease;
         }
 
         .tabs a:hover {
-            background: #1e90ff;
+            background: rgba(30, 144, 255, 0.8);
             color: white;
             transform: translateY(-3px);
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);
         }
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
             .hero {
                 padding: 30px 15px;
+                margin-top: 80px; /* Adjusted for smaller screens */
             }
 
             .hero h2 {

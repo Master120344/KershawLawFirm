@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - The Kershaw Law Firm P.C.</title>
-
     <style>
         /* Global Reset */
         * {
@@ -17,7 +16,6 @@
         /* Body Styling */
         body {
             background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/justice-books.jpg') no-repeat center center/cover;
-            background-size: cover;
             color: #fff;
             text-align: center;
             display: flex;
@@ -25,6 +23,12 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Dark Overlay for Better Readability */
@@ -48,12 +52,25 @@
             width: 100%;
             max-width: 600px;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         h1 {
             color: #FFD700;
             margin-bottom: 10px;
             font-size: 2em;
+            animation: colorChange 3s infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: #FFD700; }
+            50% { color: #FF4500; }
+            100% { color: #FFD700; }
         }
 
         p {
@@ -77,6 +94,7 @@
             font-size: 1em;
             background: #222;
             color: #fff;
+            transition: border-color 0.3s ease;
         }
 
         select:focus, input:focus, textarea:focus {
@@ -94,12 +112,13 @@
             border-radius: 6px;
             margin-top: 20px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             font-size: 1.1em;
         }
 
         button:hover {
             background: #E6B800;
+            transform: scale(1.05);
         }
 
         /* Total Cost Display */
@@ -248,11 +267,11 @@
             <div class="terms-container">
                 <input type="checkbox" id="termsCheckbox" required>
                 <label for="termsCheckbox">
-                    I have read and agree to the 
+                    I have read and agree to the
                     <a href="terms.html" target="_blank">Terms and Conditions</a>.
                 </label>
             </div>
-            
+
             <button type="button" id="payNow">Proceed to Payment</button>
         </form>
     </div>

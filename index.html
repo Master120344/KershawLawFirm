@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Kershaw Law Firm P.C.</title>
-
     <style>
         /* Global Reset */
         * {
@@ -23,6 +22,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Header Styling */
@@ -32,6 +37,12 @@
             font-weight: bold;
             color: #FFD700;
             text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9);
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
         /* Hero Section */
@@ -41,6 +52,12 @@
             margin-top: auto;
             margin-bottom: 120px;
             padding: 20px;
+            animation: fadeUp 1s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .hero h2 {
@@ -54,7 +71,7 @@
         .cta-button {
             display: inline-block;
             padding: 15px 40px;
-            background: #004AAD;
+            background: rgba(0, 74, 173, 0.8); /* Matching the sky color */
             color: white;
             text-decoration: none;
             font-size: 1.4em;
@@ -66,7 +83,7 @@
         }
 
         .cta-button:hover {
-            background: #002D62;
+            background: rgba(0, 56, 133, 0.9); /* Darker shade for hover */
             transform: scale(1.08);
         }
 
@@ -83,7 +100,7 @@
             z-index: 10;
             font-size: 1.2em;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.25); /* More Transparent */
+            background: rgba(0, 0, 0, 0.5); /* More Transparent */
             backdrop-filter: blur(8px);
         }
 

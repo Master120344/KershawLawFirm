@@ -15,58 +15,61 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
-        /* Background & Layout */
+        /* Body Background Styling */
         body {
             background: url('https://github.com/Master120344/KershawLawFirm/blob/main/Austin%20Background.jpg') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding-bottom: 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Header - Law Firm Name */
+        /* Header Styling */
         .header {
             padding: 20px;
-            font-size: 2.5em;
+            font-size: 2.8em;
             font-weight: bold;
             color: #FFD700;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.9);
         }
 
-        /* Hero Section */
+        /* Hero Section Styling */
         .hero {
-            margin-top: 40px;
             padding: 50px 20px;
             background: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
+            border-radius: 12px;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
         }
 
         .hero h2 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
+            font-size: 2em;
+            margin-bottom: 20px;
             color: #ddd;
         }
 
-        /* Get Started Button */
+        /* CTA Button Styling */
         .cta-button {
             display: inline-block;
-            padding: 14px 35px;
+            padding: 15px 40px;
             background: #004AAD;
             color: white;
             text-decoration: none;
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 10px;
             transition: all 0.3s ease;
             margin-top: 20px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .cta-button:hover {
             background: #002D62;
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         /* Bottom Navigation Tabs */
@@ -76,11 +79,11 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             position: fixed;
             bottom: 0;
             left: 0;
-            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.6);
             z-index: 10;
             border-radius: 10px 10px 0 0;
         }
@@ -90,7 +93,7 @@
             text-decoration: none;
             font-size: 1.2em;
             font-weight: bold;
-            padding: 12px 18px;
+            padding: 10px 20px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -99,17 +102,17 @@
         .tabs a:hover {
             background: #1e90ff;
             color: white;
-            transform: scale(1.1);
+            transform: translateY(-3px);
         }
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
             .hero {
-                padding: 40px 15px;
+                padding: 30px 15px;
             }
 
             .hero h2 {
-                font-size: 1.5em;
+                font-size: 1.4em;
             }
 
             .cta-button {
@@ -118,12 +121,16 @@
             }
 
             .tabs {
-                gap: 15px;
+                gap: 10px;
             }
 
             .tabs a {
                 font-size: 1em;
-                padding: 10px 14px;
+                padding: 8px 12px;
+            }
+
+            .header {
+                font-size: 2em;
             }
         }
     </style>
@@ -131,7 +138,7 @@
 
 <body>
 
-    <!-- Law Firm Name -->
+    <!-- Law Firm Name Header -->
     <header class="header">
         The Kershaw Law Firm P.C.
     </header>

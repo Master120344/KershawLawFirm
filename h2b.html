@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,16 +21,12 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            animation: fadeIn 1.5s ease-in-out;
+            transition: all 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        body.video-playing {
+            filter: blur(10px) brightness(0.5);
+            pointer-events: none;
         }
 
         /* Header Section */
@@ -41,41 +36,38 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-            animation: slideDown 1s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(0);
-            }
         }
 
         header h1 {
             font-size: 2.8em;
             color: #FFD700;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-            animation: colorChange 3s infinite;
-        }
-
-        @keyframes colorChange {
-            0% {
-                color: #FFD700;
-            }
-            50% {
-                color: #FF4500;
-            }
-            100% {
-                color: #FFD700;
-            }
         }
 
         header p {
             font-size: 1.2em;
             margin-top: 10px;
             color: #ddd;
+        }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* Main Content Wrapper */
@@ -98,31 +90,6 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            animation: fadeUp 1s ease-out forwards;
-        }
-
-        .section:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .section:nth-child(3) {
-            animation-delay: 1s;
-        }
-
-        .section:nth-child(4) {
-            animation-delay: 1.5s;
-        }
-
-        .section:nth-child(5) {
-            animation-delay: 2s;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .section:hover {
@@ -158,37 +125,7 @@
             color: #1e90ff;
         }
 
-        /* CTA Button */
-        .cta-button {
-            display: inline-block;
-            padding: 15px 35px;
-            background: #004AAD;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 7px;
-            margin-top: 20px;
-            transition: background 0.3s ease, transform 0.2s ease;
-            font-size: 1.3em;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .cta-button:hover {
-            background: #002D62;
-            transform: scale(1.1);
-        }
-
-        /* Navigation Tabs - Matching Main Page Style */
+        /* Navigation Tabs */
         .tabs {
             padding: 15px 0;
             width: 100%;
@@ -201,7 +138,7 @@
             z-index: 10;
             font-size: 1.2em;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
         }
 
@@ -235,11 +172,6 @@
                 font-size: 1em;
             }
 
-            .cta-button {
-                font-size: 1em;
-                padding: 12px 25px;
-            }
-
             .tabs {
                 gap: 20px;
                 font-size: 1em;
@@ -261,13 +193,18 @@
         <p>Empowering Employers with a Reliable Workforce</p>
     </header>
 
+    <!-- Video Section -->
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/4cnMH0ba5Jk" frameborder="0" allowfullscreen></iframe>
+    </div>
+
     <!-- Main Content Wrapper -->
     <div class="content-wrapper">
 
         <!-- About H-2B Visa -->
         <section class="section">
             <h2>What is the H-2B Visa?</h2>
-            <p>The H-2B visa program allows U.S. employers to hire foreign workers for temporary non-agricultural jobs when there are not enough U.S. workers available. This program ensures that businesses can meet their labor needs during peak periods.</p>
+            <p>The H-2B visa program allows U.S. employers to hire foreign workers for temporary non-agricultural jobs. This program is particularly beneficial for industries with seasonal or peak load needs, such as hospitality, tourism, landscaping, and seafood processing.</p>
         </section>
 
         <!-- Benefits of the H-2B Program -->
@@ -305,13 +242,6 @@
             </ul>
         </section>
 
-        <!-- Get Started Section -->
-        <section class="section">
-            <h2>Ready to Apply?</h2>
-            <p>Let us simplify the process for you. Get in touch today to start your H-2B visa application and ensure your business has the workforce it needs.</p>
-            <a href="getstarted.html" class="cta-button">Apply Now</a>
-        </section>
-
     </div>
 
     <!-- Bottom Navigation Bar -->
@@ -323,6 +253,18 @@
         <a href="contact.html">Contact</a>
     </nav>
 
-</body>
+    <script>
+        const videoContainer = document.querySelector('.video-container iframe');
+        const body = document.body;
 
+        videoContainer.addEventListener('play', () => {
+            body.classList.add('video-playing');
+        });
+
+        videoContainer.addEventListener('pause', () => {
+            body.classList.remove('video-playing');
+        });
+    </script>
+
+</body>
 </html>

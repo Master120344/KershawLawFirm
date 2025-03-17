@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions</title>
+    <title>Terms and Conditions - The Kershaw Law Firm P.C.</title>
     <style>
-        /* Global Styling */
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
@@ -13,204 +13,129 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
+        /* Body Styling */
         body {
-            background: #f4f4f4;
-            color: #333;
-            text-align: center;
+            background: #000 url('https://www.transparenttextures.com/patterns/asfalt-dark.png') repeat;
+            color: #fff;
+            line-height: 1.8;
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            animation: fadeIn 1.5s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .container {
-            background: #fff;
-            padding: 40px;
-            border-radius: 10px;
-            max-width: 800px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
-            position: relative;
-            animation: slideUp 1s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        h1 {
-            color: #333;
+        /* Header Styling */
+        header {
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .terms-container {
-            text-align: left;
-            max-height: 300px;
-            overflow-y: auto;
-            background: #f9f9f9;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 1em;
-            color: #555;
-            transition: height 0.3s ease;
-        }
-
-        .terms-container h2 {
+        header h1 {
+            font-size: 2.5em;
             color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Main Content Styling */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .content h2 {
+            font-size: 2em;
+            color: #FFD700;
+            border-bottom: 2px solid #FFD700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .content ul li {
+            font-size: 1.1em;
             margin-bottom: 10px;
         }
 
-        .terms-container p {
-            line-height: 1.6;
-        }
-
-        .terms-container ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-
-        .terms-agreement {
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .terms-agreement input {
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        button {
-            background: #FFD700;
-            color: #000;
+        .content ul li:before {
+            content: "•";
+            color: #FFD700;
             font-weight: bold;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
+            display: inline-block;
+            width: 1em;
         }
 
-        button:hover {
-            background: #E6B800;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #e63946;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .close-button:hover {
-            background: #ff4d61;
-        }
-
-        .terms-reopen {
-            margin-top: 10px;
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            margin-top: 20px;
             font-size: 0.9em;
-            color: #1e90ff;
-            cursor: pointer;
+            color: #ddd;
         }
 
-        .terms-reopen:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 480px) {
-            .container {
-                width: 90%;
-                padding: 20px;
+        /* Mobile Responsive Tweaks */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
             }
 
-            h1 {
-                font-size: 1.5em;
+            .content h2 {
+                font-size: 1.8em;
             }
 
-            .terms-container {
-                font-size: 0.9em;
+            .content p, .content ul li {
+                font-size: 1em;
             }
         }
     </style>
 </head>
+
 <body>
-
-    <div class="container">
-        <button class="close-button" onclick="closeTerms()">X</button>
+    <!-- Header Section -->
+    <header>
         <h1>Terms and Conditions</h1>
+    </header>
 
-        <div class="terms-container" id="termsContainer">
-            <h2>Agreement to Pay and Legal Terms</h2>
-            <p>By making a payment to The Kershaw Law Firm P.C., you agree to the following terms and conditions:</p>
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Introduction</h2>
+        <p>Welcome to The Kershaw Law Firm P.C. These terms and conditions outline the rules and regulations for the use of our website and services. By accessing this website, we assume you accept these terms and conditions in full. Do not continue to use our website if you do not accept all of the terms and conditions stated on this page.</p>
 
-            <ul>
-                <li><strong>Non-Refundable Payments:</strong> All payments made pursuant to this agreement are non-refundable and non-creditable. Once paid, no refunds will be issued under any circumstances. Payments made for legal services and visa filing will be applied to processing fees, legal consultations, and other required administrative actions as part of the agreement.</li>
-                <li><strong>Full Disclosure of Information:</strong> You agree to provide truthful, accurate, and complete information. Falsifying or withholding information may result in the termination of services or the invalidation of your visa application.</li>
-                <li><strong>Legal Obligations:</strong> You are bound by the terms of this agreement. By accepting and submitting this form, you acknowledge that you fully understand your legal obligations and responsibilities under U.S. law regarding visa applications and legal representation.</li>
-                <li><strong>Payment Authorization:</strong> By proceeding with payment, you authorize The Kershaw Law Firm P.C. to process your payment for the visa services as outlined. This agreement acknowledges that you have agreed to the total payment amount, and the payment is being made voluntarily.</li>
-                <li><strong>Finality of Agreement:</strong> By completing the payment process, you agree that you are legally bound by these terms and conditions. You are further informed that once the payment is made, no withdrawals or cancellations will be allowed.</li>
-            </ul>
+        <h2>Intellectual Property</h2>
+        <p>Unless otherwise stated, The Kershaw Law Firm P.C. and/or its licensors own the intellectual property rights for all material on this website. All intellectual property rights are reserved. You may view and/or print pages from this website for your own personal use subject to restrictions set in these terms and conditions.</p>
 
-            <p>Failure to comply with these terms may result in termination of your visa application process, and you will not be entitled to a refund of any fees paid.</p>
+        <h2>Acceptable Use</h2>
+        <p>You may use our website for your own personal purposes and in accordance with these terms and conditions. You may not use our website for any illegal or unauthorized purpose. You must not violate any laws in your jurisdiction (including but not limited to copyright laws).</p>
 
-        </div>
+        <h2>Prohibited Actions</h2>
+        <ul>
+            <li>Republish material from our website without prior written consent.</li>
+            <li>Sell, rent, or sub-license material from our website.</li>
+            <li>Reproduce, duplicate, or copy material from our website.</li>
+            <li>Redistribute content from our website (unless content is specifically made for redistribution).</li>
+        </ul>
 
-        <div class="terms-agreement">
-            <input type="checkbox" id="agreeTerms">
-            <label for="agreeTerms">I agree to the Terms and Conditions</label>
-        </div>
+        <h2>Limitation of Liability</h2>
+        <p>The Kershaw Law Firm P.C. will not be liable for any indirect, incidental, consequential, or punitive damages arising out of your use of this website. The Kershaw Law Firm P.C. does not warrant that the website is free of viruses or other harmful components.</p>
 
-        <button onclick="submitAgreement()" id="submitButton" disabled>Proceed to Payment</button>
-        <p class="terms-reopen" onclick="reopenTerms()">Reopen Terms and Conditions</p>
+        <h2>Governing Law</h2>
+        <p>These terms and conditions are governed by and construed in accordance with the laws of the United States. Any disputes shall be subject to the exclusive jurisdiction of the courts of the United States.</p>
     </div>
 
-    <script>
-        // Enable submit button when checkbox is checked
-        document.getElementById('agreeTerms').addEventListener('change', function() {
-            document.getElementById('submitButton').disabled = !this.checked;
-        });
-
-        // Function to close the terms and conditions popup
-        function closeTerms() {
-            window.close();
-        }
-
-        // Function to reopen the terms and conditions popup
-        function reopenTerms() {
-            document.getElementById('termsContainer').style.display = 'block';
-            document.getElementById('submitButton').disabled = true;
-            document.getElementById('agreeTerms').checked = false;
-        }
-
-        // Handle the terms acceptance and proceed to payment
-        function submitAgreement() {
-            if (document.getElementById('agreeTerms').checked) {
-                alert("You have agreed to the terms. Proceeding with payment...");
-                window.close();
-                // Here you can integrate the actual payment system
-            } else {
-                alert("You must agree to the terms to proceed.");
-            }
-        }
-    </script>
-
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 The Kershaw Law Firm P.C. All rights reserved.</p>
+    </footer>
 </body>
 </html>

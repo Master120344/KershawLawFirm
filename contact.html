@@ -6,7 +6,6 @@
     <title>Contact Us | The Kershaw Law Firm P.C.</title>
     <link rel="stylesheet" href="css/contact.css">
     <script defer src="JS/contactscript.js"></script>
-
     <style>
         /* Basic Reset */
         * {
@@ -20,9 +19,12 @@
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Header Section */
+        /* Hero Section */
         .hero {
             background: url('images/lawfirm-bg.jpg') center/cover no-repeat;
             height: 350px;
@@ -30,6 +32,12 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            animation: heroFadeIn 1s ease-in-out;
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .hero::before {
@@ -46,6 +54,12 @@
             position: relative;
             text-align: center;
             color: #fff;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .hero-content h1 {
@@ -88,6 +102,14 @@
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
         }
 
         textarea {
@@ -103,11 +125,12 @@
             border-radius: 5px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .submit-btn:hover {
             background-color: #3e8e41;
+            transform: scale(1.05);
         }
 
         /* Footer Navigation */
@@ -117,6 +140,7 @@
             gap: 20px;
             padding: 10px;
             background: #333;
+            margin-top: auto;
         }
 
         .footer-nav a {
@@ -128,12 +152,6 @@
 
         .footer-nav a:hover {
             color: #4CAF50;
-        }
-
-        /* Fade In Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Responsive Design */

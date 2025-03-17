@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H2A Questionnaire - The Kershaw Law Firm P.C.</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .questionnaire-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        .questionnaire-container h1 {
+            text-align: center;
+            color: #FFD700;
+        }
+        .questionnaire-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .questionnaire-container label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .questionnaire-container input, .questionnaire-container select, .questionnaire-container textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .questionnaire-container button {
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #FFD700;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .questionnaire-container button:hover {
+            background-color: #E6B800;
+        }
+    </style>
+</head>
+<body>
+    <div class="questionnaire-container">
+        <h1>H2A Labor Certification Questionnaire</h1>
+        <form id="questionnaireForm">
+            <!-- Add form fields for each question here -->
+            <label for="businessName">Legal Business Name:</label>
+            <input type="text" id="businessName" name="businessName" required>
+
+            <label for="contactName">H2A Contact Full Legal Name:</label>
+            <input type="text" id="contactName" name="contactName" required>
+
+            <!-- Continue adding fields for all questions -->
+
+            <button type="submit">Submit Questionnaire</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("questionnaireForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            // Here, you would typically generate a PDF and send it via email
+            // For now, we'll simulate this process
+            alert("Questionnaire submitted for approval. You will receive an approval code via email.");
+            // Redirect to the code submission page
+            window.location.href = "code_submission.html";
+        });
+    </script>
+</body>
+</html>

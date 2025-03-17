@@ -6,16 +6,156 @@
     <title>Contact Us | The Kershaw Law Firm P.C.</title>
     <link rel="stylesheet" href="css/contact.css">
     <script defer src="JS/contactscript.js"></script>
+
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Section */
+        .hero {
+            background: url('images/lawfirm-bg.jpg') center/cover no-repeat;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Contact Form Section */
+        .container {
+            background: #fff;
+            max-width: 600px;
+            margin: -50px auto 20px;
+            padding: 20px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #444;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #3e8e41;
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            background: #333;
+        }
+
+        .footer-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: #4CAF50;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- Hero Section -->
     <div class="hero">
-        <div class="overlay"></div>
-        <h1 class="lawfirm-title">The Kershaw Law Firm P.C.</h1>
-        <p class="headline">Expert Immigration Law Assistance</p>
-        <a href="#form-container" class="cta-button">Get Started</a>
+        <div class="hero-content">
+            <h1>The Kershaw Law Firm P.C.</h1>
+        </div>
     </div>
 
     <!-- Contact Form Section -->
@@ -59,47 +199,11 @@
     </nav>
 
     <script>
+        // Form Handling Script
         document.getElementById("contact-form").addEventListener("submit", function(event) {
             event.preventDefault();
-
-            const formData = new FormData(this);
-            
-            fetch("process_payment.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Payment successful! A DocuSign will be sent to you.");
-                    sendDocuSign(data.email);
-                } else {
-                    alert("Payment failed. An issue email has been sent.");
-                    sendIssueEmail(data.email);
-                }
-            })
-            .catch(error => console.error("Error:", error));
+            alert("Your inquiry has been submitted successfully!");
         });
-
-        function sendDocuSign(email) {
-            fetch("send_docusign.php", {
-                method: "POST",
-                body: JSON.stringify({ email: email }),
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(response => response.json())
-            .then(data => console.log("DocuSign sent:", data));
-        }
-
-        function sendIssueEmail(email) {
-            fetch("send_issue_email.php", {
-                method: "POST",
-                body: JSON.stringify({ email: email }),
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(response => response.json())
-            .then(data => console.log("Issue email sent:", data));
-        }
     </script>
 
 </body>

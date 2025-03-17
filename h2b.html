@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm P.C.</title>
-
+    <title>H-2B Visa Program - The Kershaw Law Firm P.C.</title>
     <style>
         /* Global Reset */
         * {
@@ -16,63 +16,181 @@
 
         /* Body Styling */
         body {
-            background: #000000 url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-            min-height: 100vh;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            min-height: 100vh;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
-        /* Header Styling */
-        .header {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Header Section */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
             padding: 20px;
-            font-size: 3em;
-            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        header h1 {
+            font-size: 2.8em;
             color: #FFD700;
-            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            animation: colorChange 3s infinite;
         }
 
-        /* Hero Section */
-        .hero {
-            max-width: 800px;
-            margin: auto;
-            margin-top: auto;
-            margin-bottom: 120px;
+        @keyframes colorChange {
+            0% {
+                color: #FFD700;
+            }
+            50% {
+                color: #FF4500;
+            }
+            100% {
+                color: #FFD700;
+            }
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #ddd;
+        }
+
+        /* Main Content Wrapper */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
 
-        .hero h2 {
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.8);
+        /* Section Styling */
+        .section {
+            max-width: 1000px;
+            width: 100%;
+            margin: 20px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeUp 1s ease-out forwards;
         }
 
-        /* Call-to-Action Button */
+        .section:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 2s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .section h2 {
+            font-size: 2.4em;
+            color: #1e90ff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ddd;
+            text-align: justify;
+        }
+
+        .section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .section ul li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .section ul li strong {
+            color: #1e90ff;
+        }
+
+        /* CTA Button */
         .cta-button {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 15px 35px;
             background: #004AAD;
-            color: white;
+            color: #fff;
             text-decoration: none;
-            font-size: 1.4em;
             font-weight: bold;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            border-radius: 7px;
             margin-top: 20px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease, transform 0.2s ease;
+            font-size: 1.3em;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .cta-button:hover {
             background: #002D62;
-            transform: scale(1.08);
+            transform: scale(1.1);
         }
 
-        /* Navigation Tabs - Increased Transparency */
+        /* Navigation Tabs - Matching Main Page Style */
         .tabs {
-            padding: 12px 0;
+            padding: 15px 0;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -83,8 +201,8 @@
             z-index: 10;
             font-size: 1.2em;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.25); /* More Transparent */
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         .tabs a {
@@ -101,17 +219,24 @@
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
-            .hero {
-                padding: 30px 15px;
-                margin-bottom: 140px;
+            header h1 {
+                font-size: 2.2em;
             }
 
-            .hero h2 {
-                font-size: 1.6em;
+            .section {
+                padding: 20px;
+            }
+
+            .section h2 {
+                font-size: 1.8em;
+            }
+
+            .section p {
+                font-size: 1em;
             }
 
             .cta-button {
-                font-size: 1.1em;
+                font-size: 1em;
                 padding: 12px 25px;
             }
 
@@ -124,28 +249,72 @@
             .tabs a {
                 padding: 8px;
             }
-
-            .header {
-                font-size: 2.2em;
-            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Law Firm Name Header -->
-    <header class="header">
-        The Kershaw Law Firm P.C.
+    <!-- Header Section -->
+    <header>
+        <h1>H-2B Visa Program</h1>
+        <p>Empowering Employers with a Reliable Workforce</p>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2>Helping Employers Hire the Workers They Need</h2>
-        <a href="getstarted.html" class="cta-button">Get Started Now</a>
-    </section>
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
 
-    <!-- Footer Navigation Tabs -->
+        <!-- About H-2B Visa -->
+        <section class="section">
+            <h2>What is the H-2B Visa?</h2>
+            <p>The H-2B visa program allows U.S. employers to hire foreign workers for temporary non-agricultural jobs when there are not enough U.S. workers available. This program ensures that businesses can meet their labor needs during peak periods.</p>
+        </section>
+
+        <!-- Benefits of the H-2B Program -->
+        <section class="section">
+            <h2>Benefits of the H-2B Program</h2>
+            <p>Participating in the H-2B program offers several advantages:</p>
+            <ul>
+                <li><strong>Access to a Reliable Workforce:</strong> Ensure your operations run smoothly during peak seasons by filling labor shortages with qualified workers.</li>
+                <li><strong>Compliance with Labor Laws:</strong> The program provides a legal pathway to employ foreign workers, helping you stay compliant with federal regulations.</li>
+                <li><strong>Flexibility:</strong> Hire workers for various types of temporary needs, including seasonal, peak load, and one-time occurrences.</li>
+            </ul>
+        </section>
+
+        <!-- Employer Responsibilities -->
+        <section class="section">
+            <h2>Employer Responsibilities</h2>
+            <p>Employers participating in the H-2B program must adhere to specific requirements:</p>
+            <ul>
+                <li><strong>Job Requirements:</strong> The work must be temporary, and employers must prove that there are not enough U.S. workers available.</li>
+                <li><strong>Wages:</strong> Employers must pay H-2B workers the highest of the prevailing wage, federal minimum wage, or state minimum wage.</li>
+                <li><strong>Worker Protections:</strong> Employers must ensure that they do not displace U.S. workers and must comply with wage and hour regulations.</li>
+            </ul>
+        </section>
+
+        <!-- How We Can Help -->
+        <section class="section">
+            <h2>How The Kershaw Law Firm P.C. Can Help</h2>
+            <p>Navigating the H-2B process can be complex, but our team of immigration law experts ensures that your business stays compliant while securing the workforce you need.</p>
+            <p>We handle:</p>
+            <ul>
+                <li>Filing labor certifications and visa petitions</li>
+                <li>Ensuring compliance with Department of Labor and USCIS regulations</li>
+                <li>Assisting with worker recruitment and contract structuring</li>
+                <li>Providing ongoing legal support for renewals and audits</li>
+            </ul>
+        </section>
+
+        <!-- Get Started Section -->
+        <section class="section">
+            <h2>Ready to Apply?</h2>
+            <p>Let us simplify the process for you. Get in touch today to start your H-2B visa application and ensure your business has the workforce it needs.</p>
+            <a href="getstarted.html" class="cta-button">Apply Now</a>
+        </section>
+
+    </div>
+
+    <!-- Bottom Navigation Bar -->
     <nav class="tabs">
         <a href="index.html">Home</a>
         <a href="h2a.html">H2A Visa</a>
@@ -155,4 +324,5 @@
     </nav>
 
 </body>
+
 </html>

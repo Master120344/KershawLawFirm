@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H2A Labor Certification Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>H2A Labor Certification Questionnaire</h1>
+    <form id="questionnaireForm">
+        <label for="businessName">Legal Business Name:</label>
+        <input type="text" id="businessName" name="businessName" required>
+
+        <label for="tradeName">Trade Name/DBA:</label>
+        <input type="text" id="tradeName" name="tradeName">
+
+        <label for="fein">FEIN:</label>
+        <input type="text" id="fein" name="fein" required>
+
+        <label for="naicsCode">NAICS Code:</label>
+        <input type="text" id="naicsCode" name="naicsCode" required>
+
+        <label for="contactFirstName">H2A Contact for The Kershaw Law Firm - First Name:</label>
+        <input type="text" id="contactFirstName" name="contactFirstName" required>
+
+        <label for="contactMiddleName">Middle Name:</label>
+        <input type="text" id="contactMiddleName" name="contactMiddleName">
+
+        <label for="contactLastName">Last Name:</label>
+        <input type="text" id="contactLastName" name="contactLastName" required>
+
+        <label for="contactJobTitle">Job Title:</label>
+        <input type="text" id="contactJobTitle" name="contactJobTitle">
+
+        <label for="contactEmail">Email:</label>
+        <input type="email" id="contactEmail" name="contactEmail" required>
+
+        <label for="contactOfficePhone">Office Phone:</label>
+        <input type="tel" id="contactOfficePhone" name="contactOfficePhone">
+
+        <label for="contactCellPhone">Cell Phone:</label>
+        <input type="tel" id="contactCellPhone" name="contactCellPhone">
+
+        <label for="contactFax">Fax Number:</label>
+        <input type="tel" id="contactFax" name="contactFax">
+
+        <!-- Continue adding fields similarly for the rest of the questionnaire -->
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="firebase.js"></script>
+    <script src="submitForm.js"></script>
+</body>
+</html>

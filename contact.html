@@ -250,15 +250,14 @@
             // Simulate ticket generation
             const ticketNumber = Math.floor(100000 + Math.random() * 900000);
             const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
 
             // Display thank you message
             const thankYouMessage = document.getElementById("thankYouMessage");
             thankYouMessage.style.display = "block";
-            thankYouMessage.innerHTML = `Thank you, `${{name}! We will reach out to you shortly at}$`{email}. Your ticket number is: ${ticketNumber}`;
+            thankYouMessage.innerHTML = `Thank you, `${{name}! We will reach out to you shortly. Your ticket number is:}$`{ticketNumber}`;
 
             // Simulate sending email (for demonstration purposes)
-            console.log(`Sending email to `${{email} with ticket number}$`{ticketNumber}`);
+            console.log(`Sending email to `${{name} with ticket number}$`{ticketNumber}`);
         });
     </script>
 

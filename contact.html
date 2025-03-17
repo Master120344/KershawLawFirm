@@ -15,21 +15,31 @@
 
         /* Body Styling */
         body {
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #000;
+            color: #fff;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Header Section */
         header {
-            background: #000;
+            background: rgba(0, 0, 0, 0.9);
             color: #fff;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid #333;
         }
 
         header h1 {
@@ -38,39 +48,35 @@
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
         }
 
-        /* Main Content Wrapper */
-        .content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
         /* Contact Form Section */
         .contact-form {
-            background: #fff;
+            background: rgba(0, 0, 0, 0.9);
             max-width: 600px;
             width: 100%;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             margin-top: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .contact-form h2 {
             text-align: center;
             margin-bottom: 20px;
             font-size: 1.8rem;
-            color: #444;
+            color: #FFD700;
         }
 
         .contact-form label {
             font-weight: bold;
             display: block;
             margin-bottom: 5px;
-            color: #555;
+            color: #ddd;
         }
 
         .contact-form input,
@@ -79,9 +85,12 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #555;
             border-radius: 5px;
             font-size: 1em;
+            background: #111;
+            color: #fff;
+            transition: border-color 0.3s ease;
         }
 
         .contact-form input:focus,
@@ -105,11 +114,22 @@
             border-radius: 5px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .contact-form .submit-btn:hover {
             background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        /* Thank You Message */
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            font-size: 1.2em;
+            color: #FFD700;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
         }
 
         /* Navigation Tabs */
@@ -188,37 +208,37 @@
         <h1>Contact Us</h1>
     </header>
 
-    <!-- Main Content Wrapper -->
-    <div class="content-wrapper">
-        <!-- Contact Form Section -->
-        <div class="contact-form">
-            <h2>Get in Touch</h2>
-            <form id="contactForm">
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+    <!-- Contact Form Section -->
+    <div class="contact-form">
+        <h2>Get in Touch</h2>
+        <form id="contactForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name">
 
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
 
-                <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
 
-                <label for="service">Legal Assistance Needed:</label>
-                <select id="service" name="service" required>
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="h2a">H-2A Visa Assistance</option>
-                    <option value="h2b">H-2B Visa Assistance</option>
-                    <option value="green-card">Green Card Application</option>
-                    <option value="citizenship">U.S. Citizenship Services</option>
-                    <option value="other">Other Immigration Law Needs</option>
-                </select>
+            <label for="service">Legal Assistance Needed:</label>
+            <select id="service" name="service" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="h2a">H-2A Visa Assistance</option>
+                <option value="h2b">H-2B Visa Assistance</option>
+                <option value="green-card">Green Card Application</option>
+                <option value="citizenship">U.S. Citizenship Services</option>
+                <option value="other">Other Immigration Law Needs</option>
+            </select>
 
-                <label for="message">Your Message:</label>
-                <textarea id="message" name="message" rows="5" required placeholder="Describe your case or question..."></textarea>
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Describe your case or question..."></textarea>
 
-                <button type="submit" class="submit-btn">Submit Inquiry</button>
-            </form>
-        </div>
+            <button type="submit" class="submit-btn">Submit Inquiry</button>
+        </form>
+
+        <!-- Thank You Message -->
+        <div class="thank-you-message" id="thankYouMessage"></div>
     </div>
 
     <!-- Bottom Navigation Bar -->
@@ -231,10 +251,20 @@
     </nav>
 
     <script>
-        // Form Handling Script
         document.getElementById("contactForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            alert("Your inquiry has been submitted successfully!");
+
+            // Simulate ticket generation
+            const ticketNumber = Math.floor(100000 + Math.random() * 900000);
+            const name = document.getElementById("name").value;
+
+            // Display thank you message
+            const thankYouMessage = document.getElementById("thankYouMessage");
+            thankYouMessage.style.display = "block";
+            thankYouMessage.innerHTML = `Thank you, `${{name}! We will reach out to you shortly. Your ticket number is:}$`{ticketNumber}`;
+
+            // Simulate sending email (for demonstration purposes)
+            console.log(`Sending email to support@myrealsurveys.com with ticket number ${ticketNumber}`);
         });
     </script>
 

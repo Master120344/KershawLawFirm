@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Approval Code - The Kershaw Law Firm P.C.</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .code-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .code-container h1 {
+            text-align: center;
+            color: #FFD700;
+        }
+        .code-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .code-container label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .code-container input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .code-container button {
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #FFD700;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .code-container button:hover {
+            background-color: #E6B800;
+        }
+    </style>
+</head>
+<body>
+    <div class="code-container">
+        <h1>Enter Approval Code</h1>
+        <form id="codeForm">
+            <label for="approvalCode">Approval Code:</label>
+            <input type="text" id="approvalCode" name="approvalCode" required placeholder="Enter your approval code">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("codeForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const approvalCode = document.getElementById("approvalCode").value;
+            // Here, you would validate the approval code
+            // For now, we'll use a static code for demonstration
+            if (approvalCode === "APPROVED123") {
+                window.location.href = "getstarted.html";
+            } else {
+                alert("Invalid approval code. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>

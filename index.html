@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Kershaw Law Firm P.C.</title>
-    <link rel="stylesheet" href="style.css">
 
     <style>
         /* Global Reset */
@@ -15,9 +14,9 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
-        /* Body Background Styling */
+        /* Body Styling with Correct Background */
         body {
-            background: url('https://github.com/Master120344/KershawLawFirm/blob/main/Austin%20Background.jpg') no-repeat center center/cover;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding-bottom: 80px;
@@ -27,32 +26,33 @@
             justify-content: space-between;
         }
 
-        /* Header Styling */
+        /* Header Styling - Clean Color and Text Effect */
         .header {
             padding: 20px;
-            font-size: 2.8em;
+            font-size: 3em;
             font-weight: bold;
-            color: #FFD700;
-            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.9);
+            color: #00CED1; /* A fresh turquoise-blue that stands out */
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9);
         }
 
-        /* Hero Section Styling */
+        /* Hero Section Styling - No More Ugly Background Box */
         .hero {
             padding: 50px 20px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.4); /* Subtle transparent overlay */
             border-radius: 12px;
             max-width: 800px;
             margin: auto;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            box-shadow: none; /* Removed ugly shadow */
         }
 
         .hero h2 {
-            font-size: 2em;
+            font-size: 2.2em;
             margin-bottom: 20px;
-            color: #ddd;
+            color: #ffffff; /* Clean, bright white text */
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.8);
         }
 
-        /* CTA Button Styling */
+        /* Call-to-Action Button Styling */
         .cta-button {
             display: inline-block;
             padding: 15px 40px;
@@ -72,10 +72,10 @@
             transform: scale(1.08);
         }
 
-        /* Bottom Navigation Tabs */
+        /* Bottom Navigation Tabs - Sleek & Transparent Overhaul */
         .tabs {
-            background: rgba(0, 0, 0, 0.85);
-            padding: 15px 0;
+            background: rgba(0, 0, 0, 0.3); /* More transparent now */
+            padding: 10px 0;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -86,10 +86,11 @@
             box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.6);
             z-index: 10;
             border-radius: 10px 10px 0 0;
+            backdrop-filter: blur(8px); /* Smooth glass effect */
         }
 
         .tabs a {
-            color: #ddd;
+            color: #ffffff;
             text-decoration: none;
             font-size: 1.2em;
             font-weight: bold;

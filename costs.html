@@ -18,12 +18,11 @@
       background-color: #f4f4f4;
       color: #333;
       line-height: 1.6;
-      padding-top: 60px;
     }
 
     /* Header */
     header {
-      background: #333;
+      background: #111;
       color: #fff;
       padding: 1em 0;
       position: fixed;
@@ -46,6 +45,7 @@
       font-size: 1.8em;
       font-weight: bold;
       letter-spacing: 1px;
+      color: #f39c12;
     }
 
     nav ul {
@@ -68,9 +68,9 @@
       color: #f39c12;
     }
 
-    /* Page Content */
+    /* Hero Section */
     .page-content {
-      background: url('costs-background.jpg') no-repeat center center/cover;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('costs-background.jpg') center/cover no-repeat;
       height: 60vh;
       color: #fff;
       display: flex;
@@ -82,20 +82,37 @@
     }
 
     .page-content h1 {
-      font-size: 3em;
+      font-size: 3.5em;
       font-weight: bold;
       text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+      margin-bottom: 10px;
     }
 
+    .page-content p {
+      font-size: 1.3em;
+      opacity: 0.9;
+    }
+
+    /* Content Section */
     .content-section {
-      padding: 30px 20px;
+      padding: 40px 20px;
       text-align: center;
+      background: #fff;
+      margin-top: -30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .content-section h2 {
-      font-size: 2.5em;
+      font-size: 2.8em;
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #f39c12;
+      display: inline-block;
+      padding-bottom: 5px;
     }
 
     .content-section p {
@@ -108,17 +125,21 @@
     .content-section ul {
       list-style: none;
       padding: 0;
+      margin-top: 15px;
     }
 
     .content-section ul li {
-      font-size: 1.1em;
+      font-size: 1.2em;
       margin-bottom: 10px;
+      color: #333;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
     }
 
     .cta-button {
       display: inline-block;
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 12px 25px;
       color: #fff;
       background-color: #f39c12;
       text-decoration: none;
@@ -133,8 +154,8 @@
 
     /* Footer */
     footer {
-      background: #222;
-      color: #fff;
+      background: #111;
+      color: #ddd;
       text-align: center;
       padding: 1em 0;
       margin-top: 20px;

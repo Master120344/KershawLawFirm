@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started - The Kershaw Law Firm P.C.</title>
+    <title>Access Restricted - The Kershaw Law Firm P.C.</title>
     <style>
         /* Global Reset */
         * {
@@ -24,7 +24,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            padding-bottom: 80px; /* Space for the fixed footer */
         }
 
         /* Dark Overlay for Better Readability */
@@ -76,14 +75,7 @@
             text-align: center;
         }
 
-        label {
-            font-size: 1.1em;
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-        }
-
-        select, input, textarea {
+        input {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -95,14 +87,13 @@
             transition: border-color 0.3s ease;
         }
 
-        select:focus, input:focus, textarea:focus {
+        input:focus {
             outline: none;
             border-color: #FFD700;
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
-        /* Proceed to Payment Button */
-        .proceed-btn {
+        button {
             background: #FFD700;
             color: #000;
             font-weight: bold;
@@ -117,184 +108,36 @@
             text-align: center;
         }
 
-        .proceed-btn:hover {
+        button:hover {
             background: #E6B800;
             transform: scale(1.05);
         }
-
-        /* Total Cost Display */
-        .cost-display {
-            font-size: 1.5em;
-            color: #1e90ff;
-            font-weight: bold;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        /* Terms & Conditions Styling */
-        .terms-container {
-            margin-top: 15px;
-            font-size: 0.9em;
-            text-align: left;
-        }
-
-        .terms-container input {
-            margin-right: 10px;
-        }
-
-        .terms-container a {
-            color: #1e90ff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .terms-container a:hover {
-            text-decoration: underline;
-        }
-
-        /* Additional Information Section */
-        .additional-info {
-            margin-top: 20px;
-            font-size: 1em;
-            text-align: left;
-        }
-
-        .additional-info h3 {
-            color: #FFD700;
-            margin-bottom: 10px;
-        }
-
-        .additional-info p {
-            margin-bottom: 10px;
-        }
-
-        /* Navigation Tabs */
-        .tabs {
-            padding: 15px 0;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 10;
-            font-size: 1.2em;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .tabs a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 10px;
-            flex: 1 1 100px;
-            text-align: center;
-        }
-
-        .tabs a:hover {
-            color: #1E90FF;
-            transform: translateY(-3px);
-        }
-
-        /* Mobile Responsive Tweaks */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5em;
-            }
-
-            .container {
-                width: 100%;
-                padding: 20px;
-            }
-
-            .proceed-btn {
-                font-size: 1em;
-                padding: 12px;
-            }
-
-            .tabs {
-                gap: 5px;
-                font-size: 1em;
-                padding: 10px 0;
-            }
-
-            .tabs a {
-                padding: 8px;
-            }
-        }
     </style>
 </head>
-
 <body>
     <div class="overlay"></div>
     <div class="container">
-        <h1>Start Your Visa Application</h1>
-        <p>Secure your visa today with The Kershaw Law Firm P.C. Our experienced team is here to guide you through every step of the process.</p>
-
-        <form id="visaForm">
-            <label for="visaType">Select Visa Type:</label>
-            <select id="visaType" name="visaType" required>
-                <option value="">-- Choose a Visa --</option>
-                <option value="H-2A">H-2A Visa</option>
-                <option value="H-2B">H-2B Visa</option>
-            </select>
-
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
-
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
-
-            <label for="comments">Additional Comments:</label>
-            <textarea id="comments" name="comments" rows="4" placeholder="Provide any additional information or questions you may have..."></textarea>
-
-            <p class="cost-display">Total: $4,050</p>
-
-            <div class="terms-container">
-                <input type="checkbox" id="termsCheckbox" required>
-                <label for="termsCheckbox">
-                    I have read and agree to the
-                    <a href="terms.html" target="_blank">Terms and Conditions</a>.
-                </label>
-            </div>
-
-            <button type="submit" class="proceed-btn">Proceed to Payment</button>
-        </form>
-
-        <!-- Additional Information Section -->
-        <div class="additional-info">
-            <h3>Why Choose The Kershaw Law Firm P.C.?</h3>
-            <p>At The Kershaw Law Firm P.C., we are committed to providing exceptional legal services tailored to your unique needs. Our team of experienced attorneys is dedicated to helping you navigate the complexities of immigration law with confidence and ease.</p>
-            <p>With years of experience and a deep understanding of the legal landscape, we offer personalized solutions to ensure your visa application process is smooth and successful. Trust us to handle your case with the utmost professionalism and care.</p>
-        </div>
+        <h1>Access Restricted</h1>
+        <p>Please enter your access code to proceed.</p>
+        <input type="text" id="accessCode" placeholder="Enter your access code">
+        <button onclick="verifyAccessCode()">Submit</button>
     </div>
 
-    <!-- Bottom Navigation Bar -->
-    <nav class="tabs">
-        <a href="index.html">Home</a>
-        <a href="h2a.html">H2A Visa</a>
-        <a href="h2b.html">H2B Visa</a>
-        <a href="costs.html">Costs</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="firebase.js"></script>
     <script>
-        document.getElementById("visaForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            if (document.getElementById("termsCheckbox").checked) {
-                window.location.href = "payment.html";
-            } else {
-                alert("You must agree to the terms to proceed.");
-            }
-        });
-    </script>
+        async function verifyAccessCode() {
+            const code = document.getElementById('accessCode').value;
+            const db = firebase.firestore();
 
+            const querySnapshot = await db.collection('questionnaires').where('accessCode', '==', code).get();
+            if (!querySnapshot.empty) {
+                window.location.href = "index.html";
+            } else {
+                alert("Invalid access code. Please try again.");
+            }
+        }
+    </script>
 </body>
 </html>

@@ -15,8 +15,7 @@
 
         /* Body Styling */
         body {
-            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/justice-books.jpg') no-repeat center center/cover;
-            background-size: cover;
+            background: #000 url('https://www.transparenttextures.com/patterns/asfalt-dark.png') repeat;
             color: #fff;
             line-height: 1.6;
             display: flex;
@@ -25,6 +24,7 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            padding-bottom: 80px; /* Space for the fixed footer */
         }
 
         /* Dark Overlay for Better Readability */
@@ -61,6 +61,7 @@
             margin-bottom: 10px;
             font-size: 2em;
             animation: colorChange 3s infinite;
+            text-align: center;
         }
 
         @keyframes colorChange {
@@ -72,6 +73,7 @@
         p {
             margin-bottom: 15px;
             font-size: 1.1em;
+            text-align: center;
         }
 
         label {
@@ -85,7 +87,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid #FFD700;
             border-radius: 6px;
             font-size: 1em;
             background: #222;
@@ -123,6 +125,7 @@
             color: #1e90ff;
             font-weight: bold;
             margin-top: 10px;
+            text-align: center;
         }
 
         /* Terms & Conditions Styling */
@@ -146,6 +149,38 @@
             text-decoration: underline;
         }
 
+        /* Navigation Tabs */
+        .tabs {
+            padding: 15px 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            font-size: 1.2em;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .tabs a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 10px;
+            flex: 1 1 100px;
+            text-align: center;
+        }
+
+        .tabs a:hover {
+            color: #1E90FF;
+            transform: translateY(-3px);
+        }
+
         /* Mobile Responsive Tweaks */
         @media (max-width: 480px) {
             h1 {
@@ -160,6 +195,16 @@
             button {
                 font-size: 1em;
                 padding: 10px;
+            }
+
+            .tabs {
+                gap: 5px;
+                font-size: 1em;
+                padding: 10px 0;
+            }
+
+            .tabs a {
+                padding: 8px;
             }
         }
     </style>
@@ -204,6 +249,15 @@
             <button type="submit" id="payNow">Proceed to Payment</button>
         </form>
     </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="tabs">
+        <a href="index.html">Home</a>
+        <a href="h2a.html">H2A Visa</a>
+        <a href="h2b.html">H2B Visa</a>
+        <a href="costs.html">Costs</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
     <script>
         document.getElementById("visaForm").addEventListener("submit", function(event) {

@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-2A Visa - The Kershaw Law Firm P.C.</title>
-    <link rel="stylesheet" href="style.css">
+    <title>H-2A Visa Program - The Kershaw Law Firm P.C.</title>
 
     <style>
         /* Global Reset */
@@ -18,14 +17,17 @@
 
         /* Body Styling */
         body {
-            background: #f4f4f4;
+            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Farm-Background.jpg') no-repeat center center/cover;
             color: #333;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Header Section */
         header {
-            background: #333;
+            background: rgba(0, 0, 0, 0.7);
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -44,28 +46,23 @@
             color: #ddd;
         }
 
-        /* Hero Banner */
-        .hero {
-            background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Farm-Background.jpg') no-repeat center center/cover;
-            height: 60vh;
+        /* Main Content Wrapper */
+        .content-wrapper {
+            flex: 1;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            text-align: center;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
-        }
-
-        .hero h1 {
-            font-size: 3.5em;
+            padding: 20px;
         }
 
         /* Section Styling */
         .section {
             max-width: 1000px;
-            margin: 20px auto;
+            width: 100%;
+            margin: 20px 0;
             padding: 30px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
@@ -91,7 +88,7 @@
         .cta-button {
             display: inline-block;
             padding: 12px 30px;
-            background: #f39c12;
+            background: #004AAD;
             color: #fff;
             text-decoration: none;
             font-weight: bold;
@@ -102,39 +99,43 @@
         }
 
         .cta-button:hover {
-            background: #e67e22;
+            background: #002D62;
             transform: scale(1.05);
         }
 
-        /* Footer Navigation */
-        footer {
-            background: #222;
-            color: #ddd;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 0.9em;
-        }
-
-        footer a {
-            color: #1e90ff;
-            text-decoration: none;
+        /* Navigation Tabs - Matching Main Page Style */
+        .tabs {
+            padding: 12px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            font-size: 1.2em;
             font-weight: bold;
-            margin: 0 10px;
-            transition: color 0.3s ease;
+            background: rgba(0, 0, 0, 0.25); /* More Transparent */
+            backdrop-filter: blur(8px);
         }
 
-        footer a:hover {
-            color: #f39c12;
+        .tabs a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 10px;
+        }
+
+        .tabs a:hover {
+            color: #1E90FF;
+            transform: translateY(-3px);
         }
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2.2em;
-            }
-
-            .hero h1 {
-                font-size: 2em;
             }
 
             .section {
@@ -154,8 +155,14 @@
                 padding: 10px 20px;
             }
 
-            footer {
-                font-size: 0.8em;
+            .tabs {
+                gap: 20px;
+                font-size: 1em;
+                padding: 10px 0;
+            }
+
+            .tabs a {
+                padding: 8px;
             }
         }
     </style>
@@ -165,48 +172,72 @@
 
     <!-- Header Section -->
     <header>
-        <h1>The H-2A Visa Program</h1>
-        <p>Helping agricultural businesses hire seasonal workers legally and efficiently.</p>
+        <h1>H-2A Visa Program</h1>
+        <p>Empowering Agricultural Employers with a Reliable Workforce</p>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Grow Your Workforce the Right Way</h1>
-    </section>
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
 
-    <!-- About H-2A Visa -->
-    <section class="section">
-        <h2>What is an H-2A Visa?</h2>
-        <p>The H-2A visa allows U.S. agricultural employers to bring foreign workers for temporary or seasonal jobs when domestic workers are unavailable.</p>
-    </section>
+        <!-- About H-2A Visa -->
+        <section class="section">
+            <h2>What is the H-2A Visa?</h2>
+            <p>The H-2A visa program allows U.S. agricultural employers to bring foreign nationals to the United States to fill temporary or seasonal agricultural jobs when there are not enough U.S. workers available. This program ensures that agricultural businesses can meet their labor needs during critical periods. 0</p>
+        </section>
 
-    <!-- Why Choose Us -->
-    <section class="section">
-        <h2>Why Choose The Kershaw Law Firm P.C.?</h2>
-        <p>We specialize in making the H-2A visa process smooth, efficient, and fully compliant with immigration laws — saving you time and headaches.</p>
-    </section>
+        <!-- Benefits of the H-2A Program -->
+        <section class="section">
+            <h2>Benefits of the H-2A Program</h2>
+            <p>Participating in the H-2A program offers several advantages:</p>
+            <ul>
+                <li><strong>Access to a Reliable Workforce:</strong> Ensure your agricultural operations run smoothly during peak seasons by filling labor shortages with qualified workers.</li>
+                <li><strong>Compliance with Labor Laws:</strong> The program provides a legal pathway to employ foreign workers, helping you stay compliant with federal regulations. 1</li>
+                <li><strong>Tax Benefits:</strong> Employers are not required to pay Social Security and Medicare taxes for H-2A workers, reducing overall labor costs. 2</li>
+            </ul>
+        </section>
 
-    <!-- Eligibility Requirements -->
-    <section class="section">
-        <h2>Eligibility Requirements</h2>
-        <p>Employers must demonstrate a genuine need for seasonal agricultural workers and meet all labor and wage regulations set by the Department of Labor.</p>
-    </section>
+        <!-- Employer Responsibilities -->
+        <section class="section">
+            <h2>Employer Responsibilities</h2>
+            <p>Employers participating in the H-2A program must adhere to specific requirements:</3
+<ul>
+                <li><strong>Job Requirements:</strong> The work must be temporary or seasonal, and employers must prove that there are not enough U.S. workers available.</li>
+                <li><strong>Wages:</strong> Employers must pay H-2A workers the highest of the Adverse Effect Wage Rate (AEWR), the state or federal minimum wage, or the prevailing wage.</li>
+                <li><strong>Housing and Transportation:</strong> Employers must provide free housing to workers who cannot return home at the end of the workday and cover transportation costs to and from their home country.</li>
+                <li><strong>Workplace Conditions:</strong> Employers must meet health and safety standards set by the U.S. Department of Labor.</li>
+            </ul>
+        </section>
 
-    <!-- Get Started Section -->
-    <section class="section">
-        <h2>Ready to Get Started?</h2>
-        <p>Contact us today to begin your H-2A visa application. Ensure your business remains fully staffed and compliant — let us handle the process for you.</p>
-        <a href="getstarted.html" class="cta-button">Apply Now</a>
-    </section>
+        <!-- How We Can Help -->
+        <section class="section">
+            <h2>How The Kershaw Law Firm P.C. Can Help</h2>
+            <p>Navigating the H-2A process can be complex, but our team of immigration law experts ensures that your business stays compliant while securing the workforce you need.</p>
+            <p>We handle:</p>
+            <ul>
+                <li>Filing labor certifications and visa petitions</li>
+                <li>Ensuring compliance with U.S. Department of Labor and USCIS regulations</li>
+                <li>Assisting with worker recruitment and contract structuring</li>
+                <li>Providing ongoing legal support for renewals and audits</li>
+            </ul>
+        </section>
 
-    <!-- Footer Navigation -->
-    <footer>
-        <a href="index.html">Home</a> |
-        <a href="h2a.html">H-2A Visa</a> |
-        <a href="h2b.html">H-2B Visa</a> |
+        <!-- Get Started Section -->
+        <section class="section">
+            <h2>Ready to Apply?</h2>
+            <p>Let us simplify the process for you. Get in touch today to start your H-2A visa application and ensure your agricultural business has the workforce it needs.</p>
+            <a href="getstarted.html" class="cta-button">Apply Now</a>
+        </section>
+
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="tabs">
+        <a href="index.html">Home</a>
+        <a href="h2a.html">H2A Visa</a>
+        <a href="h2b.html">H2B Visa</a>
+        <a href="costs.html">Costs</a>
         <a href="contact.html">Contact</a>
-        <p>&copy; 2025 The Kershaw Law Firm P.C. All rights reserved.</p>
-    </footer>
+    </nav>
 
 </body>
 

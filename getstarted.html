@@ -101,20 +101,23 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
-        button {
+        /* Proceed to Payment Button */
+        .proceed-btn {
             background: #FFD700;
             color: #000;
             font-weight: bold;
-            padding: 12px;
+            padding: 15px;
             border: none;
             border-radius: 6px;
             margin-top: 20px;
             cursor: pointer;
             transition: background 0.3s ease, transform 0.3s ease;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            width: 100%;
+            text-align: center;
         }
 
-        button:hover {
+        .proceed-btn:hover {
             background: #E6B800;
             transform: scale(1.05);
         }
@@ -147,6 +150,22 @@
 
         .terms-container a:hover {
             text-decoration: underline;
+        }
+
+        /* Additional Information Section */
+        .additional-info {
+            margin-top: 20px;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .additional-info h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .additional-info p {
+            margin-bottom: 10px;
         }
 
         /* Navigation Tabs */
@@ -192,9 +211,9 @@
                 padding: 20px;
             }
 
-            button {
+            .proceed-btn {
                 font-size: 1em;
-                padding: 10px;
+                padding: 12px;
             }
 
             .tabs {
@@ -214,7 +233,7 @@
     <div class="overlay"></div>
     <div class="container">
         <h1>Start Your Visa Application</h1>
-        <p>Secure your visa today with The Kershaw Law Firm P.C.</p>
+        <p>Secure your visa today with The Kershaw Law Firm P.C. Our experienced team is here to guide you through every step of the process.</p>
 
         <form id="visaForm">
             <label for="visaType">Select Visa Type:</label>
@@ -225,16 +244,16 @@
             </select>
 
             <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" required>
+            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
 
             <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
 
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
+            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
 
             <label for="comments">Additional Comments:</label>
-            <textarea id="comments" name="comments" rows="4"></textarea>
+            <textarea id="comments" name="comments" rows="4" placeholder="Provide any additional information or questions you may have..."></textarea>
 
             <p class="cost-display">Total: $4,050</p>
 
@@ -246,8 +265,15 @@
                 </label>
             </div>
 
-            <button type="submit" id="payNow">Proceed to Payment</button>
+            <button type="submit" class="proceed-btn">Proceed to Payment</button>
         </form>
+
+        <!-- Additional Information Section -->
+        <div class="additional-info">
+            <h3>Why Choose The Kershaw Law Firm P.C.?</h3>
+            <p>At The Kershaw Law Firm P.C., we are committed to providing exceptional legal services tailored to your unique needs. Our team of experienced attorneys is dedicated to helping you navigate the complexities of immigration law with confidence and ease.</p>
+            <p>With years of experience and a deep understanding of the legal landscape, we offer personalized solutions to ensure your visa application process is smooth and successful. Trust us to handle your case with the utmost professionalism and care.</p>
+        </div>
     </div>
 
     <!-- Bottom Navigation Bar -->

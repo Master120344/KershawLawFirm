@@ -1,116 +1,179 @@
-/* ======= Reset and Body Styling ======= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
-/* Body Background with Gradient */
 body {
-    background: linear-gradient(120deg, #001f33, #003366);
-    color: #ddd;
-    line-height: 1.6;
+    background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    color: #ffffff;
+    font-family: 'EB Garamond', serif;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.header {
+    position: relative;
+    z-index: 2;
+    padding: 40px 20px;
     text-align: center;
 }
 
-/* ======= Header Styling ======= */
-header {
-    padding: 30px 20px;
-    background: #003366;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+.logo-container {
+    display: inline-block;
 }
 
-header h1 {
-    font-size: 3rem;
+.header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5em;
+    color: #f5e8c7;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
     letter-spacing: 2px;
+    animation: fadeInDown 1.5s ease-out;
 }
 
-header h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+.header-line {
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #f5e8c7, transparent);
+    margin: 15px auto;
+    animation: expand 1.5s ease-out;
 }
 
-/* ======= Navigation Bar ======= */
-.nav-menu {
-    background: #00264d;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.nav-menu a {
-    color: #ddd;
-    text-decoration: none;
-    padding: 10px 20px;
-    transition: 0.3s ease;
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    background: #00aaff;
-    color: #fff;
-    border-radius: 5px;
-}
-
-/* ======= Hero Section Styling ======= */
 .hero {
-    padding: 50px 20px;
-    background: #001f33;
-    color: #fff;
+    position: relative;
+    z-index: 2;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.hero-content {
+    max-width: 900px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    animation: fadeInUp 1.5s ease-out;
 }
 
 .hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    color: #f5e8c7;
+    line-height: 1.2;
 }
 
-/* ======= Buttons Styling ======= */
-.cta-button,
-.service-button {
+.subtitle {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: #dcdcdc;
+    opacity: 0.9;
+}
+
+.cta-button {
     display: inline-block;
-    background: #00aaff;
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 5px;
+    padding: 15px 45px;
+    background: linear-gradient(45deg, #004aad, #1e90ff);
+    color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s ease;
+    font-family: 'Cinzel', serif;
+    font-size: 1.3em;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.cta-button:hover,
-.service-button:hover {
-    background: #0077cc;
-    transform: scale(1.1);
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, #003087, #1c7bd6);
 }
 
-/* ======= Services Section ======= */
-.services {
+.tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 50px;
+    z-index: 2;
 }
 
-.service-card {
-    background: #00264d;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-    width: 300px;
+.tab-link {
+    color: #dcdcdc;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-/* ======= Footer Styling ======= */
-footer {
-    background: #001f33;
-    padding: 10px;
-    font-size: 0.9rem;
-    color: #ddd;
+.tab-link:hover,
+.tab-link.active {
+    color: #f5e8c7;
 }
 
-/* Smooth Transitions */
-a, button {
-    transition: 0.3s ease;
+.tab-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: #f5e8c7;
+    transition: all 0.3s ease;
+}
+
+.tab-link:hover::after,
+.tab-link.active::after {
+    width: 50%;
+    left: 25%;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes expand {
+    from { width: 0; }
+    to { width: 60%; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header h1 { font-size: 2.5em; }
+    .hero h2 { font-size: 2em; }
+    .subtitle { font-size: 1.1em; }
+    .cta-button { font-size: 1.1em; padding: 12px 35px; }
+    .tabs { gap: 20px; padding: 10px 0; }
+    .tab-link { font-size: 1em; padding: 8px 15px; }
+    .hero-content { padding: 25px; }
 }

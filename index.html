@@ -4,173 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Kershaw Law Firm P.C.</title>
-    <style>
-        /* Global Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        /* Body Styling */
-        body {
-            background: #000000 url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Header Styling */
-        .header {
-            padding: 20px;
-            font-size: 3em;
-            font-weight: bold;
-            color: #FFD700;
-            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9);
-            animation: slideDown 1s ease-out;
-            font-family: 'Goudy Old Style', serif; /* Legal Font */
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-
-        /* Hero Section */
-        .hero {
-            max-width: 800px;
-            margin: auto;
-            margin-top: auto;
-            margin-bottom: 120px;
-            padding: 20px;
-            animation: fadeUp 1s ease-out;
-        }
-
-        @keyframes fadeUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .hero h2 {
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Call-to-Action Button */
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: rgba(0, 74, 173, 0.8); /* Matching the sky color */
-            color: white;
-            text-decoration: none;
-            font-size: 1.4em;
-            font-weight: bold;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .cta-button:hover {
-            background: rgba(0, 56, 133, 0.9); /* Darker shade for hover */
-            transform: scale(1.08);
-        }
-
-        /* Navigation Tabs - Increased Transparency */
-        .tabs {
-            padding: 12px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 10;
-            font-size: 1.2em;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.5); /* More Transparent */
-            backdrop-filter: blur(8px);
-        }
-
-        .tabs a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 10px;
-        }
-
-        .tabs a:hover {
-            color: #1E90FF;
-            transform: translateY(-3px);
-        }
-
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 30px 15px;
-                margin-bottom: 140px;
-            }
-
-            .hero h2 {
-                font-size: 1.6em;
-            }
-
-            .cta-button {
-                font-size: 1.1em;
-                padding: 12px 25px;
-            }
-
-            .tabs {
-                gap: 20px;
-                font-size: 1em;
-                padding: 10px 0;
-            }
-
-            .tabs a {
-                padding: 8px;
-            }
-
-            .header {
-                font-size: 2.2em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
 </head>
-
 <body>
-
-    <!-- Law Firm Name Header -->
+    <div class="overlay"></div>
+    
+    <!-- Header -->
     <header class="header">
-        The Kershaw Law Firm P.C.
+        <div class="logo-container">
+            <h1>The Kershaw Law Firm P.C.</h1>
+            <div class="header-line"></div>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <h2>Helping Employers Hire the Workers They Need</h2>
-        <a href="getstarted.html" class="cta-button">Get Started Now</a>
-    </section>
+    <main class="hero">
+        <div class="hero-content">
+            <h2>Empowering Employers with Expert Immigration Solutions</h2>
+            <p class="subtitle">Specializing in H2A & H2B Visa Programs</p>
+            <a href="getstarted.html" class="cta-button">Start Your Journey</a>
+        </div>
+    </main>
 
-    <!-- Footer Navigation Tabs -->
+    <!-- Navigation -->
     <nav class="tabs">
-        <a href="index.html">Home</a>
-        <a href="h2a.html">H2A Visa</a>
-        <a href="h2b.html">H2B Visa</a>
-        <a href="costs.html">Costs</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="tab-link active">Home</a>
+        <a href="h2a.html" class="tab-link">H2A Visa</a>
+        <a href="h2b.html" class="tab-link">H2B Visa</a>
+        <a href="costs.html" class="tab-link">Costs</a>
+        <a href="contact.html" class="tab-link">Contact</a>
     </nav>
 
+    <script src="js/index.js"></script>
 </body>
 </html>

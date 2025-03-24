@@ -4,266 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H-2A Visa Program - The Kershaw Law Firm P.C.</title>
-    <style>
-        /* Global Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        /* Body Styling */
-        body {
-            background-color: #000;
-            color: #fff;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding-bottom: 80px; /* Space for the fixed footer */
-        }
-
-        /* Header Section */
-        header {
-            background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-        }
-
-        header h1 {
-            font-size: 2.8em;
-            color: #FFD700;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-        }
-
-        header p {
-            font-size: 1.2em;
-            margin-top: 10px;
-            color: #ddd;
-        }
-
-        /* Video Section */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Main Content Wrapper */
-        .content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* Section Styling */
-        .section {
-            max-width: 1000px;
-            width: 100%;
-            margin: 20px 0;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .section:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .section h2 {
-            font-size: 2.4em;
-            color: #1e90ff;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .section p {
-            font-size: 1.2em;
-            line-height: 1.8;
-            color: #ddd;
-            text-align: justify;
-        }
-
-        .section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .section ul li {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .section ul li strong {
-            color: #1e90ff;
-        }
-
-        /* Navigation Tabs */
-        .tabs {
-            padding: 15px 0;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 10;
-            font-size: 1.2em;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .tabs a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 10px;
-            flex: 1 1 100px;
-            text-align: center;
-        }
-
-        .tabs a:hover {
-            color: #1E90FF;
-            transform: translateY(-3px);
-        }
-
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2em;
-            }
-
-            .section {
-                padding: 20px;
-            }
-
-            .section h2 {
-                font-size: 1.8em;
-            }
-
-            .section p {
-                font-size: 1em;
-            }
-
-            .tabs {
-                gap: 5px;
-                font-size: 1em;
-                padding: 10px 0;
-            }
-
-            .tabs a {
-                padding: 8px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/h2a.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <div class="overlay"></div>
 
-    <!-- Header Section -->
-    <header>
-        <h1>H-2A Visa Program</h1>
-        <p>Empowering Agricultural Employers with a Reliable Workforce</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <h1>The Kershaw Law Firm P.C.</h1>
+            <span class="tagline">Your Partner in H-2A Visa Solutions</span>
+        </div>
     </header>
 
-    <!-- Video Section -->
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/T8eFHGnKBrA" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-    <!-- Main Content Wrapper -->
-    <div class="content-wrapper">
-
-        <!-- About H-2A Visa -->
-        <section class="section">
-            <h2>What is the H-2A Visa?</h2>
-            <p>The H-2A visa program allows U.S. agricultural employers to bring foreign nationals to the United States to fill temporary or seasonal agricultural jobs when there are not enough U.S. workers available. This program ensures that agricultural businesses can meet their labor needs during critical periods.</p>
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>H-2A Visa Program</h2>
+            <p class="subtitle">Empowering Agricultural Employers with a Reliable Workforce</p>
         </section>
 
-        <!-- Benefits of the H-2A Program -->
-        <section class="section">
-            <h2>Benefits of the H-2A Program</h2>
-            <p>Participating in the H-2A program offers several advantages:</p>
-            <ul>
-                <li><strong>Access to a Reliable Workforce:</strong> Ensure your agricultural operations run smoothly during peak seasons by filling labor shortages with qualified workers.</li>
-                <li><strong>Compliance with Labor Laws:</strong> The program provides a legal pathway to employ foreign workers, helping you stay compliant with federal regulations.</li>
-                <li><strong>Tax Benefits:</strong> Employers are not required to pay Social Security and Medicare taxes for H-2A workers, reducing overall labor costs.</li>
+        <!-- Video Section -->
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/T8eFHGnKBrA" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <!-- About H-2A -->
+        <section class="section" id="about">
+            <h3>What is the H-2A Visa?</h3>
+            <p>The H-2A visa program enables U.S. agricultural employers to hire foreign workers for temporary or seasonal jobs when there’s a shortage of domestic labor. Updated for 2025, this program includes streamlined processes to ensure compliance and efficiency.</p>
+        </section>
+
+        <!-- Benefits -->
+        <section class="section benefit-cards" id="benefits">
+            <h3>Benefits of the H-2A Program</h3>
+            <div class="cards">
+                <div class="card">
+                    <h4>Reliable Workforce</h4>
+                    <p>Secure skilled workers during peak seasons to keep your operations running smoothly.</p>
+                </div>
+                <div class="card">
+                    <h4>Legal Compliance</h4>
+                    <p>Stay compliant with federal labor laws through a structured visa program.</p>
+                </div>
+                <div class="card">
+                    <h4>Cost Savings</h4>
+                    <p>Benefit from exemptions on Social Security and Medicare taxes for H-2A workers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsibilities -->
+        <section class="section" id="responsibilities">
+            <h3>Employer Responsibilities</h3>
+            <ul class="responsibility-list">
+                <li><strong>Job Eligibility:</strong> Prove a shortage of U.S. workers for temporary/seasonal roles.</li>
+                <li><strong>Wages:</strong> Pay the highest of AEWR, state/federal minimum, or prevailing wage (2025 rates apply).</li>
+                <li><strong>Housing & Travel:</strong> Provide free housing and cover transportation costs.</li>
+                <li><strong>Safety Standards:</strong> Meet updated DOL health and safety requirements.</li>
             </ul>
         </section>
 
-        <!-- Employer Responsibilities -->
-        <section class="section">
-            <h2>Employer Responsibilities</h2>
-            <p>Employers participating in the H-2A program must adhere to specific requirements:</p>
-            <ul>
-                <li><strong>Job Requirements:</strong> The work must be temporary or seasonal, and employers must prove that there are not enough U.S. workers available.</li>
-                <li><strong>Wages:</strong> Employers must pay H-2A workers the highest of the Adverse Effect Wage Rate (AEWR), the state or federal minimum wage, or the prevailing wage.</li>
-                <li><strong>Housing and Transportation:</strong> Employers must provide free housing to workers who cannot return home at the end of the workday and cover transportation costs to and from their home country.</li>
-                <li><strong>Workplace Conditions:</strong> Employers must meet health and safety standards set by the U.S. Department of Labor.</li>
-            </ul>
+        <!-- How We Help -->
+        <section class="section cta-section" id="help">
+            <h3>How We Can Help</h3>
+            <p>Our expert team simplifies the H-2A process, handling labor certifications, visa petitions, and compliance with 2025 regulations.</p>
+            <a href="contact.html" class="cta-button">Contact Us Today</a>
         </section>
+    </main>
 
-        <!-- How We Can Help -->
-        <section class="section">
-            <h2>How The Kershaw Law Firm P.C. Can Help</h2>
-            <p>Navigating the H-2A process can be complex, but our team of immigration law experts ensures that your business stays compliant while securing the workforce you need.</p>
-            <p>We handle:</p>
-            <ul>
-                <li>Filing labor certifications and visa petitions</li>
-                <li>Ensuring compliance with U.S. Department of Labor and USCIS regulations</li>
-                <li>Assisting with worker recruitment and contract structuring</li>
-                <li>Providing ongoing legal support for renewals and audits</li>
-            </ul>
-        </section>
-
-    </div>
-
-    <!-- Bottom Navigation Bar -->
+    <!-- Navigation -->
     <nav class="tabs">
-        <a href="index.html">Home</a>
-        <a href="h2a.html">H2A Visa</a>
-        <a href="h2b.html">H2B Visa</a>
-        <a href="costs.html">Costs</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="tab-link">Home</a>
+        <a href="h2a.html" class="tab-link active">H2A Visa</a>
+        <a href="h2b.html" class="tab-link">H2B Visa</a>
+        <a href="costs.html" class="tab-link">Costs</a>
+        <a href="contact.html" class="tab-link">Contact</a>
     </nav>
 
-    <script>
-        const videoContainer = document.querySelector('.video-container iframe');
-        const body = document.body;
-
-        videoContainer.addEventListener('play', () => {
-            body.classList.add('video-playing');
-        });
-
-        videoContainer.addEventListener('pause', () => {
-            body.classList.remove('video-playing');
-        });
-    </script>
-
+    <script src="js/h2a.js"></script>
 </body>
 </html>

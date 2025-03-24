@@ -5,12 +5,12 @@
 }
 
 body {
-    background: url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
+    background: #000 url('https://raw.githubusercontent.com/Master120344/KershawLawFirm/main/Austin%20Background.jpg') no-repeat center center/cover;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    color: #ffffff;
-    font-family: 'EB Garamond', serif;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
 }
 
 .overlay {
@@ -30,79 +30,71 @@ body {
     text-align: center;
 }
 
-.logo-container {
-    display: inline-block;
-}
-
-.header h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 3.5em;
-    color: #f5e8c7;
-    text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    letter-spacing: 2px;
+.logo-container h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    color: #FFD700;
+    text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8);
     animation: fadeInDown 1.5s ease-out;
 }
 
-.header-line {
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(to right, transparent, #f5e8c7, transparent);
-    margin: 15px auto;
-    animation: expand 1.5s ease-out;
+.tagline {
+    display: block;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-top: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    animation: fadeIn 2s ease-out;
 }
 
 .hero {
     position: relative;
     z-index: 2;
-    min-height: calc(100vh - 200px);
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    text-align: center;
 }
 
 .hero-content {
     max-width: 900px;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 40px;
-    border-radius: 15px;
-    backdrop-filter: blur(5px);
+    padding: 0 20px;
     animation: fadeInUp 1.5s ease-out;
 }
 
 .hero h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.8em;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
     margin-bottom: 20px;
-    color: #f5e8c7;
-    line-height: 1.2;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
 }
 
 .subtitle {
-    font-size: 1.3em;
+    font-size: 1.4rem;
     margin-bottom: 30px;
-    color: #dcdcdc;
-    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
 }
 
 .cta-button {
     display: inline-block;
-    padding: 15px 45px;
-    background: linear-gradient(45deg, #004aad, #1e90ff);
-    color: white;
+    padding: 18px 50px;
+    background: linear-gradient(135deg, #004AAD, #002B66);
+    color: #fff;
     text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.3em;
+    font-size: 1.5rem;
+    font-weight: 700;
     border-radius: 50px;
     transition: all 0.4s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
 .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(45deg, #003087, #1c7bd6);
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, #003B8C, #001F4D);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
 }
 
 .tabs {
@@ -110,28 +102,23 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 15px 0;
-    background: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
     gap: 50px;
-    z-index: 2;
 }
 
 .tab-link {
-    color: #dcdcdc;
+    color: #fff;
     text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2em;
+    font-size: 1.3rem;
+    font-weight: 400;
     padding: 10px 20px;
     transition: all 0.3s ease;
     position: relative;
-}
-
-.tab-link:hover,
-.tab-link.active {
-    color: #f5e8c7;
 }
 
 .tab-link::after {
@@ -141,14 +128,19 @@ body {
     height: 2px;
     bottom: 0;
     left: 50%;
-    background: #f5e8c7;
+    background: #FFD700;
     transition: all 0.3s ease;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    color: #FFD700;
 }
 
 .tab-link:hover::after,
 .tab-link.active::after {
-    width: 50%;
-    left: 25%;
+    width: 100%;
+    left: 0;
 }
 
 /* Animations */
@@ -162,18 +154,41 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes expand {
-    from { width: 0; }
-    to { width: 60%; }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header h1 { font-size: 2.5em; }
-    .hero h2 { font-size: 2em; }
-    .subtitle { font-size: 1.1em; }
-    .cta-button { font-size: 1.1em; padding: 12px 35px; }
-    .tabs { gap: 20px; padding: 10px 0; }
-    .tab-link { font-size: 1em; padding: 8px 15px; }
-    .hero-content { padding: 25px; }
+    .logo-container h1 {
+        font-size: 3rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .cta-button {
+        padding: 14px 35px;
+        font-size: 1.2rem;
+    }
+
+    .tabs {
+        gap: 20px;
+        padding: 15px 0;
+    }
+
+    .tab-link {
+        font-size: 1.1rem;
+        padding: 8px 15px;
+    }
 }

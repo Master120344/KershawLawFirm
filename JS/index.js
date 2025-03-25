@@ -44,9 +44,11 @@ ctaButton.addEventListener('mouseout', () => {
 const loginButton = document.querySelector('.login-button');
 loginButton.addEventListener('mouseover', () => {
     loginButton.style.transform = 'translateY(-3px)';
+    loginButton.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.5)';
 });
 loginButton.addEventListener('mouseout', () => {
     loginButton.style.transform = 'translateY(0)';
+    loginButton.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
 });
 
 // Dynamic header shadow based on scroll
@@ -57,7 +59,7 @@ window.addEventListener('scroll', () => {
         header.style.background = 'rgba(0, 0, 0, 0.3)';
     } else {
         header.style.boxShadow = 'none';
-        header.style.background = 'rgba(0, 0, 0, 0.2)';
+        header.style.background = 'transparent';
     }
 });
 

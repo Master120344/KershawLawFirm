@@ -37,7 +37,6 @@ body {
     z-index: 2;
     padding: 40px 20px;
     text-align: center;
-    background: rgba(0, 0, 0, 0.2);
     transition: all 0.5s ease;
 }
 
@@ -48,51 +47,36 @@ body {
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 4.8rem;
+    font-size: 5rem;
     color: #004AAD;
-    text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 74, 173, 0.5);
+    text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 74, 173, 0.6);
     animation: fadeInDown 1.5s ease-out, glow 3s infinite alternate;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
+    position: relative;
+    overflow: hidden;
 }
 
-.header-subtitle {
-    display: block;
-    font-size: 1.3rem;
-    color: #002B66;
-    margin-top: 5px;
-    font-family: 'EB Garamond', serif;
-    font-weight: 400;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
-    animation: fadeIn 2s ease-out;
+.logo-container h1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s ease;
+}
+
+.logo-container h1:hover::before {
+    left: 100%;
 }
 
 .header-line {
-    width: 100px;
-    height: 2px;
+    width: 120px;
+    height: 3px;
     background: linear-gradient(90deg, #004AAD, #002B66);
     margin: 15px auto;
     animation: expand 1.5s ease-out;
-}
-
-.login-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px 25px;
-    background: linear-gradient(135deg, #004AAD, #002B66);
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 25px;
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.login-button:hover {
-    transform: translateY(-3px);
-    background: linear-gradient(135deg, #003B8C, #001F4D);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Hero Section */
@@ -111,7 +95,6 @@ body {
     max-width: 1000px;
     padding: 20px;
     animation: fadeInUp 1.5s ease-out;
-    background: rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -123,15 +106,52 @@ body {
     color: #fff;
     text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.2);
     animation: textGlow 2s infinite alternate;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s ease;
+}
+
+.hero h2:hover::before {
+    left: 100%;
 }
 
 .subtitle {
     font-family: 'EB Garamond', serif;
     font-size: 1.6rem;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 400;
     text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+}
+
+.login-button {
+    display: inline-block;
+    padding: 12px 35px;
+    background: linear-gradient(135deg, #003B8C, #001F4D);
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+}
+
+.login-button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #004AAD, #002B66);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 .cta-button {
@@ -238,8 +258,8 @@ body {
 }
 
 @keyframes glow {
-    from { text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 74, 173, 0.5); }
-    to { text-shadow: 3px 3px 25px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 74, 173, 0.7); }
+    from { text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 74, 173, 0.6); }
+    to { text-shadow: 3px 3px 25px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 74, 173, 0.8); }
 }
 
 @keyframes textGlow {
@@ -249,7 +269,7 @@ body {
 
 @keyframes expand {
     from { width: 0; }
-    to { width: 100px; }
+    to { width: 120px; }
 }
 
 /* Extended Styles for WOW Factor */
@@ -286,13 +306,17 @@ body::before {
 /* Responsive Design */
 @media (max-width: 1024px) {
     .logo-container h1 {
-        font-size: 4rem;
+        font-size: 4.2rem;
     }
     .hero h2 {
         font-size: 3rem;
     }
     .subtitle {
         font-size: 1.4rem;
+    }
+    .login-button {
+        padding: 10px 30px;
+        font-size: 1.2rem;
     }
     .cta-button {
         padding: 18px 50px;
@@ -305,16 +329,18 @@ body::before {
 
 @media (max-width: 768px) {
     .logo-container h1 {
-        font-size: 3.2rem;
-    }
-    .header-subtitle {
-        font-size: 1.1rem;
+        font-size: 3.5rem;
     }
     .hero h2 {
         font-size: 2.5rem;
     }
     .subtitle {
         font-size: 1.2rem;
+    }
+    .login-button {
+        padding: 8px 25px;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
     }
     .cta-button {
         padding: 15px 40px;
@@ -328,23 +354,20 @@ body::before {
         font-size: 1.2rem;
         padding: 10px 15px;
     }
-    .login-button {
-        padding: 8px 20px;
-        font-size: 1rem;
-    }
 }
 
 @media (max-width: 480px) {
     .logo-container h1 {
-        font-size: 2.5rem;
-    }
-    .header-subtitle {
-        font-size: 0.9rem;
+        font-size: 2.8rem;
     }
     .hero h2 {
         font-size: 2rem;
     }
     .subtitle {
+        font-size: 1rem;
+    }
+    .login-button {
+        padding: 8px 20px;
         font-size: 1rem;
     }
     .cta-button {
@@ -353,10 +376,18 @@ body::before {
     }
     .tabs {
         gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .tab-link {
         font-size: 1rem;
-        padding: 8px 10px;
+        padding: 8px 12px;
+    }
+    .header {
+        padding: 30px 10px;
+    }
+    .hero {
+        padding: 0 10px;
     }
 }
 
@@ -368,7 +399,7 @@ body::before {
 }
 
 .header:hover .header-line {
-    width: 120px;
+    width: 140px;
     transition: width 0.4s ease;
 }
 
@@ -386,40 +417,9 @@ body::before {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* More Micro-Interactions */
-.hero-content::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 74, 173, 0.3);
-    border-radius: 50%;
-    animation: float 6s infinite;
-}
-
-.hero-content::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    right: -20px;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 43, 102, 0.3);
-    border-radius: 50%;
-    animation: float 6s infinite 2s;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); opacity: 0.5; }
-    50% { transform: translateY(-20px); opacity: 0.8; }
-    100% { transform: translateY(0); opacity: 0.5; }
-}
-
 /* Extra Padding for Line Count */
 body {
-    padding-bottom: 100px;
+    padding-bottom: 120px;
 }
 
 .header {
@@ -441,13 +441,14 @@ body:hover .overlay {
     background: rgba(0, 0, 0, 0.35);
 }
 
-.hero-content {
-    border: 1px solid rgba(0, 74, 173, 0.2);
-}
-
 .cta-button {
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.login-button {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
 /* This brings us close to 1000 lines with meaningful enhancements */

@@ -23,6 +23,27 @@ window.addEventListener('load', () => {
     document.body.style.opacity = '1';
 });
 
+// Button hover animations
+const ctaButton = document.querySelector('.cta-button');
+ctaButton.addEventListener('mouseover', () => {
+    ctaButton.style.transform = 'translateY(-5px) scale(1.05)';
+    ctaButton.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.6)';
+});
+ctaButton.addEventListener('mouseout', () => {
+    ctaButton.style.transform = 'translateY(0) scale(1)';
+    ctaButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.5)';
+});
+
+const loginButton = document.querySelector('.login-button');
+loginButton.addEventListener('mouseover', () => {
+    loginButton.style.transform = 'translateY(-3px)';
+    loginButton.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.5)';
+});
+loginButton.addEventListener('mouseout', () => {
+    loginButton.style.transform = 'translateY(0)';
+    loginButton.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
+});
+
 // Card hover animation
 document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('mouseover', () => {
@@ -56,25 +77,28 @@ sections.forEach(section => {
     observer.observe(section);
 });
 
-// CTA button pulse
-const ctaButton = document.querySelector('.cta-button');
-setInterval(() => {
-    ctaButton.style.transform = 'scale(1.05)';
-    setTimeout(() => {
-        ctaButton.style.transform = 'scale(1)';
-    }, 300);
-}, 2000);
+// Video interaction
+const video = document.querySelector('.custom-video');
+const overlay = document.querySelector('.overlay');
+video.addEventListener('play', () => {
+    overlay.style.background = 'rgba(0, 0, 0, 0.8)';
+    document.body.style.transition = 'all 0.5s ease';
+});
+video.addEventListener('pause', () => {
+    overlay.style.background = 'rgba(0, 0, 0, 0.5)';
+});
+video.addEventListener('ended', () => {
+    overlay.style.background = 'rgba(0, 0, 0, 0.5)';
+});
 
-// Video play state
-const videoIframe = document.querySelector('.video-container iframe');
-if (videoIframe) {
-    videoIframe.addEventListener('load', () => {
-        console.log('Video loaded successfully');
-    });
-}
-
-// Performance tracking
-window.addEventListener('load', () => {
-    const loadTime = performance.now() / 1000;
-    console.log(`H-2A page loaded in ${loadTime.toFixed(2)} seconds`);
+// Dynamic header shadow
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) {
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+        header.style.background = 'rgba(0, 0, 0, 0.3)';
+    } else {
+        header.style.boxShadow = 'none';
+        header.style.background = 'transparent';
+    }
 });

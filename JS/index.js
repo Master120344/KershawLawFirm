@@ -4,17 +4,13 @@ document.querySelectorAll('.tab-link').forEach(link => {
         e.preventDefault();
         const href = this.getAttribute('href');
         
-        // Remove active class from all links
         document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-        // Add active class to clicked link
         this.classList.add('active');
         
-        // Only scroll if not navigating to another page
         if (href.startsWith('#')) {
             const target = document.querySelector(href);
             target.scrollIntoView({ behavior: 'smooth' });
         } else {
-            // Add fade out transition before page change
             document.body.style.opacity = '0';
             setTimeout(() => {
                 window.location.href = href;
@@ -40,7 +36,6 @@ ctaButton.addEventListener('mouseout', () => {
     ctaButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.5)';
 });
 
-// Login button animation
 const loginButton = document.querySelector('.login-button');
 loginButton.addEventListener('mouseover', () => {
     loginButton.style.transform = 'translateY(-3px)';
@@ -70,4 +65,10 @@ heroContent.addEventListener('mouseover', () => {
 });
 heroContent.addEventListener('mouseout', () => {
     heroContent.style.transform = 'translateY(0)';
+});
+
+// Additional JS for consistency
+window.addEventListener('resize', () => {
+    const headerLine = document.querySelector('.header-line');
+    headerLine.style.transition = 'width 0.4s ease';
 });

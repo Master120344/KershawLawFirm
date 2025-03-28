@@ -11,7 +11,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Body Styling */
+/* Body Styling - Animated background for desktop */
 body {
     background: url('https://images.unsplash.com/photo-1531218150217-54595bc2b934?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
     position: relative;
@@ -19,6 +19,13 @@ body {
     overflow-x: hidden;
     color: #2E2E2E;
     line-height: 1.6;
+    animation: backgroundMove 20s ease-in-out infinite; /* Smooth background movement */
+}
+
+@keyframes backgroundMove {
+    0% { background-position: center center; }
+    50% { background-position: center top; } /* Moves up smoothly */
+    100% { background-position: center center; } /* Back to start */
 }
 
 body::before {
@@ -35,7 +42,7 @@ body::before {
     z-index: 0;
 }
 
-/* Background Animation */
+/* Background Animation for feather overlay */
 @keyframes backgroundShift {
     0% { background-position: 0 0; }
     50% { background-position: 150px 150px; }
@@ -120,14 +127,14 @@ body::before {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Hero Section - Fixed overlapping */
+/* Hero Section - Bigger for desktop */
 .hero {
     position: relative;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 150px 40px 80px 40px; /* Top: clear header, Bottom: clear nav */
+    padding: 200px 40px 120px 40px; /* Increased top and bottom for more space */
 }
 
 .hero-content {
@@ -136,7 +143,7 @@ body::before {
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
+    max-width: 1000px; /* Wider for desktop */
     width: 100%;
     transition: transform 0.3s ease;
 }
@@ -241,7 +248,7 @@ body::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Desktop View (min-width: 769px) - Fixed text size and spacing */
+/* Desktop View (min-width: 769px) - Bigger page and text */
 @media (min-width: 769px) {
     .header { padding: 40px 60px; }
     .logo-container h1 { font-size: 4rem; }
@@ -249,17 +256,20 @@ body::before {
     .logo-container:hover .header-line { width: 350px; }
     .login-button { margin-left: 20px; }
     .hero { 
-        padding: 150px 60px 80px 60px; /* Top: clear header, Bottom: clear nav */
+        padding: 200px 60px 120px 60px; /* Bigger top and bottom */
     }
-    .hero-content { padding: 60px; } /* More space inside */
-    .hero h2 { font-size: 4.5rem; } /* Bigger title */
-    .subtitle { font-size: 2.2rem; } /* Bigger subtitle */
+    .hero-content { 
+        padding: 80px; /* More internal space */
+        max-width: 1000px; /* Wider content box */
+    }
+    .hero h2 { font-size: 5rem; } /* Even bigger title */
+    .subtitle { font-size: 2.5rem; } /* Even bigger subtitle */
     .cta-button { padding: 25px 70px; font-size: 1.8rem; }
     .tabs { padding: 25px 60px; gap: 80px; }
     .tabs a { font-size: 1.6rem; padding: 15px 30px; }
 }
 
-/* Mobile View (max-width: 768px) - Unchanged per your request */
+/* Mobile View (max-width: 768px) - Unchanged */
 @media (max-width: 768px) {
     .header { 
         padding: 20px 15px; 

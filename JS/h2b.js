@@ -29,7 +29,7 @@ logoutButton.addEventListener('click', (e) => {
             console.log('Logged out');
         })
         .catch((error) => {
-            console.error('Logout error:', error);
+            console.error('Logout error:', error.code, error.message);
             alert('Logout failed');
         });
 });

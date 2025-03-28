@@ -1,12 +1,48 @@
+// Fade in on page load
+window.addEventListener('load', () => {
+    document.body.style.transition = 'opacity 0.3s ease';
+    document.body.style.opacity = '1';
+});
+
+// Firebase Auth Logic
+const auth = window.auth;
+const userInfo = document.getElementById('user-info');
+const userEmail = document.getElementById('user-email');
+const logoutButton = document.getElementById('logout-button');
+const loginButton = document.getElementById('login-button');
+
+window.onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginButton.style.display = 'none';
+        userInfo.style.display = 'flex';
+        userEmail.textContent = user.email;
+    } else {
+        loginButton.style.display = 'block';
+        userInfo.style.display = 'none';
+    }
+});
+
+logoutButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.signOut(auth)
+        .then(() => {
+            console.log('Logged out');
+        })
+        .catch((error) => {
+            console.error('Logout error:', error);
+            alert('Logout failed');
+        });
+});
+
 // Smooth scroll for navigation
 document.querySelectorAll('.tab-link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const href = this.getAttribute('href');
-        
+
         document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
         this.classList.add('active');
-        
+
         if (href.startsWith('#')) {
             const target = document.querySelector(href);
             target.scrollIntoView({ behavior: 'smooth' });
@@ -17,33 +53,6 @@ document.querySelectorAll('.tab-link').forEach(link => {
             }, 300);
         }
     });
-});
-
-// Fade in on page load
-window.addEventListener('load', () => {
-    document.body.style.transition = 'opacity 0.3s ease';
-    document.body.style.opacity = '1';
-});
-
-// Button hover animations
-const ctaButton = document.querySelector('.cta-button');
-ctaButton.addEventListener('mouseover', () => {
-    ctaButton.style.transform = 'translateY(-5px) scale(1.05)';
-    ctaButton.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.5)';
-});
-ctaButton.addEventListener('mouseout', () => {
-    ctaButton.style.transform = 'translateY(0) scale(1)';
-    ctaButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.4)';
-});
-
-const loginButton = document.querySelector('.login-button');
-loginButton.addEventListener('mouseover', () => {
-    loginButton.style.transform = 'translateY(-3px)';
-    loginButton.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.5)';
-});
-loginButton.addEventListener('mouseout', () => {
-    loginButton.style.transform = 'translateY(0)';
-    loginButton.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
 });
 
 // Section reveal animation
@@ -75,16 +84,4 @@ window.addEventListener('scroll', () => {
     } else {
         header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
     }
-});
-
-// Cost item hover effect
-document.querySelectorAll('.cost-item').forEach(item => {
-    item.addEventListener('mouseover', () => {
-        item.style.transform = 'translateY(-5px)';
-        item.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.5)';
-    });
-    item.addEventListener('mouseout', () => {
-        item.style.transform = 'translateY(0)';
-        item.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
-    });
 });

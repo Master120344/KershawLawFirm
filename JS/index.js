@@ -25,41 +25,8 @@ window.addEventListener('load', () => {
     document.body.style.opacity = '1';
 });
 
-// Button hover animations
-const ctaButton = document.querySelector('.cta-button');
-ctaButton.addEventListener('mouseover', () => {
-    ctaButton.style.transform = 'translateY(-5px) scale(1.05)';
-    ctaButton.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.5)';
-});
-ctaButton.addEventListener('mouseout', () => {
-    ctaButton.style.transform = 'translateY(0) scale(1)';
-    ctaButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.4)';
-});
-
-const loginButton = document.querySelector('.login-button');
-loginButton.addEventListener('mouseover', () => {
-    loginButton.style.transform = 'translateY(-3px)';
-    loginButton.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.5)';
-});
-loginButton.addEventListener('mouseout', () => {
-    loginButton.style.transform = 'translateY(0)';
-    loginButton.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
-});
-
-// Card hover animations
-document.querySelectorAll('.trust-item, .benefit-card').forEach(card => {
-    card.addEventListener('mouseover', () => {
-        card.style.transform = 'scale(1.05)';
-        card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.5)';
-    });
-    card.addEventListener('mouseout', () => {
-        card.style.transform = 'scale(1)';
-        card.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
-    });
-});
-
 // Section reveal animation
-const sections = document.querySelectorAll('.section');
+const sections = document.querySelectorAll('.section, .footer-text');
 const revealSection = entries => {
     entries.forEach((entry, index) => {
         if (entry.isIntersecting) {

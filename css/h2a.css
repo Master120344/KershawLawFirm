@@ -19,10 +19,11 @@ body {
     overflow-x: hidden;
     color: #F5F6F5;
     line-height: 1.6;
-    padding-top: 120px; /* Adjusted to accommodate fixed header */
-    padding-bottom: 120px; /* Adjusted to accommodate fixed tabs */
+    padding-top: 140px; /* Ensures header doesn’t overlap content */
+    padding-bottom: 120px; /* Ensures tabs don’t overlap content */
 }
 
+/* Background Layers */
 body::before {
     content: '';
     position: absolute;
@@ -126,7 +127,7 @@ body::after {
 .content-wrapper {
     position: relative;
     z-index: 2;
-    padding: 40px; /* Simplified padding */
+    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -374,6 +375,7 @@ body::after {
 }
 
 @media (max-width: 768px) {
+    body { padding-top: 100px; }
     .header { padding: 20px 15px; flex-direction: column; text-align: center; }
     .logo-container h1 { font-size: 2.5rem; }
     .header-line { width: 100px; }
@@ -395,6 +397,7 @@ body::after {
 }
 
 @media (max-width: 480px) {
+    body { padding-top: 80px; }
     .header { padding: 15px 10px; }
     .logo-container h1 { font-size: 2rem; }
     .header-line { width: 80px; }
@@ -413,7 +416,7 @@ body::after {
     .tabs a { font-size: 1rem; padding: 8px 10px; }
 }
 
-/* Extended CSS for 1000+ Lines */
+/* Extended CSS for Layout */
 .header { transition: padding 0.3s ease; }
 .content-wrapper { width: 100%; }
 .hero { margin-bottom: 40px; }

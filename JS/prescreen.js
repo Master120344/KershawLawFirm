@@ -4,18 +4,68 @@ window.addEventListener('load', () => {
     document.body.style.opacity = '1';
 });
 
-// Prescreen form submission
-document.getElementById('prescreen-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const clientStatus = document.getElementById('client-status').value;
+// Firebase Auth Logic
+const auth = window.auth;
+const userInfo = document.getElementById('user-info');
+const userEmail = document.getElementById('user-email');
+const logoutButton = document.getElementById('logout-button');
+const loginButton = document.getElementById('login-button');
 
-    if (clientStatus === 'yes') {
-        localStorage.setItem('authenticated', 'true');
-        document.body.style.opacity = '0';
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 300);
+window.onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginButton.style.display = 'none';
+        userInfo.style.display = 'flex';
+        userEmail.textContent = user.email;
     } else {
-        alert('Sorry, this site is for clients or potential clients only.');
+        loginButton.style.display = 'block';
+        userInfo.style.display = 'none';
     }
+});
+
+logoutButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.signOut(auth)
+        .then(() => {
+            console.log('Logged out');
+        })
+        .catch((error) => {
+            console.error('Logout error:', error);
+            alert('Logout failed');
+        });
+});
+
+// Form Handling
+const prescreenForm = document.getElementById('prescreen-form');
+const formMessage = document.getElementById('form-message');
+
+prescreenForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const business = document.getElementById('business').value;
+    const visaType = document.getElementById('visa-type').value;
+    const workers = document.getElementById('workers').value;
+
+    // Basic validation
+    if (!name || !business || !visaType || !workers) {
+        formMessage.textContent = 'Please fill out all fields.';
+        formMessage.style.color = '#C0392B';
+        return;
+    }
+
+    // Simulate form submission (replace with actual backend logic later)
+    console.log('Pre-screening submitted:', { name, business, visaType, workers });
+    formMessage.textContent = 'Thank you! We’ll review your submission and get back to you soon.';
+    formMessage.style.color = '#F5F6F5';
+    prescreenForm.reset();
+});
+
+// Input animations
+const inputs = document.querySelectorAll('.form-group input, .form-group select');
+inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        input.parentElement.style.transform = 'translateY(-5px)';
+    });
+    input.addEventListener('blur', () => {
+        input.parentElement.style.transform = 'translateY(0)';
+    });
 });

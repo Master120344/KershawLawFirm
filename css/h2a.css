@@ -13,19 +13,14 @@ html {
 
 /* Body Styling */
 body {
-    background: url('https://images.unsplash.com/photo-1531218150217-54595bc2b934?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    background: #1A1A1A;
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
     color: #F5F6F5;
     line-height: 1.6;
-    animation: backgroundMove 20s ease-in-out infinite;
-}
-
-@keyframes backgroundMove {
-    0% { background-position: center center; }
-    50% { background-position: center top; }
-    100% { background-position: center center; }
+    padding-top: 120px; /* Adjusted to accommodate fixed header */
+    padding-bottom: 120px; /* Adjusted to accommodate fixed tabs */
 }
 
 body::before {
@@ -46,17 +41,17 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png') repeat;
-    background-size: 300px 300px;
-    opacity: 0.3;
-    animation: backgroundShift 50s linear infinite;
+    background: url('https://www.transparenttextures.com/patterns/old-map.png') repeat;
+    background-size: 400px 400px;
+    opacity: 0.15;
+    animation: backgroundShift 60s linear infinite;
     z-index: 0;
 }
 
 /* Background Animation */
 @keyframes backgroundShift {
     0% { background-position: 0 0; }
-    50% { background-position: 150px 150px; }
+    50% { background-position: 200px 200px; }
     100% { background-position: 0 0; }
 }
 
@@ -131,7 +126,7 @@ body::after {
 .content-wrapper {
     position: relative;
     z-index: 2;
-    padding: 120px 40px 100px;
+    padding: 40px; /* Simplified padding */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -312,6 +307,7 @@ body::after {
     border-top: 2px solid #C0392B;
 }
 
+/* Navigation Links */
 .tabs a {
     color: #F5F6F5;
     text-decoration: none;
@@ -364,7 +360,7 @@ body::after {
     .logo-container h1 { font-size: 4rem; }
     .header-line { width: 200px; }
     .logo-container:hover .header-line { width: 350px; }
-    .content-wrapper { padding: 150px 60px 120px; }
+    .content-wrapper { padding: 60px; }
     .hero { padding: 80px 60px; }
     .hero h2 { font-size: 4.5rem; }
     .subtitle { font-size: 2rem; }
@@ -383,7 +379,7 @@ body::after {
     .header-line { width: 100px; }
     .logo-container:hover .header-line { width: 200px; }
     .login-button { margin-top: 20px; padding: 10px 30px; font-size: 1.2rem; }
-    .content-wrapper { padding: 100px 15px 80px; gap: 40px; }
+    .content-wrapper { padding: 30px 15px; gap: 40px; }
     .hero { padding: 40px 20px; }
     .hero h2 { font-size: 2.5rem; }
     .subtitle { font-size: 1.4rem; }
@@ -404,7 +400,7 @@ body::after {
     .header-line { width: 80px; }
     .logo-container:hover .header-line { width: 150px; }
     .login-button { padding: 8px 25px; font-size: 1rem; }
-    .content-wrapper { padding: 80px 10px 60px; gap: 30px; }
+    .content-wrapper { padding: 20px 10px; gap: 30px; }
     .hero { padding: 30px 15px; }
     .hero h2 { font-size: 2rem; }
     .subtitle { font-size: 1.2rem; }
@@ -418,7 +414,6 @@ body::after {
 }
 
 /* Extended CSS for 1000+ Lines */
-body { padding-bottom: 120px; }
 .header { transition: padding 0.3s ease; }
 .content-wrapper { width: 100%; }
 .hero { margin-bottom: 40px; }
@@ -510,7 +505,7 @@ body { font-size: 16px; }
 .trust-item { border: 1px solid rgba(192, 57, 43, 0.2); }
 .benefit-card { border: 1px solid rgba(192, 57, 43, 0.2); }
 
-/* Filler for 1000+ Lines */
+/* Filler for Layout */
 .header { padding-left: 20px; padding-right: 20px; }
 .content-wrapper { margin-top: 20px; }
 .hero { margin-top: 20px; }

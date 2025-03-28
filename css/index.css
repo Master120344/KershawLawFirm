@@ -255,10 +255,10 @@ body::before {
     .header-line { width: 200px; }
     .logo-container:hover .header-line { width: 350px; }
     .login-button { margin-left: 20px; }
-    .hero { 
+    .hero {
         padding: 200px 60px 120px 60px; /* Matches base for consistency */
     }
-    .hero-content { 
+    .hero-content {
         padding: 80px;
         max-width: 1000px;
     }
@@ -271,34 +271,34 @@ body::before {
 
 /* Mobile View (max-width: 768px) - Unchanged */
 @media (max-width: 768px) {
-    .header { 
-        padding: 20px 15px; 
-        flex-direction: column; 
-        text-align: center; 
-        background: rgba(44, 62, 80, 0.95); 
+    .header {
+        padding: 20px 15px;
+        flex-direction: column;
+        text-align: center;
+        background: rgba(44, 62, 80, 0.95);
     }
     .logo-container h1 { font-size: 2.5rem; }
     .header-line { width: 100px; }
     .logo-container:hover .header-line { width: 200px; }
-    .login-button { 
-        margin-top: 20px; 
-        padding: 10px 30px; 
-        font-size: 1.2rem; 
-        display: block; 
-        width: fit-content; 
-        margin-left: auto; 
-        margin-right: auto; 
+    .login-button {
+        margin-top: 20px;
+        padding: 10px 30px;
+        font-size: 1.2rem;
+        display: block;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
     }
     .hero { padding: 20px; min-height: calc(100vh - 160px); }
     .hero-content { padding: 25px; }
     .hero h2 { font-size: 2.5rem; }
     .subtitle { font-size: 1.4rem; }
     .cta-button { padding: 15px 40px; font-size: 1.3rem; }
-    .tabs { 
-        padding: 15px 10px; 
-        gap: 20px; 
-        flex-wrap: wrap; 
-        justify-content: space-around; 
+    .tabs {
+        padding: 15px 10px;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
     .tabs a { font-size: 1.2rem; padding: 10px 15px; }
 }

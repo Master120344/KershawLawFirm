@@ -19,8 +19,11 @@ body {
     overflow-x: hidden;
     color: #F5F6F5;
     line-height: 1.6;
+    padding-top: 140px; /* Increased to clear fixed header */
+    padding-bottom: 120px; /* Ensures tabs don’t overlap bottom content */
 }
 
+/* Background Layers */
 body::before {
     content: '';
     position: absolute;
@@ -124,7 +127,7 @@ body::after {
 .content-wrapper {
     position: relative;
     z-index: 2;
-    padding: 120px 40px 100px;
+    padding: 40px; /* Adjusted base padding, relying on body for top/bottom */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -343,7 +346,7 @@ body::after {
     .logo-container h1 { font-size: 4rem; }
     .header-line { width: 200px; }
     .logo-container:hover .header-line { width: 350px; }
-    .content-wrapper { padding: 150px 60px 120px; }
+    .content-wrapper { padding: 60px; } /* Adjusted for larger screens */
     .hero { padding: 80px 60px; }
     .hero h2 { font-size: 4.5rem; }
     .subtitle { font-size: 2rem; }
@@ -359,12 +362,13 @@ body::after {
 }
 
 @media (max-width: 768px) {
+    body { padding-top: 100px; } /* Adjusted for medium screens */
     .header { padding: 20px 15px; flex-direction: column; text-align: center; }
     .logo-container h1 { font-size: 2.5rem; }
     .header-line { width: 100px; }
     .logo-container:hover .header-line { width: 200px; }
     .login-button { margin-top: 20px; padding: 10px 30px; font-size: 1.2rem; }
-    .content-wrapper { padding: 100px 15px 80px; gap: 40px; }
+    .content-wrapper { padding: 30px 15px; gap: 40px; }
     .hero { padding: 40px 20px; }
     .hero h2 { font-size: 2.5rem; }
     .subtitle { font-size: 1.4rem; }
@@ -380,12 +384,13 @@ body::after {
 }
 
 @media (max-width: 480px) {
+    body { padding-top: 80px; } /* Adjusted for small screens */
     .header { padding: 15px 10px; }
     .logo-container h1 { font-size: 2rem; }
     .header-line { width: 80px; }
     .logo-container:hover .header-line { width: 150px; }
     .login-button { padding: 8px 25px; font-size: 1rem; }
-    .content-wrapper { padding: 80px 10px 60px; gap: 30px; }
+    .content-wrapper { padding: 20px 10px; gap: 30px; }
     .hero { padding: 30px 15px; }
     .hero h2 { font-size: 2rem; }
     .subtitle { font-size: 1.2rem; }
@@ -401,7 +406,6 @@ body::after {
 }
 
 /* Extended CSS for 1000+ Lines */
-body { padding-bottom: 120px; }
 .header { transition: padding 0.3s ease; }
 .content-wrapper { width: 100%; }
 .hero { margin-bottom: 40px; }

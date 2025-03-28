@@ -19,13 +19,13 @@ body {
     overflow-x: hidden;
     color: #2E2E2E;
     line-height: 1.6;
-    animation: backgroundMove 20s ease-in-out infinite;
+    animation: backgroundMove 10s ease-in-out infinite;
 }
 
 @keyframes backgroundMove {
     0% { background-position: center center; }
     50% { background-position: center top; }
-    100% { background-position: center center; }
+    100% { background-position: center bottom; }
 }
 
 body::before {
@@ -130,34 +130,6 @@ body::before {
     color: #F5F6F5;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
     margin-bottom: 20px;
-}
-
-.subtitle {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.8rem;
-    color: #F5F6F5;
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 20px 60px;
-    background: #C0392B;
-    color: #F5F6F5;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    border-radius: 50px;
-    transition: all 0.4s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-.cta-button:hover {
-    background: #9B2D23;
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
 /* Trust Section */
@@ -270,6 +242,24 @@ body::before {
     color: #F5F6F5;
 }
 
+/* Footer Text */
+.footer-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 40px;
+}
+
+.footer-text h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
 /* Navigation Tabs */
 .tabs {
     position: fixed;
@@ -329,12 +319,12 @@ body::before {
     .content-wrapper { padding: 150px 60px 120px; }
     .hero { padding: 200px 60px 120px 60px; }
     .hero h2 { font-size: 4.5rem; }
-    .subtitle { font-size: 2rem; }
-    .cta-button { padding: 25px 70px; font-size: 1.8rem; }
     .trust-section { padding: 50px; }
     .trust-section h3 { font-size: 3rem; }
     .benefits-section { padding: 50px; }
     .benefits-section h3 { font-size: 3rem; }
+    .footer-text { padding: 80px 60px; }
+    .footer-text h2 { font-size: 3.5rem; }
     .tabs { padding: 25px 60px; gap: 80px; }
     .tabs a { font-size: 1.6rem; padding: 15px 30px; }
 }
@@ -348,14 +338,14 @@ body::before {
     .content-wrapper { padding: 100px 15px 80px; gap: 40px; }
     .hero { padding: 40px 20px; }
     .hero h2 { font-size: 2.5rem; }
-    .subtitle { font-size: 1.4rem; }
-    .cta-button { padding: 15px 40px; font-size: 1.3rem; }
     .trust-section { padding: 25px; }
     .trust-section h3 { font-size: 2rem; }
     .trust-item { width: 100%; max-width: 280px; }
     .benefits-section { padding: 25px; }
     .benefits-section h3 { font-size: 2rem; }
     .benefit-card { width: 100%; max-width: 280px; }
+    .footer-text { padding: 40px 20px; }
+    .footer-text h2 { font-size: 2.5rem; }
     .tabs { padding: 15px 10px; gap: 20px; flex-wrap: wrap; }
     .tabs a { font-size: 1.2rem; padding: 10px 15px; }
 }
@@ -369,12 +359,12 @@ body::before {
     .content-wrapper { padding: 80px 10px 60px; gap: 30px; }
     .hero { padding: 30px 15px; }
     .hero h2 { font-size: 2rem; }
-    .subtitle { font-size: 1.2rem; }
-    .cta-button { padding: 12px 30px; font-size: 1.1rem; }
     .trust-section { padding: 20px; }
     .trust-section h3 { font-size: 1.8rem; }
     .benefits-section { padding: 20px; }
     .benefits-section h3 { font-size: 1.8rem; }
+    .footer-text { padding: 30px 15px; }
+    .footer-text h2 { font-size: 2rem; }
     .tabs { padding: 10px 5px; gap: 10px; }
     .tabs a { font-size: 1rem; padding: 8px 10px; }
 }

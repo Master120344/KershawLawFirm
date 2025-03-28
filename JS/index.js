@@ -47,7 +47,7 @@ loginButton.addEventListener('mouseout', () => {
 });
 
 // Card hover animations
-document.querySelectorAll('.service-card').forEach(card => {
+document.querySelectorAll('.trust-item, .benefit-card').forEach(card => {
     card.addEventListener('mouseover', () => {
         card.style.transform = 'scale(1.05)';
         card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.5)';

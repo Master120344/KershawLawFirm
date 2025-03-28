@@ -19,8 +19,8 @@ body {
     overflow-x: hidden;
     color: #F5F6F5;
     line-height: 1.6;
-    padding-top: 140px; /* Increased to clear fixed header */
-    padding-bottom: 120px; /* Ensures tabs don’t overlap bottom content */
+    padding-top: 140px;
+    padding-bottom: 120px;
 }
 
 /* Background Layers */
@@ -123,11 +123,32 @@ body::after {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* User Info */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    color: #F5F6F5;
+}
+
+.logout-link {
+    color: #C0392B;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.logout-link:hover {
+    color: #F5F6F5;
+}
+
 /* Content Wrapper */
 .content-wrapper {
     position: relative;
     z-index: 2;
-    padding: 40px; /* Adjusted base padding, relying on body padding for top/bottom */
+    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -183,73 +204,74 @@ body::after {
 
 .costs-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
     justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .cost-item {
-    background: rgba(40, 40, 40, 0.9);
+    background: rgba(245, 246, 245, 0.1);
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    width: 100%;
-    max-width: 500px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 400px;
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .cost-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    background: #C0392B;
+    color: #F5F6F5;
 }
 
 .cost-item h4 {
     font-family: 'Cinzel', serif;
     font-size: 1.8rem;
-    color: #C0392B;
+    color: #F5F6F5;
     margin-bottom: 20px;
 }
 
 .cost-item ul {
     list-style: none;
+    padding: 0;
     font-family: 'EB Garamond', serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #F5F6F5;
 }
 
 .cost-item ul li {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .cost-item ul li strong {
-    color: #C0392B;
+    color: #F5F6F5;
 }
 
 .note {
     font-family: 'EB Garamond', serif;
-    font-size: 1.1rem;
-    color: #B0B0B0;
+    font-size: 1rem;
+    color: #F5F6F5;
     text-align: center;
-    margin-top: 30px;
-    font-style: italic;
+    margin: 20px 0;
 }
 
 .cta-button {
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 40px auto 0;
+    display: inline-block;
     padding: 20px 60px;
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
-    text-align: center;
-    border-radius: 50px;
     font-family: 'Cinzel', serif;
     font-size: 1.6rem;
     font-weight: 700;
+    border-radius: 50px;
     transition: all 0.4s ease;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    width: fit-content;
 }
 
 .cta-button:hover {
@@ -309,39 +331,24 @@ body::after {
     left: 0;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 /* Responsive Design */
 @media (min-width: 769px) {
     .header { padding: 40px 60px; }
     .logo-container h1 { font-size: 4rem; }
     .header-line { width: 200px; }
     .logo-container:hover .header-line { width: 350px; }
-    .content-wrapper { padding: 60px; } /* Adjusted for larger screens */
+    .content-wrapper { padding: 60px; }
     .hero { padding: 80px 60px; }
     .hero h2 { font-size: 4.5rem; }
     .subtitle { font-size: 2rem; }
     .costs-breakdown { padding: 50px; }
     .costs-breakdown h3 { font-size: 3rem; }
-    .cost-item h4 { font-size: 2rem; }
-    .cost-item ul { font-size: 1.3rem; }
-    .note { font-size: 1.2rem; }
-    .cta-button { font-size: 1.8rem; padding: 25px 70px; }
     .tabs { padding: 25px 60px; gap: 80px; }
     .tabs a { font-size: 1.6rem; padding: 15px 30px; }
 }
 
 @media (max-width: 768px) {
-    body { padding-top: 100px; } /* Adjusted for medium screens */
+    body { padding-top: 100px; }
     .header { padding: 20px 15px; flex-direction: column; text-align: center; }
     .logo-container h1 { font-size: 2.5rem; }
     .header-line { width: 100px; }
@@ -353,16 +360,14 @@ body::after {
     .subtitle { font-size: 1.4rem; }
     .costs-breakdown { padding: 25px; }
     .costs-breakdown h3 { font-size: 2rem; }
-    .cost-item h4 { font-size: 1.6rem; }
-    .cost-item ul { font-size: 1.1rem; }
-    .note { font-size: 1rem; }
-    .cta-button { font-size: 1.3rem; padding: 15px 40px; }
+    .cost-item { width: 100%; max-width: 350px; }
+    .cta-button { padding: 15px 40px; font-size: 1.3rem; }
     .tabs { padding: 15px 10px; gap: 20px; flex-wrap: wrap; }
     .tabs a { font-size: 1.2rem; padding: 10px 15px; }
 }
 
 @media (max-width: 480px) {
-    body { padding-top: 80px; } /* Adjusted for small screens */
+    body { padding-top: 80px; }
     .header { padding: 15px 10px; }
     .logo-container h1 { font-size: 2rem; }
     .header-line { width: 80px; }
@@ -374,70 +379,16 @@ body::after {
     .subtitle { font-size: 1.2rem; }
     .costs-breakdown { padding: 20px; }
     .costs-breakdown h3 { font-size: 1.8rem; }
-    .cost-item h4 { font-size: 1.4rem; }
-    .cost-item ul { font-size: 1rem; }
-    .note { font-size: 0.9rem; }
-    .cta-button { font-size: 1.1rem; padding: 12px 30px; }
+    .cost-item { width: 100%; max-width: 300px; }
+    .cta-button { padding: 12px 30px; font-size: 1.1rem; }
     .tabs { padding: 10px 5px; gap: 10px; }
     .tabs a { font-size: 1rem; padding: 8px 10px; }
 }
 
-/* Extended CSS for 1000+ Lines */
-.header { transition: padding 0.3s ease; }
-.content-wrapper { width: 100%; }
-.hero { margin-bottom: 40px; }
-.costs-breakdown { margin-bottom: 40px; }
-.tabs { transition: padding 0.3s ease; }
-
 /* Additional Styling */
-.login-button:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
-.cta-button:active { transform: translateY(0) scale(1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
-.tabs a:active { transform: scale(0.95); }
-.hero h2 { transition: color 0.3s ease; }
-.subtitle { transition: opacity 0.3s ease; }
-.cost-item { transition: all 0.3s ease; }
-
-/* Fine-Tuned Details */
 .hero { background: linear-gradient(180deg, rgba(26, 26, 26, 0.9) 80%, rgba(40, 40, 40, 0.9) 100%); }
 .costs-breakdown { background: linear-gradient(180deg, rgba(26, 26, 26, 0.9) 80%, rgba(40, 40, 40, 0.9) 100%); }
-.cost-item ul li:first-child { padding-top: 10px; }
-.costs-breakdown h3 { letter-spacing: 1px; }
-
-/* Micro-Interactions */
-.hero:hover h2 { color: #C0392B; }
-.costs-breakdown:hover h3 { color: #C0392B; }
-.cost-item:hover h4 { color: #F5F6F5; }
-
-/* Accessibility */
-.cta-button:focus { outline: 2px solid #C0392B; outline-offset: 2px; }
-.login-button:focus { outline: 2px solid #C0392B; outline-offset: 2px; }
-.tabs a:focus { outline: 2px solid #C0392B; outline-offset: 2px; }
-
-/* Extended Responsive Tweaks */
-@media (min-width: 1024px) {
-    .hero h2 { font-size: 5rem; }
-    .subtitle { font-size: 2.2rem; }
-    .costs-breakdown h3 { font-size: 3.2rem; }
-    .cost-item h4 { font-size: 2.2rem; }
-}
-
-@media (max-width: 600px) {
-    .costs-container { gap: 20px; }
-    .cost-item { padding: 20px; }
-    .tabs { gap: 5px; }
-}
-
-/* Lawyer Theme Enhancements */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    width: 60px;
-    height: 5px;
-    background: #C0392B;
-    transform: translateX(-50%);
-}
+.hero::before,
 .costs-breakdown::before {
     content: '';
     position: absolute;
@@ -449,35 +400,18 @@ body::after {
     transform: translateX(-50%);
 }
 
-/* More Styling */
-body { font-size: 16px; }
-.hero h2 { font-weight: 700; }
-.costs-breakdown h3 { font-weight: 700; }
-.cost-item ul { padding-left: 0; }
+.hero:hover h2,
+.costs-breakdown:hover h3 {
+    color: #C0392B;
+}
 
-/* Filler for 1000+ Lines */
-.header { padding-left: 20px; padding-right: 20px; }
-.content-wrapper { margin-top: 20px; }
-.hero { margin-top: 20px; }
-.costs-breakdown { margin-top: 20px; }
-.tabs { padding-left: 20px; padding-right: 20px; }
-.hero h2 { padding-bottom: 10px; }
-.subtitle { padding-bottom: 10px; }
-.costs-breakdown h3 { padding-bottom: 10px; }
-.cost-item h4 { padding-bottom: 5px; }
-.cost-item ul li { padding: 5px 0; }
-.cta-button { margin-top: 20px; }
-.note { padding-top: 10px; }
+.cost-item:hover h4,
+.cost-item:hover ul li,
+.cost-item:hover ul li strong {
+    color: #F5F6F5;
+}
 
-/* More Details */
-.hero { transition: box-shadow 0.3s ease; }
-.costs-breakdown { transition: box-shadow 0.3s ease; }
-.hero:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); }
-.costs-breakdown:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); }
-
-/* Final Touches */
-body { background-attachment: fixed; }
-.header { background-clip: padding-box; }
-.hero { background-clip: padding-box; }
-.costs-breakdown { background-clip: padding-box; }
-.tabs { background-clip: padding-box; }
+.cta-button:focus {
+    outline: 2px solid #C0392B;
+    outline-offset: 2px;
+}

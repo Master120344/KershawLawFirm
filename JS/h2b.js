@@ -3,8 +3,10 @@ document.querySelectorAll('.tab-link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const href = this.getAttribute('href');
+        
         document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
         this.classList.add('active');
+        
         if (href.startsWith('#')) {
             const target = document.querySelector(href);
             target.scrollIntoView({ behavior: 'smooth' });
@@ -27,11 +29,11 @@ window.addEventListener('load', () => {
 const ctaButton = document.querySelector('.cta-button');
 ctaButton.addEventListener('mouseover', () => {
     ctaButton.style.transform = 'translateY(-5px) scale(1.05)';
-    ctaButton.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.6)';
+    ctaButton.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.5)';
 });
 ctaButton.addEventListener('mouseout', () => {
     ctaButton.style.transform = 'translateY(0) scale(1)';
-    ctaButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.5)';
+    ctaButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.4)';
 });
 
 const loginButton = document.querySelector('.login-button');
@@ -44,8 +46,8 @@ loginButton.addEventListener('mouseout', () => {
     loginButton.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
 });
 
-// Card hover animation
-document.querySelectorAll('.card').forEach(card => {
+// Card hover animations
+document.querySelectorAll('.trust-item, .benefit-card').forEach(card => {
     card.addEventListener('mouseover', () => {
         card.style.transform = 'scale(1.05)';
         card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.5)';
@@ -77,28 +79,12 @@ sections.forEach(section => {
     observer.observe(section);
 });
 
-// Video interaction
-const video = document.querySelector('.custom-video');
-const overlay = document.querySelector('.overlay');
-video.addEventListener('play', () => {
-    overlay.style.background = 'rgba(0, 0, 0, 0.8)';
-    document.body.style.transition = 'all 0.5s ease';
-});
-video.addEventListener('pause', () => {
-    overlay.style.background = 'rgba(0, 0, 0, 0.5)';
-});
-video.addEventListener('ended', () => {
-    overlay.style.background = 'rgba(0, 0, 0, 0.5)';
-});
-
 // Dynamic header shadow
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
     if (window.scrollY > 50) {
-        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-        header.style.background = 'rgba(0, 0, 0, 0.3)';
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.6)';
     } else {
-        header.style.boxShadow = 'none';
-        header.style.background = 'transparent';
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
     }
 });

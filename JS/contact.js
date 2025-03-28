@@ -1,95 +1,64 @@
-// Mobile Menu Toggle
-document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+// Form submission handling
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
+    // Get form values
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const service = document.getElementById("service").value;
+    const message = document.getElementById("message").value.trim();
+
+    // Basic validation
+    if (!name || !email || !phone || !service || !message) {
+        alert("Please fill out all fields.");
+        return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+    if (!/^\d{10}$/.test(phone.replace(/\D/g, ''))) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
     }
 
-    // Auto-Update Footer Year
-    const footerYear = document.getElementById('footer-year');
-    if (footerYear) {
-        footerYear.textContent = new Date().getFullYear();
-    }
+    // Generate ticket number
+    const ticketNumber = Math.floor(100000 + Math.random() * 900000);
 
-    // Form Submission Handler
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
+    // Display thank you message
+    const thankYouMessage = document.getElementById("thankYouMessage");
+    thankYouMessage.style.display = "block";
+    thankYouMessage.innerHTML = `Thank you, ${name}! We will reach out to you shortly. Your ticket number is: ${ticketNumber}`;
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+    // Log for debugging
+    console.log(`Form Submitted:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nMessage: ${message}\nTicket: ${ticketNumber}`);
 
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
+    // Reset form
+    document.getElementById("contactForm").reset();
 
-            // Simple validation
-            if (!name || !email || !message) {
-                showMessage("Please fill out all fields.", "error");
-                return;
-            }
-
-            // Email validation
-            if (!validateEmail(email)) {
-                showMessage("Please enter a valid email address.", "error");
-                return;
-            }
-
-            // Send data via fetch to PHP backend
-            try {
-                const response = await fetch("send_email.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ subject: `New Contact from ${name}`, message, email })
-                });
-
-                const result = await response.json();
-
-                if (result.status === "success") {
-                    showMessage("Message sent successfully!", "success");
-                    contactForm.reset();
-                } else {
-                    showMessage("Error sending message. Please try again later.", "error");
-                }
-            } catch (error) {
-                showMessage("Network error. Please check your connection.", "error");
-            }
-        });
-    }
-
-    // Smooth Scroll for Internal Links
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelector(link.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Helper function to validate email
-    function validateEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    // Helper function to show messages
-    function showMessage(msg, type) {
-        if (formStatus) {
-            formStatus.textContent = msg;
-            formStatus.className = type;
-            formStatus.classList.remove("hidden");
-
-            // Hide after 3 seconds
-            setTimeout(() => {
-                formStatus.classList.add("hidden");
-            }, 3000);
-        }
+    // Scroll to thank you message on mobile
+    if (window.innerWidth <= 768) {
+        thankYouMessage.scrollIntoView({ behavior: "smooth" });
     }
 });
+
+// Form field focus enhancements
+const inputs = document.querySelectorAll(".contact-form input, .contact-form select, .contact-form textarea");
+inputs.forEach(input => {
+    input.addEventListener("focus", () => {
+        input.style.background = "#FDFDFD";
+    });
+    input.addEventListener("blur", () => {
+        input.style.background = "#FFFFFF";
+    });
+});
+
+// Submit button hover effect for mobile touch
+const submitBtn = document.querySelector(".submit-btn");
+submitBtn.addEventListener("touchstart", () => {
+    submitBtn.style.background = "#9B2D23";
+}, { passive: true });
+submitBtn.addEventListener("touchend", () => {
+    submitBtn.style.background = "#C0392B";
+}, { passive: true });

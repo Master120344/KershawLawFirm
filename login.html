@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - The Kershaw Law Firm P.C.</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <h1>The Kershaw Law Firm P.C.</h1>
+            <div class="header-line"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <section class="login-section">
+            <h2>Client Login</h2>
+            <p class="subtitle">Access Your Account Securely</p>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-button">Login</button>
+                <p class="forgot-password"><a href="#">Forgot Password?</a></p>
+            </form>
+        </section>
+    </main>
+
+    <!-- Navigation -->
+    <nav class="tabs">
+        <a href="index.html" class="tab-link">Home</a>
+        <a href="h2a.html" class="tab-link">H2A Visa</a>
+        <a href="h2b.html" class="tab-link">H2B Visa</a>
+        <a href="costs.html" class="tab-link">Costs</a>
+        <a href="contact.html" class="tab-link">Contact</a>
+    </nav>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

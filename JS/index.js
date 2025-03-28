@@ -14,10 +14,10 @@ document.querySelectorAll('.tab-link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const href = this.getAttribute('href');
-        
+
         document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
         this.classList.add('active');
-        
+
         if (href.startsWith('#')) {
             const target = document.querySelector(href);
             target.scrollIntoView({ behavior: 'smooth' });

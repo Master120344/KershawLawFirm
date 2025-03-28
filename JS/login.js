@@ -4,50 +4,54 @@ window.addEventListener('load', () => {
     document.body.style.opacity = '1';
 });
 
-// Smooth scroll for navigation
-document.querySelectorAll('.tab-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
+// Firebase Authentication Logic
+const auth = window.auth;
+const loginForm = document.getElementById('login-form');
+const userInfo = document.getElementById('user-info');
+const userEmail = document.getElementById('user-email');
+const logoutButton = document.getElementById('logout-button');
 
-        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-
-        if (href.startsWith('#')) {
-            const target = document.querySelector(href);
-            target.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                window.location.href = href;
-            }, 300);
-        }
-    });
-});
-
-// Login form submission (placeholder)
-document.getElementById('login-form').addEventListener('submit', function(e) {
+// Handle login form submission
+loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Placeholder for actual login logic
-    if (username && password) {
-        alert('Login attempt successful! (This is a demo)');
-        // Redirect or handle login here
+    window.signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log('Logged in:', user.email);
+        })
+        .catch((error) => {
+            console.error('Login error:', error.code, error.message);
+            alert(`Login failed: ${error.message}`);
+        });
+});
+
+// Monitor auth state changes
+window.onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in
+        loginForm.style.display = 'none';
+        userInfo.style.display = 'block';
+        userEmail.textContent = user.email;
     } else {
-        alert('Please fill in all fields.');
+        // User is signed out
+        loginForm.style.display = 'block';
+        userInfo.style.display = 'none';
     }
 });
 
-// Dynamic header shadow
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 50) {
-        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.6)';
-    } else {
-        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-    }
+// Handle logout
+logoutButton.addEventListener('click', () => {
+    window.signOut(auth)
+        .then(() => {
+            console.log('Logged out');
+        })
+        .catch((error) => {
+            console.error('Logout error:', error);
+            alert('Logout failed');
+        });
 });
 
 // Form field animation

@@ -10,30 +10,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Header -->
     <header class="header">
         <div class="logo-container">
-            <h1>Contact Us</h1>
+            <h1>The Kershaw Law Firm P.C.</h1>
             <div class="header-line"></div>
         </div>
+        <a href="login.html" class="login-button">Login</a>
     </header>
 
     <!-- Main Content -->
     <main class="content-wrapper">
-        <!-- Contact Info Section -->
-        <section class="contact-info">
-            <h2>The Kershaw Law Firm</h2>
-            <p>A PROFESSIONAL CORPORATION</p>
-            <p>Robert D. Kershaw, Attorney at Law</p>
-            <p>Telephone: 737-204-0093</p>
-            <p>Fax: 737-204-0094</p>
-            <p>Email: robert.kershaw@kershawlaw.com</p>
-            <p>Address: 3355 Bee Caves Rd Suite 307, Austin, TX 78746</p>
+        <!-- Hero Section (Contact Info) -->
+        <section class="hero">
+            <h2>Contact Us</h2>
+            <p class="subtitle">Reach Out for Expert Immigration Assistance</p>
+            <div class="info-details">
+                <p>The Kershaw Law Firm</p>
+                <p>A PROFESSIONAL CORPORATION</p>
+                <p>Robert D. Kershaw, Attorney at Law</p>
+                <p>Telephone: 737-204-0093</p>
+                <p>Fax: 737-204-0094</p>
+                <p>Email: robert.kershaw@kershawlaw.com</p>
+                <p>Address: 3355 Bee Caves Rd Suite 307, Austin, TX 78746</p>
+            </div>
         </section>
 
         <!-- Contact Form Section -->
-        <section class="contact-form">
-            <h2>Get in Touch</h2>
+        <section class="section contact-form">
+            <h3>Get in Touch</h3>
             <form id="contactForm">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" required placeholder="Enter your full name">
@@ -57,21 +62,19 @@
                 <label for="message">Your Message:</label>
                 <textarea id="message" name="message" rows="5" required placeholder="Describe your case or question..."></textarea>
 
-                <button type="submit" class="submit-btn">Submit Inquiry</button>
+                <button type="submit" class="cta-button">Submit Inquiry</button>
             </form>
-
-            <!-- Thank You Message -->
             <div class="thank-you-message" id="thankYouMessage"></div>
         </section>
     </main>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Navigation -->
     <nav class="tabs">
-        <a href="index.html">Home</a>
-        <a href="h2a.html">H2A Visa</a>
-        <a href="h2b.html">H2B Visa</a>
-        <a href="costs.html">Costs</a>
-        <a href="contact.html" class="active">Contact</a>
+        <a href="index.html" class="tab-link">Home</a>
+        <a href="h2a.html" class="tab-link">H2A Visa</a>
+        <a href="h2b.html" class="tab-link">H2B Visa</a>
+        <a href="costs.html" class="tab-link">Costs</a>
+        <a href="contact.html" class="tab-link active">Contact</a>
     </nav>
 
     <script src="js/contact.js"></script>

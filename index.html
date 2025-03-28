@@ -16,7 +16,11 @@
             <h1>The Kershaw Law Firm P.C.</h1>
             <div class="header-line"></div>
         </div>
-        <a href="login.html" class="login-button">Login</a>
+        <div class="user-info" id="user-info" style="display: none;">
+            <span id="user-email"></span>
+            <a href="#" id="logout-button" class="logout-link">Logout</a>
+        </div>
+        <a href="login.html" class="login-button" id="login-button">Login</a>
     </header>
 
     <!-- Main Content -->
@@ -24,6 +28,7 @@
         <!-- Hero Section -->
         <section class="hero">
             <h2>Your Visa Experts</h2>
+            <a href="prescreening.html" class="cta-button">Get Started</a>
         </section>
 
         <!-- Footer Text -->
@@ -39,4 +44,31 @@
         <a href="h2b.html" class="tab-link">H2B Visa</a>
         <a href="costs.html" class="tab-link">Costs</a>
         <a href="contact.html" class="tab-link">Contact</a>
+        <a href="login.html" class="tab-link">Login</a>
     </nav>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
+            authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+            projectId: "thekershawlawfirm-d5b54",
+            storageBucket: "thekershawlawfirm-d5b54.firebasestorage.app",
+            messagingSenderId: "588166358773",
+            appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+            measurementId: "G-5SVMGTE290"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.auth = auth;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.signOut = signOut;
+    </script>
+    <script type="module" src="js/index.js"></script>
+</body>
+</html>

@@ -120,17 +120,14 @@ body::before {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Hero Section - Fixed overlapping and spacing */
+/* Hero Section - Fixed overlapping */
 .hero {
     position: relative;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 150px; /* Added to push below fixed header */
-    padding-bottom: 80px; /* Added to keep above fixed nav */
+    padding: 150px 40px 80px 40px; /* Top: clear header, Bottom: clear nav */
 }
 
 .hero-content {
@@ -252,12 +249,9 @@ body::before {
     .logo-container:hover .header-line { width: 350px; }
     .login-button { margin-left: 20px; }
     .hero { 
-        padding-left: 60px;
-        padding-right: 60px;
-        padding-top: 150px; /* Ensure no header overlap */
-        padding-bottom: 80px; /* Ensure no nav overlap */
+        padding: 150px 60px 80px 60px; /* Top: clear header, Bottom: clear nav */
     }
-    .hero-content { padding: 60px; } /* More room inside hero box */
+    .hero-content { padding: 60px; } /* More space inside */
     .hero h2 { font-size: 4.5rem; } /* Bigger title */
     .subtitle { font-size: 2.2rem; } /* Bigger subtitle */
     .cta-button { padding: 25px 70px; font-size: 1.8rem; }
@@ -265,7 +259,7 @@ body::before {
     .tabs a { font-size: 1.6rem; padding: 15px 30px; }
 }
 
-/* Mobile View (max-width: 768px) */
+/* Mobile View (max-width: 768px) - Unchanged per your request */
 @media (max-width: 768px) {
     .header { 
         padding: 20px 15px; 
@@ -285,12 +279,7 @@ body::before {
         margin-left: auto; 
         margin-right: auto; 
     }
-    .hero { 
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 100px; /* Adjusted for smaller header */
-        padding-bottom: 50px; /* Adjusted for smaller nav */
-    }
+    .hero { padding: 20px; min-height: calc(100vh - 160px); }
     .hero-content { padding: 25px; }
     .hero h2 { font-size: 2.5rem; }
     .subtitle { font-size: 1.4rem; }

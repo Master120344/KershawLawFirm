@@ -1,90 +1,81 @@
-// Smooth scroll for navigation
-document.querySelectorAll('.tab-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        
-        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-        
-        if (href.startsWith('#')) {
-            const target = document.querySelector(href);
-            target.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                window.location.href = href;
-            }, 300);
-        }
-    });
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-2A Visa Program - The Kershaw Law Firm P.C.</title>
+    <link rel="stylesheet" href="css/h2a.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <h1>The Kershaw Law Firm P.C.</h1>
+            <div class="header-line"></div>
+        </div>
+        <a href="login.html" class="login-button">Login</a>
+    </header>
 
-// Fade in on page load
-window.addEventListener('load', () => {
-    document.body.style.transition = 'opacity 0.3s ease';
-    document.body.style.opacity = '1';
-});
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Empowering Employees</h2>
+            <p class="subtitle">Trust the Experts for Your Workforce Needs</p>
+            <a href="contact.html" class="cta-button">Secure Your Solution</a>
+        </section>
 
-// Button hover animations
-const ctaButton = document.querySelector('.cta-button');
-ctaButton.addEventListener('mouseover', () => {
-    ctaButton.style.transform = 'translateY(-5px) scale(1.05)';
-    ctaButton.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.5)';
-});
-ctaButton.addEventListener('mouseout', () => {
-    ctaButton.style.transform = 'translateY(0) scale(1)';
-    ctaButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.4)';
-});
+        <!-- Why Trust Us -->
+        <section class="section trust-section">
+            <h3>Why Choose Kershaw Law?</h3>
+            <div class="trust-points">
+                <div class="trust-item">
+                    <h4>Expertise</h4>
+                    <p>Decades of experience for employers like you.</p>
+                </div>
+                <div class="trust-item">
+                    <h4>Results</h4>
+                    <p>Hundreds of successful visa approvals.</p>
+                </div>
+                <div class="trust-item">
+                    <h4>Client-First</h4>
+                    <p>Your success is our priority.</p>
+                </div>
+            </div>
+        </section>
 
-const loginButton = document.querySelector('.login-button');
-loginButton.addEventListener('mouseover', () => {
-    loginButton.style.transform = 'translateY(-3px)';
-    loginButton.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.5)';
-});
-loginButton.addEventListener('mouseout', () => {
-    loginButton.style.transform = 'translateY(0)';
-    loginButton.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
-});
+        <!-- H-2A Benefits -->
+        <section class="section benefits-section">
+            <h3>Your Competitive Edge</h3>
+            <div class="benefits">
+                <div class="benefit-card">
+                    <h4>Reliable Labor</h4>
+                    <p>A steady workforce when you need it.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Regulatory Peace</h4>
+                    <p>Stay compliant effortlessly.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Business Growth</h4>
+                    <p>Focus on what matters.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-// Card hover animations
-document.querySelectorAll('.trust-item, .benefit-card').forEach(card => {
-    card.addEventListener('mouseover', () => {
-        card.style.transform = 'scale(1.05)';
-        card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.5)';
-    });
-    card.addEventListener('mouseout', () => {
-        card.style.transform = 'scale(1)';
-        card.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
-    });
-});
+    <!-- Navigation -->
+    <nav class="tabs">
+        <a href="index.html" class="tab-link">Home</a>
+        <a href="h2a.html" class="tab-link active">H2A Visa</a>
+        <a href="h2b.html" class="tab-link">H2B Visa</a>
+        <a href="costs.html" class="tab-link">Costs</a>
+        <a href="contact.html" class="tab-link">Contact</a>
+    </nav>
 
-// Section reveal animation
-const sections = document.querySelectorAll('.section');
-const revealSection = entries => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 200);
-        }
-    });
-};
-
-const observer = new IntersectionObserver(revealSection, { threshold: 0.2 });
-sections.forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'all 0.5s ease';
-    observer.observe(section);
-});
-
-// Dynamic header shadow
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 50) {
-        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.6)';
-    } else {
-        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-    }
-});
+    <script src="js/h2a.js"></script>
+</body>
+</html>

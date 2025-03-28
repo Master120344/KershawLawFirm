@@ -13,26 +13,33 @@ html {
 
 /* Body Styling */
 body {
-    background: url('https://github.com/Master120344/KershawLawFirm/raw/main/Austin%20Background.jpg') no-repeat center center/cover;
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
     color: #2E2E2E;
     line-height: 1.6;
-    padding-top: 140px; /* Clear header */
-    padding-bottom: 120px; /* Clear tabs */
-    animation: backgroundCycle 20s ease-in-out infinite;
+    padding-top: 140px;
+    padding-bottom: 120px;
+    background-color: #1A1A1A; /* Fallback color */
 }
 
-@keyframes backgroundCycle {
-    0% { background-image: url('https://github.com/Master120344/KershawLawFirm/raw/main/Austin%20Background.jpg'); }
-    50% { background-image: url('https://images.unsplash.com/photo-1517495306974-0e47c6d6e7f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); }
-    100% { background-image: url('https://github.com/Master120344/KershawLawFirm/raw/main/Austin%20Background.jpg'); }
-}
-
+/* Background Container for Animation */
 body::before {
     content: '';
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://github.com/Master120344/KershawLawFirm/raw/main/Austin%20Background.jpg') no-repeat center center/cover;
+    animation: backgroundCycle 20s ease-in-out infinite;
+    z-index: -2;
+}
+
+/* Texture Overlay */
+body::after {
+    content: '';
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -41,7 +48,13 @@ body::before {
     background-size: 300px 300px;
     opacity: 0.3;
     animation: backgroundShift 50s linear infinite;
-    z-index: 0;
+    z-index: -1;
+}
+
+@keyframes backgroundCycle {
+    0% { background-image: url('https://github.com/Master120344/KershawLawFirm/raw/main/Austin%20Background.jpg'); }
+    50% { background-image: url('https://images.unsplash.com/photo-1517495306974-0e47c6d6e7f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); }
+    100% { background-image: url('https://github.com/Master120344/KershawLawFirm/raw/main/Austin%20Background.jpg'); }
 }
 
 @keyframes backgroundShift {

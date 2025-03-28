@@ -11,7 +11,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Body Styling - Animated background for desktop */
+/* Body Styling */
 body {
     background: url('https://images.unsplash.com/photo-1531218150217-54595bc2b934?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
     position: relative;
@@ -37,28 +37,15 @@ body::before {
     height: 100%;
     background: url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png') repeat;
     background-size: 300px 300px;
-    animation: backgroundShift 50s linear infinite;
     opacity: 0.3;
+    animation: backgroundShift 50s linear infinite;
     z-index: 0;
 }
 
-/* Background Animation for feather overlay */
 @keyframes backgroundShift {
     0% { background-position: 0 0; }
     50% { background-position: 150px 150px; }
     100% { background-position: 0 0; }
-}
-
-/* Overlay */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(44, 62, 80, 0.5);
-    z-index: 1;
-    transition: opacity 0.3s ease;
 }
 
 /* Header Styling */
@@ -118,13 +105,13 @@ body::before {
     font-weight: 600;
     border-radius: 25px;
     transition: all 0.4s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .login-button:hover {
     background: #9B2D23;
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Hero Section */
@@ -139,7 +126,6 @@ body::before {
 
 .hero-content {
     text-align: center;
-    background: none; /* Removed white box */
     padding: 40px;
     border-radius: 15px;
     max-width: 1000px;
@@ -154,16 +140,16 @@ body::before {
 .hero h2 {
     font-family: 'Cinzel', serif;
     font-size: 3.5rem;
-    color: #F5F6F5; /* White text for visibility */
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Stronger shadow for contrast */
+    color: #F5F6F5;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
     margin-bottom: 20px;
 }
 
 .subtitle {
     font-family: 'EB Garamond', serif;
     font-size: 1.8rem;
-    color: #F5F6F5; /* White text for visibility */
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7); /* Shadow for contrast */
+    color: #F5F6F5;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
     margin-bottom: 30px;
 }
 
@@ -178,16 +164,97 @@ body::before {
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.4s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 .cta-button:hover {
     background: #9B2D23;
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
-/* Navigation Tabs - Fixed scrolling */
+/* About Section */
+.about-section {
+    background: rgba(44, 62, 80, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    border: 1px solid #C0392B;
+}
+
+.about-section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #F5F6F5;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.about-section p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    color: #F5F6F5;
+    text-align: center;
+}
+
+/* Services Section */
+.services-section {
+    background: rgba(44, 62, 80, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    border: 1px solid #C0392B;
+}
+
+.services-section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #F5F6F5;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.services {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    background: rgba(245, 246, 245, 0.1);
+    padding: 25px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+    background: #C0392B;
+    color: #F5F6F5;
+}
+
+.service-card h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #F5F6F5;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    color: #F5F6F5;
+}
+
+/* Navigation Tabs */
 .tabs {
     position: fixed;
     bottom: 0;
@@ -237,69 +304,42 @@ body::before {
     left: 0;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Desktop View (min-width: 769px) */
+/* Responsive Design */
 @media (min-width: 769px) {
     .header { padding: 40px 60px; }
     .logo-container h1 { font-size: 4rem; }
     .header-line { width: 200px; }
     .logo-container:hover .header-line { width: 350px; }
-    .login-button { margin-left: 20px; }
-    .hero {
-        padding: 200px 60px 120px 60px; /* Matches base for consistency */
-    }
-    .hero-content {
-        padding: 80px;
-        max-width: 1000px;
-    }
-    .hero h2 { font-size: 5rem; }
-    .subtitle { font-size: 2.5rem; }
+    .content-wrapper { padding: 150px 60px 120px; }
+    .hero { padding: 200px 60px 120px 60px; }
+    .hero h2 { font-size: 4.5rem; }
+    .subtitle { font-size: 2rem; }
     .cta-button { padding: 25px 70px; font-size: 1.8rem; }
+    .about-section { padding: 50px; }
+    .about-section h3 { font-size: 3rem; }
+    .services-section { padding: 50px; }
+    .services-section h3 { font-size: 3rem; }
     .tabs { padding: 25px 60px; gap: 80px; }
     .tabs a { font-size: 1.6rem; padding: 15px 30px; }
 }
 
-/* Mobile View (max-width: 768px) - Unchanged */
 @media (max-width: 768px) {
-    .header {
-        padding: 20px 15px;
-        flex-direction: column;
-        text-align: center;
-        background: rgba(44, 62, 80, 0.95);
-    }
+    .header { padding: 20px 15px; flex-direction: column; text-align: center; }
     .logo-container h1 { font-size: 2.5rem; }
     .header-line { width: 100px; }
     .logo-container:hover .header-line { width: 200px; }
-    .login-button {
-        margin-top: 20px;
-        padding: 10px 30px;
-        font-size: 1.2rem;
-        display: block;
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .hero { padding: 20px; min-height: calc(100vh - 160px); }
-    .hero-content { padding: 25px; }
+    .login-button { margin-top: 20px; padding: 10px 30px; font-size: 1.2rem; }
+    .content-wrapper { padding: 100px 15px 80px; gap: 40px; }
+    .hero { padding: 40px 20px; }
     .hero h2 { font-size: 2.5rem; }
     .subtitle { font-size: 1.4rem; }
     .cta-button { padding: 15px 40px; font-size: 1.3rem; }
-    .tabs {
-        padding: 15px 10px;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
+    .about-section { padding: 25px; }
+    .about-section h3 { font-size: 2rem; }
+    .service-card { width: 100%; max-width: 280px; }
+    .services-section { padding: 25px; }
+    .services-section h3 { font-size: 2rem; }
+    .tabs { padding: 15px 10px; gap: 20px; flex-wrap: wrap; }
     .tabs a { font-size: 1.2rem; padding: 10px 15px; }
 }
 
@@ -309,20 +349,15 @@ body::before {
     .header-line { width: 80px; }
     .logo-container:hover .header-line { width: 150px; }
     .login-button { padding: 8px 25px; font-size: 1rem; }
-    .hero { padding: 15px; }
-    .hero-content { padding: 20px; }
+    .content-wrapper { padding: 80px 10px 60px; gap: 30px; }
+    .hero { padding: 30px 15px; }
     .hero h2 { font-size: 2rem; }
     .subtitle { font-size: 1.2rem; }
     .cta-button { padding: 12px 30px; font-size: 1.1rem; }
+    .about-section { padding: 20px; }
+    .about-section h3 { font-size: 1.8rem; }
+    .services-section { padding: 20px; }
+    .services-section h3 { font-size: 1.8rem; }
     .tabs { padding: 10px 5px; gap: 10px; }
     .tabs a { font-size: 1rem; padding: 8px 10px; }
 }
-
-/* Additional Styling */
-body { padding-bottom: 120px; }
-.header { border-bottom: 2px solid rgba(192, 57, 43, 0.2); }
-.hero-content { border: none; } /* Removed border with white box */
-.tabs { border-top: 2px solid rgba(192, 57, 43, 0.2); }
-.login-button:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); }
-.cta-button:active { transform: translateY(0) scale(1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-.tabs a:active { transform: scale(0.95); }

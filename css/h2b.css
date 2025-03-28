@@ -19,7 +19,8 @@ body {
     overflow-x: hidden;
     color: #F5F6F5;
     line-height: 1.6;
-    padding-top: 140px; /* Increased to fully clear fixed header */
+    padding-top: 140px;
+    padding-bottom: 120px;
 }
 
 /* Background Layers */
@@ -120,6 +121,27 @@ body::after {
     background: #9B2D23;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* User Info */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    color: #F5F6F5;
+}
+
+.logout-link {
+    color: #C0392B;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.logout-link:hover {
+    color: #F5F6F5;
 }
 
 /* Content Wrapper */
@@ -307,7 +329,6 @@ body::after {
     border-top: 2px solid #C0392B;
 }
 
-/* Navigation Links */
 .tabs a {
     color: #F5F6F5;
     text-decoration: none;
@@ -415,7 +436,7 @@ body::after {
     .tabs a { font-size: 1rem; padding: 8px 10px; }
 }
 
-/* Extended CSS for 1000+ Lines */
+/* Extended CSS for Layout */
 .header { transition: padding 0.3s ease; }
 .content-wrapper { width: 100%; }
 .hero { margin-bottom: 40px; }

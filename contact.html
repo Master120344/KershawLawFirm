@@ -4,274 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - The Kershaw Law Firm P.C.</title>
-    <style>
-        /* Global Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        /* Body Styling */
-        body {
-            background-color: #000;
-            color: #fff;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            padding-bottom: 80px; /* Space for the fixed footer */
-        }
-
-        /* Header Section */
-        header {
-            background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid #333;
-        }
-
-        header h1 {
-            font-size: 2.8em;
-            color: #FFD700;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Contact Info Section */
-        .contact-info {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .contact-info h2 {
-            font-size: 1.8em;
-            color: #FFD700;
-            margin-bottom: 10px;
-        }
-
-        .contact-info p {
-            font-size: 1.1em;
-            margin: 5px 0;
-        }
-
-        /* Contact Form Section */
-        .contact-form {
-            background: rgba(0, 0, 0, 0.9);
-            max-width: 600px;
-            width: 100%;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            margin-top: 20px;
-        }
-
-        .contact-form h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            color: #FFD700;
-        }
-
-        .contact-form label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-            color: #ddd;
-        }
-
-        .contact-form input,
-        .contact-form select,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #555;
-            border-radius: 5px;
-            font-size: 1em;
-            background: #111;
-            color: #fff;
-            transition: border-color 0.3s ease;
-        }
-
-        .contact-form input:focus,
-        .contact-form select:focus,
-        .contact-form textarea:focus {
-            border-color: #FFD700;
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-        }
-
-        .contact-form textarea {
-            resize: none;
-        }
-
-        .contact-form .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #FFD700;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .contact-form .submit-btn:hover {
-            background-color: #e6b800;
-            transform: scale(1.05);
-        }
-
-        /* Thank You Message */
-        .thank-you-message {
-            display: none;
-            text-align: center;
-            font-size: 1.2em;
-            color: #FFD700;
-            margin-top: 20px;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Navigation Tabs */
-        .tabs {
-            padding: 15px 0;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 10;
-            font-size: 1.2em;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .tabs a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 10px;
-            flex: 1 1 100px;
-            text-align: center;
-        }
-
-        .tabs a:hover {
-            color: #1E90FF;
-            transform: translateY(-3px);
-        }
-
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2em;
-            }
-
-            .contact-info h2 {
-                font-size: 1.5em;
-            }
-
-            .contact-info p {
-                font-size: 1em;
-            }
-
-            .contact-form h2 {
-                font-size: 1.5rem;
-            }
-
-            .contact-form label {
-                font-size: 0.9em;
-            }
-
-            .contact-form input,
-            .contact-form select,
-            .contact-form textarea,
-            .contact-form .submit-btn {
-                font-size: 0.9em;
-            }
-
-            .tabs {
-                gap: 5px;
-                font-size: 1em;
-                padding: 10px 0;
-            }
-
-            .tabs a {
-                padding: 8px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
 </head>
-
 <body>
-
     <!-- Header Section -->
-    <header>
-        <h1>Contact Us</h1>
+    <header class="header">
+        <div class="logo-container">
+            <h1>Contact Us</h1>
+            <div class="header-line"></div>
+        </div>
     </header>
 
-    <!-- Contact Info Section -->
-    <div class="contact-info">
-        <h2>The Kershaw Law Firm</h2>
-        <p>A PROFESSIONAL CORPORATION</p>
-        <p>Robert D. Kershaw, Attorney at Law</p>
-        <p>Telephone: 737-204-0093</p>
-        <p>Fax: 737-204-0094</p>
-        <p>Email: robert.kershaw@kershawlaw.com</p>
-        <p>Address: 3355 Bee Caves Rd Suite 307, Austin, TX 78746</p>
-    </div>
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <!-- Contact Info Section -->
+        <section class="contact-info">
+            <h2>The Kershaw Law Firm</h2>
+            <p>A PROFESSIONAL CORPORATION</p>
+            <p>Robert D. Kershaw, Attorney at Law</p>
+            <p>Telephone: 737-204-0093</p>
+            <p>Fax: 737-204-0094</p>
+            <p>Email: robert.kershaw@kershawlaw.com</p>
+            <p>Address: 3355 Bee Caves Rd Suite 307, Austin, TX 78746</p>
+        </section>
 
-    <!-- Contact Form Section -->
-    <div class="contact-form">
-        <h2>Get in Touch</h2>
-        <form id="contactForm">
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+        <!-- Contact Form Section -->
+        <section class="contact-form">
+            <h2>Get in Touch</h2>
+            <form id="contactForm">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
 
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
 
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
 
-            <label for="service">Legal Assistance Needed:</label>
-            <select id="service" name="service" required>
-                <option value="" disabled selected>Select an option</option>
-                <option value="h2a">H-2A Visa Assistance</option>
-                <option value="h2b">H-2B Visa Assistance</option>
-                <option value="green-card">Green Card Application</option>
-                <option value="citizenship">U.S. Citizenship Services</option>
-                <option value="other">Other Immigration Law Needs</option>
-            </select>
+                <label for="service">Legal Assistance Needed:</label>
+                <select id="service" name="service" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="h2a">H-2A Visa Assistance</option>
+                    <option value="h2b">H-2B Visa Assistance</option>
+                    <option value="green-card">Green Card Application</option>
+                    <option value="citizenship">U.S. Citizenship Services</option>
+                    <option value="other">Other Immigration Law Needs</option>
+                </select>
 
-            <label for="message">Your Message:</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Describe your case or question..."></textarea>
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Describe your case or question..."></textarea>
 
-            <button type="submit" class="submit-btn">Submit Inquiry</button>
-        </form>
+                <button type="submit" class="submit-btn">Submit Inquiry</button>
+            </form>
 
-        <!-- Thank You Message -->
-        <div class="thank-you-message" id="thankYouMessage"></div>
-    </div>
+            <!-- Thank You Message -->
+            <div class="thank-you-message" id="thankYouMessage"></div>
+        </section>
+    </main>
 
     <!-- Bottom Navigation Bar -->
     <nav class="tabs">
@@ -279,26 +71,9 @@
         <a href="h2a.html">H2A Visa</a>
         <a href="h2b.html">H2B Visa</a>
         <a href="costs.html">Costs</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="active">Contact</a>
     </nav>
 
-    <script>
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            // Simulate ticket generation
-            const ticketNumber = Math.floor(100000 + Math.random() * 900000);
-            const name = document.getElementById("name").value;
-
-            // Display thank you message
-            const thankYouMessage = document.getElementById("thankYouMessage");
-            thankYouMessage.style.display = "block";
-            thankYouMessage.innerHTML = `Thank you, `${{name}! We will reach out to you shortly. Your ticket number is:}$`{ticketNumber}`;
-
-            // Simulate sending email (for demonstration purposes)
-            console.log(`Sending email to `${{name} with ticket number}$`{ticketNumber}`);
-        });
-    </script>
-
+    <script src="js/contact.js"></script>
 </body>
 </html>

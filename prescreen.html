@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Screening - The Kershaw Law Firm P.C.</title>
+    <link rel="stylesheet" href="css/prescreen.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="content-wrapper">
+        <section class="prescreen-section">
+            <h1>Welcome to The Kershaw Law Firm P.C.</h1>
+            <p class="subtitle">Please answer the following to proceed:</p>
+            <form id="prescreen-form" class="prescreen-form">
+                <div class="form-group">
+                    <label for="client-status">Are you a current client or seeking legal services?</label>
+                    <select id="client-status" name="client-status" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+            <p class="login-option">Have a login? <a href="login.html" class="login-link">Click here</a></p>
+        </section>
+    </main>
+    <script src="js/prescreen.js"></script>
+</body>
+</html>

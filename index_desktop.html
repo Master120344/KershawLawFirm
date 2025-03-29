@@ -3,94 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm P.C. - Austin</title>
-    <!-- Corrected CSS Link with Folder Path -->
-    <link rel="stylesheet" href="css/index_desktop.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+    <title>Index Desktop - The Kershaw Law Firm</title>
+    <link rel="stylesheet" href="style_desktop.css">
 </head>
 <body>
 
-    <!-- Background Slider Container -->
-    <div id="background-slider">
-        <div class="slide" style="background-image: url('https://github.com/Master120344/KershawLawFirm/raw/main/Austin%20Background.jpg');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1531218150217-54595bc2b934?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1597211103966-716a8641a981?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1611880779810-6bcc1a7a0a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-        <!-- Add more slides here if needed -->
-    </div>
-    <div class="overlay"></div> <!-- Optional: Dark overlay for text readability -->
+    <h1>Welcome to The Kershaw Law Firm</h1>
+    <p>This is placeholder content for your index_desktop.html file.</p>
+    <p>Replace this section with the actual content of your page.</p>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-container">
-                <h1>The Kershaw Law Firm P.C.</h1>
-                <div class="header-line"></div>
-            </div>
-            <div class="header-actions">
-                 <div class="user-info" id="user-info" style="display: none;">
-                    <span id="user-email"></span>
-                    <a href="#" id="logout-button" class="logout-link">Logout</a>
-                </div>
-                <a href="login.html" class="login-button" id="login-button">Login</a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Main Content Area -->
-    <main class="main-content-area">
-        <div class="main-content-container">
-            <!-- Hero Section -->
-            <section class="hero">
-                <h2>Your Visa Experts</h2>
-                <p class="tagline">Strengthening Your Workforce</p>
-                <a href="prescreen.html" class="cta-button">Get Started</a>
-            </section>
-
-            <!-- Removed Footer Text Section - Integrated into Hero -->
-
-        </div>
-    </main>
-
-    <!-- Navigation Tabs (Footer) -->
-    <nav class="tabs">
-        <a href="index_desktop.html" class="tab-link active">Home</a> <!-- Stays the same, as it's in the root -->
-        <a href="h2a.html" class="tab-link">H-2A</a>
-        <a href="h2b.html" class="tab-link">H-2B</a>
-        <a href="costs.html" class="tab-link">Costs</a>
-        <a href="contact.html" class="tab-link">Contact</a>
-        <a href="login.html" class="tab-link">Login</a>
-    </nav>
-
-    <!-- Firebase SDK -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 
-        // Your Firebase configuration (ensure this is correct and secure)
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY", // Replace with your actual API key
-            authDomain: "YOUR_AUTH_DOMAIN", // Replace with your actual auth domain
-            projectId: "YOUR_PROJECT_ID", // Replace with your actual project ID
-            storageBucket: "YOUR_STORAGE_BUCKET", // Replace with your actual storage bucket
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Replace with your actual sender ID
-            appId: "YOUR_APP_ID", // Replace with your actual app ID
-            measurementId: "YOUR_MEASUREMENT_ID" // Optional: Replace if you use Analytics
-        };
+      const firebaseConfig = {
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
 
-        // Initialize Firebase
+      try {
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // Make auth accessible globally for the script_desktop.js file
-        window.firebaseApp = app; // Optional: if needed elsewhere
-        window.firebaseAuth = auth;
-        window.firebaseOnAuthStateChanged = onAuthStateChanged;
-        window.firebaseSignOut = signOut;
+        console.log("Firebase Initialized Successfully.");
+        const analytics = getAnalytics(app);
+        console.log("Firebase Analytics Initialized.");
+      } catch (error) {
+        console.error("Error initializing Firebase:", error);
+      }
     </script>
-    <!-- Corrected JS Link with Folder Path -->
-    <script type="module" src="js/index_desktop.js"></script>
+
 </body>
 </html>

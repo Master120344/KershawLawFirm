@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Constants ---
-    const CONTENT_TRANSITION_DURATION = 400; // Must match CSS transition duration
+    const CONTENT_TRANSITION_DURATION = 400; // Match CSS --transition-content duration in ms
 
     // --- Element Selectors ---
     const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link');
@@ -9,14 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContentArea = document.getElementById('main-content-area');
     const mainContentTitle = document.getElementById('main-content-title');
     const currentYearSpan = document.getElementById('current-year');
-    const logoutButton = document.getElementById('logout-button-dropdown'); // Corrected ID
+    const logoutButton = document.getElementById('logout-button-dropdown');
     const profileMenuContainer = document.querySelector('.profile-menu-container');
     const dropdownNavLinks = document.querySelectorAll('.profile-dropdown .nav-link-trigger');
     const overviewWidgets = document.querySelectorAll('#overview-content .widget.clickable');
     const loadingOverlay = document.getElementById('loading-overlay');
+    const pageSpecificCSSLink = document.getElementById('page-specific-css'); // Get the link tag
 
-    let isTransitioning = false; // Flag to prevent rapid transitions
-    let currentActiveSectionId = 'overview-content'; // Track the current section
+    let isTransitioning = false;
+    let currentActiveSectionId = document.querySelector('.content-section.is-active')?.id || 'overview-content';
 
     // --- Initial Setup ---
     setTimeout(() => { document.body.classList.remove('preload'); }, 100);
@@ -27,12 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to switch active content section with smooth transitions
     function switchContent(targetId, targetTitle = null) {
         if (isTransitioning || !targetId || targetId === currentActiveSectionId) {
-            console.log(`Transition skipped for ${targetId}`);
-            return; // Prevent switching if already transitioning or same section
+            return;
         }
         isTransitioning = true;
-        console.log(`Switching to: ${targetId}`);
-        if (loadingOverlay) loadingOverlay.classList.add('is-active'); // Show loading overlay
+        if (loadingOverlay) loadingOverlay.classList.add('is-active');
 
         const currentActiveSection = document.getElementById(currentActiveSectionId);
         const nextSection = document.getElementById(targetId);
@@ -44,6 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // --- Load/Unload Page-Specific CSS --- START MODIFY
+        if (pageSpecificCSSLink) {
+            const docusignCSSPath = 'css/docusign_desktop.css';
+            if (targetId === 'documents-content') { // Load for DocuSign section
+                if (pageSpecificCSSLink.getAttribute('href') !== docusignCSSPath) {
+                    pageSpecificCSSLink.setAttribute('href', docusignCSSPath);
+                    console.log("Loaded docusign_desktop.css");
+                }
+            } else { // Unload for other sections
+                if (pageSpecificCSSLink.getAttribute('href') === docusignCSSPath) {
+                    pageSpecificCSSLink.setAttribute('href', ''); // Unload CSS
+                    console.log("Unloaded docusign_desktop.css");
+                }
+            }
+        }
+        // --- Load/Unload Page-Specific CSS --- END MODIFY
+
+
         // 1. Trigger exit animation on the current section
         if (currentActiveSection) {
             currentActiveSection.classList.add('is-exiting');
@@ -52,46 +69,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Update Title immediately
         if (mainContentTitle) {
-            const sectionH2 = nextSection.querySelector('h2');
-            mainContentTitle.textContent = targetTitle || (sectionH2 ? sectionH2.textContent : "Dashboard");
+             const targetLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
+             const linkTitle = targetLink ? targetLink.getAttribute('data-title') : null;
+             mainContentTitle.textContent = targetTitle || linkTitle || "Dashboard";
         }
 
-        // 3. Prepare the next section (it starts hidden via CSS: opacity 0, transform)
+        // 3. Prepare the next section (starts hidden via CSS)
 
-        // 4. After a short delay (allow exit animation to start), make the next section active
+        // 4. After a short delay, make the next section active
         setTimeout(() => {
-            // Reset scroll position of the incoming section
-             if (nextSection.classList.contains('scrollable') || nextSection.id === 'calendar-content') { // Or just apply to all?
-                nextSection.scrollTop = 0;
+            if (nextSection.classList.contains('scrollable') || nextSection.id === 'calendar-content') {
+                nextSection.scrollTop = 0; // Reset scroll
             }
-
             nextSection.classList.add('is-active');
+            currentActiveSectionId = targetId;
 
-             // Update tracking variable
-             currentActiveSectionId = targetId;
-
-             // Remove exiting class from the previous section after transition ends
+             // Remove exiting class accurately using transitionend
              if (currentActiveSection) {
-                  // Use transitionend event for cleaner handling (optional but better)
-                  // currentActiveSection.addEventListener('transitionend', () => {
-                  //    currentActiveSection.classList.remove('is-exiting');
-                  // }, { once: true });
-                  // Or simply remove after a delay slightly longer than transition
-                  setTimeout(() => {
-                      currentActiveSection.classList.remove('is-exiting');
-                  }, CONTENT_TRANSITION_DURATION);
+                  const handleExitEnd = () => {
+                      if(currentActiveSection.classList.contains('is-exiting')) { // Double check
+                           currentActiveSection.classList.remove('is-exiting');
+                           currentActiveSection.removeEventListener('transitionend', handleExitEnd); // Clean up listener
+                      }
+                  }
+                  currentActiveSection.addEventListener('transitionend', handleExitEnd);
              }
 
-             // Hide loading overlay after transition
+             // Hide loading overlay after the new section's transition
              setTimeout(() => {
                 if (loadingOverlay) loadingOverlay.classList.remove('is-active');
-                 isTransitioning = false; // Allow next transition
-                 console.log(`Transition complete for ${targetId}`);
+                 isTransitioning = false;
              }, CONTENT_TRANSITION_DURATION);
 
-        }, 50); // Small delay to let CSS apply exiting styles
+        }, 50); // Small delay
 
-        // Update sidebar state
         updateSidebarActiveState(targetId);
     }
 
@@ -103,8 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Event Listeners ---
-
-    // Sidebar link clicks
     sidebarLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
@@ -114,136 +123,98 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Dropdown navigation link clicks
     dropdownNavLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const targetContentId = link.getAttribute('data-target');
-            const targetTitle = link.getAttribute('data-title');
-            switchContent(targetContentId, targetTitle);
-            // Optional: Close dropdown here
-        });
+         link.addEventListener('click', (event) => {
+             event.preventDefault();
+             const targetContentId = link.getAttribute('data-target');
+             const targetLink = document.querySelector(`.nav-link[data-target="${targetContentId}"]`);
+             const targetTitle = targetLink ? targetLink.getAttribute('data-title') : null;
+             switchContent(targetContentId, targetTitle);
+             // Close dropdown (requires dropdown state management)
+         });
     });
 
-    // Overview Widget clicks
     overviewWidgets.forEach(widget => {
         widget.addEventListener('click', () => {
             const targetContentId = widget.getAttribute('data-link-target');
-             // Find the corresponding sidebar link to get the title
-             const targetLink = document.querySelector(`.sidebar-nav .nav-link[data-target="${targetContentId}"]`);
-             const targetTitle = targetLink ? targetLink.getAttribute('data-title') : null;
+            const targetLink = document.querySelector(`.sidebar-nav .nav-link[data-target="${targetContentId}"]`);
+            const targetTitle = targetLink ? targetLink.getAttribute('data-title') : null;
             if (targetContentId) {
                 switchContent(targetContentId, targetTitle);
             }
         });
     });
 
-
-    // Logout Button Functionality
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
             console.log("Logout action triggered.");
-            // ADD FIREBASE LOGOUT LOGIC HERE (as before)
-             alert("Firebase logout logic needs implementation.");
-             // window.location.href = 'login.html';
+            alert("Firebase logout logic needs implementation.");
+            // ADD FIREBASE LOGOUT LOGIC HERE
         });
     }
 
     // ========================================================================
-    // Calendar Component Logic (Ensure this is still present from previous step)
+    // Calendar Component Logic (Ensure it's complete and correct)
     // ========================================================================
     const calendarDaysContainer = document.getElementById('calendar-days');
     const monthYearDisplay = document.getElementById('month-year');
     const prevMonthBtn = document.getElementById('prev-month-btn');
     const nextMonthBtn = document.getElementById('next-month-btn');
     const todayBtn = document.getElementById('today-btn');
-    let calendarCurrentDate = new Date(); // Use a separate variable for calendar state
+    let calendarCurrentDate = new Date(); // Separate state for calendar
 
-    function renderCalendar(dateToShow) { /* ... (Keep full renderCalendar function here) ... */
-        if (!calendarDaysContainer || !monthYearDisplay) { return; }
-        const year = dateToShow.getFullYear();
-        const month = dateToShow.getMonth();
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
-        const firstDayOfMonth = new Date(year, month, 1);
-        const lastDayOfMonth = new Date(year, month + 1, 0);
-        const lastDayOfPrevMonth = new Date(year, month, 0);
-        const firstDayWeekday = firstDayOfMonth.getDay();
-        const lastDateOfMonth = lastDayOfMonth.getDate();
-        const lastDateOfPrevMonth = lastDayOfPrevMonth.getDate();
-        calendarDaysContainer.innerHTML = '';
-        // Prev Month Days
-        for (let i = firstDayWeekday; i > 0; i--) { calendarDaysContainer.appendChild(createDayElement(lastDateOfPrevMonth - i + 1, false, true)); }
-        // Current Month Days
-        const today = new Date(); const todayDate = today.getDate(); const todayMonth = today.getMonth(); const todayYear = today.getFullYear();
-        for (let i = 1; i <= lastDateOfMonth; i++) {
-            const isCurrentDay = (i === todayDate && month === todayMonth && year === todayYear);
-            const dayElement = createDayElement(i, true, false, isCurrentDay);
-            dayElement.dataset.date = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-            calendarDaysContainer.appendChild(dayElement);
-             if (Math.random() < 0.3) { addEventIndicators(dayElement); } // Placeholder events
-        }
-        // Next Month Days
-        const totalDaysRendered = firstDayWeekday + lastDateOfMonth; const daysInGrid = totalDaysRendered <= 35 ? 35 : 42; const nextMonthDaysNeeded = daysInGrid - totalDaysRendered;
-        for (let i = 1; i <= nextMonthDaysNeeded; i++) { calendarDaysContainer.appendChild(createDayElement(i, false, true)); }
+    function renderCalendar(dateToShow) { /* ... Full renderCalendar function ... */
+        if (!calendarDaysContainer || !monthYearDisplay) { return; } const year = dateToShow.getFullYear(); const month = dateToShow.getMonth(); const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"]; monthYearDisplay.textContent = `${monthNames[month]} ${year}`; const firstDayOfMonth = new Date(year, month, 1); const lastDayOfMonth = new Date(year, month + 1, 0); const lastDayOfPrevMonth = new Date(year, month, 0); const firstDayWeekday = firstDayOfMonth.getDay(); const lastDateOfMonth = lastDayOfMonth.getDate(); const lastDateOfPrevMonth = lastDayOfPrevMonth.getDate(); calendarDaysContainer.innerHTML = ''; for (let i = firstDayWeekday; i > 0; i--) { calendarDaysContainer.appendChild(createDayElement(lastDateOfPrevMonth - i + 1, false, true)); } const today = new Date(); const todayDate = today.getDate(); const todayMonth = today.getMonth(); const todayYear = today.getFullYear(); for (let i = 1; i <= lastDateOfMonth; i++) { const isCurrentDay = (i === todayDate && month === todayMonth && year === todayYear); const dayElement = createDayElement(i, true, false, isCurrentDay); dayElement.dataset.date = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`; calendarDaysContainer.appendChild(dayElement); if (Math.random() < 0.3) { addEventIndicators(dayElement); } } const totalDaysRendered = firstDayWeekday + lastDateOfMonth; const daysInGrid = totalDaysRendered <= 35 ? 35 : 42; const nextMonthDaysNeeded = daysInGrid - totalDaysRendered; for (let i = 1; i <= nextMonthDaysNeeded; i++) { calendarDaysContainer.appendChild(createDayElement(i, false, true)); }
     }
-    function createDayElement(day, isCurrentMonth, isOtherMonth, isCurrentDay = false) { /* ... (Keep full createDayElement function here) ... */
-        const dayElement = document.createElement('div'); dayElement.classList.add('calendar-day');
-        const dayNumberSpan = document.createElement('span'); dayNumberSpan.classList.add('day-number'); dayNumberSpan.textContent = day; dayElement.appendChild(dayNumberSpan);
-        if (isOtherMonth) { dayElement.classList.add('other-month'); } if (isCurrentDay) { dayElement.classList.add('current-day'); }
-        const eventIndicatorsDiv = document.createElement('div'); eventIndicatorsDiv.classList.add('event-indicators'); dayElement.appendChild(eventIndicatorsDiv);
-        return dayElement;
+    function createDayElement(day, isCurrentMonth, isOtherMonth, isCurrentDay = false) { /* ... Full createDayElement function ... */
+        const dayElement = document.createElement('div'); dayElement.classList.add('calendar-day'); const dayNumberSpan = document.createElement('span'); dayNumberSpan.classList.add('day-number'); dayNumberSpan.textContent = day; dayElement.appendChild(dayNumberSpan); if (isOtherMonth) { dayElement.classList.add('other-month'); } if (isCurrentDay) { dayElement.classList.add('current-day'); } const eventIndicatorsDiv = document.createElement('div'); eventIndicatorsDiv.classList.add('event-indicators'); dayElement.appendChild(eventIndicatorsDiv); return dayElement;
     }
-    function addEventIndicators(dayElement) { /* ... (Keep full addEventIndicators placeholder function here) ... */
-         const indicatorsContainer = dayElement.querySelector('.event-indicators'); if (!indicatorsContainer) return;
-         const eventTypes = ['deadline', 'meeting', 'filing', 'other']; const numEvents = Math.floor(Math.random() * 4);
-         for (let i = 0; i < numEvents; i++) { const dot = document.createElement('span'); dot.classList.add('event-dot'); const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)]; dot.classList.add(`type-${randomType}`); dot.title = `Event Type: ${randomType}`; indicatorsContainer.appendChild(dot); }
+    function addEventIndicators(dayElement) { /* ... Full addEventIndicators placeholder function ... */
+        const indicatorsContainer = dayElement.querySelector('.event-indicators'); if (!indicatorsContainer) return; const eventTypes = ['deadline', 'meeting', 'filing', 'other']; const numEvents = Math.floor(Math.random() * 4); for (let i = 0; i < numEvents; i++) { const dot = document.createElement('span'); dot.classList.add('event-dot'); const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)]; dot.classList.add(`type-${randomType}`); dot.title = `Event Type: ${randomType}`; indicatorsContainer.appendChild(dot); }
     }
     if (prevMonthBtn) { prevMonthBtn.addEventListener('click', () => { calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() - 1); renderCalendar(calendarCurrentDate); }); }
     if (nextMonthBtn) { nextMonthBtn.addEventListener('click', () => { calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() + 1); renderCalendar(calendarCurrentDate); }); }
-    if (todayBtn) { todayBtn.addEventListener('click', () => { calendarCurrentDate = new Date(); renderCalendar(calendarCurrentDate); }); }
+    if (todayBtn) { todayBtn.addEventListener('click', () => { if(calendarCurrentDate.getMonth() !== new Date().getMonth() || calendarCurrentDate.getFullYear() !== new Date().getFullYear()) { calendarCurrentDate = new Date(); renderCalendar(calendarCurrentDate); } }); } // Avoid re-render if already on current month
     if (calendarDaysContainer) { calendarDaysContainer.addEventListener('click', (event) => { const targetDay = event.target.closest('.calendar-day'); if (targetDay && !targetDay.classList.contains('other-month')) { const dateStr = targetDay.dataset.date; console.log("Clicked on date:", dateStr); calendarDaysContainer.querySelectorAll('.selected-day').forEach(el => el.classList.remove('selected-day')); targetDay.classList.add('selected-day'); } }); }
-    // Initial Calendar Render (if calendar section might be initially active)
-    if(document.getElementById('calendar-content').classList.contains('is-active')){
-        renderCalendar(calendarCurrentDate);
-    }
-    // Or render it when the calendar section becomes active (more efficient)
-    const calendarObserver = new MutationObserver((mutationsList) => {
-        for(let mutation of mutationsList) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                const targetElement = mutation.target;
-                 if (targetElement.id === 'calendar-content' && targetElement.classList.contains('is-active')) {
-                     // Render calendar only when it becomes active
-                     renderCalendar(calendarCurrentDate);
-                     // observer.disconnect(); // Optional: stop observing if only needed once
+    // Use MutationObserver to render calendar only when its section is active
+    const calendarSection = document.getElementById('calendar-content');
+    if (calendarSection) {
+        const calendarObserver = new MutationObserver((mutationsList) => {
+            for(let mutation of mutationsList) {
+                 if (mutation.type === 'attributes' && mutation.attributeName === 'class' && mutation.target.id === 'calendar-content') {
+                     if(mutation.target.classList.contains('is-active')) {
+                          console.log("Rendering calendar as section became active.");
+                          renderCalendar(calendarCurrentDate);
+                     }
                  }
             }
-        }
-    });
-     if (document.getElementById('calendar-content')) {
-         calendarObserver.observe(document.getElementById('calendar-content'), { attributes: true });
-     }
-
-    // End Calendar Logic
+        });
+        calendarObserver.observe(calendarSection, { attributes: true });
+    }
     // ========================================================================
 
 
     // --- Final Initialization ---
-    // Set initial state based on the HTML (which section has .is-active)
-    const initialActiveSection = document.querySelector('.content-section.is-active');
-    if (initialActiveSection) {
-        currentActiveSectionId = initialActiveSection.id;
+    const initialActiveSectionHTML = document.querySelector('.content-section.is-active');
+    if (initialActiveSectionHTML) {
+        currentActiveSectionId = initialActiveSectionHTML.id;
         const initialLink = document.querySelector(`.sidebar-nav .nav-link[data-target="${currentActiveSectionId}"]`);
         const initialTitle = initialLink ? initialLink.getAttribute('data-title') : "Dashboard";
-         if (mainContentTitle) mainContentTitle.textContent = initialTitle;
-         updateSidebarActiveState(currentActiveSectionId);
-
-         // If initial active is calendar, render it
-         if(currentActiveSectionId === 'calendar-content') {
-             renderCalendar(calendarCurrentDate);
-         }
+        if (mainContentTitle) mainContentTitle.textContent = initialTitle;
+        updateSidebarActiveState(currentActiveSectionId);
+        // If initial active section requires specific CSS or JS logic, trigger it here
+        if (currentActiveSectionId === 'documents-content' && pageSpecificCSSLink) {
+             pageSpecificCSSLink.setAttribute('href', 'css/docusign_desktop.css');
+             console.log("Loaded docusign_desktop.css on initial load.");
+        }
+        if(currentActiveSectionId === 'calendar-content') {
+            renderCalendar(calendarCurrentDate); // Initial render if calendar is default
+        }
+    } else {
+        // Fallback if no section is marked active in HTML - activate overview
+         switchContent('overview-content', 'Dashboard Overview'); // Use switchContent to handle CSS loading etc.
     }
 
-    console.log("Enhanced Dashboard V2 Initialized.");
+    console.log("Enhanced Dashboard V2.2 Initialized.");
 
 }); // End DOMContentLoaded

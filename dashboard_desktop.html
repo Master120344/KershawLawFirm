@@ -2,33 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- Lock viewport scale -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kershaw Law Firm P.C. - Secure Admin Portal</title>
     <meta name="description" content="Internal administration portal for The Kershaw Law Firm P.C.">
-    <!-- Main Dashboard CSS -->
-    <link rel="stylesheet" href="css/dashboard_desktop.css"> <!-- Assumes css folder is sibling to html -->
-    <!-- Placeholder for Page-Specific CSS -->
+    <!-- Assumes css folder is sibling to this HTML file and named 'css' (lowercase) -->
+    <link rel="stylesheet" href="css/dashboard_desktop.css">
     <link id="page-specific-css" rel="stylesheet" href="">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- Link to your Icon Font Library (e.g., Font Awesome) -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.x.x/css/all.min.css"> -->
 </head>
-<body class="preload"> <!-- Add preload class -->
+<body class="preload">
 
-    <!-- Dedicated Background Layers -->
-    <div class="background-layer layer-1"></div> <!-- Gradient -->
-    <div class="background-layer layer-2"></div> <!-- Texture -->
+    <div class="background-layer layer-1"></div>
+    <div class="background-layer layer-2"></div>
 
     <div class="dashboard-container">
 
-        <!-- ================= Sidebar Navigation ================= -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                  <a href="#overview" class="sidebar-logo-link" data-target="overview-content">
-                    <span class="sidebar-logo">KL</span> <!-- Simple Initials Placeholder -->
+                    <span class="sidebar-logo">KL</span>
                     <h2 class="sidebar-title">Kershaw Law Firm</h2>
                  </a>
             </div>
@@ -53,9 +48,7 @@
             </div>
         </aside>
 
-        <!-- ================= Main Content Area Wrapper ================= -->
         <div class="main-wrapper">
-            <!-- ================= Header Bar ================= -->
             <header class="header">
                  <div class="header-left">
                     <button id="breadcrumb-back" class="icon-button subtle" title="Back" style="display: none;">‹</button>
@@ -72,7 +65,6 @@
                     </button>
                     <div class="profile-menu-container">
                         <button class="profile-button">
-                            <!-- === UPDATED IMAGE SOURCE === -->
                             <img src="https://github.com/Master120344/KershawLawFirm/raw/main/assets/adminprofilepicture.png" alt="Admin Avatar" class="profile-avatar">
                             <span class="profile-name" id="admin-username">Eleanor Vance</span>
                             <span class="profile-arrow">▼</span>
@@ -89,13 +81,11 @@
                 </div>
             </header>
 
-            <!-- ================= Main Content Display ================= -->
             <main class="main-content scrollable" id="main-content-area">
                 <div class="loading-overlay" id="loading-overlay">
                     <div class="spinner"></div>
                 </div>
 
-                <!-- Content Sections -->
                 <!-- == Overview Content == -->
                 <div id="overview-content" class="content-section is-active">
                      <div class="content-header">
@@ -144,36 +134,47 @@
 
                  <!-- == Clients Content == -->
                 <div id="clients-content" class="content-section">
-                     <div class="content-header"><h2>Client Management</h2><div class="header-actions"><input type="search" placeholder="Search clients..." class="table-search"><button class="button secondary small">⚖️ Filters</button><button class="button primary small">➕ Add Client</button></div></div>
-                    <p class="section-description">View, search, and manage client information.</p><div class="placeholder-table">Client Data Table Goes Here...</div>
+                     <div class="content-header">
+                        <h2>Client Management</h2>
+                        <div class="header-actions">
+                            <!-- Fixed missing id/name -->
+                            <input type="search" id="client-search-input" name="clientSearch" placeholder="Search clients..." class="table-search">
+                            <button class="button secondary small">⚖️ Filters</button>
+                            <button class="button primary small">➕ Add Client</button>
+                        </div>
+                    </div>
+                    <p class="section-description">View, search, and manage client information.</p>
+                    <div class="placeholder-table">Client Data Table Goes Here...</div>
                 </div>
 
                 <!-- == Cases Content == -->
                 <div id="cases-content" class="content-section">
-                    <div class="content-header"><h2>Case Management</h2><div class="header-actions"><input type="search" placeholder="Search cases..." class="table-search"><button class="button secondary small">⚖️ Filters</button><button class="button primary small">➕ Add Case</button></div></div>
-                    <p class="section-description">Track H2A/H2B cases, deadlines, and statuses.</p><div class="placeholder-table">Case Data Table Goes Here...</div>
+                    <div class="content-header">
+                        <h2>Case Management</h2>
+                        <div class="header-actions">
+                             <!-- Fixed missing id/name -->
+                            <input type="search" id="case-search-input" name="caseSearch" placeholder="Search cases..." class="table-search">
+                            <button class="button secondary small">⚖️ Filters</button>
+                            <button class="button primary small">➕ Add Case</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Track H2A/H2B cases, deadlines, and statuses.</p>
+                    <div class="placeholder-table">Case Data Table Goes Here...</div>
                 </div>
 
-                <!-- == Documents Content (DocuSign Form) == -->
+                <!-- == Documents Content == -->
                 <div id="documents-content" class="content-section">
                      <div class="content-header">
                         <h2>Document Generator & eSign</h2>
                         <div class="header-actions">
-                             <!-- Button to toggle showing the pending list? Or just always show? Let's keep it simple for now. -->
-                            <!-- <button class="button secondary small">🗂️ View Pending</button> -->
                         </div>
                     </div>
                     <p class="section-description">Generate preliminary agreements and manage eSignature requests.</p>
-
-                    <div class="content-row docusign-layout"> <!-- Added class for specific layout -->
-
-                        <!-- Column 1: Pending Queue & Form -->
+                    <div class="content-row docusign-layout">
                         <div class="docusign-column-main">
-                            <!-- Pending Signatures Queue -->
                              <div class="content-panel mb-3" id="pending-signatures-panel">
                                 <h3>Pending Signatures</h3>
                                 <ul id="pending-signatures-list" class="pending-list">
-                                    <!-- JS will populate this -->
                                     <li data-id="req-001">
                                         <span class="pending-name">John Doe (H2B Agreement)</span>
                                         <span class="pending-status pending">Sent: Oct 25</span>
@@ -187,95 +188,41 @@
                                      <li class="no-pending" style="display: none;">No documents currently pending signature.</li>
                                 </ul>
                             </div>
-
-                            <!-- Generation Form -->
                             <div class="content-panel">
                                 <form id="docusign-generator-form" class="docusign-form">
                                     <h3>Generate New Agreement</h3>
                                     <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="client-first-name" class="form-label">Client First Name</label>
-                                            <input type="text" id="client-first-name" name="clientFirstName" class="form-control" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="client-last-name" class="form-label">Client Last Name</label>
-                                            <input type="text" id="client-last-name" name="clientLastName" class="form-control" required>
-                                        </div>
+                                        <div class="form-group"><label for="client-first-name" class="form-label">Client First Name</label><input type="text" id="client-first-name" name="clientFirstName" class="form-control" required></div>
+                                        <div class="form-group"><label for="client-last-name" class="form-label">Client Last Name</label><input type="text" id="client-last-name" name="clientLastName" class="form-control" required></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="client-email" class="form-label">Client Email (for Signature)</label>
-                                        <input type="email" id="client-email" name="clientEmail" class="form-control" required>
-                                    </div>
-                                     <div class="form-group">
-                                        <label for="client-phone" class="form-label">Client Phone (Optional)</label>
-                                        <input type="tel" id="client-phone" name="clientPhone" class="form-control" placeholder="e.g., 555-123-4567">
-                                    </div>
-
+                                    <div class="form-group"><label for="client-email" class="form-label">Client Email (for Signature)</label><input type="email" id="client-email" name="clientEmail" class="form-control" required></div>
+                                     <div class="form-group"><label for="client-phone" class="form-label">Client Phone (Optional)</label><input type="tel" id="client-phone" name="clientPhone" class="form-control" placeholder="e.g., 555-123-4567"></div>
                                     <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="case-id" class="form-label">Case ID (Optional)</label>
-                                            <input type="text" id="case-id" name="caseId" class="form-control" placeholder="e.g., H2B-015">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="visa-type" class="form-label">Visa Type</label>
-                                            <select id="visa-type" name="visaType" class="form-control" required>
-                                                <option value="" disabled selected>Select Visa Program...</option>
-                                                <option value="H-2A">H-2A (Agricultural)</option>
-                                                <option value="H-2B">H-2B (Non-Agricultural)</option>
-                                                <option value="Both">Both H-2A & H-2B</option>
-                                                <option value="Other">Other/Consultation</option>
-                                            </select>
-                                        </div>
+                                        <div class="form-group"><label for="case-id" class="form-label">Case ID (Optional)</label><input type="text" id="case-id" name="caseId" class="form-control" placeholder="e.g., H2B-015"></div>
+                                        <div class="form-group"><label for="visa-type" class="form-label">Visa Type</label><select id="visa-type" name="visaType" class="form-control" required><option value="" disabled selected>Select Visa Program...</option><option value="H-2A">H-2A (Agricultural)</option><option value="H-2B">H-2B (Non-Agricultural)</option><option value="Both">Both H-2A & H-2B</option><option value="Other">Other/Consultation</option></select></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="employer-name" class="form-label">Employer Name</label>
-                                        <input type="text" id="employer-name" name="employerName" class="form-control" required>
-                                    </div>
+                                    <div class="form-group"><label for="employer-name" class="form-label">Employer Name</label><input type="text" id="employer-name" name="employerName" class="form-control" required></div>
                                     <fieldset class="form-fieldset">
                                         <legend class="form-legend">Agreement Terms</legend>
                                         <div class="form-row">
-                                            <div class="form-group">
-                                                <label for="legal-fee" class="form-label">Legal Fee ($)</label>
-                                                <input type="number" id="legal-fee" name="legalFee" class="form-control" step="0.01" min="0" required placeholder="e.g., 5000.00">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="filing-fee" class="form-label">Est. Filing Fees ($)</label>
-                                                <input type="number" id="filing-fee" name="filingFee" class="form-control" step="0.01" min="0" placeholder="e.g., 1500.00">
-                                            </div>
+                                            <div class="form-group"><label for="legal-fee" class="form-label">Legal Fee ($)</label><input type="number" id="legal-fee" name="legalFee" class="form-control" step="0.01" min="0" required placeholder="e.g., 5000.00"></div>
+                                            <div class="form-group"><label for="filing-fee" class="form-label">Est. Filing Fees ($)</label><input type="number" id="filing-fee" name="filingFee" class="form-control" step="0.01" min="0" placeholder="e.g., 1500.00"></div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="payment-terms" class="form-label">Payment Terms / Scope</label>
-                                            <textarea id="payment-terms" name="paymentTerms" class="form-control" rows="4" placeholder="e.g., 50% retainer upon signing, balance due upon case filing. Scope includes..." required></textarea>
-                                        </div>
+                                        <div class="form-group"><label for="payment-terms" class="form-label">Payment Terms / Scope</label><textarea id="payment-terms" name="paymentTerms" class="form-control" rows="4" placeholder="e.g., 50% retainer upon signing, balance due upon case filing. Scope includes..." required></textarea></div>
                                     </fieldset>
-                                    <div class="form-actions">
-                                        <button type="submit" id="generate-preview-btn" class="button primary">📄 Generate Preview</button>
-                                    </div>
+                                    <div class="form-actions"><button type="submit" id="generate-preview-btn" class="button primary">📄 Generate Preview</button></div>
                                 </form>
                             </div>
                         </div>
-
-                        <!-- Column 2: Preview Panel (Initially Hidden) -->
                         <div class="docusign-column-preview">
-                            <div class="content-panel sticky-preview" id="preview-panel" style="display: none;"> <!-- Added class for potential sticky positioning -->
-                                <div class="preview-header">
-                                    <h3>Document Preview</h3>
-                                    <button class="icon-button subtle close-preview" id="close-preview-btn" title="Close Preview">✕</button>
-                                </div>
-                                <div id="document-preview-area" class="document-preview">
-                                    <!-- JS will populate this -->
-                                    Preview will appear here...
-                                </div>
-                                <div class="form-actions preview-actions">
-                                    <button type="button" id="send-email-btn" class="button success" disabled>📧 Send for Signature</button>
-                                    <button type="button" id="download-pdf-btn" class="button secondary" disabled>💾 Download PDF (Simulated)</button>
-                                </div>
+                            <div class="content-panel sticky-preview" id="preview-panel" style="display: none;">
+                                <div class="preview-header"><h3>Document Preview</h3><button class="icon-button subtle close-preview" id="close-preview-btn" title="Close Preview">✕</button></div>
+                                <div id="document-preview-area" class="document-preview">Preview will appear here...</div>
+                                <div class="form-actions preview-actions"><button type="button" id="send-email-btn" class="button success" disabled>📧 Send for Signature</button><button type="button" id="download-pdf-btn" class="button secondary" disabled>💾 Download PDF (Simulated)</button></div>
                             </div>
                          </div>
-
-                    </div> <!-- End docusign-layout row -->
+                    </div>
                 </div>
-                <!-- == End Documents Content == -->
 
                  <!-- == Calendar Content == -->
                  <div id="calendar-content" class="content-section">
@@ -317,7 +264,8 @@
         </div> <!-- End Main Wrapper -->
     </div> <!-- End Dashboard Container -->
 
-    <!-- === SCRIPT PATHS MUST MATCH YOUR FOLDER STRUCTURE === -->
+    <!-- === SCRIPT PATHS MUST MATCH YOUR REPOSITORY FOLDER STRUCTURE === -->
+    <!-- These paths assume a 'js' (lowercase) folder exists next to this HTML file -->
     <script src="js/dashboard_desktop.js"></script>
     <script src="js/docusign_desktop.js"></script>
 

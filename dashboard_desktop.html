@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - The Kershaw Law Firm P.C.</title>
+    <meta name="description" content="Internal dashboard for managing clients, cases, and operations.">
+    <!-- Link to Dashboard CSS -->
+    <link rel="stylesheet" href="css/dashboard_desktop.css">
+    <!-- Google Fonts (Consistent with other pages) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Consider adding an Icon Library like Font Awesome later -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                 <!-- You can replace text with a smaller logo image -->
+                 <h2 class="sidebar-title">Kershaw Law</h2>
+                 <div class="sidebar-header-line"></div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#overview" class="nav-link active" data-target="overview-content"><span class="icon-placeholder">[O]</span> Dashboard</a></li>
+                    <li><a href="#clients" class="nav-link" data-target="clients-content"><span class="icon-placeholder">[Cl]</span> Clients</a></li>
+                    <li><a href="#cases" class="nav-link" data-target="cases-content"><span class="icon-placeholder">[Ca]</span> Cases</a></li>
+                    <li><a href="#documents" class="nav-link" data-target="documents-content"><span class="icon-placeholder">[D]</span> Documents & DocuSign</a></li>
+                    <li><a href="#calendar" class="nav-link" data-target="calendar-content"><span class="icon-placeholder">[Cal]</span> Calendar</a></li>
+                    <li><a href="#tasks" class="nav-link" data-target="tasks-content"><span class="icon-placeholder">[T]</span> Tasks & Reminders</a></li>
+                    <li><a href="#analytics" class="nav-link" data-target="analytics-content"><span class="icon-placeholder">[A]</span> Analytics & Charts</a></li>
+                    <li><a href="#ai-assistant" class="nav-link" data-target="ai-content"><span class="icon-placeholder">[AI]</span> AI Legal Assistant</a></li>
+                    <li><a href="#settings" class="nav-link" data-target="settings-content"><span class="icon-placeholder">[S]</span> Settings</a></li>
+                </ul>
+            </nav>
+             <div class="sidebar-footer">
+                <p>© <span id="current-year"></span> Kershaw Law</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper">
+            <!-- Header Bar -->
+            <header class="header">
+                <div class="header-title">
+                    <h1 id="main-content-title">Dashboard Overview</h1> <!-- Title changes based on section -->
+                </div>
+                <div class="header-actions">
+                    <button class="icon-button" title="Notifications"><span class="icon-placeholder">[N]</span></button>
+                    <div class="admin-profile">
+                        <span id="admin-username">Admin Name</span>
+                        <!-- Add profile pic/dropdown later -->
+                    </div>
+                    <button id="logout-button" class="logout-button">Logout</button>
+                </div>
+            </header>
+
+            <!-- Content Area (Loads different sections) -->
+            <main class="main-content" id="main-content-area">
+                <!-- Default Content (Dashboard Overview) -->
+                <div id="overview-content" class="content-section active">
+                    <h2>Welcome, Admin!</h2>
+                    <p>Here's a quick look at what's happening:</p>
+                    <!-- Add Summary Widgets/Cards here -->
+                    <div class="widget-container">
+                        <div class="widget">
+                            <h3>Active Cases</h3>
+                            <p class="widget-data">15</p> <!-- Placeholder Data -->
+                        </div>
+                        <div class="widget">
+                            <h3>Pending Tasks</h3>
+                            <p class="widget-data">8</p> <!-- Placeholder Data -->
+                        </div>
+                        <div class="widget">
+                            <h3>Upcoming Deadlines</h3>
+                            <p class="widget-data">3</p> <!-- Placeholder Data -->
+                        </div>
+                         <div class="widget">
+                            <h3>Documents Pending Review</h3>
+                            <p class="widget-data">5</p> <!-- Placeholder Data -->
+                        </div>
+                    </div>
+                    <!-- More overview components like recent activity feed, quick links etc. -->
+                </div>
+
+                <!-- Placeholder Content Sections (Initially Hidden) -->
+                <div id="clients-content" class="content-section">
+                    <h2>Manage Clients</h2>
+                    <p>Client list, search, and management features will go here.</p>
+                    <!-- Placeholder for client table/list -->
+                </div>
+                 <div id="cases-content" class="content-section">
+                    <h2>Manage Cases</h2>
+                    <p>Case list, details, timelines, and status updates will go here.</p>
+                     <!-- Placeholder for case table/list -->
+                </div>
+                 <div id="documents-content" class="content-section">
+                    <h2>Documents & DocuSign Integration</h2>
+                    <p>Document uploads, status tracking, and DocuSign pending/completed views will go here.</p>
+                     <!-- Placeholder for DocuSign integration view -->
+                </div>
+                 <div id="calendar-content" class="content-section">
+                    <h2>Firm Calendar</h2>
+                    <p>Integrated calendar showing deadlines, appointments, etc., will go here.</p>
+                     <!-- Placeholder for Calendar component -->
+                </div>
+                 <div id="tasks-content" class="content-section">
+                    <h2>Tasks & Reminders</h2>
+                    <p>Task assignment, tracking, and automated reminders will go here.</p>
+                     <!-- Placeholder for Task list component -->
+                </div>
+                 <div id="analytics-content" class="content-section">
+                    <h2>Analytics & Charts</h2>
+                    <p>Data visualizations, charts (e.g., case approval rates), and reports will go here.</p>
+                     <!-- Placeholder for Chart components -->
+                </div>
+                 <div id="ai-content" class="content-section">
+                    <h2>AI Legal Assistant</h2>
+                    <p>The AI chat interface, note suggestions, and other AI tools will go here.</p>
+                     <!-- Placeholder for AI Chat component -->
+                </div>
+                 <div id="settings-content" class="content-section">
+                    <h2>Settings</h2>
+                    <p>User management, notification preferences, integration settings will go here.</p>
+                     <!-- Placeholder for Settings forms -->
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Link to Dashboard JS -->
+    <script src="js/dashboard_desktop.js"></script>
+</body>
+</html>

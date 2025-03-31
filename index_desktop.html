@@ -3,93 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm - Justice, Integrity, Results</title>
-    <meta name="description" content="The Kershaw Law Firm provides expert legal representation. Contact us for a consultation.">
+    <!-- ***** CHANGE THIS TITLE ***** -->
+    <title>The Kershaw Law Firm - H2A/H2B Visa Services</title>
+    <meta name="description" content="The Kershaw Law Firm specializes in H2A and H2B visa processing for employers and workers. Contact us for expert legal assistance.">
     <!-- Link to your specific CSS file -->
+    <!-- ***** MAKE SURE THIS PATH IS CORRECT ***** -->
     <link rel="stylesheet" href="css/index_desktop.css">
-    <!-- You might add other head elements like favicons, fonts etc. here -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Link to Favicon (Example) -->
+    <!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
+
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="container">
-            <div class="logo">
-                <h1><a href="/">The Kershaw Law Firm</a></h1>
-                <!-- You might replace the H1 with an <img> tag for a logo -->
-                <!-- <img src="images/logo.png" alt="The Kershaw Law Firm Logo"> -->
+    <!-- Background Slider -->
+    <div id="background-slider">
+        <!-- Ensure you have these images in the correct path specified in CSS -->
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <div class="overlay"></div> <!-- Dark Overlay for readability -->
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>The Kershaw Law Firm</h1>
+                <div class="header-line"></div>
             </div>
-            <nav class="main-navigation">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/practice-areas.html">Practice Areas</a></li>
-                    <li><a href="/attorneys.html">Attorneys</a></li>
-                    <li><a href="/contact.html">Contact Us</a></li>
-                    <!-- Add other relevant navigation links -->
-                </ul>
-            </nav>
+            <div class="header-actions">
+                <!-- User Info Section (Hidden by default, shown when logged in) -->
+                <!-- ***** ADDED id="user-info" and display:none ***** -->
+                <div id="user-info" class="user-info" style="display: none;">
+                    <!-- ***** ADDED id="user-email" ***** -->
+                    <span id="user-email">user@example.com</span>
+                    <!-- ***** ADDED id="logout-button" ***** -->
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <!-- Login Button (Shown by default, hidden when logged in) -->
+                <!-- ***** ADDED id="login-button" ***** -->
+                <!-- ***** Ensure this links to your login page ***** -->
+                <a href="/login.html" id="login-button" class="login-button">Login</a>
+            </div>
         </div>
     </header>
 
-    <main class="site-main">
-        <section class="hero-section">
-            <div class="container">
-                <h2>Experienced Legal Representation You Can Trust</h2>
-                <p>Serving our community with dedication and expertise. Schedule your consultation today.</p>
-                <a href="/contact.html" class="cta-button">Request Consultation</a>
-            </div>
-        </section>
+    <!-- Main Content Area -->
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <section class="hero">
+                 <!-- ***** UPDATED HEADING AND TAGLINE FOR VISA FOCUS ***** -->
+                <h2>Expert H-2A & H-2B Visa Solutions</h2>
+                <p class="tagline">Navigating the complexities of agricultural and non-agricultural temporary worker visas.</p>
+                 <!-- ***** UPDATED BUTTON TEXT AND LINK ***** -->
+                <a href="/contact.html" class="cta-button">Get Started Today</a>
+            </section>
 
-        <section class="about-preview">
-            <div class="container">
-                <h3>About The Kershaw Law Firm</h3>
-                <p>Learn more about our firm's history, values, and commitment to achieving the best possible outcomes for our clients.</p>
-                <a href="/about.html">Read More About Us</a>
-            </div>
-        </section>
+            <!-- Add other relevant sections for the homepage if needed -->
+            <!-- e.g., Brief service descriptions, Firm overview -->
 
-        <section class="practice-areas-preview">
-            <div class="container">
-                <h3>Our Practice Areas</h3>
-                <p>We specialize in various areas of law, including [Example Area 1], [Example Area 2], and [Example Area 3].</p>
-                <ul>
-                    <li><a href="/practice-areas/area1.html">[Example Area 1]</a></li>
-                    <li><a href="/practice-areas/area2.html">[Example Area 2]</a></li>
-                    <li><a href="/practice-areas/area3.html">[Example Area 3]</a></li>
-                    <!-- Add more areas -->
-                </ul>
-                <a href="/practice-areas.html">View All Practice Areas</a>
-            </div>
-        </section>
-
-        <!-- Add more sections as needed: Testimonials, Contact Form Preview, Blog Posts etc. -->
-
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-contact">
-                <h4>Contact Information</h4>
-                <p>The Kershaw Law Firm</p>
-                <p>123 Law Street, Suite 400<br>City, State, ZIP Code</p>
-                <p>Phone: (555) 123-4567</p>
-                <p>Email: <a href="mailto:info@kershawlawfirm.example.com">info@kershawlawfirm.example.com</a></p>
-                <!-- Add social media links if applicable -->
-            </div>
-            <div class="footer-copyright">
-                <p>© <span id="current-year"></span> The Kershaw Law Firm. All Rights Reserved.</p>
-                <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/disclaimer.html">Disclaimer</a></p>
-            </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- Navigation Tabs (Footer) -->
+    <nav class="tabs">
+        <!-- ***** UPDATE THESE LINKS TO YOUR ACTUAL PAGES ***** -->
+        <a href="/index_desktop.html" class="active">Home</a> <!-- Assuming this is the homepage -->
+        <a href="/h2a_info.html">H-2A Visas</a>
+        <a href="/h2b_info.html">H-2B Visas</a>
+        <a href="/process_overview.html">Our Process</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/contact.html">Contact Us</a>
+        <!-- Add other relevant links -->
+    </nav>
+
 
     <!-- Firebase Initialization Script -->
+    <!-- ***** UPDATED SCRIPT BELOW ***** -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+      // ***** Import Auth functions *****
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
       const firebaseConfig = {
-        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // IMPORTANT: Consider securing this better later
         authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
         projectId: "thekershawlawfirm-d5b54",
         storageBucket: "thekershawlawfirm-d5b54.appspot.com",
@@ -101,20 +106,36 @@
       try {
         const app = initializeApp(firebaseConfig);
         console.log("Firebase Initialized Successfully.");
-        const analytics = getAnalytics(app);
-        console.log("Firebase Analytics Initialized.");
+        // Initialize Analytics (optional)
+        // const analytics = getAnalytics(app);
+        // console.log("Firebase Analytics Initialized.");
+
+        // ***** Get Auth instance *****
+        const auth = getAuth(app);
+        console.log("Firebase Auth Initialized.");
+
+        // ***** EXPOSE TO GLOBAL SCOPE (WINDOW) for index_desktop.js *****
+        window.firebaseApp = app; // Expose app if needed elsewhere
+        window.firebaseAuth = auth; // Expose auth instance
+        window.firebaseOnAuthStateChanged = onAuthStateChanged; // Expose the function itself
+        window.firebaseSignOut = signOut; // Expose the function itself
+
       } catch (error) {
         console.error("Error initializing Firebase:", error);
+        // Optionally display a user-friendly message on the page
+        // document.body.innerHTML = '<p>Error loading application. Please try again later.</p>';
       }
     </script>
 
-    <!-- Link to your specific JS file (ensure it's placed after Firebase if it depends on it) -->
-    <script src="js/index.js"></script>
+    <!-- Link to your specific JS file -->
+    <!-- ***** MAKE SURE THIS PATH IS CORRECT and matches the filename you sent ***** -->
+    <script src="js/index_desktop.js"></script>
 
-    <!-- Simple script to update copyright year -->
-    <script>
+    <!-- Simple script (can be removed if not needed or integrated into index_desktop.js) -->
+    <!-- <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
+    </script> -->
+    <!-- Note: Removed the copyright year script as there's no 'current-year' ID in the provided footer/tabs -->
 
 </body>
 </html>

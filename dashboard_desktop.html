@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kershaw Law Firm P.C. - Secure Admin Portal</title>
     <meta name="description" content="Internal administration portal for The Kershaw Law Firm P.C.">
+    <!-- Main Dashboard CSS -->
     <link rel="stylesheet" href="css/dashboard_desktop.css">
+    <!-- Placeholder for Page-Specific CSS (e.g., for DocuSign form) -->
+    <link id="page-specific-css" rel="stylesheet" href=""> <!-- Initially empty -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -52,30 +56,30 @@
             <!-- ================= Header Bar ================= -->
             <header class="header">
                 <div class="header-left">
-                    <button id="breadcrumb-back" class="icon-button subtle" title="Back" style="display: none;">‹</button> <!-- Changed placeholder -->
+                    <button id="breadcrumb-back" class="icon-button subtle" title="Back" style="display: none;">‹</button>
                     <h1 id="main-content-title" class="header-main-title">Dashboard Overview</h1>
                 </div>
                 <div class="header-right">
                     <div class="header-search-container">
-                        <input type="search" id="global-search" placeholder="Search..." class="header-search-input"> <!-- Simplified placeholder -->
-                        <button class="icon-button search-button">🔍</button> <!-- Changed placeholder -->
+                        <input type="search" id="global-search" placeholder="Search..." class="header-search-input">
+                        <button class="icon-button search-button">🔍</button>
                     </div>
                     <button class="icon-button notification-button" title="Notifications">
-                        <span class="icon-placeholder">🔔</span> <!-- Changed placeholder -->
+                        <span class="icon-placeholder">🔔</span>
                         <span class="notification-badge">3</span>
                     </button>
                     <div class="profile-menu-container">
                         <button class="profile-button">
                             <img src="placeholder-avatar.png" alt="Admin Avatar" class="profile-avatar">
                             <span class="profile-name" id="admin-username">Eleanor Vance</span>
-                            <span class="profile-arrow">▼</span> <!-- Changed placeholder -->
+                            <span class="profile-arrow">▼</span>
                         </button>
                         <div class="profile-dropdown">
                             <a href="#profile">My Profile</a>
                             <a href="#settings" data-target="settings-content" class="nav-link-trigger">Settings</a>
                             <div class="dropdown-divider"></div>
                             <button id="logout-button-dropdown" class="logout-button-dropdown">
-                                <span class="icon-placeholder">🚪</span> Logout <!-- Changed placeholder -->
+                                <span class="icon-placeholder">🚪</span> Logout
                             </button>
                         </div>
                     </div>
@@ -94,8 +98,8 @@
                      <div class="content-header">
                         <h2>Dashboard Overview</h2>
                         <div class="header-actions">
-                            <button class="button primary small">➕ Widget</button> <!-- Changed placeholder -->
-                            <button class="button secondary small">🔧 Customize</button> <!-- Changed placeholder -->
+                            <button class="button primary small">➕ Widget</button>
+                            <button class="button secondary small">🔧 Customize</button>
                         </div>
                     </div>
                     <p class="section-description">Key metrics and quick access to important areas.</p>
@@ -141,7 +145,7 @@
                         <h2>Client Management</h2>
                          <div class="header-actions">
                             <input type="search" placeholder="Search clients..." class="table-search">
-                            <button class="button secondary small">⚖️ Filters</button> <!-- Changed placeholder -->
+                            <button class="button secondary small">⚖️ Filters</button>
                             <button class="button primary small">➕ Add Client</button>
                         </div>
                     </div>
@@ -163,25 +167,97 @@
                      <div class="placeholder-table">Case Data Table Goes Here...</div>
                 </div>
 
-                 <!-- == Documents Content == -->
+                 <!-- == Documents Content (Contains DocuSign Form) == -->
                 <div id="documents-content" class="content-section">
                      <div class="content-header">
-                        <h2>Document Center & eSignatures</h2>
+                        <h2>Document Generator & eSign</h2>
                         <div class="header-actions">
-                             <button class="button secondary small">☁️ Upload</button> <!-- Changed placeholder -->
-                             <button class="button primary small">✍️ Send eSign</button> <!-- Changed placeholder -->
+                             <button class="button secondary small">🗂️ View Generated</button>
                         </div>
                     </div>
-                    <p class="section-description">Manage case documents and track DocuSign status.</p>
-                    <div class="placeholder-complex">Document Lists & DocuSign Integration Panel Goes Here...</div>
-                </div>
+                    <p class="section-description">Enter client and case details to generate a preliminary agreement for eSignature.</p>
+
+                    <div class="content-row">
+                        <!-- Form Panel -->
+                        <div class="content-panel column-2">
+                            <h3>Input Details</h3>
+                            <form id="docusign-generator-form" class="docusign-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="client-first-name" class="form-label">Client First Name</label>
+                                        <input type="text" id="client-first-name" name="clientFirstName" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client-last-name" class="form-label">Client Last Name</label>
+                                        <input type="text" id="client-last-name" name="clientLastName" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="client-email" class="form-label">Client Email (for sending)</label>
+                                    <input type="email" id="client-email" name="clientEmail" class="form-control" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="case-id" class="form-label">Case ID (Optional)</label>
+                                        <input type="text" id="case-id" name="caseId" class="form-control">
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="visa-type" class="form-label">Visa Type</label>
+                                        <select id="visa-type" name="visaType" class="form-control" required>
+                                            <option value="" disabled selected>Select Visa...</option>
+                                            <option value="H2A">H-2A (Agricultural)</option>
+                                            <option value="H2B">H-2B (Non-Agricultural)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="employer-name" class="form-label">Employer/Company Name</label>
+                                    <input type="text" id="employer-name" name="employerName" class="form-control" required>
+                                </div>
+                                <fieldset class="form-fieldset">
+                                     <legend class="form-legend">Cost & Fees</legend>
+                                     <div class="form-row">
+                                         <div class="form-group">
+                                             <label for="legal-fee" class="form-label">Legal Fee ($)</label>
+                                             <input type="number" id="legal-fee" name="legalFee" class="form-control" step="0.01" min="0" required placeholder="e.g., 5000.00">
+                                         </div>
+                                         <div class="form-group">
+                                             <label for="filing-fee" class="form-label">Estimated Filing Fees ($)</label>
+                                             <input type="number" id="filing-fee" name="filingFee" class="form-control" step="0.01" min="0" placeholder="e.g., 1500.00">
+                                         </div>
+                                     </div>
+                                     <div class="form-group">
+                                         <label for="payment-terms" class="form-label">Payment Terms (Optional)</label>
+                                         <textarea id="payment-terms" name="paymentTerms" class="form-control" rows="3" placeholder="e.g., 50% retainer, 50% upon approval..."></textarea>
+                                     </div>
+                                 </fieldset>
+
+                                <div class="form-actions">
+                                    <button type="submit" id="generate-preview-btn" class="button primary">📄 Generate Preview</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Preview Panel -->
+                        <div class="content-panel column-3" id="preview-panel" style="display: none;"> <!-- Initially hidden -->
+                            <h3>Document Preview</h3>
+                            <div id="document-preview-area" class="document-preview">
+                                <!-- Generated text will appear here -->
+                            </div>
+                             <div class="form-actions preview-actions">
+                                 <button type="button" id="send-email-btn" class="button success">📧 Send via Email</button>
+                                 <button type="button" id="download-pdf-btn" class="button secondary" disabled>💾 Download PDF (WIP)</button> <!-- Disabled for now -->
+                             </div>
+                        </div>
+                    </div>
+                </div> <!-- End #documents-content -->
 
                  <!-- == Calendar Content == -->
                  <div id="calendar-content" class="content-section">
                      <div class="content-header">
                         <h2>Firm Calendar</h2>
                          <div class="header-actions">
-                             <button class="button secondary small">👁️ View Options</button> <!-- Changed placeholder -->
+                             <button class="button secondary small">👁️ View Options</button>
                              <button class="button secondary small">⚖️ Filter</button>
                              <button class="button primary small">➕ Add Event</button>
                         </div>
@@ -211,11 +287,11 @@
 
                  <!-- == Tasks Content == -->
                 <div id="tasks-content" class="content-section">
-                    <div class="content-header">
+                     <div class="content-header">
                         <h2>Tasks & Reminders</h2>
                         <div class="header-actions">
                             <button class="button secondary small">⚖️ Filter Tasks</button>
-                             <button class="button secondary small">📋 View As</button> <!-- Changed placeholder -->
+                             <button class="button secondary small">📋 View As</button>
                             <button class="button primary small">➕ Add Task</button>
                         </div>
                     </div>
@@ -228,9 +304,9 @@
                      <div class="content-header">
                         <h2>Reporting & Analytics</h2>
                         <div class="header-actions">
-                             <button class="button secondary small">🗓️ Date Range</button> <!-- Changed placeholder -->
-                             <button class="button secondary small">📄 Generate Report</button> <!-- Changed placeholder -->
-                            <button class="button secondary small">💾 Export Data</button> <!-- Changed placeholder -->
+                             <button class="button secondary small">🗓️ Date Range</button>
+                             <button class="button secondary small">📄 Generate Report</button>
+                            <button class="button secondary small">💾 Export Data</button>
                         </div>
                     </div>
                     <p class="section-description">Visualize key performance indicators and case trends.</p>
@@ -242,7 +318,7 @@
                     <div class="content-header">
                         <h2>AI Legal Assistant</h2>
                          <div class="header-actions">
-                            <button class="button secondary small">💬 History</button> <!-- Changed placeholder -->
+                            <button class="button secondary small">💬 History</button>
                         </div>
                     </div>
                     <p class="section-description">Utilize AI for insights, summaries, and assistance.</p>
@@ -257,7 +333,7 @@
                      <div class="content-header">
                         <h2>System Settings</h2>
                          <div class="header-actions">
-                            <button class="button primary small">💾 Save Changes</button>
+                            <button class="button primary small" disabled>💾 Save Changes</button> <!-- Example disabled state -->
                         </div>
                     </div>
                     <p class="section-description">Manage user accounts, integrations, and preferences.</p>
@@ -270,5 +346,7 @@
     </div> <!-- End Dashboard Container -->
 
     <script src="js/dashboard_desktop.js"></script>
+    <!-- Link to DocuSign specific JS (Dynamically load or keep if small) -->
+    <script src="js/docusign_desktop.js"></script>
 </body>
 </html>

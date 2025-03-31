@@ -14,7 +14,7 @@
     <!-- Consider adding an Icon Library like Font Awesome later -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.x.x/css/all.min.css"> -->
 </head>
-<body class="preload"> <!-- Start with preload class to prevent animation flash -->
+<body class="preload"> <!-- Start with preload class -->
 
     <div class="dashboard-container">
 
@@ -22,15 +22,12 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                  <a href="#overview" class="sidebar-logo-link" data-target="overview-content">
-                    <!-- Replace with actual SVG/Image Logo later -->
                     <span class="sidebar-logo">[KLF Logo]</span>
                     <h2 class="sidebar-title">Kershaw Law Firm</h2>
                  </a>
-                 <!-- <button id="sidebar-toggle" class="sidebar-toggle-btn">[=]</button> --> <!-- Placeholder for toggle -->
             </div>
             <nav class="sidebar-nav">
                 <ul>
-                    <!-- Added more descriptive data attributes -->
                     <li><a href="#overview" class="nav-link active" data-target="overview-content" data-title="Dashboard Overview"><span class="nav-icon">[O]</span> <span class="nav-text">Dashboard</span></a></li>
                     <li><a href="#clients" class="nav-link" data-target="clients-content" data-title="Client Management"><span class="nav-icon">[Cl]</span> <span class="nav-text">Clients</span></a></li>
                     <li><a href="#cases" class="nav-link" data-target="cases-content" data-title="Case Management"><span class="nav-icon">[Ca]</span> <span class="nav-text">Cases</span></a></li>
@@ -55,7 +52,7 @@
             <!-- ================= Header Bar ================= -->
             <header class="header">
                 <div class="header-left">
-                    <button id="breadcrumb-back" class="icon-button subtle" title="Back" style="display: none;"><</button> <!-- Contextual Back -->
+                    <button id="breadcrumb-back" class="icon-button subtle" title="Back" style="display: none;"><</button>
                     <h1 id="main-content-title" class="header-main-title">Dashboard Overview</h1>
                 </div>
                 <div class="header-right">
@@ -65,20 +62,19 @@
                     </div>
                     <button class="icon-button notification-button" title="Notifications">
                         <span class="icon-placeholder">[N]</span>
-                        <span class="notification-badge">3</span> <!-- Example Badge -->
+                        <span class="notification-badge">3</span>
                     </button>
                     <div class="profile-menu-container">
                         <button class="profile-button">
-                            <img src="placeholder-avatar.png" alt="Admin Avatar" class="profile-avatar"> <!-- Placeholder Image -->
+                            <img src="placeholder-avatar.png" alt="Admin Avatar" class="profile-avatar">
                             <span class="profile-name" id="admin-username">Eleanor Vance</span>
                             <span class="profile-arrow">[v]</span>
                         </button>
-                        <!-- Profile Dropdown Menu (Hidden by default) -->
                         <div class="profile-dropdown">
                             <a href="#profile">My Profile</a>
                             <a href="#settings" data-target="settings-content" class="nav-link-trigger">Settings</a>
                             <div class="dropdown-divider"></div>
-                            <button id="logout-button" class="logout-button-dropdown">
+                            <button id="logout-button-dropdown" class="logout-button-dropdown">
                                 <span class="icon-placeholder">[L]</span> Logout
                             </button>
                         </div>
@@ -88,20 +84,25 @@
 
             <!-- ================= Main Content Display ================= -->
             <main class="main-content scrollable" id="main-content-area">
+                <!-- Loading Overlay (optional) -->
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="spinner"></div>
+                </div>
 
+                <!-- Content Sections will be absolutely positioned by CSS -->
                 <!-- == Overview Content == -->
-                <div id="overview-content" class="content-section active">
-                    <div class="content-header">
+                <div id="overview-content" class="content-section is-active">
+                     <div class="content-header">
                         <h2>Dashboard Overview</h2>
                         <div class="header-actions">
-                            <button class="button primary">[+] Add Widget</button>
+                            <button class="button primary small">[+] Add Widget</button>
+                            <button class="button secondary small">[C] Customize</button>
                         </div>
                     </div>
                     <p class="section-description">Key metrics and quick access to important areas.</p>
-
                     <div class="widget-grid">
-                        <!-- Example Widgets -->
-                        <div class="widget clickable" data-link="#cases">
+                        <!-- Added data-link attribute for JS interaction -->
+                        <div class="widget clickable" data-link-target="cases-content">
                             <div class="widget-icon">[Ca]</div>
                             <div class="widget-content">
                                 <h3 class="widget-title">Active Cases</h3>
@@ -109,7 +110,7 @@
                                 <p class="widget-change up">+3 this week</p>
                             </div>
                         </div>
-                         <div class="widget clickable" data-link="#tasks">
+                         <div class="widget clickable" data-link-target="tasks-content">
                             <div class="widget-icon">[T]</div>
                             <div class="widget-content">
                                 <h3 class="widget-title">Pending Tasks</h3>
@@ -117,7 +118,7 @@
                                 <p class="widget-change overdue">5 Overdue</p>
                             </div>
                         </div>
-                         <div class="widget clickable" data-link="#calendar">
+                         <div class="widget clickable" data-link-target="calendar-content">
                             <div class="widget-icon">[Cal]</div>
                             <div class="widget-content">
                                 <h3 class="widget-title">Upcoming Deadlines</h3>
@@ -125,7 +126,7 @@
                                 <p class="widget-change">Next: Filing (J. Doe)</p>
                             </div>
                         </div>
-                         <div class="widget clickable" data-link="#documents">
+                         <div class="widget clickable" data-link-target="documents-content">
                             <div class="widget-icon">[D]</div>
                             <div class="widget-content">
                                 <h3 class="widget-title">Documents Awaiting Review</h3>
@@ -134,11 +135,9 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="content-row">
                         <div class="content-panel column-2">
                             <h3>Recent Activity</h3>
-                             <!-- Placeholder for activity feed -->
                             <ul class="activity-feed">
                                 <li><span class="activity-icon">[U]</span> New client 'Acme Corp' added. <span class="timestamp">1h ago</span></li>
                                 <li><span class="activity-icon">[D]</span> Document 'Passport - J. Smith' uploaded. <span class="timestamp">3h ago</span></li>
@@ -160,16 +159,15 @@
 
                 <!-- == Clients Content == -->
                 <div id="clients-content" class="content-section">
-                    <div class="content-header">
+                     <div class="content-header">
                         <h2>Client Management</h2>
                          <div class="header-actions">
                             <input type="search" placeholder="Search clients..." class="table-search">
-                            <button class="button secondary">[F] Filters</button>
-                            <button class="button primary">[+] Add Client</button>
+                            <button class="button secondary small">[F] Filters</button>
+                            <button class="button primary small">[+] Add Client</button>
                         </div>
                     </div>
                     <p class="section-description">View, search, and manage client information.</p>
-                    <!-- Placeholder for Clients Table/Grid -->
                      <div class="placeholder-table">Client Data Table Goes Here...</div>
                 </div>
 
@@ -179,12 +177,11 @@
                         <h2>Case Management</h2>
                          <div class="header-actions">
                             <input type="search" placeholder="Search cases..." class="table-search">
-                            <button class="button secondary">[F] Filters</button>
-                            <button class="button primary">[+] Add Case</button>
+                            <button class="button secondary small">[F] Filters</button>
+                            <button class="button primary small">[+] Add Case</button>
                         </div>
                     </div>
                     <p class="section-description">Track H2A/H2B cases, deadlines, and statuses.</p>
-                     <!-- Placeholder for Cases Table/Grid -->
                      <div class="placeholder-table">Case Data Table Goes Here...</div>
                 </div>
 
@@ -193,63 +190,84 @@
                      <div class="content-header">
                         <h2>Document Center & eSignatures</h2>
                         <div class="header-actions">
-                             <button class="button secondary">[U] Upload Document</button>
+                             <button class="button secondary small">[U] Upload Document</button>
+                             <button class="button primary small">[DS] Send for Signature</button>
                         </div>
                     </div>
                     <p class="section-description">Manage case documents and track DocuSign status.</p>
-                    <!-- Placeholder for Document Management & DocuSign -->
                     <div class="placeholder-complex">Document Lists & DocuSign Integration Panel Goes Here...</div>
                 </div>
 
-                 <!-- == Calendar Content == -->
-                <div id="calendar-content" class="content-section">
+                 <!-- == Calendar Content (Structure from previous step) == -->
+                 <div id="calendar-content" class="content-section">
                      <div class="content-header">
                         <h2>Firm Calendar</h2>
                          <div class="header-actions">
-                             <button class="button secondary">[M] Month View</button>
-                             <button class="button primary">[+] Add Event</button>
+                             <button class="button secondary small">[V] View Options</button>
+                             <button class="button secondary small">[F] Filter</button>
+                             <button class="button primary small">[+] Add Event/Deadline</button>
                         </div>
                     </div>
-                    <p class="section-description">View deadlines, appointments, and key dates.</p>
-                     <!-- Placeholder for Calendar -->
-                     <div class="placeholder-complex">Interactive Calendar Component Goes Here...</div>
+                    <p class="section-description">Overview of key dates, deadlines, and appointments.</p>
+                    <div class="calendar-container card-style">
+                        <div class="calendar-header">
+                            <button id="prev-month-btn" class="calendar-nav-btn" title="Previous Month"><</button>
+                            <h3 id="month-year" class="calendar-month-title">Month Year</h3>
+                            <button id="next-month-btn" class="calendar-nav-btn" title="Next Month">></button>
+                             <button id="today-btn" class="button secondary tiny" title="Go to Today">Today</button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                        </div>
+                        <div class="calendar-grid" id="calendar-days"></div>
+                    </div>
+                    <div class="content-panel mt-3">
+                        <h3>Upcoming Deadlines & Events</h3>
+                        <ul class="upcoming-events-list">
+                            <li><span class="event-date">Oct 28</span> Filing Deadline - Case #H2A-015 <span class="event-time">EOD</span></li>
+                            <li><span class="event-date">Oct 30</span> Client Meeting - Acme Corp <span class="event-time">10:00 AM</span></li>
+                            <li><span class="event-date">Nov 02</span> RFE Response Due - Case #H2B-007 <span class="event-time">EOD</span></li>
+                        </ul>
+                    </div>
                 </div>
 
                  <!-- == Tasks Content == -->
                 <div id="tasks-content" class="content-section">
-                    <div class="content-header">
+                     <div class="content-header">
                         <h2>Tasks & Reminders</h2>
                         <div class="header-actions">
-                            <button class="button secondary">[F] Filter Tasks</button>
-                            <button class="button primary">[+] Add Task</button>
+                            <button class="button secondary small">[F] Filter Tasks</button>
+                             <button class="button secondary small">[V] View As</button>
+                            <button class="button primary small">[+] Add Task</button>
                         </div>
                     </div>
                     <p class="section-description">Manage your workload and track important action items.</p>
-                     <!-- Placeholder for Task List -->
                      <div class="placeholder-table">Task List / Kanban Board Goes Here...</div>
                 </div>
 
                  <!-- == Analytics Content == -->
                 <div id="analytics-content" class="content-section">
-                    <div class="content-header">
+                     <div class="content-header">
                         <h2>Reporting & Analytics</h2>
                         <div class="header-actions">
-                             <button class="button secondary">[D] Date Range</button>
-                            <button class="button secondary">[E] Export Data</button>
+                             <button class="button secondary small">[D] Date Range</button>
+                             <button class="button secondary small">[G] Generate Report</button>
+                            <button class="button secondary small">[E] Export Data</button>
                         </div>
                     </div>
                     <p class="section-description">Visualize key performance indicators and case trends.</p>
-                    <!-- Placeholder for Charts -->
                     <div class="placeholder-complex">Chart Components (Approval Rates, Processing Times, etc.) Go Here...</div>
                 </div>
 
                  <!-- == AI Assistant Content == -->
                 <div id="ai-content" class="content-section">
-                     <div class="content-header">
+                    <div class="content-header">
                         <h2>AI Legal Assistant</h2>
+                         <div class="header-actions">
+                            <button class="button secondary small">[H] History</button>
+                        </div>
                     </div>
                     <p class="section-description">Utilize AI for insights, summaries, and assistance.</p>
-                     <!-- Placeholder for AI Chat Interface -->
                     <div class="placeholder-complex ai-panel">
                         <p>AI Chat Window & Suggestion Tools Go Here...</p>
                         <p><em>"I am your Kershaw Law Visa Assistant AI. How can I help?"</em></p>
@@ -260,9 +278,11 @@
                 <div id="settings-content" class="content-section">
                      <div class="content-header">
                         <h2>System Settings</h2>
+                         <div class="header-actions">
+                            <button class="button primary small">[S] Save Changes</button>
+                        </div>
                     </div>
                     <p class="section-description">Manage user accounts, integrations, and preferences.</p>
-                     <!-- Placeholder for Settings Forms -->
                      <div class="placeholder-complex">Settings Forms (User Management, Notifications, API Keys) Go Here...</div>
                 </div>
 

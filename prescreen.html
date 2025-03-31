@@ -1,92 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-Screening - The Kershaw Law Firm P.C.</title>
-    <link rel="stylesheet" href="css/prescreen.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo-container">
-            <h1>The Kershaw Law Firm P.C.</h1>
-            <div class="header-line"></div>
-        </div>
-        <div class="user-info" id="user-info" style="display: none;">
-            <span id="user-email"></span>
-            <a href="#" id="logout-button" class="logout-link">Logout</a>
-        </div>
-        <a href="login.html" class="login-button" id="login-button">Login</a>
-    </header>
+// Fade in on page load
+window.addEventListener('load', () => {
+    document.body.style.transition = 'opacity 0.3s ease';
+    document.body.style.opacity = '1';
+});
 
-    <!-- Main Content -->
-    <main class="content-wrapper">
-        <section class="prescreen-section">
-            <h2>Pre-Screening Form</h2>
-            <p class="subtitle">Tell Us About Your Needs</p>
-            <form id="prescreen-form" class="prescreen-form">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-group">
-                    <label for="business">Business Name</label>
-                    <input type="text" id="business" name="business" placeholder="Enter your business name" required>
-                </div>
-                <div class="form-group">
-                    <label for="visa-type">Visa Type</label>
-                    <select id="visa-type" name="visa-type" required>
-                        <option value="" disabled selected>Select a visa type</option>
-                        <option value="h2a">H-2A (Agricultural)</option>
-                        <option value="h2b">H-2B (Non-Agricultural)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="workers">Number of Workers Needed</label>
-                    <input type="number" id="workers" name="workers" min="1" placeholder="Enter number" required>
-                </div>
-                <button type="submit" class="submit-button">Submit</button>
-            </form>
-            <p id="form-message" class="form-message"></p>
-        </section>
-    </main>
+// Firebase Auth Logic
+const auth = window.auth;
+const userInfo = document.getElementById('user-info');
+const userEmail = document.getElementById('user-email');
+const logoutButton = document.getElementById('logout-button');
+const loginButton = document.getElementById('login-button');
 
-    <!-- Navigation -->
-    <nav class="tabs">
-        <a href="index.html" class="tab-link">Home</a>
-        <a href="h2a.html" class="tab-link">H-2A</a>
-        <a href="h2b.html" class="tab-link">H-2B</a>
-        <a href="costs.html" class="tab-link">Costs</a>
-        <a href="contact.html" class="tab-link">Contact</a>
-        <a href="login.html" class="tab-link">Login</a>
-    </nav>
+window.onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginButton.style.display = 'none';
+        userInfo.style.display = 'flex';
+        userEmail.textContent = user.email;
+    } else {
+        loginButton.style.display = 'block';
+        userInfo.style.display = 'none';
+    }
+});
 
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+logoutButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.signOut(auth)
+        .then(() => {
+            console.log('Logged out');
+        })
+        .catch((error) => {
+            console.error('Logout error:', error);
+            alert('Logout failed');
+        });
+});
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
-            authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
-            projectId: "thekershawlawfirm-d5b54",
-            storageBucket: "thekershawlawfirm-d5b54.firebasestorage.app",
-            messagingSenderId: "588166358773",
-            appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-            measurementId: "G-5SVMGTE290"
-        };
+// Form Handling
+const prescreenForm = document.getElementById('prescreen-form');
+const formMessage = document.getElementById('form-message');
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+prescreenForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const business = document.getElementById('business').value;
+    const visaType = document.getElementById('visa-type').value;
+    const workers = document.getElementById('workers').value;
 
-        window.auth = auth;
-        window.onAuthStateChanged = onAuthStateChanged;
-        window.signOut = signOut;
-    </script>
-    <script type="module" src="js/prescreen.js"></script>
-</body>
-</html>
+    // Basic validation
+    if (!name || !business || !visaType || !workers) {
+        formMessage.textContent = 'Please fill out all fields.';
+        formMessage.style.color = '#C0392B';
+        return;
+    }
+
+    // Simulate form submission (replace with actual backend logic later)
+    console.log('Pre-screening submitted:', { name, business, visaType, workers });
+    formMessage.textContent = 'Thank you! We’ll review your submission and get back to you soon.';
+    formMessage.style.color = '#F5F6F5';
+    prescreenForm.reset();
+});
+
+// Input animations
+const inputs = document.querySelectorAll('.form-group input, .form-group select');
+inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        input.parentElement.style.transform = 'translateY(-5px)';
+    });
+    input.addEventListener('blur', () => {
+        input.parentElement.style.transform = 'translateY(0)';
+    });
+});

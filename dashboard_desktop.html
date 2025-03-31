@@ -6,7 +6,7 @@
     <title>Kershaw Law Firm P.C. - Secure Admin Portal</title>
     <meta name="description" content="Internal administration portal for The Kershaw Law Firm P.C.">
     <!-- Main Dashboard CSS -->
-    <link rel="stylesheet" href="css/dashboard_desktop.css">
+    <link rel="stylesheet" href="css/dashboard_desktop.css"> <!-- Assumes css folder is sibling to html -->
     <!-- Placeholder for Page-Specific CSS -->
     <link id="page-specific-css" rel="stylesheet" href="">
 
@@ -72,7 +72,8 @@
                     </button>
                     <div class="profile-menu-container">
                         <button class="profile-button">
-                            <img src="placeholder-avatar.png" alt="Admin Avatar" class="profile-avatar">
+                            <!-- === UPDATED IMAGE SOURCE === -->
+                            <img src="https://github.com/Master120344/KershawLawFirm/raw/main/assets/adminprofilepicture.png" alt="Admin Avatar" class="profile-avatar">
                             <span class="profile-name" id="admin-username">Eleanor Vance</span>
                             <span class="profile-arrow">▼</span>
                         </button>
@@ -309,14 +310,16 @@
                  <!-- == Settings Content == -->
                 <div id="settings-content" class="content-section">
                      <div class="content-header"><h2>System Settings</h2><div class="header-actions"><button class="button primary small" disabled>💾 Save Changes</button></div></div>
-                    <p class="section-description">Manage user accounts, integrations, and preferences.</p><div class="placeholder-placeholder-complex">Settings Forms (User Management, Notifications, API Keys) Go Here...</div>
+                    <p class="section-description">Manage user accounts, integrations, and preferences.</p><div class="placeholder-complex">Settings Forms (User Management, Notifications, API Keys) Go Here...</div>
                 </div>
 
             </main>
         </div> <!-- End Main Wrapper -->
     </div> <!-- End Dashboard Container -->
 
+    <!-- === SCRIPT PATHS MUST MATCH YOUR FOLDER STRUCTURE === -->
     <script src="js/dashboard_desktop.js"></script>
-    <script src="js/docusign_desktop.js"></script> <!-- Keep this linked -->
+    <script src="js/docusign_desktop.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FAQ - The Kershaw Law Firm P.C. - Mobile</title>
+    <meta name="description" content="Frequently Asked Questions about H-2A/H-2B visas with The Kershaw Law Firm P.C. Mobile access.">
+
+    <!-- Linking to the mobile CSS file -->
+    <link rel="stylesheet" href="css/faq_mobile.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Element with Animation -->
+    <div id="background-static" class="background-animated"></div>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>The Kershaw Law Firm P.C.</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <a href="login_mobile.html" id="login-button" class="login-button">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <p class="faq-intro">Your H-2A and H-2B visa questions, answered with expertise.</p>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3 class="faq-question">What are H-2A and H-2B visas?</h3>
+                        <div class="faq-answer">
+                            <p>The H-2A visa is for temporary agricultural workers, while the H-2B visa is for non-agricultural temporary workers. Both allow U.S. employers to hire foreign nationals when there are insufficient U.S. workers available, subject to strict labor certifications.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Who qualifies for an H-2A visa?</h3>
+                        <div class="faq-answer">
+                            <p>Employers in agriculture (e.g., farms, nurseries) needing seasonal or temporary workers qualify. You must prove a shortage of U.S. workers and that hiring foreigners won’t harm local wages or conditions.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What industries use H-2B visas?</h3>
+                        <div class="faq-answer">
+                            <p>H-2B visas are common in hospitality, landscaping, construction, and tourism. They’re capped annually at 66,000, so timing is critical. We’ll guide you through the process seamlessly.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">How long does the visa process take?</h3>
+                        <div class="faq-answer">
+                            <p>Typically, 60-90 days, depending on labor certification, USCIS processing, and consular interviews. Our prescreening ensures your application is optimized for speed and approval.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What costs should I expect?</h3>
+                        <div class="faq-answer">
+                            <p>Costs include filing fees ($460-$1,000+), labor certification expenses, and worker transportation. We provide transparent estimates tailored to your needs during prescreening.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can workers extend their stay?</h3>
+                        <div class="faq-answer">
+                            <p>Yes, H-2A/H-2B visas can be extended in one-year increments, up to three years total, if the need persists. We handle extensions with precision to keep your workforce intact.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why choose The Kershaw Law Firm P.C.?</h3>
+                        <div class="faq-answer">
+                            <p>Our expertise in visa law, meticulous prescreening, and personalized service ensure your application succeeds. We turn complex processes into clear solutions.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="getstarted_mobile.html" class="cta-button">Get Started Now</a>
+            </section>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs (Footer) -->
+    <nav class="tabs">
+        <a href="index_mobile.html">Home</a>
+        <a href="prescreen_mobile.html">Prescreen</a>
+        <a href="faq_mobile.html" class="active">FAQ</a>
+        <a href="contact_mobile.html">Contact</a>
+        <a href="login_mobile.html">Login</a>
+    </nav>
+
+    <!-- Firebase Initialization Script -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY", // Replace with secure env variable in production
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
+
+      try {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+      } catch (error) {
+        console.error("Error initializing Firebase (Mobile):", error);
+        document.body.innerHTML += '<p style="color: #D35400; text-align: center; padding: 10px; font-size: 14px;">Error loading application. Please try again later.</p>';
+      }
+    </script>
+
+    <!-- Link to Mobile JS -->
+    <script src="js/faq_mobile.js"></script>
+</body>
+</html>

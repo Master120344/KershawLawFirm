@@ -1,4 +1,4 @@
-// js/h2a_desktop.js
+// js/h2avisa_desktop.js
 
 document.addEventListener('DOMContentLoaded', () => {
     const bodyElement = document.body;
@@ -85,5 +85,5 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionObserver.observe(section);
     });
 
-    console.log("H2A Desktop JS Initialized.");
+    console.log("H2A Visa Desktop JS Initialized.");
 });

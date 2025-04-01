@@ -1,12 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Element Selectors (Updated to match new IDs)
-    const loginButton = document.getElementById('login-button');
-    const userInfoDiv = document.getElementById('user-info');
-    const userEmailSpan = document.getElementById('user-email');
-    const logoutButton = document.getElementById('logout-button');
+    // Element Selectors
     const bodyElement = document.body;
-    const contactForm = document.getElementById('contact-form'); // Fixed ID
-    const thankYouMessage = document.getElementById('thank-you-message'); // Fixed ID
+    const contactForm = document.getElementById('contact-form');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const userNameSpan = document.getElementById('user-name');
 
     // Fade-in Effect for Page Load
     if (bodyElement) {
@@ -15,48 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
     }
 
-    // Firebase Auth Setup
-    if (window.firebaseAuth && window.firebaseOnAuthStateChanged && window.firebaseSignOut) {
-        const auth = window.firebaseAuth;
-
-        // Auth State Listener
-        window.firebaseOnAuthStateChanged(auth, (user) => {
-            if (user) {
-                loginButton.style.display = 'none';
-                userInfoDiv.style.display = 'flex';
-                userEmailSpan.textContent = user.email;
-            } else {
-                loginButton.style.display = 'inline-block';
-                userInfoDiv.style.display = 'none';
-                userEmailSpan.textContent = '';
-            }
-        });
-
-        // Logout Handler
-        if (logoutButton && !logoutButton.hasAttribute('data-listener-attached')) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.firebaseSignOut(auth)
-                    .then(() => {
-                        // UI updates handled by auth listener
-                    })
-                    .catch((error) => {
-                        console.error("Logout failed:", error);
-                        alert("Logout failed. Please try again.");
-                    });
-            });
-            logoutButton.setAttribute('data-listener-attached', 'true');
-        }
-    } else {
-        console.error("Firebase Auth not initialized properly.");
-        loginButton.style.display = 'inline-block';
-        userInfoDiv.style.display = 'none';
-    }
-
     // Contact Form Submission Handler
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Prevent page refresh
 
             // Collect form data
             const formData = new FormData(contactForm);
@@ -84,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 `
             });
 
+            // Update Thank You message with user's name
+            userNameSpan.textContent = data.name;
+
             // Transition to Thank You Message
             contactForm.style.transition = 'opacity 0.3s ease';
             contactForm.style.opacity = '0';
@@ -104,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Enhance touch responsiveness
-    document.querySelectorAll('.tabs a, .submit-button, .login-button, .logout-link').forEach(el => {
+    document.querySelectorAll('.tab-link, .submit-button, .login-button').forEach(el => {
         el.addEventListener('touchstart', () => {}, { passive: true });
     });
 });

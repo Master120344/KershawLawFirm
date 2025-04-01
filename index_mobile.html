@@ -1,58 +1,90 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Element Selectors
-    const loginButton = document.getElementById('login-button');
-    const userInfoDiv = document.getElementById('user-info');
-    const userEmailSpan = document.getElementById('user-email');
-    const logoutButton = document.getElementById('logout-button');
-    const bodyElement = document.body;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Kershaw Law Firm P.C. - Mobile</title>
+    <meta name="description" content="The Kershaw Law Firm P.C. specializes in H2A/H2B visa prescreening and processing. Mobile access.">
 
-    // Fade-in Effect
-    if (bodyElement) {
-        setTimeout(() => {
-            bodyElement.classList.add('loaded');
-        }, 50);
-    }
+    <!-- Linking to the mobile CSS file -->
+    <link rel="stylesheet" href="css/index_mobile.css">
 
-    // Firebase Auth Setup
-    if (window.firebaseAuth && window.firebaseOnAuthStateChanged && window.firebaseSignOut) {
-        const auth = window.firebaseAuth;
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Element -->
+    <div id="background-static"></div>
+    <div class="overlay"></div>
 
-        // Auth State Listener
-        window.firebaseOnAuthStateChanged(auth, (user) => {
-            if (user) {
-                loginButton.style.display = 'none';
-                userInfoDiv.style.display = 'flex';
-                userEmailSpan.textContent = user.email;
-            } else {
-                loginButton.style.display = 'inline-block';
-                userInfoDiv.style.display = 'none';
-                userEmailSpan.textContent = '';
-            }
-        });
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>The Kershaw Law Firm P.C.</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <a href="login_mobile.html" id="login-button" class="login-button">Login</a>
+            </div>
+        </div>
+    </header>
 
-        // Logout Handler
-        if (logoutButton && !logoutButton.hasAttribute('data-listener-attached')) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.firebaseSignOut(auth)
-                    .then(() => {
-                        // UI updates handled by auth listener
-                    })
-                    .catch((error) => {
-                        console.error("Logout failed:", error);
-                        alert("Logout failed. Please try again.");
-                    });
-            });
-            logoutButton.setAttribute('data-listener-attached', 'true');
-        }
-    } else {
-        console.error("Firebase Auth not initialized properly.");
-        loginButton.style.display = 'inline-block';
-        userInfoDiv.style.display = 'none';
-    }
+    <!-- Main Content Area -->
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <section class="hero">
+                <h2>Secure Your H-2A & H-2B Visa</h2>
+                <p class="tagline">Expert prescreening for temporary worker solutions.</p>
+                <a href="getstarted_mobile.html" class="cta-button">Get Started Today</a>
+            </section>
+        </div>
+    </div>
 
-    // Ensure touch events work smoothly (optional enhancement)
-    document.querySelectorAll('.tabs a, .cta-button, .login-button, .logout-link').forEach(el => {
-        el.addEventListener('touchstart', () => {}, { passive: true }); // Improves touch responsiveness
-    });
-});
+    <!-- Navigation Tabs (Footer) -->
+    <nav class="tabs">
+        <a href="index_mobile.html" class="active">Home</a>
+        <a href="prescreen_mobile.html">Prescreen</a>
+        <a href="faq_mobile.html">FAQ</a>
+        <a href="contact_mobile.html">Contact</a>
+        <a href="login_mobile.html">Login</a>
+    </nav>
+
+    <!-- Firebase Initialization Script -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY", // Replace with secure env variable in production
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
+
+      try {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+      } catch (error) {
+        console.error("Error initializing Firebase (Mobile):", error);
+        document.body.innerHTML += '<p style="color: #D35400; text-align: center; padding: 10px; font-size: 14px;">Error loading application. Please try again later.</p>';
+      }
+    </script>
+
+    <!-- Link to Mobile JS -->
+    <script src="js/index_mobile.js"></script>
+</body>
+</html>

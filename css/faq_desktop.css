@@ -262,7 +262,7 @@ body.loaded {
 }
 
 .faq-item.active .faq-answer {
-    max-height: 300px; /* Increased for desktop readability */
+    max-height: none; /* Remove fixed height to allow full content display */
     padding: 20px 30px;
 }
 

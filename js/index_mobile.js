@@ -50,4 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loginButton.style.display = 'inline-block';
         userInfoDiv.style.display = 'none';
     }
+
+    // Ensure touch events work smoothly (optional enhancement)
+    document.querySelectorAll('.tabs a, .cta-button, .login-button, .logout-link').forEach(el => {
+        el.addEventListener('touchstart', () => {}, { passive: true }); // Improves touch responsiveness
+    });
 });

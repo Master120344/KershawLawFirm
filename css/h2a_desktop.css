@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Cinzel', serif;
 }
 
 /* Smooth Scroll */
@@ -13,48 +12,50 @@ html {
 
 /* Body Styling */
 body {
-    background: #1A1A1A;
-    position: relative;
+    font-family: 'EB Garamond', serif;
     min-height: 100vh;
-    overflow-x: hidden;
     color: #F5F6F5;
     line-height: 1.6;
-    /* Adjust padding based on final fixed element heights */
-    padding-top: 140px; /* Original value, adjust if needed */
-    padding-bottom: 120px; /* Original value, adjust if needed */
+    background-color: #1a1d24;
+    overflow-x: hidden;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    padding-top: 160px;
+    padding-bottom: 100px;
 }
 
-/* Background Layers */
-body::before {
-    content: '';
-    position: absolute; /* Changed back to absolute, covers scrolling content */
+body.loaded {
+    opacity: 1;
+}
+
+#background-static {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(44, 62, 80, 0.2) 0%, rgba(192, 57, 43, 0.1) 100%);
-    z-index: 0; /* Keep behind content */
+    z-index: -2;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('../assets/austinbackground.jpg');
 }
 
-body::after {
-    content: '';
-    position: absolute; /* Changed back to absolute */
+@media (max-width: 0px), (min-width: 0px) {
+    #background-static {
+        background-image: url('https://github.com/Master120344/KershawLawFirm/blob/main/assets/austinbackground.jpg?raw=true');
+    }
+}
+
+.overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://www.transparenttextures.com/patterns/old-map.png') repeat;
-    background-size: 400px 400px; /* Original size */
-    opacity: 0.15; /* Original opacity */
-    animation: backgroundShift 60s linear infinite; /* Original animation */
-    z-index: 0; /* Keep behind content */
-}
-
-/* Background Animation */
-@keyframes backgroundShift {
-    0% { background-position: 0 0; }
-    50% { background-position: 200px 200px; }
-    100% { background-position: 0 0; }
+    background-color: rgba(10, 10, 20, 0.5);
+    z-index: -1;
 }
 
 /* Header Styling */
@@ -63,172 +64,180 @@ body::after {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensure header is on top */
-    padding: 30px 40px; /* Original padding */
-    background: rgba(26, 26, 26, 0.95); /* Original background */
+    z-index: 1000;
+    padding: 25px 0;
+    background: rgba(26, 29, 36, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.header-content {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    border-bottom: 2px solid #C0392B;
-    transition: all 0.3s ease; /* Original transition */
 }
 
-/* Logo Container */
 .logo-container {
-    text-align: center; /* Original alignment */
-    /* NOTE: header-actions div was added in HTML for better layout */
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 3.5rem; /* Original size */
+    font-size: 3.0rem;
     color: #F5F6F5;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
     letter-spacing: 2px;
+    margin-bottom: 8px;
     transition: color 0.3s ease;
-    margin-bottom: 0; /* Adjust if line spacing is off */
+    font-weight: 700;
 }
 
 .logo-container h1:hover {
-    color: #C0392B;
+    color: #E74C3C;
 }
 
 .header-line {
-    width: 150px; /* Original width */
-    height: 4px;
+    width: 120px;
+    height: 3px;
     background: #C0392B;
-    margin: 15px auto; /* Original margin */
-    transition: width 0.4s ease;
+    margin: 0 auto;
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 1px;
 }
 
 .logo-container:hover .header-line {
-    width: 300px; /* Original hover width */
+    width: 350px;
 }
 
-/* Header Actions container (Added in HTML, style if needed) */
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 20px; /* Adjust spacing */
+    gap: 20px;
 }
 
-/* Login Button */
 .login-button {
-    padding: 12px 40px; /* Original padding */
+    padding: 12px 35px;
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.4rem; /* Original size */
+    font-size: 1.2rem;
     font-weight: 600;
-    border-radius: 25px; /* Original radius */
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(192, 57, 43, 0.4);
+    border: 1px solid transparent;
 }
 
 .login-button:hover {
-    background: #9B2D23; /* Original hover color */
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    background: #E74C3C;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
+    border-color: #F5F6F5;
 }
 
-/* User Info */
 .user-info {
-    display: flex; /* Controlled by JS */
+    display: flex;
     align-items: center;
     gap: 15px;
     font-family: 'EB Garamond', serif;
-    font-size: 1.2rem; /* Original size */
-    color: #F5F6F5;
-}
-
-#user-email {
-    /* No specific style in original, add if needed */
+    font-size: 1.1rem;
+    color: #e0e0e0;
 }
 
 .logout-link {
-    color: #C0392B;
+    color: #E74C3C;
     text-decoration: none;
-    font-size: 1rem; /* Original size */
-    transition: color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(245, 246, 245, 0.1);
 }
 
 .logout-link:hover {
-    color: #F5F6F5; /* Original hover */
+    color: #F5F6F5;
+    background-color: rgba(231, 76, 60, 0.8);
+    transform: scale(1.05);
 }
 
 /* Content Wrapper */
 .content-wrapper {
-    position: relative; /* Keep relative for z-index */
-    z-index: 2; /* Above background layers */
-    padding: 40px; /* Original padding */
+    position: relative;
+    z-index: 5;
+    padding: 60px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px; /* Original gap */
-    max-width: 1200px; /* Original max-width */
-    margin: 0 auto;
+    gap: 60px;
 }
 
-/* Section Base - Used by JS for reveal */
+/* Section Styles */
 .section {
-    /* Styles applied individually below */
-    /* JS will handle opacity and transform for reveal */
-    width: 100%; /* Ensure sections take width */
-}
-
-/* Hero Section */
-.hero { /* Also has .section class */
+    width: 100%;
     text-align: center;
-    padding: 60px 40px; /* Original padding */
-    background: rgba(26, 26, 26, 0.9); /* Original background */
-    border-radius: 15px; /* Original radius */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(26, 29, 36, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     border: 1px solid #C0392B;
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    font-size: 4rem; /* Original size */
-    color: #F5F6F5;
-    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
-    margin-bottom: 25px;
+    font-size: 4.8rem;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+    margin-bottom: 20px;
 }
 
 .subtitle {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.8rem; /* Original size */
-    color: #F5F6F5;
-    margin-bottom: 35px;
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #e0e0e0;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
 }
 
 .cta-button {
-    display: inline-block;
-    padding: 20px 60px; /* Original padding */
+    padding: 18px 55px;
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.6rem; /* Original size */
+    font-size: 1.6rem;
     font-weight: 700;
-    border-radius: 50px; /* Original radius */
-    transition: all 0.4s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 5px 18px rgba(192, 57, 43, 0.5);
+    border: 2px solid transparent;
+    display: inline-block;
 }
 
 .cta-button:hover {
-    background: #9B2D23; /* Original hover */
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+    background: #E74C3C;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
+    border-color: #ffffff;
 }
 
-/* Icon Placeholder Style (Added for HTML) */
 .icon-placeholder {
     font-size: 0.8em;
     color: #C0392B;
     margin-bottom: 15px;
-    width: 40px; /* Adjust size */
+    width: 40px;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -239,111 +248,74 @@ body::after {
 }
 
 /* Trust Section */
-.trust-section { /* Also has .section class */
-    background: rgba(26, 26, 26, 0.9); /* Original background */
-    padding: 40px; /* Original padding */
-    border-radius: 15px; /* Original radius */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid #C0392B; /* Original border */
-}
-
-.trust-section h3 {
+.trust-section h3,
+.benefits-section h3,
+.process-section h3 {
     font-family: 'Cinzel', serif;
-    font-size: 2.5rem; /* Original size */
+    font-size: 2.5rem;
     color: #F5F6F5;
     text-align: center;
     margin-bottom: 30px;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
-.trust-points {
+.trust-points,
+.benefits,
+.process-steps {
     display: flex;
     justify-content: center;
-    gap: 30px; /* Original gap */
+    gap: 30px;
     flex-wrap: wrap;
 }
 
-.trust-item {
-    background: rgba(245, 246, 245, 0.1); /* Original background */
-    padding: 25px; /* Original padding */
-    border-radius: 10px; /* Original radius */
-    width: 300px; /* Original width */
+.trust-item,
+.benefit-card,
+.process-step {
+    background: rgba(245, 246, 245, 0.1);
+    padding: 25px;
+    border-radius: 10px;
+    width: 300px;
     text-align: center;
-    transition: all 0.3s ease; /* Original transition */
+    transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.trust-item:hover {
-    transform: scale(1.05); /* Original hover */
+.trust-item:hover,
+.benefit-card:hover,
+.process-step:hover {
+    transform: scale(1.05);
     background: #C0392B;
     color: #F5F6F5;
 }
 
-.trust-item h4 {
+.trust-item h4,
+.benefit-card h4,
+.process-step h4 {
     font-family: 'Cinzel', serif;
-    font-size: 1.5rem; /* Original size */
+    font-size: 1.5rem;
     color: #F5F6F5;
     margin-bottom: 15px;
 }
 
-.trust-item p {
+.trust-item p,
+.benefit-card p,
+.process-step p {
     font-family: 'EB Garamond', serif;
-    font-size: 1.1rem; /* Original size */
-    color: #F5F6F5;
+    font-size: 1.1rem;
+    color: #e0e0e0;
 }
 
-/* Benefits Section */
-.benefits-section { /* Also has .section class */
-    background: rgba(26, 26, 26, 0.9); /* Original background */
-    padding: 40px; /* Original padding */
-    border-radius: 15px; /* Original radius */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid #C0392B; /* Original border */
-}
-
-.benefits-section h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.5rem; /* Original size */
-    color: #F5F6F5;
-    text-align: center;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-}
-
-.benefits {
-    display: flex;
-    justify-content: center;
-    gap: 30px; /* Original gap */
-    flex-wrap: wrap;
-}
-
-.benefit-card {
-    background: rgba(245, 246, 245, 0.1); /* Original background */
-    padding: 25px; /* Original padding */
-    border-radius: 10px; /* Original radius */
-    width: 300px; /* Original width */
-    text-align: center;
-    transition: all 0.3s ease; /* Original transition */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.benefit-card:hover {
-    transform: scale(1.05); /* Original hover */
+/* Process Section */
+.step-number {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
     background: #C0392B;
     color: #F5F6F5;
-}
-
-.benefit-card h4 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.5rem; /* Original size */
-    color: #F5F6F5;
-    margin-bottom: 15px;
-}
-
-.benefit-card p {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1rem; /* Original size */
-    color: #F5F6F5;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 /* Navigation Tabs */
@@ -352,27 +324,29 @@ body::after {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensure tabs are on top */
-    padding: 20px 40px; /* Original padding */
-    background: rgba(26, 26, 26, 0.95); /* Original background */
+    z-index: 1000;
+    padding: 20px 0;
+    background: rgba(26, 29, 36, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
-    gap: 60px; /* Original gap */
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
-    border-top: 2px solid #C0392B;
+    align-items: center;
+    gap: 50px;
 }
 
 .tabs a {
-    color: #F5F6F5;
+    color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    font-size: 1.4rem; /* Original size */
+    font-size: 1.3rem;
     font-weight: 500;
-    padding: 12px 25px; /* Original padding */
-    transition: all 0.4s ease;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
     position: relative;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .tabs a::after {
@@ -380,197 +354,29 @@ body::after {
     position: absolute;
     width: 0;
     height: 3px;
-    bottom: 0; /* Adjusted position */
+    bottom: -5px;
     left: 50%;
-    transform: translateX(-50%); /* Center align */
+    transform: translateX(-50%);
     background: #C0392B;
-    transition: all 0.4s ease;
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 2px;
 }
 
 .tabs a:hover,
 .tabs a.active {
-    color: #C0392B; /* Original active/hover color */
+    color: #FFFFFF;
 }
 
 .tabs a:hover::after,
 .tabs a.active::after {
-    width: 100%; /* Original underline width */
-    /* left: 0; */ /* Keep centered alignment */
+    width: 70%;
 }
-
-/* Animations (Unused FadeIn/Down from original - JS handles reveal) */
-/* @keyframes fadeInUp { ... } */
-/* @keyframes fadeInDown { ... } */
-
-/* --- START: Responsive Design (Kept from original h2a.css) --- */
-@media (min-width: 769px) {
-    .header { padding: 40px 60px; }
-    .logo-container h1 { font-size: 4rem; }
-    .header-line { width: 200px; }
-    .logo-container:hover .header-line { width: 350px; }
-    .content-wrapper { padding: 60px; }
-    .hero { padding: 80px 60px; }
-    .hero h2 { font-size: 4.5rem; }
-    .subtitle { font-size: 2rem; }
-    .cta-button { padding: 25px 70px; font-size: 1.8rem; }
-    .trust-section { padding: 50px; }
-    .trust-section h3 { font-size: 3rem; }
-    .benefits-section { padding: 50px; }
-    .benefits-section h3 { font-size: 3rem; }
-    .tabs { padding: 25px 60px; gap: 80px; }
-    .tabs a { font-size: 1.6rem; padding: 15px 30px; }
-}
-
-@media (max-width: 768px) {
-    body { padding-top: 100px; } /* Adjust based on collapsed header */
-    .header { padding: 20px 15px; flex-direction: column; text-align: center; }
-    .logo-container h1 { font-size: 2.5rem; }
-    .header-line { width: 100px; margin-top: 10px; margin-bottom: 10px; }
-    .logo-container:hover .header-line { width: 200px; }
-    .header-actions { margin-top: 15px; } /* Space below logo */
-    .login-button { padding: 10px 30px; font-size: 1.2rem; }
-    .content-wrapper { padding: 30px 15px; gap: 40px; }
-    .hero { padding: 40px 20px; }
-    .hero h2 { font-size: 2.5rem; }
-    .subtitle { font-size: 1.4rem; }
-    .cta-button { padding: 15px 40px; font-size: 1.3rem; }
-    .trust-section { padding: 25px; }
-    .trust-section h3 { font-size: 2rem; }
-    .trust-item { width: 100%; max-width: 280px; } /* Allow full width */
-    .benefits-section { padding: 25px; }
-    .benefits-section h3 { font-size: 2rem; }
-    .benefit-card { width: 100%; max-width: 280px; } /* Allow full width */
-    .tabs { padding: 15px 10px; gap: 15px; flex-wrap: wrap; justify-content: space-around; } /* Better wrapping */
-    .tabs a { font-size: 1.1rem; padding: 8px 12px; } /* Smaller tabs */
-}
-
-@media (max-width: 480px) {
-    body { padding-top: 90px; } /* Further adjust */
-    .header { padding: 15px 10px; }
-    .logo-container h1 { font-size: 2rem; }
-    .header-line { width: 80px; }
-    .logo-container:hover .header-line { width: 150px; }
-    .login-button { padding: 8px 25px; font-size: 1rem; }
-    .content-wrapper { padding: 20px 10px; gap: 30px; }
-    .hero { padding: 30px 15px; }
-    .hero h2 { font-size: 2rem; }
-    .subtitle { font-size: 1.2rem; }
-    .cta-button { padding: 12px 30px; font-size: 1.1rem; }
-    .trust-section { padding: 20px; }
-    .trust-section h3 { font-size: 1.8rem; }
-    .benefits-section { padding: 20px; }
-    .benefits-section h3 { font-size: 1.8rem; }
-    .tabs { padding: 10px 5px; gap: 8px; } /* Tighter gap */
-    .tabs a { font-size: 1rem; padding: 6px 8px; } /* Even smaller tabs */
-}
-/* --- END: Responsive Design --- */
-
-
-/* Extended CSS for Layout (Kept from original) */
-.header { transition: padding 0.3s ease; }
-.content-wrapper { width: 100%; }
-/* .hero { margin-bottom: 40px; } Removed margin, using gap in flex container */
-/* .trust-section { margin-bottom: 40px; } */
-/* .benefits-section { margin-bottom: 40px; } */
-.tabs { transition: padding 0.3s ease; }
-
-/* Additional Styling (Kept from original) */
-.login-button:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
-.cta-button:active { transform: translateY(0) scale(1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
-.tabs a:active { transform: scale(0.95); }
-.hero h2 { transition: color 0.3s ease; }
-.subtitle { transition: opacity 0.3s ease; }
-.trust-item { transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease; }
-.benefit-card { transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease; }
-
-/* Fine-Tuned Details (Kept from original) */
-.hero { background: linear-gradient(180deg, rgba(26, 26, 26, 0.9) 80%, rgba(40, 40, 40, 0.9) 100%); }
-.trust-section { background: linear-gradient(180deg, rgba(26, 26, 26, 0.9) 80%, rgba(40, 40, 40, 0.9) 100%); }
-.benefits-section { background: linear-gradient(180deg, rgba(26, 26, 26, 0.9) 80%, rgba(40, 40, 40, 0.9) 100%); }
-.trust-item h4 { letter-spacing: 1px; }
-.benefit-card h4 { letter-spacing: 1px; }
-.trust-item p { padding: 0 10px; }
-.benefit-card p { padding: 0 10px; }
-
-/* Micro-Interactions (Kept from original) */
-.hero:hover h2 { color: #C0392B; }
-.trust-section:hover h3 { color: #C0392B; }
-.benefits-section:hover h3 { color: #C0392B; }
-.trust-item:hover h4 { color: #F5F6F5; } /* Ensures text is readable on hover background */
-.benefit-card:hover h4 { color: #F5F6F5; }
-.trust-item:hover p { color: #F5F6F5; }
-.benefit-card:hover p { color: #F5F6F5; }
-
 
 /* Accessibility */
-.cta-button:focus { outline: 2px solid #C0392B; outline-offset: 2px; }
-.login-button:focus { outline: 2px solid #C0392B; outline-offset: 2px; }
-.tabs a:focus { outline: 2px solid #C0392B; outline-offset: 2px; }
-/* Add focus-visible for modern browsers */
-:is(button, a):focus-visible {
-    outline: 2px solid #E74C3C; /* Use brighter red for focus */
+a:focus, button:focus {
+    outline: none;
+}
+a:focus-visible, button:focus-visible {
+    outline: 2px solid #E74C3C;
     outline-offset: 2px;
 }
-:is(button, a):focus:not(:focus-visible) {
-    outline: none; /* Hide outline if not keyboard focus */
-}
-
-/* Lawyer Theme Enhancements (Kept from original) - Needs Position Relative on Sections */
-.hero, .trust-section, .benefits-section { position: relative; } /* Needed for ::before */
-
-.hero::before, .trust-section::before, .benefits-section::before {
-    content: '';
-    position: absolute;
-    top: -1px; /* Position just above the border */
-    left: 50%;
-    width: 60px;
-    height: 5px;
-    background: #C0392B;
-    transform: translateX(-50%);
-    border-radius: 0 0 3px 3px; /* Slightly rounded bottom */
-}
-
-/* More Styling (Kept from original) */
-body { font-size: 16px; } /* Base font size */
-.hero h2 { font-weight: 700; }
-.trust-section h3 { font-weight: 700; }
-.benefits-section h3 { font-weight: 700; }
-.trust-item { border: 1px solid rgba(192, 57, 43, 0.2); }
-.benefit-card { border: 1px solid rgba(192, 57, 43, 0.2); }
-
-/* Filler for Layout (Minor adjustments kept) */
-/* .header { padding-left: 20px; padding-right: 20px; } Using % padding now */
-/* .content-wrapper { margin-top: 20px; } Using padding-top on body now */
-/* Margins below removed as gap handles spacing */
-.hero h2 { padding-bottom: 10px; }
-.subtitle { padding-bottom: 10px; }
-.trust-section h3 { padding-bottom: 10px; }
-.benefits-section h3 { padding-bottom: 10px; }
-.trust-item h4 { padding-bottom: 5px; }
-.benefit-card h4 { padding-bottom: 5px; }
-.trust-item p { margin-bottom: 0; }
-.benefit-card p { margin-bottom: 0; }
-.cta-button { margin-top: 20px; }
-/* .login-button { margin-left: 10px; } Using gap in header-actions now */
-.trust-points { margin-top: 20px; }
-.benefits { margin-top: 20px; }
-
-/* More Details (Kept from original) */
-.hero { transition: box-shadow 0.3s ease; }
-.trust-section { transition: box-shadow 0.3s ease; }
-.benefits-section { transition: box-shadow 0.3s ease; }
-/* .trust-item { transition: box-shadow 0.3s ease; } Combined transition above */
-/* .benefit-card { transition: box-shadow 0.3s ease; } Combined transition above */
-.hero:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); }
-.trust-section:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); }
-.benefits-section:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); }
-
-/* Final Touches (Kept from original) */
-/* body { background-attachment: fixed; } Consider performance impact */
-.header { background-clip: padding-box; }
-.hero { background-clip: padding-box; }
-.trust-section { background-clip: padding-box; }
-.benefits-section { background-clip: padding-box; }
-.tabs { background-clip: padding-box; }
-.trust-item { background-clip: padding-box; }
-.benefit-card { background-clip: padding-box; }

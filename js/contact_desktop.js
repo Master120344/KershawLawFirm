@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 `
             });
 
+            // Simulate form submission success (no actual backend here)
             userNameSpan.textContent = data.name;
-
             contactForm.style.transition = 'opacity 0.3s ease';
             contactForm.style.opacity = '0';
             setTimeout(() => {
@@ -100,6 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     thankYouMessage.classList.add('visible');
                 }, 50);
             }, 300);
+
+            // Reset form fields (optional, since it's hidden)
+            contactForm.reset();
         });
     } else {
         console.error("Contact form not found. Check ID 'contact-form'.");

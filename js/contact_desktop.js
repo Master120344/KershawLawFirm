@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInfoDiv = document.getElementById('user-info');
     const userEmailSpan = document.getElementById('user-email');
     const logoutButton = document.getElementById('logout-button');
+    const navTabs = document.getElementById('nav-tabs');
 
     // Fade-in Effect
     if (bodyElement) {
@@ -30,11 +31,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (loginButton) loginButton.style.display = 'none';
                 if (userInfoDiv) userInfoDiv.style.display = 'flex';
                 if (userEmailSpan) userEmailSpan.textContent = user.email;
+
+                // Update tabs for logged-in state
+                if (navTabs) {
+                    navTabs.innerHTML = `
+                        <a href="/KershawLawFirm/index2_desktop.html" id="tab-home">Home</a>
+                        <a href="/KershawLawFirm/visah2a_desktop.html" id="tab-h2a">H2-A</a>
+                        <a href="/KershawLawFirm/visah2b_desktop.html" id="tab-h2b">H2-B</a>
+                        <a href="/KershawLawFirm/videos_desktop.html" id="tab-videos">Videos</a>
+                        <a href="/KershawLawFirm/contact_desktop.html" id="tab-contact" class="active">Contact</a>
+                    `;
+                }
             } else {
                 console.log("User logged out.");
                 if (loginButton) loginButton.style.display = 'inline-block';
                 if (userInfoDiv) userInfoDiv.style.display = 'none';
                 if (userEmailSpan) userEmailSpan.textContent = '';
+
+                // Reset tabs to logged-out state
+                if (navTabs) {
+                    navTabs.innerHTML = `
+                        <a href="/KershawLawFirm/index_desktop.html" id="tab-home">Home</a>
+                        <a href="/KershawLawFirm/faq_desktop.html" id="tab-faq">FAQ</a>
+                        <a href="/KershawLawFirm/contact_desktop.html" id="tab-contact" class="active">Contact Us</a>
+                    `;
+                }
             }
         });
 
@@ -45,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.firebaseSignOut(auth)
                     .then(() => {
                         console.log("Sign out successful.");
+                        window.location.href = '/KershawLawFirm/login_desktop.html';
                     })
                     .catch((error) => {
                         console.error("Logout failed:", error);
@@ -88,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 `
             });
 
-            // Simulate form submission success (no actual backend here)
             userNameSpan.textContent = data.name;
             contactForm.style.transition = 'opacity 0.3s ease';
             contactForm.style.opacity = '0';
@@ -101,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 50);
             }, 300);
 
-            // Reset form fields (optional, since it's hidden)
             contactForm.reset();
         });
     } else {

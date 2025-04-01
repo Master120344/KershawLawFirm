@@ -14,63 +14,57 @@ html {
 body {
     font-family: 'EB Garamond', serif;
     min-height: 100vh;
-    color: #F5F6F5; /* Light text for dark background */
+    color: #F5F6F5;
     line-height: 1.6;
-    background-color: #1a1d24; /* Dark fallback background */
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    position: relative; /* Needed for stacking context */
-    /* ***** VITAL: Start hidden for fade-in controlled by JS ***** */
+    background-color: #1a1d24;
+    overflow-x: hidden;
+    position: relative;
     opacity: 0;
-    transition: opacity 0.8s ease-in-out; /* Fade-in transition */
-    /* ***** VITAL: End Start hidden ***** */
-    padding-top: 160px; /* Increased space for larger header */
-    padding-bottom: 100px; /* Space for fixed bottom nav */
+    transition: opacity 0.8s ease-in-out;
+    padding-top: 160px;
+    padding-bottom: 100px;
 }
 
-/* ***** VITAL: Class added by JS to make body visible ***** */
 body.loaded {
     opacity: 1;
 }
-/* ***** VITAL: End Class added by JS ***** */
 
-
-/* Background Element (Simplified for static image) */
-/* ***** UPDATED: Replaced #background-slider with #background-static ***** */
 #background-static {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2; /* Behind overlay and content */
+    z-index: -2;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    /* ***** ADD YOUR AUSTIN IMAGE PATH HERE ***** */
-    background-image: url('../images/austin-texas-wallpaper.jpg'); /* --- REPLACE WITH YOUR ACTUAL IMAGE PATH --- */
-    /* Optional: Add a subtle zoom or effect if desired */
-    /* transform: scale(1.05); */
-    /* transition: transform 6s ease-out; */
+    background-image: url('../assets/austinbackground.jpg'); /* Primary path */
 }
 
-/* Dark Overlay for Readability */
+/* Fallback background image using GitHub link */
+@media (max-width: 0px), (min-width: 0px) { /* This is a trick to apply fallback */
+    #background-static {
+        background-image: url('https://github.com/Master120344/KershawLawFirm/blob/main/assets/austinbackground.jpg?raw=true');
+    }
+}
+
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 20, 0.5); /* Adjust darkness/color if needed */
-    z-index: -1; /* Between background and content */
+    background-color: rgba(10, 10, 20, 0.5);
+    z-index: -1;
 }
 
-/* Header Styling */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* High z-index */
+    z-index: 1000;
     padding: 25px 0;
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
@@ -130,7 +124,6 @@ body.loaded {
     gap: 20px;
 }
 
-/* Login Button */
 .login-button {
     padding: 12px 35px;
     background: #C0392B;
@@ -152,9 +145,8 @@ body.loaded {
     border-color: #F5F6F5;
 }
 
-/* User Info */
 .user-info {
-    display: flex; /* Changed from none by default, JS will hide/show */
+    display: flex;
     align-items: center;
     gap: 15px;
     font-family: 'EB Garamond', serif;
@@ -183,13 +175,11 @@ body.loaded {
     transform: scale(1.05);
 }
 
-/* Main Content Area */
 .main-content-area {
     position: relative;
     z-index: 5;
 }
 
-/* Centered Content Container */
 .main-content-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -202,7 +192,6 @@ body.loaded {
     text-align: center;
 }
 
-/* Hero Section */
 .hero {
     padding: 40px 0;
 }
@@ -248,7 +237,6 @@ body.loaded {
     color: #ffffff;
 }
 
-/* Navigation Tabs (Footer) */
 .tabs {
     position: fixed;
     bottom: 0;
@@ -302,11 +290,10 @@ body.loaded {
     width: 70%;
 }
 
-/* Focus Styles */
 a:focus, button:focus {
     outline: none;
 }
 a:focus-visible, button:focus-visible {
-     outline: 2px solid #E74C3C;
-     outline-offset: 2px;
+    outline: 2px solid #E74C3C;
+    outline-offset: 2px;
 }

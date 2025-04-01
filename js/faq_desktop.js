@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         question.addEventListener('click', () => {
             const isActive = item.classList.contains('active');
 
+            // Collapse all other items
             faqItems.forEach(i => {
                 if (i !== item) {
                     i.classList.remove('active');
@@ -72,9 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // Toggle current item
             item.classList.toggle('active');
             if (!isActive) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
+                // Set max-height to full content height plus padding
+                const fullHeight = answer.scrollHeight + 40; // 40px accounts for 20px top + 20px bottom padding
+                answer.style.maxHeight = `${fullHeight}px`;
             } else {
                 answer.style.maxHeight = '0';
             }

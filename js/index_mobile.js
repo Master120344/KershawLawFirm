@@ -1,5 +1,4 @@
 // js/index_mobile.js
-// ** The content here is IDENTICAL to the corrected js/index_desktop.js **
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Element Selectors ---
@@ -12,10 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initial Setup ---
     // Add the 'loaded' class to trigger the CSS fade-in effect (opacity 0 to 1)
     if (bodyElement) {
+        // Slight delay can sometimes help ensure rendering is ready
         setTimeout(() => {
             bodyElement.classList.add('loaded');
             console.log("Body 'loaded' class added for fade-in (Mobile).");
-        }, 50);
+        }, 50); // 50 milliseconds
     } else {
         console.error("Body element not found (Mobile). Fade-in cannot be applied.");
     }
@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // User is signed in
                 console.log("User is logged in (Mobile):", user.email);
                 if (loginButton) loginButton.style.display = 'none';
-                if (userInfoDiv) userInfoDiv.style.display = 'flex';
+                if (userInfoDiv) userInfoDiv.style.display = 'flex'; // Use 'flex' to match CSS
                 if (userEmailSpan) userEmailSpan.textContent = user.email;
 
             } else {
                 // User is signed out
                 console.log("User is logged out (Mobile).");
-                if (loginButton) loginButton.style.display = 'inline-block';
+                if (loginButton) loginButton.style.display = 'inline-block'; // Match CSS display
                 if (userInfoDiv) userInfoDiv.style.display = 'none';
                 if (userEmailSpan) userEmailSpan.textContent = '';
             }
@@ -46,26 +46,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Logout Button Listener ---
         if (logoutButton) {
+             // Prevent adding multiple listeners if script runs unexpectedly twice
              if (!logoutButton.hasAttribute('data-listener-attached')) {
                  logoutButton.addEventListener('click', (e) => {
-                    e.preventDefault();
+                    e.preventDefault(); // Stop link default action
                     console.log("Logout button clicked (Mobile).");
                     window.firebaseSignOut(auth).then(() => {
                         console.log("Firebase sign out successful (Mobile).");
+                        // Auth listener above handles UI changes automatically
                     }).catch((error) => {
                         console.error("Firebase sign out failed (Mobile):", error);
-                        alert("Logout failed. Please try again.");
+                        alert("Logout failed. Please try again."); // User feedback
                     });
                 });
-                logoutButton.setAttribute('data-listener-attached', 'true');
+                logoutButton.setAttribute('data-listener-attached', 'true'); // Mark listener as attached
              }
         } else {
-            // console.log("Logout button element not found (Mobile - likely hidden or user logged out).");
+             // Expected if user is logged out, element is display:none
+             // console.log("Logout button element not found (Mobile - likely hidden or user logged out).");
         }
 
     } else {
-        console.error("Essential Firebase Auth functions not found on window object (Mobile). Check HTML script order and initialization.");
-        // Fallback UI state
+        console.error("Essential Firebase Auth functions (firebaseAuth, firebaseOnAuthStateChanged, firebaseSignOut) were not found on the window object (Mobile). Check HTML script order, initialization, and exposure (window.firebaseAuth = ...).");
+        // Fallback UI state if Firebase fails
         if (loginButton) loginButton.style.display = 'inline-block';
         if (userInfoDiv) userInfoDiv.style.display = 'none';
     }

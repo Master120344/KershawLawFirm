@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home (Logged In) - The Kershaw Law Firm - Desktop</title>
+    <meta name="description" content="Logged-in home page for The Kershaw Law Firm clients. Desktop optimized.">
+    <link rel="stylesheet" href="css/index2_desktop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="background-static"></div>
+    <div class="overlay"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>The Kershaw Law Firm</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <a href="/KershawLawFirm/login_desktop.html" id="login-button" class="login-button" style="display: none;">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <section class="welcome-section">
+                <h2>Welcome Back</h2>
+                <p class="welcome-subtitle">Your trusted partner in immigration law.</p>
+                <a href="/KershawLawFirm/payment_desktop.html" class="pay-button">Make a Payment</a>
+            </section>
+        </div>
+    </div>
+
+    <nav class="tabs">
+        <a href="/KershawLawFirm/index2_desktop.html" class="active">Home</a>
+        <a href="/KershawLawFirm/visah2a_desktop.html">H2-A</a>
+        <a href="/KershawLawFirm/visah2b_desktop.html">H2-B</a>
+        <a href="/KershawLawFirm/videos_desktop.html">Videos</a>
+        <a href="/KershawLawFirm/contact_desktop.html">Contact</a>
+    </nav>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
+
+      try {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+      } catch (error) {
+        console.error("Error initializing Firebase (Desktop):", error);
+      }
+    </script>
+    <script src="js/index2_desktop.js"></script>
+</body>
+</html>

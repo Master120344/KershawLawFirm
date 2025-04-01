@@ -1,428 +1,122 @@
-/* Global Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - The Kershaw Law Firm - Desktop</title>
+    <meta name="description" content="Contact The Kershaw Law Firm for expert H-2A/H-2B visa assistance. Desktop optimized.">
+    <link rel="stylesheet" href="css/contact_desktop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="background-static"></div>
+    <div class="overlay"></div>
 
-/* Smooth Scroll */
-html {
-    scroll-behavior: smooth;
-}
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>The Kershaw Law Firm</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <a href="/KershawLawFirm/login_desktop.html" id="login-button" class="login-button">Login</a>
+            </div>
+        </div>
+    </header>
 
-/* Body Styling */
-body {
-    font-family: 'EB Garamond', serif;
-    min-height: 100vh;
-    color: #F5F6F5;
-    line-height: 1.6;
-    background-color: #1a1d24;
-    overflow-x: hidden;
-    position: relative;
-    opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-    padding-top: 160px;
-    padding-bottom: 100px;
-}
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <h2 class="contact-title">Contact Us</h2>
+            <section class="contact-info">
+                <p class="subtitle">Excellence in Immigration Law</p>
+                <div class="info-details">
+                    <p>The Kershaw Law Firm</p>
+                    <p>A Professional Corporation</p>
+                    <p>Robert D. Kershaw, Attorney at Law</p>
+                    <p>Telephone: <a href="tel:737-204-0093">737-204-0093</a></p>
+                    <p>Fax: 737-204-0094</p>
+                    <p>Email: <a href="mailto:robert.kershaw@kershawlaw.com">robert.kershaw@kershawlaw.com</a></p>
+                    <p>Address: 3355 Bee Caves Rd Suite 307, Austin, TX 78746</p>
+                </div>
+            </section>
 
-body.loaded {
-    opacity: 1;
-}
+            <section class="contact-form">
+                <h3>Get in Touch</h3>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Legal Assistance Needed</label>
+                        <select id="service" name="service" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="h2a">H-2A Visa Assistance</option>
+                            <option value="h2b">H-2B Visa Assistance</option>
+                            <option value="green-card">Green Card Application</option>
+                            <option value="citizenship">U.S. Citizenship Services</option>
+                            <option value="other">Other Immigration Law Needs</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Describe your case or question..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit Inquiry</button>
+                </form>
+                <div class="thank-you-message" id="thank-you-message" style="display: none; opacity: 0;">
+                    <h3 id="thank-you-title">Thank You, <span id="user-name"></span>!</h3>
+                    <p>We have received your inquiry and will get back to you shortly at <strong>robert.kershaw@kershawlaw.com</strong>.</p>
+                </div>
+            </section>
+        </div>
+    </div>
 
-#background-static {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-image: url('../assets/austinbackground.jpg');
-}
+    <nav class="tabs" id="nav-tabs">
+        <a href="/KershawLawFirm/index_desktop.html" id="tab-home">Home</a>
+        <a href="/KershawLawFirm/faq_desktop.html" id="tab-faq">FAQ</a>
+        <a href="/KershawLawFirm/contact_desktop.html" id="tab-contact" class="active">Contact Us</a>
+    </nav>
 
-/* Fallback background image */
-@media (max-width: 0px), (min-width: 0px) {
-    #background-static {
-        background-image: url('https://github.com/Master120344/KershawLawFirm/blob/main/assets/austinbackground.jpg?raw=true');
-    }
-}
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(10, 10, 20, 0.5);
-    z-index: -1;
-}
+      const firebaseConfig = {
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
 
-/* Header Styling */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 25px 0;
-    background: rgba(26, 29, 36, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-}
-
-.header-content {
-    width: 90%;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container {
-    text-align: center;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.logo-container h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 3.0rem;
-    color: #F5F6F5;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    transition: color 0.3s ease;
-    font-weight: 700;
-}
-
-.logo-container h1:hover {
-    color: #E74C3C;
-}
-
-.header-line {
-    width: 120px;
-    height: 3px;
-    background: #C0392B;
-    margin: 0 auto;
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 1px;
-}
-
-.logo-container:hover .header-line {
-    width: 350px;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.login-button {
-    padding: 12px 35px;
-    background: #C0392B;
-    color: #F5F6F5;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(192, 57, 43, 0.4);
-    border: 1px solid transparent;
-}
-
-.login-button:hover {
-    background: #E74C3C;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
-    border-color: #F5F6F5;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1rem;
-    color: #e0e0e0;
-}
-
-#user-email {
-    font-weight: 500;
-}
-
-.logout-link {
-    color: #E74C3C;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: color 0.3s ease, transform 0.2s ease;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: rgba(245, 246, 245, 0.1);
-}
-
-.logout-link:hover {
-    color: #F5F6F5;
-    background-color: rgba(231, 76, 60, 0.8);
-    transform: scale(1.05);
-}
-
-/* Main Content Area */
-.main-content-area {
-    position: relative;
-    z-index: 5;
-}
-
-.main-content-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    min-height: calc(100vh - 160px - 100px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-}
-
-/* Contact Title (Moved to Top) */
-.contact-title {
-    font-family: 'Cinzel', serif;
-    font-size: 4.8rem;
-    color: #FFFFFF;
-    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Contact Info Section */
-.contact-info {
-    text-align: center;
-    background: rgba(26, 29, 36, 0.9);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 500px;
-}
-
-.subtitle {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    color: #e0e0e0;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
-}
-
-.info-details p {
-    font-size: 1.3rem;
-    color: #F5F6F5;
-    margin: 12px 0;
-    letter-spacing: 0.5px;
-}
-
-.info-details a {
-    color: #E74C3C;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.info-details a:hover {
-    color: #FFFFFF;
-}
-
-/* Contact Form Section */
-.contact-form {
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-}
-
-.contact-form h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 3rem;
-    color: #F5F6F5;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
-    margin-bottom: 30px;
-}
-
-#contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    background: rgba(26, 29, 36, 0.9);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    transition: opacity 0.3s ease;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.form-group label {
-    font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    color: #F5F6F5;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    padding: 16px;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.2rem;
-    color: #333;
-    background: #FFFFFF;
-    border: 2px solid #C0392B;
-    border-radius: 10px;
-    outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(192, 57, 43, 0.3);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: #E74C3C;
-    box-shadow: 0 0 12px rgba(231, 76, 60, 0.7);
-    background: #F5F6F5;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 150px;
-}
-
-.submit-button {
-    padding: 18px 55px;
-    background: #C0392B;
-    color: #F5F6F5;
-    font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 50px;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 5px 18px rgba(192, 57, 43, 0.5);
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.submit-button:hover {
-    background: #E74C3C;
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
-}
-
-/* Thank You Message */
-.thank-you-message {
-    transition: opacity 0.5s ease-in-out;
-    padding: 40px;
-    background: rgba(26, 29, 36, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    margin-top: 40px;
-    text-align: center;
-}
-
-.thank-you-message.visible {
-    opacity: 1;
-}
-
-.thank-you-message h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 3rem;
-    color: #F5F6F5;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
-    margin-bottom: 20px;
-}
-
-.thank-you-message p {
-    font-size: 1.4rem;
-    color: #e0e0e0;
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.8;
-}
-
-.thank-you-message strong {
-    color: #E74C3C;
-}
-
-/* Navigation Tabs (Footer) */
-.tabs {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 20px 0;
-    background: rgba(26, 29, 36, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-}
-
-.tabs a {
-    color: #cccccc;
-    text-decoration: none;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 500;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
-    position: relative;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-.tabs a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #C0392B;
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 2px;
-}
-
-.tabs a:hover,
-.tabs a.active {
-    color: #FFFFFF;
-}
-
-.tabs a:hover::after,
-.tabs a.active::after {
-    width: 70%;
-}
-
-/* Accessibility */
-a:focus, button:focus, input:focus, select:focus, textarea:focus {
-    outline: none;
-}
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-    outline: 2px solid #E74C3C;
-    outline-offset: 2px;
-}
+      try {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+      } catch (error) {
+        console.error("Error initializing Firebase (Desktop):", error);
+      }
+    </script>
+    <script src="js/contact_desktop.js"></script>
+</body>
+</html>

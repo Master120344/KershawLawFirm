@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (userInfoDiv) userInfoDiv.style.display = 'flex';
                 if (userEmailSpan) userEmailSpan.textContent = user.email;
                 if (loginMessage) loginMessage.textContent = '';
+                // Redirect to index2_desktop.html after login
+                window.location.href = '/KershawLawFirm/index2_desktop.html';
             } else {
                 console.log("User logged out.");
                 if (loginForm) loginForm.style.display = 'block';
@@ -48,9 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.firebaseSignInWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         console.log("Login successful:", userCredential.user.email);
-                        loginMessage.textContent = "Login successful!";
+                        loginMessage.textContent = "Login successful! Redirecting...";
                         loginMessage.classList.remove('error');
                         loginMessage.classList.add('success');
+                        // The redirect will happen via onAuthStateChanged
                     })
                     .catch((error) => {
                         console.error("Login failed:", error.message);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ***** CHANGE THIS TITLE ***** -->
+    <!-- ***** CHANGE THIS TITLE if needed ***** -->
     <title>The Kershaw Law Firm - H2A/H2B Visa Services</title>
     <meta name="description" content="The Kershaw Law Firm specializes in H2A and H2B visa processing for employers and workers. Contact us for expert legal assistance.">
     <!-- Link to your specific CSS file -->
@@ -19,36 +19,28 @@
     <!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
 
 </head>
-<body>
+<body> <!-- Body will start hidden by CSS (opacity: 0) -->
 
-    <!-- Background Slider -->
-    <div id="background-slider">
-        <!-- Ensure you have these images in the correct path specified in CSS -->
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-    </div>
+    <!-- Background Element (Simplified for single image) -->
+    <!-- ***** UPDATED: Using a single div instead of slider ***** -->
+    <div id="background-static"></div>
     <div class="overlay"></div> <!-- Dark Overlay for readability -->
 
     <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
+                <!-- ***** You can change H1 text here if needed ***** -->
                 <h1>The Kershaw Law Firm</h1>
                 <div class="header-line"></div>
             </div>
             <div class="header-actions">
                 <!-- User Info Section (Hidden by default, shown when logged in) -->
-                <!-- ***** ADDED id="user-info" and display:none ***** -->
                 <div id="user-info" class="user-info" style="display: none;">
-                    <!-- ***** ADDED id="user-email" ***** -->
                     <span id="user-email">user@example.com</span>
-                    <!-- ***** ADDED id="logout-button" ***** -->
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
                 <!-- Login Button (Shown by default, hidden when logged in) -->
-                <!-- ***** ADDED id="login-button" ***** -->
                 <!-- ***** Ensure this links to your login page ***** -->
                 <a href="/login.html" id="login-button" class="login-button">Login</a>
             </div>
@@ -62,8 +54,8 @@
                  <!-- ***** UPDATED HEADING AND TAGLINE FOR VISA FOCUS ***** -->
                 <h2>Expert H-2A & H-2B Visa Solutions</h2>
                 <p class="tagline">Navigating the complexities of agricultural and non-agricultural temporary worker visas.</p>
-                 <!-- ***** UPDATED BUTTON TEXT AND LINK ***** -->
-                <a href="/contact.html" class="cta-button">Get Started Today</a>
+                 <!-- ***** UPDATED BUTTON LINK TO prescreen.html ***** -->
+                <a href="prescreen.html" class="cta-button">Get Started Today</a>
             </section>
 
             <!-- Add other relevant sections for the homepage if needed -->
@@ -86,11 +78,10 @@
 
 
     <!-- Firebase Initialization Script -->
-    <!-- ***** UPDATED SCRIPT BELOW ***** -->
+    <!-- (Keep this script exactly as it was, including the window assignments) -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-      // ***** Import Auth functions *****
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
       const firebaseConfig = {
@@ -106,36 +97,24 @@
       try {
         const app = initializeApp(firebaseConfig);
         console.log("Firebase Initialized Successfully.");
-        // Initialize Analytics (optional)
-        // const analytics = getAnalytics(app);
-        // console.log("Firebase Analytics Initialized.");
-
-        // ***** Get Auth instance *****
         const auth = getAuth(app);
         console.log("Firebase Auth Initialized.");
 
-        // ***** EXPOSE TO GLOBAL SCOPE (WINDOW) for index_desktop.js *****
-        window.firebaseApp = app; // Expose app if needed elsewhere
-        window.firebaseAuth = auth; // Expose auth instance
-        window.firebaseOnAuthStateChanged = onAuthStateChanged; // Expose the function itself
-        window.firebaseSignOut = signOut; // Expose the function itself
+        // EXPOSE TO GLOBAL SCOPE (WINDOW) for index_desktop.js
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
 
       } catch (error) {
         console.error("Error initializing Firebase:", error);
-        // Optionally display a user-friendly message on the page
-        // document.body.innerHTML = '<p>Error loading application. Please try again later.</p>';
       }
     </script>
 
     <!-- Link to your specific JS file -->
-    <!-- ***** MAKE SURE THIS PATH IS CORRECT and matches the filename you sent ***** -->
+    <!-- ***** MAKE SURE THIS PATH IS CORRECT ***** -->
+    <!-- ***** This script MUST come AFTER the Firebase init script ***** -->
     <script src="js/index_desktop.js"></script>
-
-    <!-- Simple script (can be removed if not needed or integrated into index_desktop.js) -->
-    <!-- <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script> -->
-    <!-- Note: Removed the copyright year script as there's no 'current-year' ID in the provided footer/tabs -->
 
 </body>
 </html>

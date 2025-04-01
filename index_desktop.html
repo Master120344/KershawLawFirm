@@ -3,89 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ***** CHANGE THIS TITLE if needed ***** -->
     <title>The Kershaw Law Firm - H2A/H2B Visa Services</title>
     <meta name="description" content="The Kershaw Law Firm specializes in H2A and H2B visa processing for employers and workers. Contact us for expert legal assistance.">
-    <!-- Link to your specific CSS file -->
-    <!-- ***** MAKE SURE THIS PATH IS CORRECT ***** -->
     <link rel="stylesheet" href="css/index_desktop.css">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Link to Favicon (Example) -->
-    <!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
-
 </head>
-<body> <!-- Body will start hidden by CSS (opacity: 0) -->
-
-    <!-- Background Element (Simplified for single image) -->
-    <!-- ***** UPDATED: Using a single div instead of slider ***** -->
+<body>
     <div id="background-static"></div>
-    <div class="overlay"></div> <!-- Dark Overlay for readability -->
+    <div class="overlay"></div>
 
-    <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                <!-- ***** You can change H1 text here if needed ***** -->
                 <h1>The Kershaw Law Firm</h1>
                 <div class="header-line"></div>
             </div>
             <div class="header-actions">
-                <!-- User Info Section (Hidden by default, shown when logged in) -->
                 <div id="user-info" class="user-info" style="display: none;">
                     <span id="user-email">user@example.com</span>
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
-                <!-- Login Button (Shown by default, hidden when logged in) -->
-                <!-- ***** Ensure this links to your login page ***** -->
-                <a href="/login.html" id="login-button" class="login-button">Login</a>
+                <a href="/login_desktop.html" id="login-button" class="login-button">Login</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <div class="main-content-area">
         <div class="main-content-container">
             <section class="hero">
-                 <!-- ***** UPDATED HEADING AND TAGLINE FOR VISA FOCUS ***** -->
                 <h2>Expert H-2A & H-2B Visa Solutions</h2>
                 <p class="tagline">Navigating the complexities of agricultural and non-agricultural temporary worker visas.</p>
-                 <!-- ***** UPDATED BUTTON LINK TO prescreen.html ***** -->
-                <a href="prescreen.html" class="cta-button">Get Started Today</a>
+                <a href="getstarted_desktop.html" class="cta-button">Get Started Today</a>
             </section>
-
-            <!-- Add other relevant sections for the homepage if needed -->
-            <!-- e.g., Brief service descriptions, Firm overview -->
-
         </div>
     </div>
 
-    <!-- Navigation Tabs (Footer) -->
     <nav class="tabs">
-        <!-- ***** UPDATE THESE LINKS TO YOUR ACTUAL PAGES ***** -->
-        <a href="/index_desktop.html" class="active">Home</a> <!-- Assuming this is the homepage -->
-        <a href="/h2a_info.html">H-2A Visas</a>
-        <a href="/h2b_info.html">H-2B Visas</a>
-        <a href="/process_overview.html">Our Process</a>
-        <a href="/faq.html">FAQ</a>
-        <a href="/contact.html">Contact Us</a>
-        <!-- Add other relevant links -->
+        <a href="/index_desktop.html" class="active">Home</a>
+        <a href="/faq_desktop.html">FAQ</a>
+        <a href="/contact_desktop.html">Contact Us</a>
     </nav>
 
-
-    <!-- Firebase Initialization Script -->
-    <!-- (Keep this script exactly as it was, including the window assignments) -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
       const firebaseConfig = {
-        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // IMPORTANT: Consider securing this better later
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
         authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
         projectId: "thekershawlawfirm-d5b54",
         storageBucket: "thekershawlawfirm-d5b54.appspot.com",
@@ -99,22 +66,14 @@
         console.log("Firebase Initialized Successfully.");
         const auth = getAuth(app);
         console.log("Firebase Auth Initialized.");
-
-        // EXPOSE TO GLOBAL SCOPE (WINDOW) for index_desktop.js
         window.firebaseApp = app;
         window.firebaseAuth = auth;
         window.firebaseOnAuthStateChanged = onAuthStateChanged;
         window.firebaseSignOut = signOut;
-
       } catch (error) {
         console.error("Error initializing Firebase:", error);
       }
     </script>
-
-    <!-- Link to your specific JS file -->
-    <!-- ***** MAKE SURE THIS PATH IS CORRECT ***** -->
-    <!-- ***** This script MUST come AFTER the Firebase init script ***** -->
     <script src="js/index_desktop.js"></script>
-
 </body>
 </html>

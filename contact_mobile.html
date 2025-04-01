@@ -6,7 +6,6 @@
     <title>Contact - The Kershaw Law Firm P.C. - Mobile</title>
     <meta name="description" content="Contact The Kershaw Law Firm P.C. for expert H-2A/H-2B visa assistance. Mobile access.">
 
-    <!-- Ensure correct CSS path -->
     <link rel="stylesheet" href="css/contact_mobile.css">
 
     <!-- Google Fonts -->
@@ -15,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background Element with Animation -->
     <div id="background-static" class="background-animated"></div>
     <div class="overlay"></div>
 
@@ -27,10 +25,6 @@
                 <div class="header-line"></div>
             </div>
             <div class="header-actions">
-                <div id="user-info" class="user-info" style="display: none;">
-                    <span id="user-email">user@example.com</span>
-                    <a href="#" id="logout-button" class="logout-link">Logout</a>
-                </div>
                 <a href="login_mobile.html" id="login-button" class="login-button">Login</a>
             </div>
         </div>
@@ -57,7 +51,7 @@
             <!-- Contact Form Section -->
             <section class="contact-form">
                 <h3>Get in Touch</h3>
-                <form id="contact-form"> <!-- Changed ID to avoid JS conflict -->
+                <form id="contact-form">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" required placeholder="Enter your full name">
@@ -88,51 +82,21 @@
                     <button type="submit" class="submit-button">Submit Inquiry</button>
                 </form>
                 <div class="thank-you-message" id="thank-you-message" style="display: none; opacity: 0;">
-                    <h3>Thank You for Reaching Out</h3>
-                    <p>Your inquiry has been received. Expect a response from our team shortly at <strong>robert.kershaw@kershawlaw.com</strong>.</p>
+                    <h3 id="thank-you-title">Thank You, <span id="user-name"></span></h3>
+                    <p>The Kershaw Law Firm P.C. has received your details. A member of our team will contact you shortly at <strong>robert.kershaw@kershawlaw.com</strong>.</p>
                 </div>
             </section>
         </div>
     </div>
 
-    <!-- Navigation Tabs (Footer) -->
+    <!-- Navigation Tabs (Footer) - Removed Prescreen and Login -->
     <nav class="tabs">
-        <a href="index_mobile.html">Home</a>
-        <a href="prescreen_mobile.html">Prescreen</a>
-        <a href="faq_mobile.html">FAQ</a>
-        <a href="contact_mobile.html" class="active">Contact</a>
-        <a href="login_mobile.html">Login</a>
+        <a href="index_mobile.html" class="tab-link">Home</a>
+        <a href="faq_mobile.html" class="tab-link">FAQ</a>
+        <a href="contact_mobile.html" class="tab-link active">Contact</a>
     </nav>
 
-    <!-- Firebase Initialization Script -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-      const firebaseConfig = {
-        apiKey: "YOUR_API_KEY", // Replace with secure env variable in production
-        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
-        projectId: "thekershawlawfirm-d5b54",
-        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
-        messagingSenderId: "588166358773",
-        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-        measurementId: "G-5SVMGTE290"
-      };
-
-      try {
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        window.firebaseApp = app;
-        window.firebaseAuth = auth;
-        window.firebaseOnAuthStateChanged = onAuthStateChanged;
-        window.firebaseSignOut = signOut;
-      } catch (error) {
-        console.error("Error initializing Firebase (Mobile):", error);
-        document.body.innerHTML += '<p style="color: #D35400; text-align: center; padding: 10px; font-size: 14px;">Error loading application. Please try again later.</p>';
-      }
-    </script>
-
-    <!-- Link to Mobile JS -->
+    <!-- No Firebase needed since Login tab is removed -->
     <script src="js/contact_mobile.js"></script>
 </body>
 </html>

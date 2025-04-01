@@ -6,12 +6,8 @@
     <title>The Kershaw Law Firm - Mobile</title>
     <meta name="description" content="The Kershaw Law Firm specializes in H2A/H2B visa processing. Mobile access.">
 
-    <!-- ***** CRITICAL PART: Check this CSS link path ***** -->
-    <!-- This path assumes 'index_mobile.html' is in the root -->
-    <!-- and 'index_mobile.css' is inside a folder named 'css' -->
-    <!-- If your structure is different, ADJUST THIS HREF -->
+    <!-- Linking to the mobile CSS file inside the 'css' folder -->
     <link rel="stylesheet" href="css/index_mobile.css">
-    <!-- **************************************************** -->
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
 
 </head>
-<body>
+<body> <!-- Starts hidden via CSS opacity: 0 -->
+
     <!-- Background Element -->
     <div id="background-static"></div>
     <div class="overlay"></div>
@@ -32,12 +29,12 @@
                 <div class="header-line"></div>
             </div>
             <div class="header-actions">
-                <!-- User Info Section -->
+                <!-- User Info Section (Initially hidden) -->
                 <div id="user-info" class="user-info" style="display: none;">
                     <span id="user-email">user@example.com</span>
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
-                <!-- Login Button -->
+                <!-- Login Button (Initially visible) -->
                 <a href="/login.html" id="login-button" class="login-button">Login</a>
             </div>
         </div>
@@ -64,11 +61,12 @@
         <a href="/contact_mobile.html">Contact</a>
     </nav>
 
-    <!-- Firebase Initialization Script (Keep EXACTLY the same as before) -->
+    <!-- Firebase Initialization Script (Ensure this is correct for your project) -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+      // Use your actual Firebase config details here
       const firebaseConfig = {
         apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // Consider securing this
         authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
@@ -85,6 +83,7 @@
         const auth = getAuth(app);
         console.log("Firebase Auth Initialized (Mobile).");
 
+        // Expose functions needed by index_mobile.js
         window.firebaseApp = app;
         window.firebaseAuth = auth;
         window.firebaseOnAuthStateChanged = onAuthStateChanged;
@@ -92,11 +91,13 @@
 
       } catch (error) {
         console.error("Error initializing Firebase (Mobile):", error);
+        // Display error to user?
+        // document.body.innerHTML = '<p style="color: red; padding: 20px;">Error initializing application. Please check console.</p>';
       }
     </script>
 
-    <!-- Link to MOBILE JS file -->
-    <!-- Make sure this path is correct too, usually js/index_mobile.js -->
+    <!-- Link to MOBILE JS file (Must be AFTER Firebase init) -->
+    <!-- Assumes 'js' folder is in the root, parallel to 'css' -->
     <script src="js/index_mobile.js"></script>
 
 </body>

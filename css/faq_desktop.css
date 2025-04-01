@@ -258,12 +258,12 @@ body.loaded {
     max-height: 0;
     overflow: hidden;
     padding: 0 30px;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    transition: max-height 0.5s ease, padding 0.3s ease; /* Adjusted transition duration */
 }
 
 .faq-item.active .faq-answer {
-    max-height: none; /* Remove fixed height to allow full content display */
     padding: 20px 30px;
+    /* max-height will be set dynamically by JS */
 }
 
 .faq-answer p {

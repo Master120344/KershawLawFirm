@@ -1,0 +1,389 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Body Styling */
+body {
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+    color: #F5F6F5;
+    line-height: 1.5;
+    background-color: #1a1d24;
+    overflow-x: hidden;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Background Element */
+#background-static {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../images/austin-texas-wallpaper.jpg'); /* Replace with your image */
+    filter: brightness(0.8) contrast(1.2);
+}
+
+/* Dark Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 20, 0.7);
+    z-index: -1;
+}
+
+/* Header Styling */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    background: rgba(26, 29, 36, 0.95);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.logo-container h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #F5F6F5;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.logo-container h1:active,
+.logo-container h1:hover {
+    color: #D35400;
+}
+
+.header-line {
+    width: 60px;
+    height: 2px;
+    background: #D35400;
+    margin: 5px auto 0;
+    transition: width 0.3s ease;
+    border-radius: 1px;
+}
+
+.logo-container:active .header-line,
+.logo-container:hover .header-line {
+    width: 100px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-button {
+    padding: 8px 20px;
+    background: #D35400;
+    color: #F5F6F5;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(211, 84, 0, 0.4);
+    touch-action: manipulation;
+}
+
+.login-button:hover,
+.login-button:active {
+    background: #E67E22;
+    transform: scale(1.05);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+}
+
+#user-email {
+    font-weight: 500;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logout-link {
+    color: #D35400;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.logout-link:hover,
+.logout-link:active {
+    color: #F5F6F5;
+    background: rgba(211, 84, 0, 0.8);
+}
+
+/* Main Content Area */
+.main-content-area {
+    position: relative;
+    z-index: 5;
+}
+
+.main-content-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 10px;
+    min-height: calc(100vh - 100px - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Prescreen Form */
+.prescreen-form h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px;
+}
+
+.form-intro {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+}
+
+#visa-prescreen-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    color: #F5F6F5;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: #333;
+    background: #F5F6F5;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #D35400;
+    box-shadow: 0 0 5px rgba(211, 84, 0, 0.5);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.submit-button {
+    padding: 12px;
+    background: #D35400;
+    color: #F5F6F5;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(211, 84, 0, 0.5);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.submit-button:hover,
+.submit-button:active {
+    background: #E67E22;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.7);
+}
+
+/* Thank You Section */
+.thank-you h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 15px;
+}
+
+.thank-you p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    max-width: 300px;
+}
+
+/* Navigation Tabs (Footer) */
+.tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px 0;
+    background: rgba(26, 29, 36, 0.95);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.tabs a {
+    color: #cccccc;
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    touch-action: manipulation;
+}
+
+.tabs a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #D35400;
+    transition: width 0.3s ease;
+}
+
+.tabs a:hover,
+.tabs a:active,
+.tabs a.active {
+    color: #D35400;
+}
+
+.tabs a:hover::after,
+.tabs a:active::after,
+.tabs a.active::after {
+    width: 70%;
+}
+
+/* Accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #D35400;
+    outline-offset: 2px;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 400px) {
+    .logo-container h1 {
+        font-size: 1.5rem;
+    }
+    .header-line {
+        width: 50px;
+    }
+    .login-button {
+        padding: 6px 15px;
+        font-size: 0.8rem;
+    }
+    .prescreen-form h2,
+    .thank-you h2 {
+        font-size: 1.8rem;
+    }
+    .form-intro,
+    .thank-you p {
+        font-size: 1rem;
+    }
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 0.95rem;
+        padding: 8px;
+    }
+    .submit-button {
+        padding: 10px;
+        font-size: 1rem;
+    }
+    .tabs a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
+}

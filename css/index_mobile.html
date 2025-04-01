@@ -1,0 +1,346 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Improve rendering on mobile */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+    /* Prevent text size inflation on orientation change */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* Body Styling */
+body {
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+    color: #F5F6F5;
+    line-height: 1.5; /* Slightly tighter line height for mobile */
+    background-color: #1a1d24;
+    overflow-x: hidden;
+    position: relative;
+    /* VITAL: Start hidden for fade-in controlled by JS */
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out; /* Slightly faster fade */
+    /* VITAL: End Start hidden */
+    /* Reduced padding for smaller header/footer */
+    padding-top: 90px;
+    padding-bottom: 70px;
+}
+
+/* VITAL: Class added by JS to make body visible */
+body.loaded {
+    opacity: 1;
+}
+/* VITAL: End Class added by JS */
+
+
+/* Background Element (Same rules as desktop, image set here) */
+#background-static {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* ***** ADD YOUR AUSTIN IMAGE PATH HERE ***** */
+    background-image: url('../images/austin-texas-wallpaper.jpg'); /* --- REPLACE WITH YOUR ACTUAL IMAGE PATH --- */
+}
+
+/* Dark Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 20, 0.55); /* Slightly darker maybe? */
+    z-index: -1;
+}
+
+/* Header Styling */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Reduced padding */
+    padding: 15px 0;
+    background: rgba(26, 29, 36, 0.90); /* More opaque background */
+    backdrop-filter: blur(8px); /* Slightly less blur */
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    /* Use more width on mobile */
+    width: 92%;
+    max-width: 100%; /* Allow full width use */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap; /* Prevent wrapping if possible, adjust sizing */
+}
+
+.logo-container {
+    text-align: left; /* Align left on mobile? Or keep center? */
+    flex-grow: 1; /* Allow it to take space */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Keep centered text */
+    margin-right: 10px; /* Add some space between logo and actions */
+}
+
+.logo-container h1 {
+    font-family: 'Cinzel', serif;
+    /* Reduced font size */
+    font-size: 1.8rem;
+    color: #F5F6F5;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px; /* Less spacing */
+    margin-bottom: 5px; /* Less space */
+    font-weight: 700;
+    white-space: nowrap; /* Try to prevent title wrapping */
+}
+
+/* No hover effect needed on mobile generally */
+/* .logo-container h1:hover { color: #E74C3C; } */
+
+.header-line {
+    /* Reduced size */
+    width: 80px;
+    height: 2px;
+    background: #C0392B;
+    margin: 0 auto;
+    /* No hover animation needed */
+    /* transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */
+    border-radius: 1px;
+}
+/* Remove line hover effect for mobile */
+/* .logo-container:hover .header-line { width: 150px; } */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    /* Reduced gap */
+    gap: 10px;
+    flex-shrink: 0; /* Prevent actions area from shrinking too much */
+}
+
+/* Login Button */
+.login-button {
+    /* Reduced padding and font size */
+    padding: 8px 18px;
+    background: #C0392B;
+    color: #F5F6F5;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 30px; /* Maintain pill shape */
+    transition: background-color 0.3s ease; /* Simpler transition */
+    box-shadow: 0 2px 6px rgba(192, 57, 43, 0.4);
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.login-button:active { /* Use :active for touch feedback */
+    background: #E74C3C;
+    transform: scale(0.98); /* Slight press effect */
+}
+
+/* User Info */
+.user-info {
+    display: flex;
+    align-items: center;
+    /* Reduced gap and font size */
+    gap: 8px;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow if email is too long */
+}
+
+#user-email {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ... if email is too long */
+    max-width: 100px; /* Limit email width */
+}
+
+.logout-link {
+    color: #E74C3C;
+    text-decoration: none;
+    /* Reduced font size */
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: rgba(245, 246, 245, 0.1);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.logout-link:active { /* Use :active for touch feedback */
+    color: #F5F6F5;
+    background-color: rgba(231, 76, 60, 0.8);
+}
+
+/* Main Content Area */
+.main-content-area {
+    position: relative;
+    z-index: 5;
+}
+
+/* Centered Content Container */
+.main-content-container {
+    /* Use percentage width */
+    width: 90%;
+    max-width: 500px; /* Max width for larger mobile */
+    margin: 0 auto;
+    /* Reduced padding */
+    padding: 40px 10px;
+    /* Adjust min-height based on new body padding */
+    min-height: calc(100vh - 90px - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    padding: 20px 0; /* Reduced padding */
+}
+
+.hero h2 {
+    font-family: 'Cinzel', serif;
+    /* Reduced font size */
+    font-size: 2.4rem;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px; /* Less space */
+    font-weight: 700;
+}
+
+.hero .tagline {
+    font-family: 'Cinzel', serif;
+    /* Reduced font size */
+    font-size: 1.3rem;
+    color: #e0e0e0;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    /* Reduced margin */
+    margin-bottom: 35px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.cta-button {
+    /* Reduced padding and font size */
+    padding: 14px 30px;
+    background: #C0392B;
+    color: #F5F6F5;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Simpler transition */
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.5);
+    border: 1px solid transparent; /* Adjusted border */
+    display: inline-block;
+}
+
+.cta-button:active { /* Use :active for touch feedback */
+    background: #E74C3C;
+    transform: scale(0.97); /* Press effect */
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.6);
+}
+
+/* Navigation Tabs (Footer) */
+.tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Reduced padding */
+    padding: 12px 0;
+    background: rgba(26, 29, 36, 0.90); /* More opaque */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-around; /* Distribute space evenly */
+    align-items: center;
+    gap: 0; /* Remove fixed gap, rely on space-around */
+    border-top: 1px solid rgba(245, 246, 245, 0.1); /* Subtle top border */
+}
+
+.tabs a {
+    color: #cccccc;
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    /* Reduced font size */
+    font-size: 0.9rem;
+    font-weight: 500;
+    /* Reduced padding */
+    padding: 8px 5px; /* Less horizontal padding */
+    transition: color 0.3s ease; /* Simple transition */
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Less spacing */
+    text-align: center;
+    flex-grow: 1; /* Allow tabs to grow */
+    flex-basis: 0; /* Distribute space evenly */
+}
+
+/* Simpler active/hover indicator for mobile */
+.tabs a.active {
+    color: #FFFFFF;
+}
+
+/* Remove underline effect or simplify */
+.tabs a::after {
+   content: '';
+   position: absolute;
+   width: 0; /* Start hidden */
+   height: 3px;
+   bottom: -2px; /* Position below text */
+   left: 50%;
+   transform: translateX(-50%);
+   background: #C0392B;
+   transition: width 0.3s ease;
+   border-radius: 2px;
+}
+
+.tabs a.active::after {
+    width: 40%; /* Shorter underline for active */
+}
+/* Remove hover effects for underline on mobile */
+/* .tabs a:hover { color: #FFFFFF; } */
+/* .tabs a:hover::after { width: 40%; } */
+
+
+/* Focus Styles (Keep for accessibility) */
+a:focus, button:focus {
+    outline: none;
+}
+a:focus-visible, button:focus-visible {
+     outline: 2px solid #E74C3C;
+     outline-offset: 1px;
+}

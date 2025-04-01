@@ -1,0 +1,487 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Body Styling */
+body {
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+    color: #F5F6F5;
+    line-height: 1.5;
+    background-color: #1a1d24; /* Dark theme background */
+    overflow-x: hidden;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    padding-top: 140px;
+    padding-bottom: 80px;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Background Element with Animation */
+#background-static {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../images/austin-texas-wallpaper.jpg'); /* Replace with your image */
+    filter: brightness(0.65) contrast(1.4);
+}
+
+.background-animated {
+    animation: subtleZoom 25s infinite ease-in-out;
+}
+
+@keyframes subtleZoom {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+/* Dark Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.85), rgba(10, 10, 20, 0.65));
+    z-index: -1;
+}
+
+/* Header Styling */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 25px 0;
+    background: rgba(26, 29, 36, 0.98);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.logo-container h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: #F5F6F5;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.logo-container h1:active,
+.logo-container h1:hover {
+    color: #D35400; /* Dark orange */
+}
+
+.header-line {
+    width: 80px;
+    height: 3px;
+    background: #D35400;
+    margin: 8px auto 0;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.logo-container:active .header-line,
+.logo-container:hover .header-line {
+    width: 140px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-button {
+    padding: 10px 25px;
+    background: #D35400;
+    color: #F5F6F5;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(211, 84, 0, 0.6);
+    touch-action: manipulation;
+}
+
+.login-button:hover,
+.login-button:active {
+    background: #E67E22; /* Lighter orange */
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(211, 84, 0, 0.8);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+}
+
+#user-email {
+    font-weight: 500;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logout-link {
+    color: #D35400;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.logout-link:hover,
+.logout-link:active {
+    color: #F5F6F5;
+    background: rgba(211, 84, 0, 0.9);
+}
+
+/* Main Content Area */
+.main-content-area {
+    position: relative;
+    z-index: 5;
+}
+
+.main-content-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 30px 10px;
+    min-height: calc(100vh - 140px - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Contact Info Section */
+.contact-info {
+    text-align: center;
+    background: rgba(26, 29, 36, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid rgba(211, 84, 0, 0.3);
+}
+
+.contact-info h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #F5F6F5;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8);
+    margin-bottom: 15px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.3rem;
+    color: #e0e0e0;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.info-details p {
+    font-size: 1.1rem;
+    color: #F5F6F5;
+    margin: 10px 0;
+    letter-spacing: 0.5px;
+}
+
+.info-details a {
+    color: #D35400;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.info-details a:hover,
+.info-details a:active {
+    color: #E67E22;
+}
+
+/* Contact Form Section */
+.contact-form {
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.contact-form h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #F5F6F5;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 25px;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(26, 29, 36, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(211, 84, 0, 0.3);
+    transition: opacity 0.3s ease; /* For fade-out */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: #F5F6F5;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 14px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: #333;
+    background: #FFFFFF;
+    border: 2px solid #D35400;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(211, 84, 0, 0.3);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #E67E22;
+    box-shadow: 0 0 12px rgba(211, 84, 0, 0.7);
+    background: #F5F6F5;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-button {
+    padding: 16px;
+    background: #D35400;
+    color: #F5F6F5;
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 35px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(211, 84, 0, 0.7);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.submit-button:hover,
+.submit-button:active {
+    background: #E67E22;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(211, 84, 0, 0.9);
+}
+
+/* Thank You Message */
+.thank-you-message {
+    transition: opacity 0.5s ease-in-out;
+    padding: 25px;
+    background: rgba(26, 29, 36, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    margin-top: 25px;
+    border: 1px solid rgba(211, 84, 0, 0.3);
+    text-align: center;
+}
+
+.thank-you-message.visible {
+    opacity: 1;
+}
+
+.thank-you-message h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #F5F6F5;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 15px;
+}
+
+.thank-you-message p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.thank-you-message strong {
+    color: #D35400;
+}
+
+/* Navigation Tabs (Footer) */
+.tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    background: rgba(26, 29, 36, 0.98);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.tabs a {
+    color: #cccccc;
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 10px 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    touch-action: manipulation;
+}
+
+.tabs a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #D35400;
+    transition: width 0.3s ease;
+}
+
+.tabs a:hover,
+.tabs a:active,
+.tabs a.active {
+    color: #D35400;
+}
+
+.tabs a:hover::after,
+.tabs a:active::after,
+.tabs a.active::after {
+    width: 85%;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #D35400;
+    outline-offset: 2px;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 400px) {
+    .logo-container h1 {
+        font-size: 1.8rem;
+    }
+    .header-line {
+        width: 60px;
+    }
+    .login-button {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+    .contact-info h2,
+    .contact-form h3,
+    .thank-you-message h3 {
+        font-size: 2rem;
+    }
+    .subtitle,
+    .thank-you-message p {
+        font-size: 1.1rem;
+    }
+    .info-details p {
+        font-size: 1rem;
+    }
+    #contact-form {
+        padding: 25px;
+    }
+    .form-group label {
+        font-size: 1rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+    .submit-button {
+        padding: 14px;
+        font-size: 1.2rem;
+    }
+    .tabs a {
+        font-size: 1rem;
+        padding: 8px 14px;
+    }
+}

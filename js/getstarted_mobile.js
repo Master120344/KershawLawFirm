@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prescreenSection = document.getElementById('prescreen-form');
     const thankYouSection = document.getElementById('thank-you');
 
-    // Fade-in Effect
+    // Fade-in Effect for Page Load
     if (bodyElement) {
         setTimeout(() => {
             bodyElement.classList.add('loaded');
@@ -54,20 +54,52 @@ document.addEventListener('DOMContentLoaded', () => {
         userInfoDiv.style.display = 'none';
     }
 
-    // Form Submission Handler
+    // Form Submission Handler with Email Trigger Simulation
     if (prescreenForm) {
         prescreenForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            // Simulate form submission (replace with actual backend logic later)
-            console.log("Form submitted with data:", new FormData(prescreenForm));
+            // Collect form data
+            const formData = new FormData(prescreenForm);
+            const data = {
+                fullName: formData.get('full-name'),
+                companyName: formData.get('company-name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                visaType: formData.get('visa-type'),
+                workerCount: formData.get('worker-count'),
+                message: formData.get('message'),
+                submittedAt: new Date().toISOString()
+            };
 
-            // Hide form and show thank you message
+            // Simulate saving data and sending email
+            console.log("Saving prescreening data:", data);
+            console.log("Triggering email to visa-screening@kershawlawfirm.com with details:", {
+                to: "visa-screening@kershawlawfirm.com",
+                subject: `New Prescreening Request from ${data.companyName}`,
+                body: `
+                    Full Name: ${data.fullName}
+                    Company: ${data.companyName}
+                    Email: ${data.email}
+                    Phone: ${data.phone}
+                    Visa Type: ${data.visaType}
+                    Workers Needed: ${data.workerCount}
+                    Details: ${data.message || 'None provided'}
+                    Submitted: ${data.submittedAt}
+                `
+            });
+
+            // Transition to Thank You
             prescreenSection.style.display = 'none';
             thankYouSection.style.display = 'block';
+            setTimeout(() => {
+                thankYouSection.classList.add('visible');
+            }, 50); // Slight delay for smooth fade-in
 
-            // Optional: Reset form for testing (comment out for production)
-            // prescreenForm.reset();
+            // For real implementation, replace console logs with:
+            // 1. Save to Firebase Firestore:
+            //    firebase.firestore().collection('prescreening').add(data);
+            // 2. Send email via backend (e.g., Node.js with Nodemailer or Firebase Functions)
         });
     }
 

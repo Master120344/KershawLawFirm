@@ -3,14 +3,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Improve rendering on mobile */
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Smooth Scroll */
+/* Smooth Scroll & Text Size Adjust */
 html {
     scroll-behavior: smooth;
-    /* Prevent text size inflation on orientation change */
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
@@ -19,28 +17,25 @@ html {
 body {
     font-family: 'EB Garamond', serif;
     min-height: 100vh;
-    color: #F5F6F5;
-    line-height: 1.5; /* Slightly tighter line height for mobile */
-    background-color: #1a1d24;
+    color: #F5F6F5; /* Light text color */
+    line-height: 1.5;
+    background-color: #1a1d24; /* Dark background fallback */
     overflow-x: hidden;
     position: relative;
-    /* VITAL: Start hidden for fade-in controlled by JS */
+    /* Start hidden for JS fade-in */
     opacity: 0;
-    transition: opacity 0.7s ease-in-out; /* Slightly faster fade */
-    /* VITAL: End Start hidden */
-    /* Reduced padding for smaller header/footer */
+    transition: opacity 0.7s ease-in-out;
+    /* Padding for fixed header/footer */
     padding-top: 90px;
     padding-bottom: 70px;
 }
 
-/* VITAL: Class added by JS to make body visible */
+/* Class added by JS to make body visible */
 body.loaded {
     opacity: 1;
 }
-/* VITAL: End Class added by JS */
 
-
-/* Background Element (Same rules as desktop, image set here) */
+/* Background Element */
 #background-static {
     position: fixed;
     top: 0;
@@ -51,8 +46,9 @@ body.loaded {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    /* ***** ADD YOUR AUSTIN IMAGE PATH HERE ***** */
-    background-image: url('../images/austin-texas-wallpaper.jpg'); /* --- REPLACE WITH YOUR ACTUAL IMAGE PATH --- */
+    /* ***** VERIFY THIS IMAGE PATH IS CORRECT ***** */
+    /* Assumes 'css' folder is in root, 'images' folder is in root */
+    background-image: url('../images/austin-texas-wallpaper.jpg'); /* --- ADJUST PATH AS NEEDED --- */
 }
 
 /* Dark Overlay */
@@ -62,7 +58,7 @@ body.loaded {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 20, 0.55); /* Slightly darker maybe? */
+    background-color: rgba(10, 10, 20, 0.55); /* Semi-transparent overlay */
     z-index: -1;
 }
 
@@ -73,117 +69,101 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 1000;
-    /* Reduced padding */
     padding: 15px 0;
-    background: rgba(26, 29, 36, 0.90); /* More opaque background */
-    backdrop-filter: blur(8px); /* Slightly less blur */
+    background: rgba(26, 29, 36, 0.90);
+    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .header-content {
-    /* Use more width on mobile */
     width: 92%;
-    max-width: 100%; /* Allow full width use */
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Prevent wrapping if possible, adjust sizing */
+    flex-wrap: nowrap;
 }
 
 .logo-container {
-    text-align: left; /* Align left on mobile? Or keep center? */
-    flex-grow: 1; /* Allow it to take space */
+    text-align: center; /* Centered logo */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Keep centered text */
-    margin-right: 10px; /* Add some space between logo and actions */
+    align-items: center;
+    margin-right: 10px;
 }
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    /* Reduced font size */
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Mobile size */
     color: #F5F6F5;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    letter-spacing: 1px; /* Less spacing */
-    margin-bottom: 5px; /* Less space */
+    letter-spacing: 1px;
+    margin-bottom: 5px;
     font-weight: 700;
-    white-space: nowrap; /* Try to prevent title wrapping */
+    white-space: nowrap;
 }
-
-/* No hover effect needed on mobile generally */
-/* .logo-container h1:hover { color: #E74C3C; } */
 
 .header-line {
-    /* Reduced size */
-    width: 80px;
+    width: 80px; /* Mobile size */
     height: 2px;
-    background: #C0392B;
+    background: #C0392B; /* Red accent */
     margin: 0 auto;
-    /* No hover animation needed */
-    /* transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */
     border-radius: 1px;
 }
-/* Remove line hover effect for mobile */
-/* .logo-container:hover .header-line { width: 150px; } */
 
 .header-actions {
     display: flex;
     align-items: center;
-    /* Reduced gap */
     gap: 10px;
-    flex-shrink: 0; /* Prevent actions area from shrinking too much */
+    flex-shrink: 0;
 }
 
 /* Login Button */
 .login-button {
-    /* Reduced padding and font size */
-    padding: 8px 18px;
+    padding: 8px 18px; /* Mobile padding */
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Mobile size */
     font-weight: 600;
-    border-radius: 30px; /* Maintain pill shape */
-    transition: background-color 0.3s ease; /* Simpler transition */
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
     box-shadow: 0 2px 6px rgba(192, 57, 43, 0.4);
     border: 1px solid transparent;
     white-space: nowrap;
 }
 
-.login-button:active { /* Use :active for touch feedback */
+.login-button:active {
     background: #E74C3C;
-    transform: scale(0.98); /* Slight press effect */
+    transform: scale(0.98);
 }
 
 /* User Info */
 .user-info {
-    display: flex;
+    display: flex; /* JS toggles display: none / flex */
     align-items: center;
-    /* Reduced gap and font size */
     gap: 8px;
     font-family: 'EB Garamond', serif;
     font-size: 0.85rem;
     color: #e0e0e0;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    overflow: hidden; /* Hide overflow if email is too long */
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 #user-email {
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ... if email is too long */
-    max-width: 100px; /* Limit email width */
+    text-overflow: ellipsis;
+    max-width: 100px; /* Limit width */
 }
 
 .logout-link {
     color: #E74C3C;
     text-decoration: none;
-    /* Reduced font size */
     font-size: 0.85rem;
     font-weight: 600;
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -194,7 +174,7 @@ body.loaded {
     flex-shrink: 0;
 }
 
-.logout-link:active { /* Use :active for touch feedback */
+.logout-link:active {
     color: #F5F6F5;
     background-color: rgba(231, 76, 60, 0.8);
 }
@@ -205,15 +185,11 @@ body.loaded {
     z-index: 5;
 }
 
-/* Centered Content Container */
 .main-content-container {
-    /* Use percentage width */
     width: 90%;
-    max-width: 500px; /* Max width for larger mobile */
+    max-width: 500px;
     margin: 0 auto;
-    /* Reduced padding */
-    padding: 40px 10px;
-    /* Adjust min-height based on new body padding */
+    padding: 40px 10px; /* Mobile padding */
     min-height: calc(100vh - 90px - 70px);
     display: flex;
     flex-direction: column;
@@ -224,50 +200,47 @@ body.loaded {
 
 /* Hero Section */
 .hero {
-    padding: 20px 0; /* Reduced padding */
+    padding: 20px 0;
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    /* Reduced font size */
-    font-size: 2.4rem;
+    font-size: 2.4rem; /* Mobile size */
     color: #FFFFFF;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
-    margin-bottom: 10px; /* Less space */
+    margin-bottom: 10px;
     font-weight: 700;
+    line-height: 1.2; /* Adjust line height for multi-line */
 }
 
 .hero .tagline {
     font-family: 'Cinzel', serif;
-    /* Reduced font size */
-    font-size: 1.3rem;
+    font-size: 1.3rem; /* Mobile size */
     color: #e0e0e0;
     text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
-    /* Reduced margin */
     margin-bottom: 35px;
     font-weight: 400;
     line-height: 1.4;
 }
 
 .cta-button {
-    /* Reduced padding and font size */
-    padding: 14px 30px;
+    padding: 14px 30px; /* Mobile padding */
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
+    font-size: 1.1rem; /* Mobile size */
     font-weight: 700;
     border-radius: 50px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Simpler transition */
+    transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 12px rgba(192, 57, 43, 0.5);
-    border: 1px solid transparent; /* Adjusted border */
+    border: 1px solid transparent;
     display: inline-block;
 }
 
-.cta-button:active { /* Use :active for touch feedback */
+.cta-button:active {
     background: #E74C3C;
-    transform: scale(0.97); /* Press effect */
+    transform: scale(0.97);
     box-shadow: 0 2px 8px rgba(231, 76, 60, 0.6);
 }
 
@@ -278,49 +251,44 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 1000;
-    /* Reduced padding */
-    padding: 12px 0;
-    background: rgba(26, 29, 36, 0.90); /* More opaque */
+    padding: 12px 0; /* Mobile padding */
+    background: rgba(26, 29, 36, 0.90);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     display: flex;
-    justify-content: space-around; /* Distribute space evenly */
+    justify-content: space-around; /* Even distribution */
     align-items: center;
-    gap: 0; /* Remove fixed gap, rely on space-around */
-    border-top: 1px solid rgba(245, 246, 245, 0.1); /* Subtle top border */
+    gap: 0;
+    border-top: 1px solid rgba(245, 246, 245, 0.1);
 }
 
 .tabs a {
     color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    /* Reduced font size */
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Mobile size */
     font-weight: 500;
-    /* Reduced padding */
-    padding: 8px 5px; /* Less horizontal padding */
-    transition: color 0.3s ease; /* Simple transition */
+    padding: 8px 5px; /* Mobile padding */
+    transition: color 0.3s ease;
     position: relative;
     text-transform: uppercase;
-    letter-spacing: 1px; /* Less spacing */
+    letter-spacing: 1px;
     text-align: center;
-    flex-grow: 1; /* Allow tabs to grow */
-    flex-basis: 0; /* Distribute space evenly */
+    flex-grow: 1;
+    flex-basis: 0;
 }
 
-/* Simpler active/hover indicator for mobile */
 .tabs a.active {
-    color: #FFFFFF;
+    color: #FFFFFF; /* Highlight active tab */
 }
 
-/* Remove underline effect or simplify */
-.tabs a::after {
+.tabs a::after { /* Underline for active tab */
    content: '';
    position: absolute;
-   width: 0; /* Start hidden */
+   width: 0;
    height: 3px;
-   bottom: -2px; /* Position below text */
+   bottom: -2px;
    left: 50%;
    transform: translateX(-50%);
    background: #C0392B;
@@ -329,12 +297,8 @@ body.loaded {
 }
 
 .tabs a.active::after {
-    width: 40%; /* Shorter underline for active */
+    width: 40%; /* Active underline visible */
 }
-/* Remove hover effects for underline on mobile */
-/* .tabs a:hover { color: #FFFFFF; } */
-/* .tabs a:hover::after { width: 40%; } */
-
 
 /* Focus Styles (Keep for accessibility) */
 a:focus, button:focus {

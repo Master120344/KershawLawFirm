@@ -72,11 +72,11 @@ body.loaded {
 /* Login Section */
 .login-section {
     background: rgba(26, 29, 36, 0.9);
-    padding: 50px;
+    padding: 40px 60px; /* Reduced vertical padding, increased horizontal for rectangular shape */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 600px;
+    max-width: 700px; /* Increased max-width for a wider, rectangular look */
     text-align: center;
     transition: box-shadow 0.3s ease;
 }
@@ -98,14 +98,14 @@ body.loaded {
     font-size: 2rem;
     color: #e0e0e0;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
+    margin-bottom: 30px; /* Reduced slightly for less vertical space */
 }
 
 /* Login Form */
 .login-form {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px; /* Reduced gap for a more compact, rectangular form */
 }
 
 .form-group {
@@ -118,13 +118,13 @@ body.loaded {
     font-family: 'Cinzel', serif;
     font-size: 1.4rem;
     color: #F5F6F5;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reduced slightly for compactness */
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .form-group input {
-    padding: 16px;
+    padding: 14px; /* Slightly reduced padding for a less tall input */
     font-family: 'EB Garamond', serif;
     font-size: 1.2rem;
     color: #333;
@@ -143,7 +143,7 @@ body.loaded {
 }
 
 .login-button {
-    padding: 18px 55px;
+    padding: 16px 50px; /* Adjusted for a slightly shorter, wider button */
     background: #C0392B;
     color: #F5F6F5;
     font-family: 'Cinzel', serif;
@@ -197,14 +197,14 @@ body.loaded {
 
 /* User Info Section */
 .user-info {
-    margin-top: 30px;
+    margin-top: 20px; /* Reduced for a more compact layout */
     font-family: 'EB Garamond', serif;
     font-size: 1.4rem;
     color: #F5F6F5;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 15px; /* Reduced gap */
 }
 
 .user-info p {
@@ -212,7 +212,7 @@ body.loaded {
 }
 
 .logout-button {
-    padding: 14px 40px;
+    padding: 12px 35px; /* Adjusted for a slightly shorter, wider button */
     background: #C0392B;
     color: #F5F6F5;
     font-family: 'Cinzel', serif;

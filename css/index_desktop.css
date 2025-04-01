@@ -12,61 +12,45 @@ html {
 
 /* Body Styling */
 body {
-    font-family: 'EB Garamond', serif; /* More readable base font */
+    font-family: 'EB Garamond', serif;
     min-height: 100vh;
     color: #F5F6F5; /* Light text for dark background */
     line-height: 1.6;
     background-color: #1a1d24; /* Dark fallback background */
     overflow-x: hidden; /* Prevent horizontal scroll */
     position: relative; /* Needed for stacking context */
-    opacity: 0; /* Start hidden for fade-in */
+    /* ***** VITAL: Start hidden for fade-in controlled by JS ***** */
+    opacity: 0;
     transition: opacity 0.8s ease-in-out; /* Fade-in transition */
+    /* ***** VITAL: End Start hidden ***** */
     padding-top: 160px; /* Increased space for larger header */
     padding-bottom: 100px; /* Space for fixed bottom nav */
 }
 
+/* ***** VITAL: Class added by JS to make body visible ***** */
 body.loaded {
-    opacity: 1; /* Fade in when JS adds 'loaded' class */
+    opacity: 1;
 }
+/* ***** VITAL: End Class added by JS ***** */
 
-/* Background Slider */
-#background-slider {
+
+/* Background Element (Simplified for static image) */
+/* ***** UPDATED: Replaced #background-slider with #background-static ***** */
+#background-static {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -2; /* Behind overlay and content */
-    overflow: hidden; /* Hide parts of slides outside viewport */
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background-size: cover;
     background-position: center center;
-    opacity: 0;
-    animation: backgroundFade 24s linear infinite; /* 6s per image * 4 images */
-    transform: scale(1.05); /* Subtle zoom effect */
-    transition: transform 0.5s ease; /* Smooth zoom transitions */
-}
-
-/* Stagger animation delay for each slide */
-.slide:nth-child(1) { animation-delay: 0s; }
-.slide:nth-child(2) { animation-delay: 6s; }
-.slide:nth-child(3) { animation-delay: 12s; }
-.slide:nth-child(4) { animation-delay: 18s; }
-/* Add more delays if you add more slides */
-
-@keyframes backgroundFade {
-    0% { opacity: 0; transform: scale(1.05); }
-    12.5% { opacity: 1; transform: scale(1); } /* Fade in */
-    25% { opacity: 1; transform: scale(1); }   /* Hold */
-    37.5% { opacity: 0; transform: scale(1.05); } /* Fade out */
-    100% { opacity: 0; transform: scale(1.05); }
+    background-repeat: no-repeat;
+    /* ***** ADD YOUR AUSTIN IMAGE PATH HERE ***** */
+    background-image: url('../images/austin-texas-wallpaper.jpg'); /* --- REPLACE WITH YOUR ACTUAL IMAGE PATH --- */
+    /* Optional: Add a subtle zoom or effect if desired */
+    /* transform: scale(1.05); */
+    /* transition: transform 6s ease-out; */
 }
 
 /* Dark Overlay for Readability */
@@ -76,24 +60,9 @@ body.loaded {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 20, 0.5); /* Adjust darkness/color */
+    background-color: rgba(10, 10, 20, 0.5); /* Adjust darkness/color if needed */
     z-index: -1; /* Between background and content */
 }
-
-/* Texture Overlay (Optional - Kept from original) */
-/* body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png') repeat;
-    background-size: 300px 300px;
-    opacity: 0.1; // Reduced opacity
-    z-index: 0; // Above overlay, below content
-    pointer-events: none; // Allow clicks through
-} */
 
 /* Header Styling */
 .header {
@@ -102,68 +71,64 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 1000; /* High z-index */
-    padding: 25px 0; /* Vertical padding, horizontal handled by container */
-    background: rgba(26, 29, 36, 0.85); /* Slightly transparent dark */
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    -webkit-backdrop-filter: blur(10px); /* Safari */
+    padding: 25px 0;
+    background: rgba(26, 29, 36, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 }
 
 .header-content {
-    width: 90%; /* Control header content width */
-    max-width: 1400px; /* Max width */
-    margin: 0 auto; /* Center the content */
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* Space between logo and actions */
+    justify-content: space-between;
     align-items: center;
 }
 
 .logo-container {
-    text-align: center; /* Center h1 and line within this container */
-    flex-grow: 1; /* Allow logo to take space but centered */
-    display: flex; /* Use flex to center content properly */
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    /* Remove margin-right if login is on the far right */
 }
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 3.0rem; /* Slightly adjusted */
+    font-size: 3.0rem;
     color: #F5F6F5;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
     letter-spacing: 2px;
-    margin-bottom: 8px; /* Space between title and line */
+    margin-bottom: 8px;
     transition: color 0.3s ease;
-    font-weight: 700; /* Bold Cinzel */
+    font-weight: 700;
 }
 
 .logo-container h1:hover {
-    color: #E74C3C; /* Slightly brighter red on hover */
+    color: #E74C3C;
 }
 
 .header-line {
-    width: 120px; /* Initial width */
-    height: 3px; /* Thickness */
-    background: #C0392B; /* Original red */
-    margin: 0 auto; /* Keep centered */
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+    width: 120px;
+    height: 3px;
+    background: #C0392B;
+    margin: 0 auto;
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 1px;
 }
 
-/* Make line grow towards the edges */
 .logo-container:hover .header-line {
-    width: 350px; /* Increased hover width */
+    width: 350px;
 }
-
 
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between user info and login button if both visible */
+    gap: 20px;
 }
-
 
 /* Login Button */
 .login-button {
@@ -172,117 +137,115 @@ body.loaded {
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem; /* Adjusted size */
+    font-size: 1.2rem;
     font-weight: 600;
-    border-radius: 50px; /* Pill shape */
+    border-radius: 50px;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(192, 57, 43, 0.4);
     border: 1px solid transparent;
 }
 
 .login-button:hover {
-    background: #E74C3C; /* Brighter red */
+    background: #E74C3C;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
-    border-color: #F5F6F5; /* Subtle border on hover */
+    border-color: #F5F6F5;
 }
 
 /* User Info */
 .user-info {
-    display: flex;
+    display: flex; /* Changed from none by default, JS will hide/show */
     align-items: center;
     gap: 15px;
     font-family: 'EB Garamond', serif;
-    font-size: 1.1rem; /* Adjusted size */
-    color: #e0e0e0; /* Slightly softer white */
+    font-size: 1.1rem;
+    color: #e0e0e0;
 }
 
 #user-email {
-    font-weight: 500; /* Medium weight */
+    font-weight: 500;
 }
 
 .logout-link {
-    color: #E74C3C; /* Brighter red */
+    color: #E74C3C;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 600;
     transition: color 0.3s ease, transform 0.2s ease;
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: rgba(245, 246, 245, 0.1); /* Subtle background */
+    background-color: rgba(245, 246, 245, 0.1);
 }
 
 .logout-link:hover {
     color: #F5F6F5;
-    background-color: rgba(231, 76, 60, 0.8); /* Red background on hover */
+    background-color: rgba(231, 76, 60, 0.8);
     transform: scale(1.05);
 }
-
 
 /* Main Content Area */
 .main-content-area {
     position: relative;
-    z-index: 5; /* Above background/overlay, below header/nav */
+    z-index: 5;
 }
 
 /* Centered Content Container */
 .main-content-container {
-    max-width: 1100px; /* Max width for main content */
-    margin: 0 auto; /* Center container */
-    padding: 60px 40px; /* Padding inside the container */
-    min-height: calc(100vh - 160px - 100px); /* Fill space between header/nav */
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    min-height: calc(100vh - 160px - 100px);
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically center content */
-    align-items: center; /* Horizontally center content */
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
 /* Hero Section */
 .hero {
-    /* Removed positioning, relies on container */
-    padding: 40px 0; /* Padding within hero */
+    padding: 40px 0;
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    font-size: 4.8rem; /* Larger primary heading */
+    font-size: 4.8rem;
     color: #FFFFFF;
     text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
     margin-bottom: 15px;
-    font-weight: 700; /* Bold */
+    font-weight: 700;
 }
 
 .hero .tagline {
     font-family: 'Cinzel', serif;
-    font-size: 2.5rem; /* Size for the secondary heading */
-    color: #e0e0e0; /* Slightly muted color */
+    font-size: 2.5rem;
+    color: #e0e0e0;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 50px; /* Increased space before button */
-    font-weight: 400; /* Regular weight */
+    margin-bottom: 50px;
+    font-weight: 400;
 }
 
 .cta-button {
-    padding: 18px 55px; /* Larger button */
+    padding: 18px 55px;
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.6rem; /* Larger text */
-    font-weight: 700; /* Bold */
-    border-radius: 50px; /* Pill shape */
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+    font-size: 1.6rem;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 5px 18px rgba(192, 57, 43, 0.5);
-    border: 2px solid transparent; /* Prepare for border */
-    display: inline-block; /* Needed for margins/padding */
+    border: 2px solid transparent;
+    display: inline-block;
 }
 
 .cta-button:hover {
-    background: #E74C3C; /* Brighter red */
-    transform: translateY(-4px) scale(1.03); /* Lift and slightly enlarge */
+    background: #E74C3C;
+    transform: translateY(-4px) scale(1.03);
     box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
-    border-color: #ffffff; /* White border on hover */
-    color: #ffffff; /* Ensure text stays white */
+    border-color: #ffffff;
+    color: #ffffff;
 }
 
 /* Navigation Tabs (Footer) */
@@ -291,29 +254,29 @@ body.loaded {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* High z-index */
-    padding: 20px 0; /* Vertical padding, horizontal from container/gap */
-    background: rgba(26, 29, 36, 0.85); /* Match header */
-    backdrop-filter: blur(10px); /* Match header */
+    z-index: 1000;
+    padding: 20px 0;
+    background: rgba(26, 29, 36, 0.85);
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
-    justify-content: center; /* Center tabs */
+    justify-content: center;
     align-items: center;
-    gap: 50px; /* Increased space between tabs */
+    gap: 50px;
 }
 
 .tabs a {
-    color: #cccccc; /* Slightly muted default color */
+    color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    font-size: 1.3rem; /* Adjusted size */
-    font-weight: 500; /* Medium weight */
-    padding: 10px 20px; /* Padding around text */
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 10px 20px;
     transition: all 0.3s ease;
     position: relative;
     text-transform: uppercase;
-    letter-spacing: 1.5px; /* More spacing */
+    letter-spacing: 1.5px;
 }
 
 .tabs a::after {
@@ -321,9 +284,9 @@ body.loaded {
     position: absolute;
     width: 0;
     height: 3px;
-    bottom: -5px; /* Position below text */
+    bottom: -5px;
     left: 50%;
-    transform: translateX(-50%); /* Center the line */
+    transform: translateX(-50%);
     background: #C0392B;
     transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 2px;
@@ -331,19 +294,18 @@ body.loaded {
 
 .tabs a:hover,
 .tabs a.active {
-    color: #FFFFFF; /* Bright white on hover/active */
+    color: #FFFFFF;
 }
 
 .tabs a:hover::after,
 .tabs a.active::after {
-    width: 70%; /* Underline width on hover/active */
+    width: 70%;
 }
 
-/* Remove default focus outline for aesthetics, ensure keyboard navigation is still clear */
+/* Focus Styles */
 a:focus, button:focus {
     outline: none;
 }
-/* Add custom focus style if needed for accessibility */
 a:focus-visible, button:focus-visible {
      outline: 2px solid #E74C3C;
      outline-offset: 2px;

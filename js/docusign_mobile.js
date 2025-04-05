@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const documentList = document.getElementById('document-list');
     const createDocuSignBtn = document.getElementById('create-docusign-btn');
     const notificationCount = document.getElementById('notification-count');
-    let documents = JSON.parse(localStorage.getItem('documents')) || [];
+    let documents = JSON.parse(localStorage.getItem('documents')) || [
+        { id: 1, type: 'H-2A Agreement', clientName: 'Sample Client', email: 'sample@example.com', status: 'sent', envelopeId: 'SIM-123' },
+        { id: 2, type: 'H-2B Agreement', clientName: 'Demo Client', email: 'demo@example.com', status: 'approved', envelopeId: 'SIM-456' }
+    ]; // Pre-populated samples
 
     const docusignConfig = {
         apiKey: 'YOUR_DOCUSIGN_API_KEY_HERE', // Replace with real DocuSign API key later
@@ -37,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="form-actions">
                 <button class="button primary" id="send-docusign-btn">Send for Signature</button>
+                <button class="button secondary" id="preview-docusign-btn">Preview</button>
                 <button class="button secondary" id="cancel-docusign-btn">Cancel</button>
             </div>
         </div>
@@ -51,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <strong>${doc.type}</strong> for ${doc.clientName} <br> 
                 Status: ${doc.status} | Sent to: ${doc.email}
                 <button class="icon-button subtle approve-doc-btn" data-doc-id="${doc.id}" title="Approve">✔️</button>
+                <button class="icon-button subtle preview-doc-btn" data-doc-id="${doc.id}" title="Preview">👁️</button>
             `;
             documentList.appendChild(docItem);
         });
@@ -60,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateNotification(message) {
         const currentCount = parseInt(notificationCount.textContent) || 0;
         notificationCount.textContent = currentCount + 1;
-        console.log(`Notification: ${message}`);
+        window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message } }));
     }
 
     function showClippy(message) {
@@ -87,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     emailSubject: `Kershaw Law Firm: ${docData.type} for Signature`,
                     emailBlurb: docData.message || 'Please review and sign this document.',
                     documents: [{
-                        documentBase64: btoa(`Sample ${docData.type} for ${docData.clientName}`), // Placeholder; real doc would be base64-encoded
+                        documentBase64: btoa(`Sample ${docData.type} for ${docData.clientName}`),
                         name: `${docData.type}.pdf`,
                         documentId: '1'
                     }],
@@ -107,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return data.envelopeId;
         } catch (error) {
             console.error('DocuSign Error:', error);
-            return null; // Simulate success for now until real key is added
+            return null; // Simulate success for now
         }
     }
 
@@ -125,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDocumentList();
         updateNotification(`DocuSign Sent: ${newDoc.type} for ${newDoc.clientName}`);
         showClippy(`Sent ${newDoc.type} to ${newDoc.email}! Need approval?`);
+        window.dispatchEvent(new CustomEvent('documentSent', { detail: { type: newDoc.type, clientName: newDoc.clientName } }));
         return newDoc;
     }
 
@@ -134,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('docusign-form');
             const clientSelect = document.getElementById('doc-client');
             const sendBtn = document.getElementById('send-docusign-btn');
+            const previewBtn = document.getElementById('preview-docusign-btn');
             const cancelBtn = document.getElementById('cancel-docusign-btn');
 
-            // Populate client dropdown
             const clients = JSON.parse(localStorage.getItem('clients')) || [];
             clients.forEach(client => {
                 const option = document.createElement('option');
@@ -154,15 +160,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (clientName && email) {
                     const docData = { clientName, type, email, message };
                     const envelopeId = await sendDocuSign(docData);
-                    if (envelopeId) {
+                    if (envelopeId || true) { // Simulate success until real API
                         addDocument({ ...docData, envelopeId });
-                        form.remove();
-                    } else {
-                        addDocument(docData); // Simulate success until real key
                         form.remove();
                     }
                 } else {
                     alert('Please select a client and enter an email.');
+                }
+            });
+
+            previewBtn.addEventListener('click', () => {
+                const clientName = clientSelect.value;
+                const type = document.getElementById('doc-type').value;
+                const email = document.getElementById('doc-email').value.trim();
+                if (clientName && email) {
+                    alert(`Preview: ${type} for ${clientName}\nTo: ${email}\nMessage: ${document.getElementById('doc-message').value || 'N/A'}`);
+                } else {
+                    alert('Please select a client and enter an email for preview.');
                 }
             });
 
@@ -186,16 +200,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('approve-doc-btn')) {
             const docId = parseInt(e.target.getAttribute('data-doc-id'));
             approveDocument(docId);
+        } else if (e.target.classList.contains('preview-doc-btn')) {
+            const docId = parseInt(e.target.getAttribute('data-doc-id'));
+            const doc = documents.find(d => d.id === docId);
+            if (doc) alert(`Preview: ${doc.type} for ${doc.clientName}\nStatus: ${doc.status}\nTo: ${doc.email}`);
         }
     });
 
-    // Sync with AI Assistant commands
     window.addEventListener('aiCommandProcessed', (e) => {
         const command = e.detail.command.toLowerCase();
         if (command.includes('create document') && command.match(/h-2[ab]/i)) {
-            const clientName = clients.length > 0 ? clients[0].name : 'Unknown Client';
+            const clientName = JSON.parse(localStorage.getItem('clients'))?.[0]?.name || 'Unknown Client';
             const type = command.includes('h-2a') ? 'H-2A Agreement' : 'H-2B Agreement';
-            const email = clients.length > 0 ? clients[0].email : 'unknown@example.com';
+            const email = JSON.parse(localStorage.getItem('clients'))?.[0]?.email || 'unknown@example.com';
             const docData = { clientName, type, email, message: 'Generated by AI Assistant' };
             addDocument(docData);
         } else if (command.includes('approve') && (command.includes('yes') || command.includes('no'))) {
@@ -206,6 +223,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial load
-    updateDocumentList();
+    updateDocumentList(); // Load initial documents
 });

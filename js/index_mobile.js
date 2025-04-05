@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userInfoDiv.style.display = 'none';
     }
 
-    // Ensure touch events work smoothly (optional enhancement)
+    // Touch Optimization
     document.querySelectorAll('.tabs a, .cta-button, .login-button, .logout-link').forEach(el => {
         el.addEventListener('touchstart', () => {}, { passive: true }); // Improves touch responsiveness
     });

@@ -19,11 +19,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const aiChatSend = document.getElementById('ai-chat-send');
     const aiChatMessages = document.getElementById('ai-chat-messages');
     const notificationCount = document.getElementById('notification-count');
+    const headerRight = document.querySelector('.header-right');
     let isVisible = false;
     let chatHistory = [];
     let isProcessing = false;
-    let positionX = 50;
+    let positionX = window.innerWidth - 120; // Bottom-right corner
     let positionY = window.innerHeight - 150;
+
+    const clippyToggle = document.createElement('button');
+    clippyToggle.classList.add('icon-button');
+    clippyToggle.innerHTML = '<span class="icon-placeholder">🤖</span>';
+    clippyToggle.title = 'Toggle Clippy';
+    headerRight.insertBefore(clippyToggle, headerRight.firstChild);
 
     const aiConfig = {
         apiKey: 'AIzaSyAbBo5ye75w8JzikAnW3Xw3fpVZEmeCFQE',
@@ -47,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clippy.style.opacity = '1';
             clippy.style.transform = 'scale(1)';
             clippy.classList.add('bounce');
-            clippy.classList.add('wave'); // New wave animation
+            clippy.classList.add('wave');
         }, 50);
         isVisible = true;
         setTimeout(() => {
@@ -67,10 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function moveClippy() {
-        positionX += Math.random() * 20 - 10;
-        positionY += Math.random() * 20 - 10;
-        positionX = Math.max(0, Math.min(positionX, window.innerWidth - 100));
-        positionY = Math.max(0, Math.min(positionY, window.innerHeight - 150));
+        positionX = window.innerWidth - 120; // Keep in bottom-right
+        positionY = window.innerHeight - 150;
         clippy.style.left = `${positionX}px`;
         clippy.style.top = `${positionY}px`;
     }
@@ -151,11 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (approval === 'Approved') updateDocumentStatus(aiState.currentDocument, 'approved');
             showClippy(`Document ${approval.toLowerCase()}! Anything else?`);
             window.dispatchEvent(new CustomEvent('aiCommandProcessed', { detail: { command } }));
-        } else if (aiState.lastCommand.includes('list clients')) {
+        } else if (aiState.lastCommand.includes('summarize clients')) {
             const clients = JSON.parse(localStorage.getItem('clients')) || [];
-            const clientList = clients.map(c => `${c.name} (${c.visaType})`).join(', ') || 'No clients yet.';
-            addMessage(`Current clients: ${clientList}`);
-            showClippy('Here’s your client list!');
+            const summary = clients.length > 0 ? `You have ${clients.length} clients: ${clients.map(c => `${c.name} (${c.visaType})`).join(', ')}.` : 'No clients yet.';
+            addMessage(summary);
+            showClippy('Here’s your client rundown!');
         } else {
             const response = await callAiApi(command);
             addMessage(response);
@@ -214,7 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateNotification(`Document ${status}: ${document.visaType}`);
     }
 
-    showClippy(); // Show Clippy on load
+    showClippy();
+
+    clippyToggle.addEventListener('click', () => {
+        if (isVisible) hideClippy();
+        else showClippy('Back to assist you!');
+    });
 
     clippy.addEventListener('click', () => {
         if (!isVisible) showClippy('Back to assist you!');
@@ -235,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('click', (e) => {
-        if (!clippy.contains(e.target) && !aiChatInput.contains(e.target) && !aiChatSend.contains(e.target) && isVisible) {
+        if (!clippy.contains(e.target) && !aiChatInput.contains(e.target) && !aiChatSend.contains(e.target) && !clippyToggle.contains(e.target) && isVisible) {
             hideClippy();
         }
     });
@@ -266,6 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    window.addEventListener('resize', moveClippy); // Adjust position on resize
+
     setInterval(() => {
         if (!isProcessing && !isVisible && chatHistory.length > 0) {
             const lastUserCommand = chatHistory.filter(m => m.isUser).pop()?.text.toLowerCase();
@@ -277,10 +289,4 @@ document.addEventListener('DOMContentLoaded', () => {
             moveClippy();
         }
     }, 10000);
-
-    // React to other dashboard actions
-    window.addEventListener('clientTaskAdded', (e) => showClippy(`Task added! Need a DocuSign next?`));
-    window.addEventListener('documentSent', (e) => showClippy(`Document sent! Want to approve it?`));
-    window.addEventListener('taskCompleted', (e) => showClippy(`Task done! What’s next on your list?`));
-    window.addEventListener('deadlineAdded', (e) => showClippy(`Deadline set! I’ll remind you!`));
 });

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kershaw Law Firm P.C. - Secure Admin Portal</title>
+    <meta name="description" content="Internal administration portal for The Kershaw Law Firm P.C.">
+    <link rel="stylesheet" href="css/dashboard_mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="preload">
+    <div class="background-layer layer-1"></div>
+    <div class="background-layer layer-2"></div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="#overview" class="sidebar-logo-link" data-target="overview-content">
+                    <span class="sidebar-logo">KL</span>
+                    <h2 class="sidebar-title">Kershaw Law Firm</h2>
+                </a>
+                <button id="sidebar-toggle" class="icon-button">☰</button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#overview" class="nav-link active" data-target="overview-content" data-title="Dashboard Overview"><span class="nav-icon">📊</span> <span class="nav-text">Dashboard</span></a></li>
+                    <li><a href="#clients" class="nav-link" data-target="clients-content" data-title="Client Management"><span class="nav-icon">👥</span> <span class="nav-text">Clients</span></a></li>
+                    <li><a href="#cases" class="nav-link" data-target="cases-content" data-title="Case Management"><span class="nav-icon">📁</span> <span class="nav-text">Cases</span></a></li>
+                    <li><a href="#documents" class="nav-link" data-target="documents-content" data-title="Document Center"><span class="nav-icon">📄</span> <span class="nav-text">Documents & eSign</span></a></li>
+                    <li><a href="#calendar" class="nav-link" data-target="calendar-content" data-title="Firm Calendar"><span class="nav-icon">📅</span> <span class="nav-text">Calendar</span></a></li>
+                    <li><a href="#tasks" class="nav-link" data-target="tasks-content" data-title="Tasks & Reminders"><span class="nav-icon">✅</span> <span class="nav-text">Tasks</span></a></li>
+                    <li><a href="#analytics" class="nav-link" data-target="analytics-content" data-title="Reporting & Analytics"><span class="nav-icon">📈</span> <span class="nav-text">Analytics</span></a></li>
+                    <li><a href="#ai-assistant" class="nav-link" data-target="ai-content" data-title="AI Legal Assistant"><span class="nav-icon">🤖</span> <span class="nav-text">AI Assistant</span></a></li>
+                    <li><a href="#settings" class="nav-link" data-target="settings-content" data-title="System Settings"><span class="nav-icon">⚙️</span> <span class="nav-text">Settings</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-indicator online"></span> Connected
+                </div>
+                <p class="copyright">© <span id="current-year"></span> Kershaw Law Firm P.C.</p>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="header">
+                <div class="header-left">
+                    <button id="breadcrumb-back" class="icon-button subtle" title="Back" style="display: none;">‹</button>
+                    <h1 id="main-content-title" class="header-main-title">Dashboard Overview</h1>
+                </div>
+                <div class="header-right">
+                    <button class="icon-button notification-button" title="Notifications">
+                        <span class="icon-placeholder">🔔</span>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="profile-menu-container">
+                        <button class="profile-button">
+                            <img src="https://github.com/Master120344/KershawLawFirm/raw/main/assets/adminprofilepicture.png" alt="Admin Avatar" class="profile-avatar">
+                            <span class="profile-name" id="admin-username">Eleanor Vance</span>
+                            <span class="profile-arrow">▼</span>
+                        </button>
+                        <div class="profile-dropdown">
+                            <a href="#profile">My Profile</a>
+                            <a href="#settings" data-target="settings-content" class="nav-link-trigger">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <button id="logout-button-dropdown" class="logout-button-dropdown">
+                                <span class="icon-placeholder">🚪</span> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content scrollable" id="main-content-area">
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="spinner"></div>
+                </div>
+
+                <div id="overview-content" class="content-section is-active">
+                    <div class="content-header">
+                        <h2>Dashboard Overview</h2>
+                        <div class="header-actions">
+                            <button class="button primary small">➕ Widget</button>
+                            <button class="button secondary small">🔧 Customize</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Key metrics and quick access to important areas.</p>
+                    <div class="widget-grid">
+                        <div class="widget clickable" data-link-target="cases-content">
+                            <div class="widget-icon">📁</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Active Cases</h3>
+                                <p class="widget-data">28</p>
+                                <p class="widget-change up">+3 this week</p>
+                            </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="tasks-content">
+                            <div class="widget-icon">✅</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Pending Tasks</h3>
+                                <p class="widget-data">14</p>
+                                <p class="widget-change overdue">5 Overdue</p>
+                            </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="calendar-content">
+                            <div class="widget-icon">📅</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Upcoming Deadlines</h3>
+                                <p class="widget-data">6</p>
+                                <p class="widget-change">Next: Filing (J. Doe)</p>
+                            </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="documents-content">
+                            <div class="widget-icon">📄</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Docs Awaiting Review</h3>
+                                <p class="widget-data">9</p>
+                                <p class="widget-change">Client Uploads: 4</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-row">
+                        <div class="content-panel column-2">
+                            <h3>Recent Activity</h3>
+                            <ul class="activity-feed">
+                                <li><span class="activity-icon">👤</span> New client 'Acme Corp' added. <span class="timestamp">1h ago</span></li>
+                                <li><span class="activity-icon">📎</span> Document 'Passport - J. Smith' uploaded. <span class="timestamp">3h ago</span></li>
+                                <li><span class="activity-icon">🔄</span> Case #H2B-012 status changed to 'RFE Received'. <span class="timestamp">5h ago</span></li>
+                                <li><span class="activity-icon">✔️</span> Task 'Prepare LCA - Farm LLC' completed. <span class="timestamp">Yesterday</span></li>
+                            </ul>
+                        </div>
+                        <div class="content-panel column-1">
+                            <h3>Quick Links</h3>
+                            <ul class="quick-links">
+                                <li><a href="#cases" data-target="cases-content" class="nav-link-trigger">➕ Start New Case</a></li>
+                                <li><a href="#clients" data-target="clients-content" class="nav-link-trigger">➕ Add New Client</a></li>
+                                <li><a href="#tasks" data-target="tasks-content" class="nav-link-trigger">➕ Create Task</a></li>
+                                <li><a href="#calendar" data-target="calendar-content" class="nav-link-trigger">View Calendar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="clients-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Client Management</h2>
+                        <div class="header-actions">
+                            <input type="search" id="client-search-input" name="clientSearch" placeholder="Search clients..." class="table-search">
+                            <button class="button secondary small">⚖️ Filters</button>
+                            <button class="button primary small">➕ Add Client</button>
+                        </div>
+                    </div>
+                    <p class="section-description">View, search, and manage client information.</p>
+                    <div class="placeholder-table">Client Data Table Goes Here...</div>
+                </div>
+
+                <div id="cases-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Case Management</h2>
+                        <div class="header-actions">
+                            <input type="search" id="case-search-input" name="caseSearch" placeholder="Search cases..." class="table-search">
+                            <button class="button secondary small">⚖️ Filters</button>
+                            <button class="button primary small">➕ Add Case</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Track H2A/H2B cases, deadlines, and statuses.</p>
+                    <div class="placeholder-table">Case Data Table Goes Here...</div>
+                </div>
+
+                <div id="documents-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Document Generator & eSign</h2>
+                        <div class="header-actions"></div>
+                    </div>
+                    <p class="section-description">Generate preliminary agreements and manage eSignature requests.</p>
+                    <div class="content-row docusign-layout">
+                        <div class="docusign-column-main">
+                            <div class="content-panel mb-3" id="pending-signatures-panel">
+                                <h3>Pending Signatures</h3>
+                                <ul id="pending-signatures-list" class="pending-list">
+                                    <li data-id="req-001">
+                                        <span class="pending-name">John Doe (H2B Agreement)</span>
+                                        <span class="pending-status pending">Sent: Oct 25</span>
+                                        <button class="icon-button subtle tiny" title="Resend">🔁</button>
+                                    </li>
+                                    <li data-id="req-002">
+                                        <span class="pending-name">Acme Corp (H2A Retainer)</span>
+                                        <span class="pending-status error">Error</span>
+                                        <button class="icon-button subtle tiny" title="View Error">❗</button>
+                                    </li>
+                                    <li class="no-pending" style="display: none;">No documents currently pending signature.</li>
+                                </ul>
+                            </div>
+                            <div class="content-panel">
+                                <form id="docusign-generator-form" class="docusign-form">
+                                    <h3>Generate New Agreement</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="client-first-name" class="form-label">Client First Name</label>
+                                            <input type="text" id="client-first-name" name="clientFirstName" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="client-last-name" class="form-label">Client Last Name</label>
+                                            <input type="text" id="client-last-name" name="clientLastName" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client-email" class="form-label">Client Email (for Signature)</label>
+                                        <input type="email" id="client-email" name="clientEmail" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client-phone" class="form-label">Client Phone (Optional)</label>
+                                        <input type="tel" id="client-phone" name="clientPhone" class="form-control" placeholder="e.g., 555-123-4567">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="case-id" class="form-label">Case ID (Optional)</label>
+                                            <input type="text" id="case-id" name="caseId" class="form-control" placeholder="e.g., H2B-015">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="visa-type" class="form-label">Visa Type</label>
+                                            <select id="visa-type" name="visaType" class="form-control" required>
+                                                <option value="" disabled selected>Select Visa Program...</option>
+                                                <option value="H-2A">H-2A (Agricultural)</option>
+                                                <option value="H-2B">H-2B (Non-Agricultural)</option>
+                                                <option value="Both">Both H-2A & H-2B</option>
+                                                <option value="Other">Other/Consultation</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="employer-name" class="form-label">Employer Name</label>
+                                        <input type="text" id="employer-name" name="employerName" class="form-control" required>
+                                    </div>
+                                    <fieldset class="form-fieldset">
+                                        <legend class="form-legend">Agreement Terms</legend>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="legal-fee" class="form-label">Legal Fee ($)</label>
+                                                <input type="number" id="legal-fee" name="legalFee" class="form-control" step="0.01" min="0" required placeholder="e.g., 5000.00">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="filing-fee" class="form-label">Est. Filing Fees ($)</label>
+                                                <input type="number" id="filing-fee" name="filingFee" class="form-control" step="0.01" min="0" placeholder="e.g., 1500.00">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="payment-terms" class="form-label">Payment Terms / Scope</label>
+                                            <textarea id="payment-terms" name="paymentTerms" class="form-control" rows="4" placeholder="e.g., 50% retainer upon signing, balance due upon case filing. Scope includes..." required></textarea>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <button type="submit" id="generate-preview-btn" class="button primary">📄 Generate Preview</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="docusign-column-preview">
+                            <div class="content-panel sticky-preview" id="preview-panel" style="display: none;">
+                                <div class="preview-header">
+                                    <h3>Document Preview</h3>
+                                    <button class="icon-button subtle close-preview" id="close-preview-btn" title="Close Preview">✕</button>
+                                </div>
+                                <div id="document-preview-area" class="document-preview">Preview will appear here...</div>
+                                <div class="form-actions preview-actions">
+                                    <button type="button" id="send-email-btn" class="button success" disabled>📧 Send for Signature</button>
+                                    <button type="button" id="download-pdf-btn" class="button secondary" disabled>💾 Download PDF (Simulated)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="calendar-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Firm Calendar</h2>
+                        <div class="header-actions">
+                            <button class="button secondary small">👁️ View Options</button>
+                            <button class="button secondary small">⚖️ Filter</button>
+                            <button class="button primary small">➕ Add Event</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Overview of key dates, deadlines, and appointments.</p>
+                    <div class="calendar-container card-style">
+                        <div class="calendar-header">
+                            <button id="prev-month-btn" class="calendar-nav-btn" title="Previous Month">‹</button>
+                            <h3 id="month-year" class="calendar-month-title">Month Year</h3>
+                            <button id="next-month-btn" class="calendar-nav-btn" title="Next Month">›</button>
+                            <button id="today-btn" class="button secondary tiny" title="Go to Today">Today</button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+                        <div class="calendar-grid" id="calendar-days"></div>
+                    </div>
+                    <div class="content-panel mt-3">
+                        <h3>Upcoming Deadlines & Events</h3>
+                        <ul class="upcoming-events-list">
+                            <li><span class="event-date">Oct 28</span> Filing Deadline - Case #H2A-015 <span class="event-time">EOD</span></li>
+                            <li><span class="event-date">Oct 30</span> Client Meeting - Acme Corp <span class="event-time">10:00 AM</span></li>
+                            <li><span class="event-date">Nov 02</span> RFE Response Due - Case #H2B-007 <span class="event-time">EOD</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="tasks-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Tasks & Reminders</h2>
+                        <div class="header-actions">
+                            <button class="button secondary small">⚖️ Filter Tasks</button>
+                            <button class="button secondary small">📋 View As</button>
+                            <button class="button primary small">➕ Add Task</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Manage your workload and track important action items.</p>
+                    <div class="placeholder-table">Task List / Kanban Board Goes Here...</div>
+                </div>
+
+                <div id="analytics-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Reporting & Analytics</h2>
+                        <div class="header-actions">
+                            <button class="button secondary small">🗓️ Date Range</button>
+                            <button class="button secondary small">📄 Generate Report</button>
+                            <button class="button secondary small">💾 Export Data</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Visualize key performance indicators and case trends.</p>
+                    <div class="placeholder-complex">Chart Components (Approval Rates, Processing Times, etc.) Go Here...</div>
+                </div>
+
+                <div id="ai-content" class="content-section">
+                    <div class="content-header">
+                        <h2>AI Legal Assistant</h2>
+                        <div class="header-actions">
+                            <button class="button secondary small">💬 History</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Utilize AI for insights, summaries, and assistance.</p>
+                    <div class="placeholder-complex ai-panel">
+                        <p>AI Chat Window & Suggestion Tools Go Here...</p>
+                        <p><em>"I am your Kershaw Law Visa Assistant AI. How can I help?"</em></p>
+                    </div>
+                </div>
+
+                <div id="settings-content" class="content-section">
+                    <div class="content-header">
+                        <h2>System Settings</h2>
+                        <div class="header-actions">
+                            <button class="button primary small" disabled>💾 Save Changes</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Manage user accounts, integrations, and preferences.</p>
+                    <div class="placeholder-complex">Settings Forms (User Management, Notifications, API Keys) Go Here...</div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/dashboard_mobile.js"></script>
+</body>
+</html>

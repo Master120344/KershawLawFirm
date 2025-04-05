@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    let navigationHistory = ['overview-content'];
+    let navigationHistory = ['dashboard-content'];
 
     function showLoadingOverlay() {
         loadingOverlay.classList.add('is-active');
@@ -105,11 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoutButtonDropdown.addEventListener('click', () => {
         console.log('Logout clicked');
+        window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message: 'User logged out' } }));
     });
 
     document.querySelectorAll('.nav-link, .widget.clickable, .nav-link-trigger, .icon-button, .button').forEach(el => {
         el.addEventListener('touchstart', () => {}, { passive: true });
     });
 
-    switchContent('overview-content');
+    switchContent('dashboard-content');
 });

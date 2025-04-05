@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationCount = document.getElementById('notification-count');
     let clients = JSON.parse(localStorage.getItem('clients')) || [];
 
-    // Client form (dynamically added when "Add Client" is clicked)
     const clientFormHTML = `
         <div class="client-form" id="client-form">
             <h3>Add New Client</h3>
@@ -36,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateClientList() {
         clientList.innerHTML = '';
+        clients.sort((a, b) => a.name.localeCompare(b.name)); // Sort clients A to Z
         clients.forEach(client => {
             const clientItem = document.createElement('div');
             clientItem.classList.add('client-item');
@@ -48,12 +48,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         localStorage.setItem('clients', JSON.stringify(clients));
         updateDashboardStats();
+        updateClientDropdowns(); // Update dropdowns in other forms
+    }
+
+    function updateClientDropdowns() {
+        const taskClientSelect = document.getElementById('task-client');
+        const docClientSelect = document.getElementById('doc-client');
+        
+        if (taskClientSelect) {
+            taskClientSelect.innerHTML = '<option value="">No Client</option>';
+            clients.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client.name;
+                option.textContent = `${client.name} (${client.visaType})`;
+                taskClientSelect.appendChild(option);
+            });
+        }
+
+        if (docClientSelect) {
+            docClientSelect.innerHTML = '<option value="" disabled selected>Select a client...</option>';
+            clients.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client.name;
+                option.textContent = `${client.name} (${client.visaType})`;
+                docClientSelect.appendChild(option);
+            });
+        }
     }
 
     function updateNotification(message) {
         const currentCount = parseInt(notificationCount.textContent) || 0;
         notificationCount.textContent = currentCount + 1;
-        console.log(`Notification: ${message}`);
+        window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message } }));
     }
 
     function updateDashboardStats() {
@@ -91,29 +117,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showClientForm() {
-        if (!document.getElementById('client-form')) {
-            clientList.insertAdjacentHTML('beforeend', clientFormHTML);
-            const form = document.getElementById('client-form');
-            const saveBtn = document.getElementById('save-client-btn');
-            const cancelBtn = document.getElementById('cancel-client-btn');
+        if (document.getElementById('client-form')) return; // Prevent multiple forms
+        clientList.insertAdjacentHTML('beforeend', clientFormHTML);
+        const form = document.getElementById('client-form');
+        const saveBtn = document.getElementById('save-client-btn');
+        const cancelBtn = document.getElementById('cancel-client-btn');
 
-            saveBtn.addEventListener('click', () => {
-                const name = document.getElementById('client-name').value.trim();
-                const visaType = document.getElementById('client-visa').value;
-                const email = document.getElementById('client-email').value.trim();
-                const phone = document.getElementById('client-phone').value.trim();
+        saveBtn.addEventListener('click', () => {
+            const name = document.getElementById('client-name').value.trim();
+            const visaType = document.getElementById('client-visa').value;
+            const email = document.getElementById('client-email').value.trim();
+            const phone = document.getElementById('client-phone').value.trim();
 
-                if (name && email) {
-                    const clientData = { name, visaType, email, phone };
-                    addClient(clientData);
-                    form.remove();
-                } else {
-                    alert('Please fill in Name and Email.');
-                }
-            });
+            if (name && email) {
+                const clientData = { name, visaType, email, phone };
+                addClient(clientData);
+                form.remove();
+            } else {
+                alert('Please fill in Name and Email.');
+            }
+        });
 
-            cancelBtn.addEventListener('click', () => form.remove());
-        }
+        cancelBtn.addEventListener('click', () => form.remove());
     }
 
     function addTaskForClient(clientId, taskTitle, dueDate) {
@@ -151,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Sync with AI Assistant commands
     window.addEventListener('aiCommandProcessed', (e) => {
         const command = e.detail.command.toLowerCase();
         if (command.includes('add client') && command.includes('@')) {
@@ -165,11 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return {
             name: parts.slice(parts.indexOf('client') + 1, parts.indexOf('h-2')).join(' '),
             visaType: parts.find(p => p.match(/h-2[ab]/i)) || 'H-2A',
-            email: parts.find(p => p.includes('@')) || 'unknown@email.com',
+            email: parts.find(p => p.includes('@')) || 'unknown@example.com',
             phone: parts.find(p => p.match(/\d{3}-\d{3}-\d{4}/)) || ''
         };
     }
 
-    // Initial load
     updateClientList();
 });

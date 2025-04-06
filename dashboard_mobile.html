@@ -31,6 +31,8 @@
                     <li><a href="#tasks" class="nav-link" data-target="tasks-content" data-title="Tasks"><span class="nav-icon">✅</span> <span class="nav-text">Tasks</span></a></li>
                     <li><a href="#deadlines" class="nav-link" data-target="deadlines-content" data-title="Deadlines"><span class="nav-icon">📅</span> <span class="nav-text">Deadlines</span></a></li>
                     <li><a href="#ai-assistant" class="nav-link" data-target="ai-content" data-title="AI Assistant"><span class="nav-icon">🤖</span> <span class="nav-text">AI Assistant</span></a></li>
+                    <li><a href="#reports" class="nav-link" data-target="reports-content" data-title="Reports"><span class="nav-icon">📈</span> <span class="nav-text">Reports</span></a></li>
+                    <li><a href="#settings" class="nav-link" data-target="settings-content" data-title="Settings"><span class="nav-icon">⚙️</span> <span class="nav-text">Settings</span></a></li>
                 </ul>
             </nav>
             <div class="sidebar-footer">
@@ -48,6 +50,9 @@
                     <h1 id="main-content-title" class="header-main-title">Dashboard</h1>
                 </div>
                 <div class="header-right">
+                    <div class="search-bar">
+                        <input type="text" id="global-search" class="table-search" placeholder="Search clients, tasks...">
+                    </div>
                     <button class="icon-button notification-button" title="Notifications">
                         <span class="icon-placeholder">🔔</span>
                         <span class="notification-badge" id="notification-count">0</span>
@@ -55,10 +60,13 @@
                     <div class="profile-menu-container">
                         <button class="profile-button">
                             <img src="https://github.com/Master120344/KershawLawFirm/raw/main/assets/adminprofilepicture.png" alt="Admin Avatar" class="profile-avatar">
+                            <span class="profile-name">Admin</span>
                             <span class="profile-arrow">▼</span>
                         </button>
                         <div class="profile-dropdown">
                             <a href="#profile">My Profile</a>
+                            <a href="#account-settings">Account Settings</a>
+                            <div class="dropdown-divider"></div>
                             <button id="logout-button-dropdown" class="logout-button-dropdown">
                                 <span class="icon-placeholder">🚪</span> Logout
                             </button>
@@ -75,6 +83,10 @@
                 <div id="dashboard-content" class="content-section is-active">
                     <div class="content-header">
                         <h2>Dashboard</h2>
+                        <div class="header-actions">
+                            <button class="button primary small" id="quick-add-client-btn">Quick Add Client</button>
+                            <button class="button primary small" id="quick-add-task-btn">Quick Add Task</button>
+                        </div>
                     </div>
                     <p class="section-description">Welcome to your H-2A/H-2B visa management hub.</p>
                     <div class="widget-grid">
@@ -83,6 +95,7 @@
                             <div class="widget-content">
                                 <h3 class="widget-title">Active Clients</h3>
                                 <p class="widget-data" id="active-clients">0</p>
+                                <span class="widget-change neutral">No change</span>
                             </div>
                         </div>
                         <div class="widget clickable" data-link-target="tasks-content">
@@ -90,6 +103,7 @@
                             <div class="widget-content">
                                 <h3 class="widget-title">Pending Tasks</h3>
                                 <p class="widget-data" id="pending-tasks">0</p>
+                                <span class="widget-change neutral">No change</span>
                             </div>
                         </div>
                         <div class="widget clickable" data-link-target="deadlines-content">
@@ -97,7 +111,33 @@
                             <div class="widget-content">
                                 <h3 class="widget-title">Upcoming Deadlines</h3>
                                 <p class="widget-data" id="upcoming-deadlines">0</p>
+                                <span class="widget-change neutral">No change</span>
                             </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="documents-content">
+                            <div class="widget-icon">📄</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Pending Documents</h3>
+                                <p class="widget-data" id="pending-documents">0</p>
+                                <span class="widget-change neutral">No change</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-row">
+                        <div class="content-panel column-1">
+                            <h3>Recent Activity</h3>
+                            <ul class="activity-feed" id="recent-activity-feed">
+                                <li><span class="activity-icon">📄</span> No recent activity yet. <span class="timestamp">Just now</span></li>
+                            </ul>
+                        </div>
+                        <div class="content-panel column-1">
+                            <h3>Quick Links</h3>
+                            <ul class="quick-links">
+                                <li><a href="#clients" class="nav-link-trigger" data-target="clients-content">Add New Client</a></li>
+                                <li><a href="#documents" class="nav-link-trigger" data-target="documents-content">Create DocuSign</a></li>
+                                <li><a href="#tasks" class="nav-link-trigger" data-target="tasks-content">Assign Task</a></li>
+                                <li><a href="#deadlines" class="nav-link-trigger" data-target="deadlines-content">Set Deadline</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -106,6 +146,7 @@
                     <div class="content-header">
                         <h2>Clients</h2>
                         <div class="header-actions">
+                            <input type="text" id="client-search" class="table-search" placeholder="Search clients...">
                             <button class="button primary small" id="add-client-btn">➕ Add Client</button>
                         </div>
                     </div>
@@ -117,6 +158,7 @@
                     <div class="content-header">
                         <h2>Documents & eSign</h2>
                         <div class="header-actions">
+                            <input type="text" id="document-search" class="table-search" placeholder="Search documents...">
                             <button class="button primary small" id="create-docusign-btn">➕ New DocuSign</button>
                         </div>
                     </div>
@@ -128,6 +170,7 @@
                     <div class="content-header">
                         <h2>Tasks</h2>
                         <div class="header-actions">
+                            <input type="text" id="task-search" class="table-search" placeholder="Search tasks...">
                             <button class="button primary small" id="add-task-btn">➕ Add Task</button>
                         </div>
                     </div>
@@ -138,6 +181,9 @@
                 <div id="deadlines-content" class="content-section">
                     <div class="content-header">
                         <h2>Deadlines</h2>
+                        <div class="header-actions">
+                            <input type="text" id="deadline-search" class="table-search" placeholder="Search deadlines...">
+                        </div>
                     </div>
                     <p class="section-description">Stay on top of visa deadlines.</p>
                     <div id="deadline-list" class="deadline-list"></div>
@@ -146,15 +192,162 @@
                 <div id="ai-content" class="content-section">
                     <div class="content-header">
                         <h2>AI Assistant</h2>
+                        <div class="header-actions">
+                            <button class="button primary small" id="clear-chat-btn">Clear Chat</button>
+                        </div>
                     </div>
                     <p class="section-description">Your Kershaw AI Legal Assistant is here to help!</p>
                     <div id="ai-chat-container" class="ai-chat-container">
                         <div id="ai-chat-messages" class="ai-chat-messages"></div>
-                        <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask me anything...">
-                        <button id="ai-chat-send" class="button primary small">Send</button>
+                        <div class="ai-chat-input-group">
+                            <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask me anything...">
+                            <button id="ai-chat-send" class="button primary small">Send</button>
+                            <button id="ai-voice-input" class="button secondary small">🎙️</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reports-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Reports</h2>
+                        <div class="header-actions">
+                            <select id="report-type" class="form-control">
+                                <option value="client">Client Report</option>
+                                <option value="task">Task Report</option>
+                                <option value="deadline">Deadline Report</option>
+                            </select>
+                            <button class="button primary small" id="generate-report-btn">Generate Report</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Generate reports for clients, tasks, and deadlines.</p>
+                    <div id="report-output" class="content-panel">
+                        <h3>Report Output</h3>
+                        <p>No report generated yet. Select a report type and click "Generate Report".</p>
+                    </div>
+                </div>
+
+                <div id="settings-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Settings</h2>
+                    </div>
+                    <p class="section-description">Customize your dashboard experience.</p>
+                    <div class="content-panel">
+                        <h3>General Settings</h3>
+                        <div class="form-group">
+                            <label for="theme-select" class="form-label">Theme</label>
+                            <select id="theme-select" class="form-control">
+                                <option value="dark">Dark (Default)</option>
+                                <option value="light">Light</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notification-preference" class="form-label">Notification Preference</label>
+                            <select id="notification-preference" class="form-control">
+                                <option value="all">All Notifications</option>
+                                <option value="urgent">Urgent Only</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="content-panel">
+                        <h3>Account Settings</h3>
+                        <div class="form-group">
+                            <label for="user-email" class="form-label">Email</label>
+                            <input type="email" id="user-email" class="form-control" value="admin@kershawlaw.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password" class="form-label">Change Password</label>
+                            <input type="password" id="user-password" class="form-control" placeholder="New password">
+                        </div>
+                        <div class="form-actions">
+                            <button class="button primary" id="save-settings-btn">Save Settings</button>
+                        </div>
                     </div>
                 </div>
             </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="client-details-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Client Details</h3>
+                <button class="icon-button subtle modal-close" data-modal="client-details-modal">✖</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Name:</strong> <span id="modal-client-name"></span></p>
+                <p><strong>Visa Type:</strong> <span id="modal-client-visa"></span></p>
+                <p><strong>Email:</strong> <span id="modal-client-email"></span></p>
+                <p><strong>Phone:</strong> <span id="modal-client-phone"></span></p>
+                <h4>Associated Tasks</h4>
+                <ul id="modal-client-tasks" class="activity-feed"></ul>
+                <h4>Associated Documents</h4>
+                <ul id="modal-client-documents" class="activity-feed"></ul>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary modal-close" data-modal="client-details-modal">Close</button>
+                <button class="button primary" id="edit-client-btn">Edit Client</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="quick-add-client-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quick Add Client</h3>
+                <button class="icon-button subtle modal-close" data-modal="quick-add-client-modal">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="quick-client-name" class="form-label">Name</label>
+                    <input type="text" id="quick-client-name" class="form-control" placeholder="e.g., John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-visa" class="form-label">Visa Type</label>
+                    <select id="quick-client-visa" class="form-control" required>
+                        <option value="H-2A">H-2A (Agricultural)</option>
+                        <option value="H-2B">H-2B (Non-Agricultural)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-email" class="form-label">Email</label>
+                    <input type="email" id="quick-client-email" class="form-control" placeholder="e.g., john@example.com" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary modal-close" data-modal="quick-add-client-modal">Cancel</button>
+                <button class="button primary" id="quick-save-client-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="quick-add-task-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quick Add Task</h3>
+                <button class="icon-button subtle modal-close" data-modal="quick-add-task-modal">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="quick-task-title" class="form-label">Task Title</label>
+                    <input type="text" id="quick-task-title" class="form-control" placeholder="e.g., Prepare LCA" required>
+                </div>
+                <div class="form-group">
+                    <label for="quick-task-client" class="form-label">Client (Optional)</label>
+                    <select id="quick-task-client" class="form-control">
+                        <option value="">No Client</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quick-task-due" class="form-label">Due Date</label>
+                    <input type="date" id="quick-task-due" class="form-control" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary modal-close" data-modal="quick-add-task-modal">Cancel</button>
+                <button class="button primary" id="quick-save-task-btn">Save</button>
+            </div>
         </div>
     </div>
 

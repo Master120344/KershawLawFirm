@@ -98,6 +98,14 @@
                                 <span class="widget-change neutral">No change</span>
                             </div>
                         </div>
+                        <div class="widget clickable" data-link-target="clients-content">
+                            <div class="widget-icon">📞</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Total Contacts</h3>
+                                <p class="widget-data" id="total-contacts">0</p>
+                                <span class="widget-change neutral">No change</span>
+                            </div>
+                        </div>
                         <div class="widget clickable" data-link-target="tasks-content">
                             <div class="widget-icon">✅</div>
                             <div class="widget-content">
@@ -284,6 +292,8 @@
                 <ul id="modal-client-tasks" class="activity-feed"></ul>
                 <h4>Associated Documents</h4>
                 <ul id="modal-client-documents" class="activity-feed"></ul>
+                <h4>Associated Contacts</h4>
+                <ul id="modal-client-contacts" class="activity-feed"></ul>
             </div>
             <div class="modal-footer">
                 <button class="button secondary modal-close" data-modal="client-details-modal">Close</button>
@@ -313,6 +323,14 @@
                 <div class="form-group">
                     <label for="quick-client-email" class="form-label">Email</label>
                     <input type="email" id="quick-client-email" class="form-control" placeholder="e.g., john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-name" class="form-label">Primary Contact Name (Optional)</label>
+                    <input type="text" id="quick-client-contact-name" class="form-control" placeholder="e.g., Employer Name">
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-email" class="form-label">Primary Contact Email (Optional)</label>
+                    <input type="email" id="quick-client-contact-email" class="form-control" placeholder="e.g., employer@example.com">
                 </div>
             </div>
             <div class="modal-footer">

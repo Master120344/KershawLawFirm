@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClientPhone = document.getElementById('modal-client-phone');
     const modalClientTasks = document.getElementById('modal-client-tasks');
     const modalClientDocuments = document.getElementById('modal-client-documents');
+    const modalClientContacts = document.getElementById('modal-client-contacts');
+    const activeClientsWidget = document.getElementById('active-clients');
     let clients = JSON.parse(localStorage.getItem('clients')) || [];
 
     const clientFormHTML = `
@@ -34,6 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="client-phone" class="form-label">Phone (Optional)</label>
                 <input type="tel" id="client-phone" class="form-control" placeholder="e.g., 555-123-4567">
             </div>
+            <div class="form-group">
+                <label for="client-contact-name" class="form-label">Primary Contact Name (Optional)</label>
+                <input type="text" id="client-contact-name" class="form-control" placeholder="e.g., Employer Name">
+            </div>
+            <div class="form-group">
+                <label for="client-contact-email" class="form-label">Primary Contact Email (Optional)</label>
+                <input type="email" id="client-contact-email" class="form-control" placeholder="e.g., employer@example.com">
+            </div>
             <div class="form-actions">
                 <button class="button primary" id="save-client-btn">Save Client</button>
                 <button class="button secondary" id="cancel-client-btn">Cancel</button>
@@ -43,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateClientList() {
         clientList.innerHTML = '';
-        clients.sort((a, b) => a.name.localeCompare(b.name)); // Sort clients A to Z
+        clients.sort((a, b) => a.name.localeCompare(b.name));
         clients.forEach(client => {
             const clientItem = document.createElement('div');
             clientItem.classList.add('client-item');
@@ -85,15 +95,26 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDropdown(deadlineClientSelect);
     }
 
+    function updateDashboardStats() {
+        if (activeClientsWidget) {
+            activeClientsWidget.textContent = clients.length;
+            activeClientsWidget.parentElement.addEventListener('click', () => {
+                const clientSummary = clients.map(client => `${client.name} (${client.visaType})`).join('\n') || 'No clients yet.';
+                alert(`Active Clients:\n${clientSummary}`);
+            });
+        }
+
+        const totalContacts = document.getElementById('total-contacts');
+        if (totalContacts) {
+            const contactCount = clients.reduce((sum, client) => sum + (client.contacts ? client.contacts.length : 0), 0);
+            totalContacts.textContent = contactCount;
+        }
+    }
+
     function updateNotification(message) {
         const currentCount = parseInt(notificationCount.textContent) || 0;
         notificationCount.textContent = currentCount + 1;
         window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message } }));
-    }
-
-    function updateDashboardStats() {
-        const activeClients = document.getElementById('active-clients');
-        if (activeClients) activeClients.textContent = clients.length;
     }
 
     function showClippy(message) {
@@ -116,7 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
             email: clientData.email,
             phone: clientData.phone || 'N/A',
             tasks: [],
-            documents: []
+            documents: [],
+            contacts: clientData.contactName && clientData.contactEmail ? [{
+                id: Date.now(),
+                name: clientData.contactName,
+                email: clientData.contactEmail,
+                role: 'Primary Contact'
+            }] : []
         };
         clients.push(newClient);
         updateClientList();
@@ -137,9 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const visaType = document.getElementById('client-visa').value;
             const email = document.getElementById('client-email').value.trim();
             const phone = document.getElementById('client-phone').value.trim();
+            const contactName = document.getElementById('client-contact-name').value.trim();
+            const contactEmail = document.getElementById('client-contact-email').value.trim();
 
             if (name && email) {
-                const clientData = { name, visaType, email, phone };
+                const clientData = { name, visaType, email, phone, contactName, contactEmail };
                 addClient(clientData);
                 form.remove();
             } else {
@@ -166,6 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 ? client.documents.map(doc => `<li>${doc.type} (Status: ${doc.status})</li>`).join('')
                 : '<li>No documents assigned.</li>';
 
+            modalClientContacts.innerHTML = client.contacts && client.contacts.length > 0
+                ? client.contacts.map(contact => `<li>${contact.name} (${contact.role}) - ${contact.email}</li>`).join('')
+                : '<li>No contacts assigned.</li>';
+
             const modal = document.getElementById('client-details-modal');
             modal.style.display = 'block';
             setTimeout(() => modal.classList.add('is-active'), 50);
@@ -181,6 +214,17 @@ document.addEventListener('DOMContentLoaded', () => {
             updateNotification(`Task Added for ${client.name}: ${taskTitle}`);
             showClippy(`Task "${taskTitle}" added for ${client.name}!`);
             updateTaskList(task);
+            window.dispatchEvent(new CustomEvent('clientTaskAdded', { detail: { taskTitle, dueDate, clientId } }));
+        }
+    }
+
+    function addDocumentForClient(clientId, docData) {
+        const client = clients.find(c => c.id === clientId);
+        if (client) {
+            client.documents.push(docData);
+            localStorage.setItem('clients', JSON.stringify(clients));
+            updateNotification(`Document Added for ${client.name}: ${docData.type}`);
+            showClippy(`Document "${docData.type}" added for ${client.name}!`);
         }
     }
 
@@ -227,13 +271,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    window.addEventListener('documentSent', (e) => {
+        const { clientName, type } = e.detail;
+        const client = clients.find(c => c.name === clientName);
+        if (client) {
+            addDocumentForClient(client.id, { type, status: 'sent' });
+        }
+    });
+
     function parseClientDataFromAI(command) {
         const parts = command.split(' ');
         return {
             name: parts.slice(parts.indexOf('client') + 1, parts.indexOf('h-2')).join(' '),
             visaType: parts.find(p => p.match(/h-2[ab]/i)) || 'H-2A',
             email: parts.find(p => p.includes('@')) || 'unknown@example.com',
-            phone: parts.find(p => p.match(/\d{3}-\d{3}-\d{4}/)) || ''
+            phone: parts.find(p => p.match(/\d{3}-\d{3}-\d{4}/)) || '',
+            contactName: '',
+            contactEmail: ''
         };
     }
 

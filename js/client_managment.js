@@ -116,16 +116,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateContactsList() {
         if (contactsList) {
             contactsList.innerHTML = '';
+            let hasContacts = false;
             clients.forEach(client => {
                 if (client.contacts && client.contacts.length > 0) {
+                    hasContacts = true;
                     client.contacts.forEach(contact => {
                         const contactItem = document.createElement('div');
                         contactItem.classList.add('contact-item');
                         contactItem.innerHTML = `
                             <div class="contact-card">
-                                <h4>${contact.name}</h4>
-                                <p><strong>Role:</strong> ${contact.role}</p>
-                                <p><strong>Email:</strong> ${contact.email}</p>
+                                <h4>${contact.name || 'Unknown'}</h4>
+                                <p><strong>Role:</strong> ${contact.role || 'N/A'}</p>
+                                <p><strong>Email:</strong> ${contact.email || 'N/A'}</p>
                                 <p><strong>Phone:</strong> ${contact.phone || 'N/A'}</p>
                                 <p><strong>Address:</strong> ${contact.address || 'N/A'}</p>
                                 <p><strong>Client:</strong> ${client.name}</p>
@@ -135,6 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+            if (!hasContacts) {
+                contactsList.innerHTML = '<p>No contacts available.</p>';
+            }
         }
     }
 
@@ -144,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             activeClientsWidget.parentElement.addEventListener('click', () => {
                 const clientSummary = clients.map(client => `${client.name} (${client.visaType}) - Contacts: ${client.contacts ? client.contacts.length : 0}`).join('\n') || 'No clients yet.';
                 alert(`Active Clients:\n${clientSummary}`);
-            });
+            }, { once: true }); // Ensure the event listener is only added once
         }
 
         const totalContacts = document.getElementById('total-contacts');

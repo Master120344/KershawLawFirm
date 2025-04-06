@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClientDocuments = document.getElementById('modal-client-documents');
     const modalClientContacts = document.getElementById('modal-client-contacts');
     const activeClientsWidget = document.getElementById('active-clients');
+    const contactsList = document.getElementById('contacts-list');
     let clients = JSON.parse(localStorage.getItem('clients')) || [];
 
     const clientFormHTML = `
@@ -37,12 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="tel" id="client-phone" class="form-control" placeholder="e.g., 555-123-4567">
             </div>
             <div class="form-group">
-                <label for="client-contact-name" class="form-label">Primary Contact Name (Optional)</label>
+                <label for="client-contact-name" class="form-label">Contact Name (Optional)</label>
                 <input type="text" id="client-contact-name" class="form-control" placeholder="e.g., Employer Name">
             </div>
             <div class="form-group">
-                <label for="client-contact-email" class="form-label">Primary Contact Email (Optional)</label>
+                <label for="client-contact-email" class="form-label">Contact Email (Optional)</label>
                 <input type="email" id="client-contact-email" class="form-control" placeholder="e.g., employer@example.com">
+            </div>
+            <div class="form-group">
+                <label for="client-contact-address" class="form-label">Contact Address (Optional)</label>
+                <input type="text" id="client-contact-address" class="form-control" placeholder="e.g., 123 Main St, City, State">
+            </div>
+            <div class="form-group">
+                <label for="client-contact-phone" class="form-label">Contact Phone (Optional)</label>
+                <input type="tel" id="client-contact-phone" class="form-control" placeholder="e.g., 555-987-6543">
+            </div>
+            <div class="form-group">
+                <label for="client-contact-role" class="form-label">Contact Role (Optional)</label>
+                <select id="client-contact-role" class="form-control">
+                    <option value="Employer">Employer</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div class="form-actions">
                 <button class="button primary" id="save-client-btn">Save Client</button>
@@ -69,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('clients', JSON.stringify(clients));
         updateDashboardStats();
         updateClientDropdowns();
+        updateContactsList();
     }
 
     function updateClientDropdowns() {
@@ -95,11 +113,36 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDropdown(deadlineClientSelect);
     }
 
+    function updateContactsList() {
+        if (contactsList) {
+            contactsList.innerHTML = '';
+            clients.forEach(client => {
+                if (client.contacts && client.contacts.length > 0) {
+                    client.contacts.forEach(contact => {
+                        const contactItem = document.createElement('div');
+                        contactItem.classList.add('contact-item');
+                        contactItem.innerHTML = `
+                            <div class="contact-card">
+                                <h4>${contact.name}</h4>
+                                <p><strong>Role:</strong> ${contact.role}</p>
+                                <p><strong>Email:</strong> ${contact.email}</p>
+                                <p><strong>Phone:</strong> ${contact.phone || 'N/A'}</p>
+                                <p><strong>Address:</strong> ${contact.address || 'N/A'}</p>
+                                <p><strong>Client:</strong> ${client.name}</p>
+                            </div>
+                        `;
+                        contactsList.appendChild(contactItem);
+                    });
+                }
+            });
+        }
+    }
+
     function updateDashboardStats() {
         if (activeClientsWidget) {
             activeClientsWidget.textContent = clients.length;
             activeClientsWidget.parentElement.addEventListener('click', () => {
-                const clientSummary = clients.map(client => `${client.name} (${client.visaType})`).join('\n') || 'No clients yet.';
+                const clientSummary = clients.map(client => `${client.name} (${client.visaType}) - Contacts: ${client.contacts ? client.contacts.length : 0}`).join('\n') || 'No clients yet.';
                 alert(`Active Clients:\n${clientSummary}`);
             });
         }
@@ -142,7 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: Date.now(),
                 name: clientData.contactName,
                 email: clientData.contactEmail,
-                role: 'Primary Contact'
+                address: clientData.contactAddress || '',
+                phone: clientData.contactPhone || '',
+                role: clientData.contactRole || 'Employer'
             }] : []
         };
         clients.push(newClient);
@@ -166,9 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const phone = document.getElementById('client-phone').value.trim();
             const contactName = document.getElementById('client-contact-name').value.trim();
             const contactEmail = document.getElementById('client-contact-email').value.trim();
+            const contactAddress = document.getElementById('client-contact-address').value.trim();
+            const contactPhone = document.getElementById('client-contact-phone').value.trim();
+            const contactRole = document.getElementById('client-contact-role').value;
 
             if (name && email) {
-                const clientData = { name, visaType, email, phone, contactName, contactEmail };
+                const clientData = { name, visaType, email, phone, contactName, contactEmail, contactAddress, contactPhone, contactRole };
                 addClient(clientData);
                 form.remove();
             } else {
@@ -196,7 +244,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 : '<li>No documents assigned.</li>';
 
             modalClientContacts.innerHTML = client.contacts && client.contacts.length > 0
-                ? client.contacts.map(contact => `<li>${contact.name} (${contact.role}) - ${contact.email}</li>`).join('')
+                ? client.contacts.map(contact => `
+                    <li class="contact-card">
+                        <strong>${contact.name}</strong> (${contact.role}) <br>
+                        Email: ${contact.email} <br>
+                        Phone: ${contact.phone || 'N/A'} <br>
+                        Address: ${contact.address || 'N/A'}
+                    </li>
+                `).join('')
                 : '<li>No contacts assigned.</li>';
 
             const modal = document.getElementById('client-details-modal');
@@ -287,7 +342,10 @@ document.addEventListener('DOMContentLoaded', () => {
             email: parts.find(p => p.includes('@')) || 'unknown@example.com',
             phone: parts.find(p => p.match(/\d{3}-\d{3}-\d{4}/)) || '',
             contactName: '',
-            contactEmail: ''
+            contactEmail: '',
+            contactAddress: '',
+            contactPhone: '',
+            contactRole: ''
         };
     }
 

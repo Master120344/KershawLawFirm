@@ -13,7 +13,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClientContacts = document.getElementById('modal-client-contacts');
     const activeClientsWidget = document.getElementById('active-clients');
     const contactsList = document.getElementById('contacts-list');
-    let clients = JSON.parse(localStorage.getItem('clients')) || [];
+    let clients = [];
+
+    // Configure AWS SDK
+    AWS.config.update({
+        region: 'us-east-1', // Replace with your AWS region
+        credentials: new AWS.Credentials('YOUR_ACCESS_KEY', 'YOUR_SECRET_KEY') // Replace with your AWS credentials
+    });
+
+    const API_ENDPOINT = 'https://xxxx.execute-api.us-east-1.amazonaws.com/prod/clients'; // Replace with your API Gateway endpoint
+
+    // Fetch clients from AWS RDS via API Gateway
+    async function fetchClients() {
+        try {
+            const response = await fetch(API_ENDPOINT, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            clients = await response.json();
+            updateClientList();
+        } catch (err) {
+            console.error('Error fetching clients:', err);
+        }
+    }
+
+    // Save a client to AWS RDS via API Gateway
+    async function saveClient(clientData) {
+        try {
+            const response = await fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: clientData.name,
+                    visa_type: clientData.visaType,
+                    email: clientData.email,
+                    phone: clientData.phone || 'N/A',
+                    contacts: clientData.contactName && clientData.contactEmail ? [{
+                        id: Date.now(),
+                        name: clientData.contactName,
+                        email: clientData.contactEmail,
+                        address: clientData.contactAddress || '',
+                        phone: clientData.contactPhone || '',
+                        role: clientData.contactRole || 'Employer'
+                    }] : []
+                })
+            });
+            const newClient = await response.json();
+            clients.push(newClient);
+            updateClientList();
+            updateNotification(`New Client Added: ${newClient.name}`);
+            showClippy(`Added ${newClient.name}! Want to create a task or document for them?`);
+            return newClient;
+        } catch (err) {
+            console.error('Error saving client:', err);
+            alert('Failed to save client. Please try again.');
+        }
+    }
 
     const clientFormHTML = `
         <div class="client-form" id="client-form">
@@ -76,14 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
             clientItem.classList.add('client-item');
             clientItem.setAttribute('data-client-id', client.id);
             clientItem.innerHTML = `
-                <strong>${client.name}</strong> - ${client.visaType} <br> 
+                <strong>${client.name}</strong> - ${client.visa_type} <br> 
                 ${client.email} ${client.phone ? `<br> ${client.phone}` : ''} 
                 <button class="icon-button subtle client-task-btn" data-client-id="${client.id}" title="Add Task">✅</button>
                 <button class="icon-button subtle client-details-btn" data-client-id="${client.id}" title="View Details">👁️</button>
             `;
             clientList.appendChild(clientItem);
         });
-        localStorage.setItem('clients', JSON.stringify(clients));
         updateDashboardStats();
         updateClientDropdowns();
         updateContactsList();
@@ -101,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clients.forEach(client => {
                     const option = document.createElement('option');
                     option.value = client.name;
-                    option.textContent = `${client.name} (${client.visaType})`;
+                    option.textContent = `${client.name} (${client.visa_type})`;
                     select.appendChild(option);
                 });
             }
@@ -147,9 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeClientsWidget) {
             activeClientsWidget.textContent = clients.length;
             activeClientsWidget.parentElement.addEventListener('click', () => {
-                const clientSummary = clients.map(client => `${client.name} (${client.visaType}) - Contacts: ${client.contacts ? client.contacts.length : 0}`).join('\n') || 'No clients yet.';
+                const clientSummary = clients.map(client => `${client.name} (${client.visa_type}) - Contacts: ${client.contacts ? client.contacts.length : 0}`).join('\n') || 'No clients yet.';
                 alert(`Active Clients:\n${clientSummary}`);
-            }, { once: true }); // Ensure the event listener is only added once
+            }, { once: true });
         }
 
         const totalContacts = document.getElementById('total-contacts');
@@ -177,31 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function addClient(clientData) {
-        const newClient = {
-            id: Date.now(),
-            name: clientData.name,
-            visaType: clientData.visaType,
-            email: clientData.email,
-            phone: clientData.phone || 'N/A',
-            tasks: [],
-            documents: [],
-            contacts: clientData.contactName && clientData.contactEmail ? [{
-                id: Date.now(),
-                name: clientData.contactName,
-                email: clientData.contactEmail,
-                address: clientData.contactAddress || '',
-                phone: clientData.contactPhone || '',
-                role: clientData.contactRole || 'Employer'
-            }] : []
-        };
-        clients.push(newClient);
-        updateClientList();
-        updateNotification(`New Client Added: ${newClient.name}`);
-        showClippy(`Added ${newClient.name}! Want to create a task or document for them?`);
-        return newClient;
-    }
-
     function showClientForm() {
         if (document.getElementById('client-form')) return;
         clientList.insertAdjacentHTML('beforeend', clientFormHTML);
@@ -209,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const saveBtn = document.getElementById('save-client-btn');
         const cancelBtn = document.getElementById('cancel-client-btn');
 
-        saveBtn.addEventListener('click', () => {
+        saveBtn.addEventListener('click', async () => {
             const name = document.getElementById('client-name').value.trim();
             const visaType = document.getElementById('client-visa').value;
             const email = document.getElementById('client-email').value.trim();
@@ -222,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (name && email) {
                 const clientData = { name, visaType, email, phone, contactName, contactEmail, contactAddress, contactPhone, contactRole };
-                addClient(clientData);
+                await saveClient(clientData);
                 form.remove();
             } else {
                 alert('Please fill in Name and Email.');
@@ -236,15 +265,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const client = clients.find(c => c.id === parseInt(clientId));
         if (client) {
             modalClientName.textContent = client.name;
-            modalClientVisa.textContent = client.visaType;
+            modalClientVisa.textContent = client.visa_type;
             modalClientEmail.textContent = client.email;
             modalClientPhone.textContent = client.phone;
 
-            modalClientTasks.innerHTML = client.tasks.length > 0
+            modalClientTasks.innerHTML = client.tasks && client.tasks.length > 0
                 ? client.tasks.map(task => `<li>${task.title} (Due: ${task.dueDate})</li>`).join('')
                 : '<li>No tasks assigned.</li>';
 
-            modalClientDocuments.innerHTML = client.documents.length > 0
+            modalClientDocuments.innerHTML = client.documents && client.documents.length > 0
                 ? client.documents.map(doc => `<li>${doc.type} (Status: ${doc.status})</li>`).join('')
                 : '<li>No documents assigned.</li>';
 
@@ -269,8 +298,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const client = clients.find(c => c.id === clientId);
         if (client) {
             const task = { id: Date.now(), title: taskTitle, dueDate, status: 'pending' };
+            if (!client.tasks) client.tasks = [];
             client.tasks.push(task);
-            localStorage.setItem('clients', JSON.stringify(clients));
+            // Note: For now, we're not saving tasks to RDS; we'll add this in a future step
             updateNotification(`Task Added for ${client.name}: ${taskTitle}`);
             showClippy(`Task "${taskTitle}" added for ${client.name}!`);
             updateTaskList(task);
@@ -281,8 +311,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function addDocumentForClient(clientId, docData) {
         const client = clients.find(c => c.id === clientId);
         if (client) {
+            if (!client.documents) client.documents = [];
             client.documents.push(docData);
-            localStorage.setItem('clients', JSON.stringify(clients));
+            // Note: For now, we're not saving documents to RDS; we'll add this in a future step
             updateNotification(`Document Added for ${client.name}: ${docData.type}`);
             showClippy(`Document "${docData.type}" added for ${client.name}!`);
         }
@@ -323,11 +354,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    window.addEventListener('aiCommandProcessed', (e) => {
+    window.addEventListener('aiCommandProcessed', async (e) => {
         const command = e.detail.command.toLowerCase();
         if (command.includes('add client') && command.includes('@')) {
             const clientData = parseClientDataFromAI(command);
-            addClient(clientData);
+            await saveClient(clientData);
         }
     });
 
@@ -354,5 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    updateClientList();
+    // Initial fetch of clients
+    fetchClients();
 });

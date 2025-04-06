@@ -2,6 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const clientList = document.getElementById('client-list');
     const addClientBtn = document.getElementById('add-client-btn');
     const notificationCount = document.getElementById('notification-count');
+    const clientSearch = document.getElementById('client-search');
+    const clientDetailsModal = document.getElementById('client-details-modal');
+    const modalClientName = document.getElementById('modal-client-name');
+    const modalClientVisa = document.getElementById('modal-client-visa');
+    const modalClientEmail = document.getElementById('modal-client-email');
+    const modalClientPhone = document.getElementById('modal-client-phone');
+    const modalClientTasks = document.getElementById('modal-client-tasks');
+    const modalClientDocuments = document.getElementById('modal-client-documents');
     let clients = JSON.parse(localStorage.getItem('clients')) || [];
 
     const clientFormHTML = `
@@ -39,41 +47,42 @@ document.addEventListener('DOMContentLoaded', () => {
         clients.forEach(client => {
             const clientItem = document.createElement('div');
             clientItem.classList.add('client-item');
+            clientItem.setAttribute('data-client-id', client.id);
             clientItem.innerHTML = `
                 <strong>${client.name}</strong> - ${client.visaType} <br> 
                 ${client.email} ${client.phone ? `<br> ${client.phone}` : ''} 
                 <button class="icon-button subtle client-task-btn" data-client-id="${client.id}" title="Add Task">✅</button>
+                <button class="icon-button subtle client-details-btn" data-client-id="${client.id}" title="View Details">👁️</button>
             `;
             clientList.appendChild(clientItem);
         });
         localStorage.setItem('clients', JSON.stringify(clients));
         updateDashboardStats();
-        updateClientDropdowns(); // Update dropdowns in other forms
+        updateClientDropdowns();
     }
 
     function updateClientDropdowns() {
         const taskClientSelect = document.getElementById('task-client');
         const docClientSelect = document.getElementById('doc-client');
-        
-        if (taskClientSelect) {
-            taskClientSelect.innerHTML = '<option value="">No Client</option>';
-            clients.forEach(client => {
-                const option = document.createElement('option');
-                option.value = client.name;
-                option.textContent = `${client.name} (${client.visaType})`;
-                taskClientSelect.appendChild(option);
-            });
-        }
+        const quickTaskClientSelect = document.getElementById('quick-task-client');
+        const deadlineClientSelect = document.getElementById('deadline-client');
 
-        if (docClientSelect) {
-            docClientSelect.innerHTML = '<option value="" disabled selected>Select a client...</option>';
-            clients.forEach(client => {
-                const option = document.createElement('option');
-                option.value = client.name;
-                option.textContent = `${client.name} (${client.visaType})`;
-                docClientSelect.appendChild(option);
-            });
-        }
+        const updateDropdown = (select) => {
+            if (select) {
+                select.innerHTML = '<option value="">No Client</option>';
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.name;
+                    option.textContent = `${client.name} (${client.visaType})`;
+                    select.appendChild(option);
+                });
+            }
+        };
+
+        updateDropdown(taskClientSelect);
+        updateDropdown(docClientSelect);
+        updateDropdown(quickTaskClientSelect);
+        updateDropdown(deadlineClientSelect);
     }
 
     function updateNotification(message) {
@@ -117,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showClientForm() {
-        if (document.getElementById('client-form')) return; // Prevent multiple forms
+        if (document.getElementById('client-form')) return;
         clientList.insertAdjacentHTML('beforeend', clientFormHTML);
         const form = document.getElementById('client-form');
         const saveBtn = document.getElementById('save-client-btn');
@@ -139,6 +148,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         cancelBtn.addEventListener('click', () => form.remove());
+    }
+
+    function showClientDetails(clientId) {
+        const client = clients.find(c => c.id === parseInt(clientId));
+        if (client) {
+            modalClientName.textContent = client.name;
+            modalClientVisa.textContent = client.visaType;
+            modalClientEmail.textContent = client.email;
+            modalClientPhone.textContent = client.phone;
+
+            modalClientTasks.innerHTML = client.tasks.length > 0
+                ? client.tasks.map(task => `<li>${task.title} (Due: ${task.dueDate})</li>`).join('')
+                : '<li>No tasks assigned.</li>';
+
+            modalClientDocuments.innerHTML = client.documents.length > 0
+                ? client.documents.map(doc => `<li>${doc.type} (Status: ${doc.status})</li>`).join('')
+                : '<li>No documents assigned.</li>';
+
+            const modal = document.getElementById('client-details-modal');
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('is-active'), 50);
+        }
     }
 
     function addTaskForClient(clientId, taskTitle, dueDate) {
@@ -173,7 +204,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (taskTitle && dueDate) {
                 addTaskForClient(clientId, taskTitle, dueDate);
             }
+        } else if (e.target.classList.contains('client-details-btn')) {
+            const clientId = e.target.getAttribute('data-client-id');
+            showClientDetails(clientId);
         }
+    });
+
+    clientSearch.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const clientItems = clientList.querySelectorAll('.client-item');
+        clientItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+        });
     });
 
     window.addEventListener('aiCommandProcessed', (e) => {

@@ -9,18 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutButtonDropdown = document.getElementById('logout-button-dropdown');
     const loadingOverlay = document.getElementById('loading-overlay');
     const currentYearSpan = document.getElementById('current-year');
+    const notificationCount = document.getElementById('notification-count');
+
+    // New elements from updated HTML
+    const globalSearch = document.getElementById('global-search');
+    const quickAddClientBtn = document.getElementById('quick-add-client-btn');
+    const quickAddTaskBtn = document.getElementById('quick-add-task-btn');
+    const clientDetailsModal = document.getElementById('client-details-modal');
+    const quickAddClientModal = document.getElementById('quick-add-client-modal');
+    const quickAddTaskModal = document.getElementById('quick-add-task-modal');
+    const modalCloseButtons = document.querySelectorAll('.modal-close');
+    const quickSaveClientBtn = document.getElementById('quick-save-client-btn');
+    const quickSaveTaskBtn = document.getElementById('quick-save-task-btn');
 
     currentYearSpan.textContent = new Date().getFullYear();
-
-    sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-    });
-
-    mainContentArea.addEventListener('click', (e) => {
-        if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            sidebar.classList.remove('open');
-        }
-    });
 
     let navigationHistory = ['dashboard-content'];
 
@@ -54,6 +56,38 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebar.classList.remove('open');
         }
     }
+
+    function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('is-active'), 50);
+        }
+    }
+
+    function hideModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('is-active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+    }
+
+    function updateNotification(message) {
+        const currentCount = parseInt(notificationCount.textContent) || 0;
+        notificationCount.textContent = currentCount + 1;
+        window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message } }));
+    }
+
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+    });
+
+    mainContentArea.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+            sidebar.classList.remove('open');
+        }
+    });
 
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -105,9 +139,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoutButtonDropdown.addEventListener('click', () => {
         console.log('Logout clicked');
-        window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message: 'User logged out' } }));
+        updateNotification('User logged out');
     });
 
+    // Global Search Functionality
+    globalSearch.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const sections = ['clients-content', 'tasks-content', 'documents-content', 'deadlines-content'];
+        sections.forEach(sectionId => {
+            const section = document.getElementById(sectionId);
+            const items = section.querySelectorAll('.client-item, .task-item, .document-item, .deadline-item');
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    });
+
+    // Quick Add Client Modal
+    quickAddClientBtn.addEventListener('click', () => {
+        showModal('quick-add-client-modal');
+        const clientSelect = document.getElementById('quick-task-client');
+        const clients = JSON.parse(localStorage.getItem('clients')) || [];
+        clientSelect.innerHTML = '<option value="">No Client</option>';
+        clients.forEach(client => {
+            const option = document.createElement('option');
+            option.value = client.name;
+            option.textContent = `${client.name} (${client.visaType})`;
+            clientSelect.appendChild(option);
+        });
+    });
+
+    quickSaveClientBtn.addEventListener('click', () => {
+        const name = document.getElementById('quick-client-name').value.trim();
+        const visaType = document.getElementById('quick-client-visa').value;
+        const email = document.getElementById('quick-client-email').value.trim();
+
+        if (name && email) {
+            const clientData = { name, visaType, email, phone: '' };
+            window.dispatchEvent(new CustomEvent('aiCommandProcessed', { detail: { command: `add client ${name} ${visaType} ${email}` } }));
+            hideModal('quick-add-client-modal');
+            document.getElementById('quick-client-name').value = '';
+            document.getElementById('quick-client-email').value = '';
+        } else {
+            alert('Please fill in Name and Email.');
+        }
+    });
+
+    // Quick Add Task Modal
+    quickAddTaskBtn.addEventListener('click', () => {
+        showModal('quick-add-task-modal');
+        const clientSelect = document.getElementById('quick-task-client');
+        const clients = JSON.parse(localStorage.getItem('clients')) || [];
+        clientSelect.innerHTML = '<option value="">No Client</option>';
+        clients.forEach(client => {
+            const option = document.createElement('option');
+            option.value = client.name;
+            option.textContent = `${client.name} (${client.visaType})`;
+            clientSelect.appendChild(option);
+        });
+    });
+
+    quickSaveTaskBtn.addEventListener('click', () => {
+        const title = document.getElementById('quick-task-title').value.trim();
+        const clientName = document.getElementById('quick-task-client').value;
+        const dueDate = document.getElementById('quick-task-due').value;
+
+        if (title && dueDate) {
+            const command = `task ${title}${clientName ? ` for ${clientName}` : ''} by ${dueDate}`;
+            window.dispatchEvent(new CustomEvent('aiCommandProcessed', { detail: { command } }));
+            hideModal('quick-add-task-modal');
+            document.getElementById('quick-task-title').value = '';
+            document.getElementById('quick-task-client').value = '';
+            document.getElementById('quick-task-due').value = '';
+        } else {
+            alert('Please fill in Task Title and Due Date.');
+        }
+    });
+
+    // Modal Close Buttons
+    modalCloseButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modalId = button.getAttribute('data-modal');
+            hideModal(modalId);
+        });
+    });
+
+    // Handle Touch Events for Mobile
     document.querySelectorAll('.nav-link, .widget.clickable, .nav-link-trigger, .icon-button, .button').forEach(el => {
         el.addEventListener('touchstart', () => {}, { passive: true });
     });

@@ -1,234 +1,400 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const mainContentArea = document.getElementById('main-content-area');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const contentSections = document.querySelectorAll('.content-section');
-    const mainContentTitle = document.getElementById('main-content-title');
-    const breadcrumbBack = document.getElementById('breadcrumb-back');
-    const logoutButtonDropdown = document.getElementById('logout-button-dropdown');
-    const loadingOverlay = document.getElementById('loading-overlay');
-    const currentYearSpan = document.getElementById('current-year');
-    const notificationCount = document.getElementById('notification-count');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kershaw Law Firm P.C. - Admin Dashboard</title>
+    <meta name="description" content="Secure admin portal for H-2A/H-2B visa management at Kershaw Law Firm P.C.">
+    <link rel="stylesheet" href="css/dashboard_mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="preload">
+    <div class="background-layer layer-1"></div>
+    <div class="background-layer layer-2"></div>
 
-    // New elements from updated HTML
-    const globalSearch = document.getElementById('global-search');
-    const quickAddClientBtn = document.getElementById('quick-add-client-btn');
-    const quickAddTaskBtn = document.getElementById('quick-add-task-btn');
-    const clientDetailsModal = document.getElementById('client-details-modal');
-    const quickAddClientModal = document.getElementById('quick-add-client-modal');
-    const quickAddTaskModal = document.getElementById('quick-add-task-modal');
-    const modalCloseButtons = document.querySelectorAll('.modal-close');
-    const quickSaveClientBtn = document.getElementById('quick-save-client-btn');
-    const quickSaveTaskBtn = document.getElementById('quick-save-task-btn');
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="#dashboard" class="sidebar-logo-link" data-target="dashboard-content">
+                    <span class="sidebar-logo">KL</span>
+                    <h2 class="sidebar-title">Kershaw Law Firm</h2>
+                </a>
+                <button id="sidebar-toggle" class="icon-button">☰</button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" data-target="dashboard-content" data-title="Dashboard"><span class="nav-icon">📊</span> <span class="nav-text">Dashboard</span></a></li>
+                    <li><a href="#clients" class="nav-link" data-target="clients-content" data-title="Clients"><span class="nav-icon">👥</span> <span class="nav-text">Clients</span></a></li>
+                    <li><a href="#documents" class="nav-link" data-target="documents-content" data-title="Documents & eSign"><span class="nav-icon">📄</span> <span class="nav-text">Documents & eSign</span></a></li>
+                    <li><a href="#tasks" class="nav-link" data-target="tasks-content" data-title="Tasks"><span class="nav-icon">✅</span> <span class="nav-text">Tasks</span></a></li>
+                    <li><a href="#deadlines" class="nav-link" data-target="deadlines-content" data-title="Deadlines"><span class="nav-icon">📅</span> <span class="nav-text">Deadlines</span></a></li>
+                    <li><a href="#ai-assistant" class="nav-link" data-target="ai-content" data-title="AI Assistant"><span class="nav-icon">🤖</span> <span class="nav-text">AI Assistant</span></a></li>
+                    <li><a href="#reports" class="nav-link" data-target="reports-content" data-title="Reports"><span class="nav-icon">📈</span> <span class="nav-text">Reports</span></a></li>
+                    <li><a href="#settings" class="nav-link" data-target="settings-content" data-title="Settings"><span class="nav-icon">⚙️</span> <span class="nav-text">Settings</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-indicator online"></span> Connected
+                </div>
+                <p class="copyright">© <span id="current-year"></span> Kershaw Law Firm P.C.</p>
+            </div>
+        </aside>
 
-    currentYearSpan.textContent = new Date().getFullYear();
+        <div class="main-wrapper">
+            <header class="header">
+                <div class="header-left">
+                    <button id="breadcrumb-back" class="icon-button subtle" title="Back" style="display: none;">‹</button>
+                    <h1 id="main-content-title" class="header-main-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <input type="text" id="global-search" class="table-search" placeholder="Search clients, tasks...">
+                    </div>
+                    <button class="icon-button notification-button" title="Notifications">
+                        <span class="icon-placeholder">🔔</span>
+                        <span class="notification-badge" id="notification-count">0</span>
+                    </button>
+                    <div class="profile-menu-container">
+                        <button class="profile-button">
+                            <img src="https://github.com/Master120344/KershawLawFirm/raw/main/assets/adminprofilepicture.png" alt="Admin Avatar" class="profile-avatar">
+                            <span class="profile-name">Admin</span>
+                            <span class="profile-arrow">▼</span>
+                        </button>
+                        <div class="profile-dropdown">
+                            <a href="#profile">My Profile</a>
+                            <a href="#account-settings">Account Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <button id="logout-button-dropdown" class="logout-button-dropdown">
+                                <span class="icon-placeholder">🚪</span> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
-    let navigationHistory = ['dashboard-content'];
+            <main class="main-content scrollable" id="main-content-area">
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="spinner"></div>
+                </div>
 
-    function showLoadingOverlay() {
-        loadingOverlay.classList.add('is-active');
-        setTimeout(() => loadingOverlay.classList.remove('is-active'), 500);
-    }
+                <div id="dashboard-content" class="content-section is-active">
+                    <div class="content-header">
+                        <h2>Dashboard</h2>
+                        <div class="header-actions">
+                            <button class="button primary small" id="quick-add-client-btn">Quick Add Client</button>
+                            <button class="button primary small" id="quick-add-task-btn">Quick Add Task</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Welcome to your H-2A/H-2B visa management hub.</p>
+                    <div class="widget-grid">
+                        <div class="widget clickable" data-link-target="clients-content">
+                            <div class="widget-icon">👥</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Active Clients</h3>
+                                <p class="widget-data" id="active-clients">0</p>
+                                <span class="widget-change neutral">No change</span>
+                            </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="clients-content">
+                            <div class="widget-icon">📞</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Total Contacts</h3>
+                                <p class="widget-data" id="total-contacts">0</p>
+                                <span class="widget-change neutral">No change</span>
+                            </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="tasks-content">
+                            <div class="widget-icon">✅</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Pending Tasks</h3>
+                                <p class="widget-data" id="pending-tasks">0</p>
+                                <span class="widget-change neutral">No change</span>
+                            </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="deadlines-content">
+                            <div class="widget-icon">📅</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Upcoming Deadlines</h3>
+                                <p class="widget-data" id="upcoming-deadlines">0</p>
+                                <span class="widget-change neutral">No change</span>
+                            </div>
+                        </div>
+                        <div class="widget clickable" data-link-target="documents-content">
+                            <div class="widget-icon">📄</div>
+                            <div class="widget-content">
+                                <h3 class="widget-title">Pending Documents</h3>
+                                <p class="widget-data" id="pending-documents">0</p>
+                                <span class="widget-change neutral">No change</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-row">
+                        <div class="content-panel column-1">
+                            <h3>Contacts</h3>
+                            <div id="contacts-list" class="contacts-list"></div>
+                        </div>
+                        <div class="content-panel column-1">
+                            <h3>Recent Activity</h3>
+                            <ul class="activity-feed" id="recent-activity-feed">
+                                <li><span class="activity-icon">📄</span> No recent activity yet. <span class="timestamp">Just now</span></li>
+                            </ul>
+                        </div>
+                        <div class="content-panel column-1">
+                            <h3>Quick Links</h3>
+                            <ul class="quick-links">
+                                <li><a href="#clients" class="nav-link-trigger" data-target="clients-content">Add New Client</a></li>
+                                <li><a href="#documents" class="nav-link-trigger" data-target="documents-content">Create DocuSign</a></li>
+                                <li><a href="#tasks" class="nav-link-trigger" data-target="tasks-content">Assign Task</a></li>
+                                <li><a href="#deadlines" class="nav-link-trigger" data-target="deadlines-content">Set Deadline</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-    function switchContent(targetId) {
-        const currentSection = document.querySelector('.content-section.is-active');
-        const targetSection = document.getElementById(targetId);
+                <div id="clients-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Clients</h2>
+                        <div class="header-actions">
+                            <input type="text" id="client-search" class="table-search" placeholder="Search clients...">
+                            <button class="button primary small" id="add-client-btn">➕ Add Client</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Manage H-2A/H-2B visa clients.</p>
+                    <div id="client-list" class="client-list"></div>
+                </div>
 
-        if (currentSection && currentSection.id !== targetId) {
-            currentSection.classList.remove('is-active');
-            currentSection.classList.add('is-exiting');
-            setTimeout(() => currentSection.classList.remove('is-exiting'), 450);
-        }
+                <div id="documents-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Documents & eSign</h2>
+                        <div class="header-actions">
+                            <input type="text" id="document-search" class="table-search" placeholder="Search documents...">
+                            <button class="button primary small" id="create-docusign-btn">➕ New DocuSign</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Create and manage visa documents.</p>
+                    <div id="document-list" class="document-list"></div>
+                </div>
 
-        if (targetSection) {
-            targetSection.classList.add('is-active');
-            showLoadingOverlay();
+                <div id="tasks-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Tasks</h2>
+                        <div class="header-actions">
+                            <input type="text" id="task-search" class="table-search" placeholder="Search tasks...">
+                            <button class="button primary small" id="add-task-btn">➕ Add Task</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Track internal workflows.</p>
+                    <div id="task-list" class="task-list"></div>
+                </div>
 
-            const newTitle = targetSection.dataset.title || document.querySelector(`.nav-link[data-target="${targetId}"]`)?.dataset.title || 'Dashboard';
-            mainContentTitle.textContent = newTitle;
+                <div id="deadlines-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Deadlines</h2>
+                        <div class="header-actions">
+                            <input type="text" id="deadline-search" class="table-search" placeholder="Search deadlines...">
+                        </div>
+                    </div>
+                    <p class="section-description">Stay on top of visa deadlines.</p>
+                    <div id="deadline-list" class="deadline-list"></div>
+                </div>
 
-            if (navigationHistory[navigationHistory.length - 1] !== targetId) {
-                navigationHistory.push(targetId);
-            }
+                <div id="ai-content" class="content-section">
+                    <div class="content-header">
+                        <h2>AI Assistant</h2>
+                        <div class="header-actions">
+                            <button class="button primary small" id="clear-chat-btn">Clear Chat</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Your Kershaw AI Legal Assistant is here to help!</p>
+                    <div id="ai-chat-container" class="ai-chat-container">
+                        <div id="ai-chat-messages" class="ai-chat-messages"></div>
+                        <div class="ai-chat-input-group">
+                            <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask me anything...">
+                            <button id="ai-chat-send" class="button primary small">Send</button>
+                            <button id="ai-voice-input" class="button secondary small">🎙️</button>
+                        </div>
+                    </div>
+                </div>
 
-            breadcrumbBack.style.display = navigationHistory.length > 1 ? 'inline-flex' : 'none';
-            sidebar.classList.remove('open');
-        }
-    }
+                <div id="reports-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Reports</h2>
+                        <div class="header-actions">
+                            <select id="report-type" class="form-control">
+                                <option value="client">Client Report</option>
+                                <option value="task">Task Report</option>
+                                <option value="deadline">Deadline Report</option>
+                            </select>
+                            <button class="button primary small" id="generate-report-btn">Generate Report</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Generate reports for clients, tasks, and deadlines.</p>
+                    <div id="report-output" class="content-panel">
+                        <h3>Report Output</h3>
+                        <p>No report generated yet. Select a report type and click "Generate Report".</p>
+                    </div>
+                </div>
 
-    function showModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'block';
-            setTimeout(() => modal.classList.add('is-active'), 50);
-        }
-    }
+                <div id="settings-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Settings</h2>
+                    </div>
+                    <p class="section-description">Customize your dashboard experience.</p>
+                    <div class="content-panel">
+                        <h3>General Settings</h3>
+                        <div class="form-group">
+                            <label for="theme-select" class="form-label">Theme</label>
+                            <select id="theme-select" class="form-control">
+                                <option value="dark">Dark (Default)</option>
+                                <option value="light">Light</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notification-preference" class="form-label">Notification Preference</label>
+                            <select id="notification-preference" class="form-control">
+                                <option value="all">All Notifications</option>
+                                <option value="urgent">Urgent Only</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="content-panel">
+                        <h3>Account Settings</h3>
+                        <div class="form-group">
+                            <label for="user-email" class="form-label">Email</label>
+                            <input type="email" id="user-email" class="form-control" value="admin@kershawlaw.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password" class="form-label">Change Password</label>
+                            <input type="password" id="user-password" class="form-control" placeholder="New password">
+                        </div>
+                        <div class="form-actions">
+                            <button class="button primary" id="save-settings-btn">Save Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
 
-    function hideModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('is-active');
-            setTimeout(() => modal.style.display = 'none', 300);
-        }
-    }
+    <!-- Modals -->
+    <div class="modal" id="client-details-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Client Details</h3>
+                <button class="icon-button subtle modal-close" data-modal="client-details-modal">✖</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Name:</strong> <span id="modal-client-name"></span></p>
+                <p><strong>Visa Type:</strong> <span id="modal-client-visa"></span></p>
+                <p><strong>Email:</strong> <span id="modal-client-email"></span></p>
+                <p><strong>Phone:</strong> <span id="modal-client-phone"></span></p>
+                <h4>Associated Tasks</h4>
+                <ul id="modal-client-tasks" class="activity-feed"></ul>
+                <h4>Associated Documents</h4>
+                <ul id="modal-client-documents" class="activity-feed"></ul>
+                <h4>Associated Contacts</h4>
+                <ul id="modal-client-contacts" class="activity-feed"></ul>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary modal-close" data-modal="client-details-modal">Close</button>
+                <button class="button primary" id="edit-client-btn">Edit Client</button>
+            </div>
+        </div>
+    </div>
 
-    function updateNotification(message) {
-        const currentCount = parseInt(notificationCount.textContent) || 0;
-        notificationCount.textContent = currentCount + 1;
-        window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message } }));
-    }
+    <div class="modal" id="quick-add-client-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quick Add Client</h3>
+                <button class="icon-button subtle modal-close" data-modal="quick-add-client-modal">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="quick-client-name" class="form-label">Name</label>
+                    <input type="text" id="quick-client-name" class="form-control" placeholder="e.g., John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-visa" class="form-label">Visa Type</label>
+                    <select id="quick-client-visa" class="form-control" required>
+                        <option value="H-2A">H-2A (Agricultural)</option>
+                        <option value="H-2B">H-2B (Non-Agricultural)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-email" class="form-label">Email</label>
+                    <input type="email" id="quick-client-email" class="form-control" placeholder="e.g., john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-name" class="form-label">Primary Contact Name (Optional)</label>
+                    <input type="text" id="quick-client-contact-name" class="form-control" placeholder="e.g., Employer Name">
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-email" class="form-label">Primary Contact Email (Optional)</label>
+                    <input type="email" id="quick-client-contact-email" class="form-control" placeholder="e.g., employer@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-address" class="form-label">Primary Contact Address (Optional)</label>
+                    <input type="text" id="quick-client-contact-address" class="form-control" placeholder="e.g., 123 Main St, City, State">
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-phone" class="form-label">Primary Contact Phone (Optional)</label>
+                    <input type="tel" id="quick-client-contact-phone" class="form-control" placeholder="e.g., 555-987-6543">
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-role" class="form-label">Primary Contact Role (Optional)</label>
+                    <select id="quick-client-contact-role" class="form-control">
+                        <option value="Employer">Employer</option>
+                        <option value="Agent">Agent</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary modal-close" data-modal="quick-add-client-modal">Cancel</button>
+                <button class="button primary" id="quick-save-client-btn">Save</button>
+            </div>
+        </div>
+    </div>
 
-    sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-    });
+    <div class="modal" id="quick-add-task-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quick Add Task</h3>
+                <button class="icon-button subtle modal-close" data-modal="quick-add-task-modal">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="quick-task-title" class="form-label">Task Title</label>
+                    <input type="text" id="quick-task-title" class="form-control" placeholder="e.g., Prepare LCA" required>
+                </div>
+                <div class="form-group">
+                    <label for="quick-task-client" class="form-label">Client (Optional)</label>
+                    <select id="quick-task-client" class="form-control">
+                        <option value="">No Client</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quick-task-due" class="form-label">Due Date</label>
+                    <input type="date" id="quick-task-due" class="form-control" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary modal-close" data-modal="quick-add-task-modal">Cancel</button>
+                <button class="button primary" id="quick-save-task-btn">Save</button>
+            </div>
+        </div>
+    </div>
 
-    mainContentArea.addEventListener('click', (e) => {
-        if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            sidebar.classList.remove('open');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('data-target');
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            switchContent(targetId);
-        });
-    });
-
-    document.querySelectorAll('.nav-link-trigger').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = trigger.getAttribute('data-target');
-            const correspondingNavLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
-            navLinks.forEach(l => l.classList.remove('active'));
-            if (correspondingNavLink) {
-                correspondingNavLink.classList.add('active');
-            }
-            switchContent(targetId);
-        });
-    });
-
-    document.querySelectorAll('.widget.clickable').forEach(widget => {
-        widget.addEventListener('click', () => {
-            const targetId = widget.getAttribute('data-link-target');
-            const correspondingNavLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
-            navLinks.forEach(l => l.classList.remove('active'));
-            if (correspondingNavLink) {
-                correspondingNavLink.classList.add('active');
-            }
-            switchContent(targetId);
-        });
-    });
-
-    breadcrumbBack.addEventListener('click', () => {
-        if (navigationHistory.length > 1) {
-            navigationHistory.pop();
-            const previousTargetId = navigationHistory[navigationHistory.length - 1];
-            navLinks.forEach(l => l.classList.remove('active'));
-            const previousNavLink = document.querySelector(`.nav-link[data-target="${previousTargetId}"]`);
-            if (previousNavLink) {
-                previousNavLink.classList.add('active');
-            }
-            switchContent(previousTargetId);
-        }
-    });
-
-    logoutButtonDropdown.addEventListener('click', () => {
-        console.log('Logout clicked');
-        updateNotification('User logged out');
-    });
-
-    // Global Search Functionality
-    globalSearch.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        const sections = ['clients-content', 'tasks-content', 'documents-content', 'deadlines-content'];
-        sections.forEach(sectionId => {
-            const section = document.getElementById(sectionId);
-            const items = section.querySelectorAll('.client-item, .task-item, .document-item, .deadline-item');
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
-            });
-        });
-    });
-
-    // Quick Add Client Modal
-    quickAddClientBtn.addEventListener('click', () => {
-        showModal('quick-add-client-modal');
-        const clientSelect = document.getElementById('quick-task-client');
-        const clients = JSON.parse(localStorage.getItem('clients')) || [];
-        clientSelect.innerHTML = '<option value="">No Client</option>';
-        clients.forEach(client => {
-            const option = document.createElement('option');
-            option.value = client.name;
-            option.textContent = `${client.name} (${client.visaType})`;
-            clientSelect.appendChild(option);
-        });
-    });
-
-    quickSaveClientBtn.addEventListener('click', () => {
-        const name = document.getElementById('quick-client-name').value.trim();
-        const visaType = document.getElementById('quick-client-visa').value;
-        const email = document.getElementById('quick-client-email').value.trim();
-
-        if (name && email) {
-            const clientData = { name, visaType, email, phone: '' };
-            window.dispatchEvent(new CustomEvent('aiCommandProcessed', { detail: { command: `add client ${name} ${visaType} ${email}` } }));
-            hideModal('quick-add-client-modal');
-            document.getElementById('quick-client-name').value = '';
-            document.getElementById('quick-client-email').value = '';
-        } else {
-            alert('Please fill in Name and Email.');
-        }
-    });
-
-    // Quick Add Task Modal
-    quickAddTaskBtn.addEventListener('click', () => {
-        showModal('quick-add-task-modal');
-        const clientSelect = document.getElementById('quick-task-client');
-        const clients = JSON.parse(localStorage.getItem('clients')) || [];
-        clientSelect.innerHTML = '<option value="">No Client</option>';
-        clients.forEach(client => {
-            const option = document.createElement('option');
-            option.value = client.name;
-            option.textContent = `${client.name} (${client.visaType})`;
-            clientSelect.appendChild(option);
-        });
-    });
-
-    quickSaveTaskBtn.addEventListener('click', () => {
-        const title = document.getElementById('quick-task-title').value.trim();
-        const clientName = document.getElementById('quick-task-client').value;
-        const dueDate = document.getElementById('quick-task-due').value;
-
-        if (title && dueDate) {
-            const command = `task ${title}${clientName ? ` for ${clientName}` : ''} by ${dueDate}`;
-            window.dispatchEvent(new CustomEvent('aiCommandProcessed', { detail: { command } }));
-            hideModal('quick-add-task-modal');
-            document.getElementById('quick-task-title').value = '';
-            document.getElementById('quick-task-client').value = '';
-            document.getElementById('quick-task-due').value = '';
-        } else {
-            alert('Please fill in Task Title and Due Date.');
-        }
-    });
-
-    // Modal Close Buttons
-    modalCloseButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const modalId = button.getAttribute('data-modal');
-            hideModal(modalId);
-        });
-    });
-
-    // Handle Touch Events for Mobile
-    document.querySelectorAll('.nav-link, .widget.clickable, .nav-link-trigger, .icon-button, .button').forEach(el => {
-        el.addEventListener('touchstart', () => {}, { passive: true });
-    });
-
-    switchContent('dashboard-content');
-});
+    <script src="js/dashboard_mobile.js"></script>
+    <script src="js/clippy_lawyer_mobile.js"></script>
+    <script src="js/client_management_mobile.js"></script>
+    <script src="js/docusign_mobile.js"></script>
+    <script src="js/tasks_mobile.js"></script>
+    <script src="js/deadlines_mobile.js"></script>
+    <script src="js/notifications_mobile.js"></script>
+</body>
+</html>

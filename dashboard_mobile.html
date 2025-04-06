@@ -133,18 +133,13 @@
                     </div>
                     <div class="content-row">
                         <div class="content-panel column-1">
+                            <h3>Contacts</h3>
+                            <div id="contacts-list" class="contacts-list"></div>
+                        </div>
+                        <div class="content-panel column-1">
                             <h3>Recent Activity</h3>
                             <ul class="activity-feed" id="recent-activity-feed">
                                 <li><span class="activity-icon">📄</span> No recent activity yet. <span class="timestamp">Just now</span></li>
-                            </ul>
-                        </div>
-                        <div class="content-panel column-1">
-                            <h3>Quick Links</h3>
-                            <ul class="quick-links">
-                                <li><a href="#clients" class="nav-link-trigger" data-target="clients-content">Add New Client</a></li>
-                                <li><a href="#documents" class="nav-link-trigger" data-target="documents-content">Create DocuSign</a></li>
-                                <li><a href="#tasks" class="nav-link-trigger" data-target="tasks-content">Assign Task</a></li>
-                                <li><a href="#deadlines" class="nav-link-trigger" data-target="deadlines-content">Set Deadline</a></li>
                             </ul>
                         </div>
                     </div>
@@ -332,6 +327,22 @@
                     <label for="quick-client-contact-email" class="form-label">Primary Contact Email (Optional)</label>
                     <input type="email" id="quick-client-contact-email" class="form-control" placeholder="e.g., employer@example.com">
                 </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-address" class="form-label">Primary Contact Address (Optional)</label>
+                    <input type="text" id="quick-client-contact-address" class="form-control" placeholder="e.g., 123 Main St, City, State">
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-phone" class="form-label">Primary Contact Phone (Optional)</label>
+                    <input type="tel" id="quick-client-contact-phone" class="form-control" placeholder="e.g., 555-987-6543">
+                </div>
+                <div class="form-group">
+                    <label for="quick-client-contact-role" class="form-label">Primary Contact Role (Optional)</label>
+                    <select id="quick-client-contact-role" class="form-control">
+                        <option value="Employer">Employer</option>
+                        <option value="Agent">Agent</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="button secondary modal-close" data-modal="quick-add-client-modal">Cancel</button>
@@ -369,6 +380,7 @@
         </div>
     </div>
 
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1469.0.min.js"></script>
     <script src="js/dashboard_mobile.js"></script>
     <script src="js/clippy_lawyer_mobile.js"></script>
     <script src="js/client_management_mobile.js"></script>

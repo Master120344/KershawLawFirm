@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Portal - The Kershaw Law Firm</title>
+    <meta name="description" content="Securely pay for H-2A or H-2B visa services with The Kershaw Law Firm. Desktop optimized.">
+    <link rel="stylesheet" href="css/payment_portal_desktop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="background-static"></div>
+    <div class="overlay"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>The Kershaw Law Firm</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">test@gmail.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <a href="/KershawLawFirm/login_desktop.html" id="login-button" class="login-button">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <section class="payment-form" id="payment-form">
+                <h2>Payment Portal</h2>
+                <p class="intro">Complete your payment for H-2A or H-2B visa services securely.</p>
+                <form id="payment-portal-form">
+                    <div class="form-group">
+                        <label for="visa-type">Service Type</label>
+                        <select id="visa-type" name="visa-type" required>
+                            <option value="" disabled selected>Select a service</option>
+                            <option value="h2a">H-2A Visa - $4,000</option>
+                            <option value="h2b">H-2B Visa - $4,000</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" name="card-number" required placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="text" id="expiry-date" name="expiry-date" required placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" required placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardholder-name">Cardholder Name</label>
+                        <input type="text" id="cardholder-name" name="cardholder-name" required placeholder="John Doe">
+                    </div>
+                    <button type="submit" class="pay-button">Pay with Card - $4,000</button>
+                </form>
+            </section>
+
+            <section class="payment-success" id="payment-success" style="display: none; opacity: 0;">
+                <h2>Payment Successful</h2>
+                <p>Your payment of $4,000 has been processed. A confirmation email has been sent to <strong id="confirmation-email">test@gmail.com</strong>.</p>
+            </section>
+        </div>
+    </div>
+
+    <nav class="tabs">
+        <a href="/KershawLawFirm/index2_desktop.html">Home</a>
+        <a href="/KershawLawFirm/h2a_desktop.html">H-2A Visa</a>
+        <a href="/KershawLawFirm/h2b_desktop.html">H-2B Visa</a>
+        <a href="/KershawLawFirm/videos_desktop.html">Videos</a>
+        <a href="/KershawLawFirm/contact_desktop.html">Contact</a>
+    </nav>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY", // Replace with secure env variable in production
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
+
+      try {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+      } catch (error) {
+        console.error("Error initializing Firebase:", error);
+      }
+    </script>
+    <script src="js/payment_portal_desktop.js"></script>
+</body>
+</html>

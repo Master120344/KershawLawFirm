@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Firebase Auth not initialized.");
         if (loginButton) loginButton.style.display = 'inline-block';
         if (userInfoDiv) userInfoDiv.style.display = 'none';
+        window.location.href = '/KershawLawFirm/login_desktop.html';
     }
 
     // Payment Form Submission (Demo)
@@ -71,13 +72,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(paymentForm);
             const paymentData = {
                 visaType: formData.get('visa-type'),
-                cardNumber: formData.get('card-number'),
+                cardNumber: formData.get('card-number').replace(/\s/g, ''),
                 expiryDate: formData.get('expiry-date'),
                 cvv: formData.get('cvv'),
                 cardholderName: formData.get('cardholder-name'),
                 amount: 4000,
                 timestamp: new Date().toISOString()
             };
+
+            // Basic Validation
+            if (!paymentData.visaType) {
+                alert("Please select a visa type.");
+                return;
+            }
+            if (!/^\d{16}$/.test(paymentData.cardNumber)) {
+                alert("Please enter a valid 16-digit card number.");
+                return;
+            }
+            if (!/^\d{2}\/\d{2}$/.test(paymentData.expiryDate)) {
+                alert("Please enter expiry date as MM/YY.");
+                return;
+            }
+            if (!/^\d{3,4}$/.test(paymentData.cvv)) {
+                alert("Please enter a valid 3- or 4-digit CVV.");
+                return;
+            }
+            if (!paymentData.cardholderName.trim()) {
+                alert("Please enter the cardholder's name.");
+                return;
+            }
 
             // Mock Payment API Call
             console.log("Processing payment:", paymentData);
@@ -97,18 +120,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Simulate success
+            // Smooth Transition to Success
+            paymentSection.style.transition = 'opacity 0.5s ease';
+            paymentSection.style.opacity = '0';
             setTimeout(() => {
                 paymentSection.style.display = 'none';
                 successSection.style.display = 'block';
+                successSection.style.opacity = '0';
                 setTimeout(() => {
                     successSection.classList.add('visible');
-                }, 50);
+                }, 10); // Slight delay for display to take effect
                 alert("Demo Payment Successful! $4,000 charged (this is a simulation).");
-            }, 1000); // Simulate network delay
-
-            // Real implementation would use Stripe/PayPal API, e.g.:
-            // stripe.createToken(cardElement).then(result => { ... });
+            }, 500); // Match transition duration
         });
     }
 

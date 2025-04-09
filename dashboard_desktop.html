@@ -31,6 +31,7 @@
                     <li><a href="#forms" class="nav-link" data-target="forms-content" data-title="Form Generator"><span class="nav-icon">📝</span> <span class="nav-text">Forms</span></a></li>
                     <li><a href="#calendar" class="nav-link" data-target="calendar-content" data-title="Firm Calendar"><span class="nav-icon">📅</span> <span class="nav-text">Calendar</span></a></li>
                     <li><a href="#tasks" class="nav-link" data-target="tasks-content" data-title="Tasks & Reminders"><span class="nav-icon">✅</span> <span class="nav-text">Tasks</span></a></li>
+                    <li><a href="#forums" class="nav-link" data-target="forums-content" data-title="Forums"><span class="nav-icon">💬</span> <span class="nav-text">Forums</span></a></li>
                     <li><a href="#reports" class="nav-link" data-target="reports-content" data-title="Reports"><span class="nav-icon">📈</span> <span class="nav-text">Reports</span></a></li>
                     <li><a href="#ai-assistant" class="nav-link" data-target="ai-content" data-title="AI Assistant"><span class="nav-icon">🤖</span> <span class="nav-text">AI Assistant</span></a></li>
                     <li><a href="#settings" class="nav-link" data-target="settings-content" data-title="Settings"><span class="nav-icon">⚙️</span> <span class="nav-text">Settings</span></a></li>
@@ -350,6 +351,33 @@
                     </div>
                 </div>
 
+                <!-- Forums Content -->
+                <div id="forums-content" class="content-section">
+                    <div class="content-header">
+                        <h2>Forums</h2>
+                        <div class="header-actions">
+                            <button class="button secondary small">⚖️ Filter Threads</button>
+                        </div>
+                    </div>
+                    <p class="section-description">Collaborate with clients and team members on H-2A/H-2B cases.</p>
+                    <div class="forum-container" style="background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 12px; box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);">
+                        <form id="new-thread-form" style="margin-bottom: 30px;">
+                            <div class="form-group">
+                                <label for="thread-case-id" style="color: #e2e2e2; font-weight: 600;">Related Case</label>
+                                <select id="thread-case-id" name="caseId" class="form-control" required style="margin-bottom: 15px;">
+                                    <option value="" disabled selected>Select Case...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="thread-title" style="color: #e2e2e2; font-weight: 600;">Thread Title</label>
+                                <input type="text" id="thread-title" name="title" class="form-control" placeholder="e.g., H-2A Filing Questions" required>
+                            </div>
+                            <button type="submit" class="button primary" style="margin-top: 15px;">Create Thread</button>
+                        </form>
+                        <div id="forum-list"></div>
+                    </div>
+                </div>
+
                 <!-- Reports Content -->
                 <div id="reports-content" class="content-section">
                     <div class="content-header">
@@ -427,6 +455,8 @@
     <script src="js/file_upload.js"></script>
     <script src="js/docusign.js"></script>
     <script src="js/wet_signature.js"></script>
+    <script src="js/forums.js"></script>
+    <script src="js/api.js"></script>
     <script src="js/dashboard_desktop.js"></script>
 </body>
 </html>

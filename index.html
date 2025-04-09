@@ -3,46 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Kershaw Law Firm...</title>
-    <!-- Optional: Add basic styling for the loading message -->
-    <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 40px; background-color: #1a1d24; color: #cccccc; }
-    </style>
-
+    <title>Redirecting...</title>
     <script>
-        (function() {
-            // --- Detection Logic ---
-            // Check the User Agent string for common mobile keywords
-            // This is a common and reasonably reliable method for basic detection.
-            const isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Detect if the user is on a mobile device
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
 
-            // --- Redirection ---
-            try {
-                if (isMobile) {
-                    console.log("Mobile device detected. Redirecting to index_mobile.html");
-                    // Redirect to the mobile version.
-                    // window.location.replace() is better than window.location.href = ...
-                    // because it doesn't leave the redirector page in the browser history.
-                    window.location.replace("index_mobile.html");
-                } else {
-                    console.log("Desktop device detected. Redirecting to index_desktop.html");
-                    // Redirect to the desktop version.
-                    window.location.replace("index_desktop.html");
-                }
-            } catch (error) {
-                // Fallback in case of script error (though unlikely here)
-                console.error("Redirection script failed:", error);
-                // Maybe try redirecting to desktop as a safer default
-                // window.location.replace("index_desktop.html");
-            }
-
-        })(); // Immediately invoke the function
+        // Redirect immediately based on device type
+        if (isMobileDevice()) {
+            window.location.replace('/KershawLawFirm/index_mobile.html');
+        } else {
+            window.location.replace('/KershawLawFirm/index_desktop.html');
+        }
     </script>
 </head>
 <body>
-    <p>Loading, please wait...</p>
-    <!-- You can add a simple loading spinner here if desired -->
-
-    <!-- No other content or scripts should be needed here -->
+    <p>Redirecting to the appropriate page... If this doesn’t work, <a href="/KershawLawFirm/index_desktop.html">click here for desktop</a> or <a href="/KershawLawFirm/index_mobile.html">click here for mobile</a>.</p>
 </body>
 </html>

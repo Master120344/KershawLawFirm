@@ -53,6 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Touch Optimization
     document.querySelectorAll('.tabs a, .cta-button, .login-button, .logout-link').forEach(el => {
-        el.addEventListener('touchstart', () => {}, { passive: true }); // Improves touch responsiveness
+        el.addEventListener('touchstart', () => {}, { passive: true });
     });
 });

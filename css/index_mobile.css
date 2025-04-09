@@ -8,7 +8,7 @@
 /* Smooth Scroll */
 html {
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Body Styling */
@@ -22,8 +22,8 @@ body {
     position: relative;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
-    padding-top: 100px; /* Adjusted for mobile */
-    padding-bottom: 60px; /* Adjusted for mobile */
+    padding-top: 100px;
+    padding-bottom: 110px; /* Increased to accommodate footer */
 }
 
 body.loaded {
@@ -35,12 +35,13 @@ body.loaded {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh; /* Fixed height to prevent scaling */
     z-index: -2;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url('../assets/austinbackground.jpg'); /* Desktop wallpaper */
+    background-image: url('../assets/austinbackground.jpg');
+    background-attachment: fixed; /* Prevents scroll scaling */
 }
 
 /* Fallback background image using GitHub link */
@@ -66,7 +67,7 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0; /* Smaller padding for mobile */
+    padding: 15px 0;
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -76,7 +77,7 @@ body.loaded {
 
 .header-content {
     width: 90%;
-    max-width: 1100px; /* Slightly smaller max-width for mobile */
+    max-width: 1100px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -93,10 +94,10 @@ body.loaded {
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 2rem; /* Scaled down for mobile */
+    font-size: 2rem;
     color: #F5F6F5;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
-    letter-spacing: 1px; /* Adjusted for mobile */
+    letter-spacing: 1px;
     margin-bottom: 6px;
     transition: color 0.3s ease;
     font-weight: 700;
@@ -108,8 +109,8 @@ body.loaded {
 }
 
 .header-line {
-    width: 80px; /* Smaller for mobile */
-    height: 2px; /* Thinner for mobile */
+    width: 80px;
+    height: 2px;
     background: #C0392B;
     margin: 0 auto;
     transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -118,28 +119,28 @@ body.loaded {
 
 .logo-container:hover .header-line,
 .logo-container:active .header-line {
-    width: 150px; /* Smaller expansion for mobile */
+    width: 150px;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 10px; /* Reduced gap for mobile */
+    gap: 10px;
 }
 
 .login-button {
-    padding: 8px 25px; /* Smaller padding for mobile */
+    padding: 8px 25px;
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1rem; /* Smaller font for mobile */
+    font-size: 1rem;
     font-weight: 600;
     border-radius: 50px;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(192, 57, 43, 0.4);
     border: 1px solid transparent;
-    touch-action: manipulation; /* Touch optimization */
+    touch-action: manipulation;
 }
 
 .login-button:hover,
@@ -153,15 +154,15 @@ body.loaded {
 .user-info {
     display: flex;
     align-items: center;
-    gap: 10px; /* Reduced for mobile */
+    gap: 10px;
     font-family: 'EB Garamond', serif;
-    font-size: 0.9rem; /* Smaller for mobile */
+    font-size: 0.9rem;
     color: #e0e0e0;
 }
 
 #user-email {
     font-weight: 500;
-    max-width: 120px; /* Prevent overflow on small screens */
+    max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -169,10 +170,10 @@ body.loaded {
 .logout-link {
     color: #E74C3C;
     text-decoration: none;
-    font-size: 0.9rem; /* Smaller for mobile */
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    padding: 4px 8px; /* Smaller padding */
+    padding: 4px 8px;
     border-radius: 5px;
     background-color: rgba(245, 246, 245, 0.1);
 }
@@ -190,10 +191,10 @@ body.loaded {
 }
 
 .main-content-container {
-    max-width: 900px; /* Smaller max-width for mobile */
+    max-width: 900px;
     margin: 0 auto;
-    padding: 40px 20px; /* Reduced padding for mobile */
-    min-height: calc(100vh - 100px - 60px);
+    padding: 40px 20px;
+    min-height: calc(100vh - 100px - 110px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -202,12 +203,12 @@ body.loaded {
 }
 
 .hero {
-    padding: 30px 0; /* Reduced padding for mobile */
+    padding: 30px 0;
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    font-size: 2.8rem; /* Scaled down for mobile */
+    font-size: 2.8rem;
     color: #FFFFFF;
     text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
     margin-bottom: 10px;
@@ -216,27 +217,27 @@ body.loaded {
 
 .hero .tagline {
     font-family: 'Cinzel', serif;
-    font-size: 1.5rem; /* Scaled down for mobile */
-    color: #e0e0e0;
+    font-size: 1.5rem;
+    color: #FFFFFF; /* Brightened from #e0e0e0 */
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
     margin-bottom: 30px;
     font-weight: 400;
 }
 
 .cta-button {
-    padding: 12px 40px; /* Smaller padding for mobile */
-    background: #C0392B;
+    padding: 12px 40px;
+    background: #C0392B; /* Matches login button */
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem; /* Smaller font for mobile */
+    font-size: 1.2rem;
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 5px 18px rgba(192, 57, 43, 0.5);
     border: 2px solid transparent;
     display: inline-block;
-    touch-action: manipulation; /* Touch optimization */
+    touch-action: manipulation;
 }
 
 .cta-button:hover,
@@ -250,11 +251,11 @@ body.loaded {
 
 .tabs {
     position: fixed;
-    bottom: 0;
+    bottom: 50px; /* Adjusted for footer */
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0; /* Smaller padding for mobile */
+    padding: 15px 0;
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -262,28 +263,28 @@ body.loaded {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px; /* Reduced gap for mobile */
+    gap: 30px;
 }
 
 .tabs a {
     color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    font-size: 1.1rem; /* Smaller font for mobile */
+    font-size: 1.1rem;
     font-weight: 500;
-    padding: 8px 15px; /* Smaller padding for mobile */
+    padding: 8px 15px;
     transition: all 0.3s ease;
     position: relative;
     text-transform: uppercase;
-    letter-spacing: 1px; /* Adjusted for mobile */
-    touch-action: manipulation; /* Touch optimization */
+    letter-spacing: 1px;
+    touch-action: manipulation;
 }
 
 .tabs a::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px; /* Thinner for mobile */
+    height: 2px;
     bottom: -4px;
     left: 50%;
     transform: translateX(-50%);
@@ -302,6 +303,20 @@ body.loaded {
 .tabs a.active::after,
 .tabs a:active::after {
     width: 70%;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #000000;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 15px 0;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    z-index: 1000;
 }
 
 a:focus, button:focus {

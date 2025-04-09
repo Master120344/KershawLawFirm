@@ -43,32 +43,6 @@
         <a href="/KershawLawFirm/contact_desktop.html">Contact Us</a>
     </nav>
 
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
-        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
-        projectId: "thekershawlawfirm-d5b54",
-        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
-        messagingSenderId: "588166358773",
-        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-        measurementId: "G-5SVMGTE290"
-      };
-
-      try {
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        window.firebaseApp = app;
-        window.firebaseAuth = auth;
-        window.firebaseSignInWithEmailAndPassword = signInWithEmailAndPassword;
-        window.firebaseOnAuthStateChanged = onAuthStateChanged;
-        window.firebaseSignOut = signOut;
-      } catch (error) {
-        console.error("Error initializing Firebase (Desktop):", error);
-      }
-    </script>
     <script src="js/login_desktop.js"></script>
 </body>
 </html>

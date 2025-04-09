@@ -55,13 +55,13 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px 0; /* Reduced padding */
+    padding: 15px 0; /* Increased padding for more space */
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    height: 70px; /* Fixed height */
+    min-height: 90px; /* Increased min-height to fit content */
 }
 
 .header-content {
@@ -83,11 +83,11 @@ body.loaded {
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 1.8rem; /* Slightly smaller */
+    font-size: 1.6rem; /* Slightly reduced font size */
     color: #F5F6F5;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
     letter-spacing: 1px;
-    margin-bottom: 4px;
+    margin-bottom: 6px; /* Increased margin for spacing */
     transition: color 0.3s ease;
     font-weight: 700;
 }
@@ -108,22 +108,22 @@ body.loaded {
 
 .logo-container:hover .header-line,
 .logo-container:active .header-line {
-    width: 120px; /* Reduced expansion */
+    width: 120px;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 8px; /* Reduced gap */
+    gap: 8px;
 }
 
 .login-button {
-    padding: 6px 20px; /* Smaller padding */
+    padding: 6px 20px;
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem; /* Smaller font */
+    font-size: 0.9rem;
     font-weight: 600;
     border-radius: 50px;
     transition: all 0.3s ease;
@@ -145,13 +145,13 @@ body.loaded {
     align-items: center;
     gap: 8px;
     font-family: 'EB Garamond', serif;
-    font-size: 0.8rem; /* Smaller font */
+    font-size: 0.8rem;
     color: #e0e0e0;
 }
 
 #user-email {
     font-weight: 500;
-    max-width: 100px; /* Reduced width */
+    max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -162,7 +162,7 @@ body.loaded {
     font-size: 0.8rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    padding: 3px 6px; /* Smaller padding */
+    padding: 3px 6px;
     border-radius: 5px;
     background-color: rgba(245, 246, 245, 0.1);
 }
@@ -176,8 +176,8 @@ body.loaded {
 
 .main-content-area {
     position: absolute;
-    top: 70px; /* Below header */
-    bottom: 50px; /* Above tabs */
+    top: 90px; /* Adjusted to match new header height */
+    bottom: 50px;
     left: 0;
     right: 0;
     z-index: 5;
@@ -193,12 +193,12 @@ body.loaded {
 }
 
 .hero {
-    padding: 20px 0; /* Reduced padding */
+    padding: 20px 0;
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    font-size: 2rem; /* Scaled down */
+    font-size: 2rem;
     color: #FFFFFF;
     text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
     margin-bottom: 8px;
@@ -207,7 +207,7 @@ body.loaded {
 
 .hero .tagline {
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem; /* Scaled down */
+    font-size: 1.2rem;
     color: #FFFFFF;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
@@ -215,12 +215,12 @@ body.loaded {
 }
 
 .cta-button {
-    padding: 10px 30px; /* Smaller padding */
+    padding: 10px 30px;
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1rem; /* Smaller font */
+    font-size: 1rem;
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -245,7 +245,7 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px 0; /* Reduced padding */
+    padding: 10px 0;
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -253,17 +253,17 @@ body.loaded {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Reduced gap */
-    height: 50px; /* Fixed height */
+    gap: 20px;
+    height: 50px;
 }
 
 .tabs a {
     color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    font-size: 0.9rem; /* Smaller font */
+    font-size: 0.9rem;
     font-weight: 500;
-    padding: 6px 12px; /* Smaller padding */
+    padding: 6px 12px;
     transition: all 0.3s ease;
     position: relative;
     text-transform: uppercase;

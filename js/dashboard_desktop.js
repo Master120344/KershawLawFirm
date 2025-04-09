@@ -2,7 +2,7 @@
 // Kershaw Law Firm - Admin Dashboard JavaScript (V3.0 - Ultimate H-2A/H-2B Edition)
 // ==========================================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // === Core Element Selectors ===
     const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link');
     const contentSections = document.querySelectorAll('.content-section');
@@ -61,33 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingsForm = document.getElementById('settings-form');
     const saveSettingsBtn = document.getElementById('save-settings-btn');
 
-    // === Data Stores ===
-    let clients = [
-        { id: 'C001', name: 'John Doe', email: 'john.doe@example.com', phone: '555-123-4567', cases: ['H2B-001'], address: '123 Farm Rd, Austin, TX', status: 'Active', created: '2025-03-01' },
-        { id: 'C002', name: 'Acme Corp', email: 'contact@acme.com', phone: '555-987-6543', cases: ['H2A-015'], address: '456 Industry Ln, Austin, TX', status: 'Active', created: '2025-03-15' }
-    ];
-    let cases = [
-        { id: 'H2A-015', clientId: 'C002', client: 'Acme Corp', visaType: 'H-2A', status: 'Filing', deadline: '2025-04-15', notes: 'Agricultural worker petition', priority: 'High', created: '2025-03-20', updated: '2025-04-08', stages: [{ name: 'ETA-9142A', status: 'Pending', date: '2025-04-01' }] },
-        { id: 'H2B-001', clientId: 'C001', client: 'John Doe', visaType: 'H-2B', status: 'RFE Received', deadline: '2025-04-20', notes: 'Non-agricultural worker', priority: 'Medium', created: '2025-03-10', updated: '2025-04-07', stages: [{ name: 'I-129', status: 'RFE', date: '2025-04-05' }] }
-    ];
-    let documents = [
-        { id: 'D001', fileName: 'Passport_JSmith.pdf', clientId: 'C001', client: 'John Smith', caseId: 'H2B-001', uploaded: '2025-04-08', status: 'Pending Review', type: 'PDF', size: '1.2 MB', reviewer: null }
-    ];
-    let tasks = [
-        { id: 'T001', task: 'Prepare LCA', caseId: 'H2A-015', dueDate: '2025-04-10', status: 'Pending', assignedTo: 'Eleanor Vance', priority: 'High', created: '2025-04-01', completed: null }
-    ];
-    let events = [
+    // === Data Stores (Fetched via API) ===
+    let clients = await window.api.getClients();
+    let cases = await window.api.getCases();
+    let documents = await window.api.getDocuments();
+    let tasks = await window.api.getTasks() || [];
+    let events = await window.api.getEvents() || [
         { id: 'E001', date: '2025-04-15', title: 'H-2A Filing Deadline', caseId: 'H2A-015', type: 'deadline', description: 'Final ETA-9142A submission' },
         { id: 'E002', date: '2025-04-20', title: 'RFE Response Due', caseId: 'H2B-001', type: 'deadline', description: 'Respond to USCIS RFE' },
         { id: 'E003', date: '2025-04-10', title: 'Client Meeting - Acme Corp', caseId: 'H2A-015', type: 'meeting', description: 'Discuss H-2A progress' }
     ];
-    let aiHistory = [];
-    let settings = { notificationPref: 'email', theme: 'dark', autoSave: true, aiVoice: false };
-    let notifications = [
-        { id: 'N001', message: 'New client "Acme Corp" added', date: '2025-04-08 10:00', read: false },
-        { id: 'N002', message: 'Document uploaded for H2B-001', date: '2025-04-08 12:30', read: false },
-        { id: 'N003', message: 'Task T001 overdue', date: '2025-04-09 09:00', read: false }
-    ];
+    let aiHistory = await window.api.getAIHistory() || [];
+    let settings = await window.api.getSettings() || { notificationPref: 'email', theme: 'dark', autoSave: true, aiVoice: false };
 
     // === Initial Setup ===
     currentYear.textContent = new Date().getFullYear();
@@ -96,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDocuments();
     renderTasks();
     renderCalendar(new Date(2025, 3, 9)); // April 9, 2025
-    updateNotifications();
 
     // === Utility Functions ===
     function showLoading(duration = 500) {
@@ -129,13 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function formatDate(date) {
         return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-    }
-
-    function updateNotifications() {
-        const unreadCount = notifications.filter(n => !n.read).length;
-        const badge = notificationButton.querySelector('.notification-badge');
-        badge.textContent = unreadCount;
-        badge.style.display = unreadCount > 0 ? 'flex' : 'none';
     }
 
     // === Navigation ===
@@ -171,14 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
         globalSearch.style.boxShadow = 'inset 0 1px 4px var(--color-shadow-inset)';
     });
 
-    // === Notifications ===
-    notificationButton.addEventListener('click', () => {
-        const notificationList = notifications.map(n => `${n.message} - ${n.date}${n.read ? ' (Read)' : ''}`).join('\n');
-        alert(`Notifications (${notifications.length}):\n\n${notificationList}`);
-        notifications.forEach(n => n.read = true);
-        updateNotifications();
-    });
-
     // === Logout ===
     logoutButton.addEventListener('click', () => {
         if (confirm('Are you sure you want to logout? All unsaved changes will be lost.')) {
@@ -188,7 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // === Client Management ===
-    function renderClients(filter = '') {
+    async function renderClients(filter = '') {
+        clients = await window.api.getClients();
         clientTableBody.innerHTML = '';
         const filteredClients = clients.filter(c => 
             c.name.toLowerCase().includes(filter) || 
@@ -218,28 +188,28 @@ document.addEventListener('DOMContentLoaded', () => {
         renderClients(query);
     }
 
-    function addClient(client) {
-        clients.push(client);
+    async function addClient(client) {
+        await window.api.addClient(client);
+        clients = await window.api.getClients();
         renderClients();
-        notifications.push({ id: generateId('N'), message: `New client "${client.name}" added`, date: new Date().toISOString(), read: false });
-        updateNotifications();
+        window.triggerNotification(`New client "${client.name}" added`);
     }
 
-    function editClient(id, updatedClient) {
+    async function editClient(id, updatedClient) {
         const index = clients.findIndex(c => c.id === id);
         if (index !== -1) {
             clients[index] = { ...clients[index], ...updatedClient };
+            await window.api.updateClient(id, clients[index]); // Assuming API supports update
             renderClients();
-            notifications.push({ id: generateId('N'), message: `Client "${updatedClient.name}" updated`, date: new Date().toISOString(), read: false });
-            updateNotifications();
+            window.triggerNotification(`Client "${updatedClient.name}" updated`);
         }
     }
 
-    function deleteClient(id) {
-        clients = clients.filter(c => c.id !== id);
+    async function deleteClient(id) {
+        await window.api.deleteClient(id); // Assuming API supports delete
+        clients = await window.api.getClients();
         renderClients();
-        notifications.push({ id: generateId('N'), message: `Client deleted (ID: ${id})`, date: new Date().toISOString(), read: false });
-        updateNotifications();
+        window.triggerNotification(`Client deleted (ID: ${id})`);
     }
 
     function attachClientEventListeners() {
@@ -280,7 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone = prompt('Enter client phone:');
         if (name && email && phone) {
             const newClient = { 
-                id: generateId('C'), 
                 name, 
                 email, 
                 phone, 
@@ -296,7 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
     clientSearchInput.addEventListener('input', (e) => filterClients(e.target.value.toLowerCase()));
 
     // === Case Management ===
-    function renderCases(filter = '') {
+    async function renderCases(filter = '') {
+        cases = await window.api.getCases();
         caseTableBody.innerHTML = '';
         const filteredCases = cases.filter(c => 
             c.id.toLowerCase().includes(filter) || 
@@ -327,28 +297,28 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCases(query);
     }
 
-    function addCase(caseData) {
-        cases.push(caseData);
+    async function addCase(caseData) {
+        await window.api.addCase(caseData);
+        cases = await window.api.getCases();
         renderCases();
-        notifications.push({ id: generateId('N'), message: `New case "${caseData.id}" added`, date: new Date().toISOString(), read: false });
-        updateNotifications();
+        window.triggerNotification(`New case "${caseData.id}" added`);
     }
 
-    function editCase(id, updatedCase) {
+    async function editCase(id, updatedCase) {
         const index = cases.findIndex(c => c.id === id);
         if (index !== -1) {
             cases[index] = { ...cases[index], ...updatedCase, updated: new Date().toISOString().split('T')[0] };
+            await window.api.updateCase(id, cases[index]); // Assuming API supports update
             renderCases();
-            notifications.push({ id: generateId('N'), message: `Case "${id}" updated`, date: new Date().toISOString(), read: false });
-            updateNotifications();
+            window.triggerNotification(`Case "${id}" updated`);
         }
     }
 
-    function deleteCase(id) {
-        cases = cases.filter(c => c.id !== id);
+    async function deleteCase(id) {
+        await window.api.deleteCase(id); // Assuming API supports delete
+        cases = await window.api.getCases();
         renderCases();
-        notifications.push({ id: generateId('N'), message: `Case "${id}" deleted`, date: new Date().toISOString(), read: false });
-        updateNotifications();
+        window.triggerNotification(`Case "${id}" deleted`);
     }
 
     function attachCaseEventListeners() {
@@ -397,7 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const deadline = prompt('Enter deadline (YYYY-MM-DD):');
         if (visaType && status && deadline) {
             const newCase = { 
-                id: generateId(visaType === 'H-2A' ? 'H2A-' : 'H2B-'), 
                 clientId: client.id, 
                 client: client.name, 
                 visaType, 
@@ -411,14 +380,15 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             addCase(newCase);
             client.cases.push(newCase.id);
-            renderClients();
+            editClient(client.id, client);
         }
     });
 
     caseSearchInput.addEventListener('input', (e) => filterCases(e.target.value.toLowerCase()));
 
     // === Document Management ===
-    function renderDocuments(filter = '') {
+    async function renderDocuments(filter = '') {
+        documents = await window.api.getDocuments();
         documentTableBody.innerHTML = '';
         const filteredDocs = documents.filter(d => 
             d.fileName.toLowerCase().includes(filter) || 
@@ -432,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${doc.client}</td>
                 <td>${doc.caseId}</td>
                 <td>${doc.uploaded}</td>
-                <td>${doc.status}</td>
+                <td>${doc.status}${doc.wetSignature ? ' (Wet Signed)' : ''}${doc.docusign ? ' (DocuSign)' : ''}</td>
                 <td>
                     <button class="button small secondary review-doc" data-id="${doc.id}">Review</button>
                     <button class="button small secondary download-doc" data-id="${doc.id}">Download</button>
@@ -448,90 +418,13 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDocuments(query);
     }
 
-    function addDocument(doc) {
-        documents.push(doc);
-        renderDocuments();
-        notifications.push({ id: generateId('N'), message: `Document "${doc.fileName}" uploaded`, date: new Date().toISOString(), read: false });
-        updateNotifications();
-    }
-
-    function reviewDocument(id, status, reviewer) {
-        const index = documents.findIndex(d => d.id === id);
-        if (index !== -1) {
-            documents[index].status = status;
-            documents[index].reviewer = reviewer;
-            renderDocuments();
-            notifications.push({ id: generateId('N'), message: `Document "${documents[index].fileName}" ${status.toLowerCase()}`, date: new Date().toISOString(), read: false });
-            updateNotifications();
-        }
-    }
-
-    function deleteDocument(id) {
-        documents = documents.filter(d => d.id !== id);
-        renderDocuments();
-        notifications.push({ id: generateId('N'), message: `Document deleted (ID: ${id})`, date: new Date().toISOString(), read: false });
-        updateNotifications();
-    }
+    uploadDocBtn.addEventListener('click', () => {
+        // Handled by file_upload_desktop.js
+    });
 
     function attachDocumentEventListeners() {
-        document.querySelectorAll('.review-doc').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.dataset.id;
-                const doc = documents.find(d => d.id === id);
-                const status = prompt('Enter review status (Approved/Rejected/Pending):', doc.status);
-                if (status) {
-                    reviewDocument(id, status, 'Eleanor Vance');
-                }
-            });
-        });
-
-        document.querySelectorAll('.download-doc').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.dataset.id;
-                const doc = documents.find(d => d.id === id);
-                alert(`Simulated download: ${doc.fileName} (${doc.size})`);
-            });
-        });
-
-        document.querySelectorAll('.delete-doc').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.dataset.id;
-                if (confirm('Are you sure you want to delete this document?')) {
-                    deleteDocument(id);
-                }
-            });
-        });
+        // Handled by file_upload_desktop.js, docusign_desktop.js, wet_signature_desktop.js
     }
-
-    uploadDocBtn.addEventListener('click', () => {
-        const fileName = prompt('Enter document name (e.g., Passport.pdf):');
-        const clientName = prompt('Enter client name:');
-        const client = clients.find(c => c.name === clientName);
-        if (!client) {
-            alert('Client not found. Please add the client first.');
-            return;
-        }
-        const caseId = prompt('Enter case ID:');
-        if (!cases.find(c => c.id === caseId)) {
-            alert('Case not found. Please add the case first.');
-            return;
-        }
-        if (fileName && client && caseId) {
-            const newDoc = { 
-                id: generateId('D'), 
-                fileName, 
-                clientId: client.id, 
-                client: client.name, 
-                caseId, 
-                uploaded: new Date().toISOString().split('T')[0], 
-                status: 'Pending Review', 
-                type: fileName.split('.').pop().toUpperCase(), 
-                size: `${(Math.random() * 5 + 0.5).toFixed(1)} MB`, 
-                reviewer: null 
-            };
-            addDocument(newDoc);
-        }
-    });
 
     // === Form Generator ===
     formGeneratorForm.addEventListener('submit', (e) => {
@@ -582,14 +475,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const today = new Date(2025, 3, 9);
 
-        // Add empty days before the first day of the month
         for (let i = 0; i < firstDay; i++) {
             const emptyDay = document.createElement('div');
             emptyDay.className = 'calendar-day';
             calendarDays.appendChild(emptyDay);
         }
 
-        // Render days of the month
         for (let day = 1; day <= daysInMonth; day++) {
             const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
             const dayEvents = events.filter(e => {
@@ -652,14 +543,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 description: '' 
             };
             events.push(newEvent);
+            window.api.addEvent(newEvent); // Assuming API supports events
             renderCalendar(currentDate);
-            notifications.push({ id: generateId('N'), message: `Event "${title}" added`, date: new Date().toISOString(), read: false });
-            updateNotifications();
+            window.triggerNotification(`Event "${title}" added`);
         }
     });
 
     // === Task Management ===
-    function renderTasks(filter = '') {
+    async function renderTasks(filter = '') {
+        tasks = await window.api.getTasks() || [];
         taskTableBody.innerHTML = '';
         const filteredTasks = tasks.filter(t => 
             t.task.toLowerCase().includes(filter) || 
@@ -688,39 +580,39 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks(query);
     }
 
-    function addTask(task) {
-        tasks.push(task);
+    async function addTask(task) {
+        await window.api.addTask(task); // Assuming API supports tasks
+        tasks = await window.api.getTasks();
         renderTasks();
-        notifications.push({ id: generateId('N'), message: `Task "${task.task}" added`, date: new Date().toISOString(), read: false });
-        updateNotifications();
+        window.triggerNotification(`Task "${task.task}" added`);
     }
 
-    function completeTask(id) {
+    async function completeTask(id) {
         const index = tasks.findIndex(t => t.id === id);
         if (index !== -1 && tasks[index].status !== 'Completed') {
             tasks[index].status = 'Completed';
             tasks[index].completed = new Date().toISOString().split('T')[0];
+            await window.api.updateTask(id, tasks[index]); // Assuming API supports update
             renderTasks();
-            notifications.push({ id: generateId('N'), message: `Task "${tasks[index].task}" completed`, date: new Date().toISOString(), read: false });
-            updateNotifications();
+            window.triggerNotification(`Task "${tasks[index].task}" completed`);
         }
     }
 
-    function editTask(id, updatedTask) {
+    async function editTask(id, updatedTask) {
         const index = tasks.findIndex(t => t.id === id);
         if (index !== -1) {
             tasks[index] = { ...tasks[index], ...updatedTask };
+            await window.api.updateTask(id, tasks[index]); // Assuming API supports update
             renderTasks();
-            notifications.push({ id: generateId('N'), message: `Task "${updatedTask.task}" updated`, date: new Date().toISOString(), read: false });
-            updateNotifications();
+            window.triggerNotification(`Task "${updatedTask.task}" updated`);
         }
     }
 
-    function deleteTask(id) {
-        tasks = tasks.filter(t => t.id !== id);
+    async function deleteTask(id) {
+        await window.api.deleteTask(id); // Assuming API supports delete
+        tasks = await window.api.getTasks();
         renderTasks();
-        notifications.push({ id: generateId('N'), message: `Task deleted (ID: ${id})`, date: new Date().toISOString(), read: false });
-        updateNotifications();
+        window.triggerNotification(`Task deleted (ID: ${id})`);
     }
 
     function attachTaskEventListeners() {
@@ -841,6 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
         aiChatMessages.innerHTML += userMessage;
         aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
         aiHistory.push({ role: 'user', content: message, timestamp: new Date().toISOString() });
+        window.api.addAIHistory(aiHistory); // Assuming API supports AI history
         
         setTimeout(() => {
             const aiResponse = generateAIResponse(message);
@@ -848,6 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
             aiChatMessages.innerHTML += aiMessage;
             aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
             aiHistory.push({ role: 'ai', content: aiResponse, timestamp: new Date().toISOString() });
+            window.api.addAIHistory(aiHistory);
         }, 800);
         
         aiChatInput.value = '';
@@ -876,13 +770,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // === Settings ===
-    settingsForm.addEventListener('submit', (e) => {
+    settingsForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(settingsForm);
         settings.notificationPref = formData.get('notificationPref');
+        await window.api.updateSettings(settings); // Assuming API supports settings
         alert('Settings saved successfully (Simulated).');
-        notifications.push({ id: generateId('N'), message: 'Settings updated', date: new Date().toISOString(), read: false });
-        updateNotifications();
+        window.triggerNotification('Settings updated');
     });
 
     saveSettingsBtn.addEventListener('click', () => {
@@ -890,44 +784,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // === Additional Features ===
-    function autoSave() {
+    async function autoSave() {
         if (settings.autoSave) {
-            localStorage.setItem('clients', JSON.stringify(clients));
-            localStorage.setItem('cases', JSON.stringify(cases));
-            localStorage.setItem('documents', JSON.stringify(documents));
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            localStorage.setItem('events', JSON.stringify(events));
-            localStorage.setItem('aiHistory', JSON.stringify(aiHistory));
-            localStorage.setItem('settings', JSON.stringify(settings));
-            console.log('Auto-saved data to localStorage (Simulated backend).');
+            console.log('Auto-saving data via API (Simulated backend).');
+            // Data is already saved via API calls in add/edit/delete functions
         }
     }
 
     setInterval(autoSave, 30000); // Auto-save every 30 seconds
-
-    function loadSavedData() {
-        const savedClients = localStorage.getItem('clients');
-        if (savedClients) clients = JSON.parse(savedClients);
-        const savedCases = localStorage.getItem('cases');
-        if (savedCases) cases = JSON.parse(savedCases);
-        const savedDocs = localStorage.getItem('documents');
-        if (savedDocs) documents = JSON.parse(savedDocs);
-        const savedTasks = localStorage.getItem('tasks');
-        if (savedTasks) tasks = JSON.parse(savedTasks);
-        const savedEvents = localStorage.getItem('events');
-        if (savedEvents) events = JSON.parse(savedEvents);
-        const savedAI = localStorage.getItem('aiHistory');
-        if (savedAI) aiHistory = JSON.parse(savedAI);
-        const savedSettings = localStorage.getItem('settings');
-        if (savedSettings) settings = JSON.parse(savedSettings);
-        renderClients();
-        renderCases();
-        renderDocuments();
-        renderTasks();
-        renderCalendar(currentDate);
-    }
-
-    loadSavedData();
 
     // === Keyboard Shortcuts ===
     document.addEventListener('keydown', (e) => {
@@ -950,6 +814,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleTheme() {
         settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
         alert(`Theme switched to ${settings.theme} (Simulated - CSS not implemented).`);
+        window.api.updateSettings(settings);
     }
 
     // === Voice Command Simulation ===
@@ -964,7 +829,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // === Dashboard Stats ===
-    function updateDashboardStats() {
+    async function updateDashboardStats() {
+        cases = await window.api.getCases();
+        tasks = await window.api.getTasks() || [];
+        documents = await window.api.getDocuments();
         const activeCases = cases.filter(c => c.status !== 'Completed' && c.status !== 'Denied').length;
         const pendingTasks = tasks.filter(t => t.status === 'Pending').length;
         const upcomingDeadlines = events.filter(e => new Date(e.date) > new Date()).length;
@@ -980,5 +848,5 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDashboardStats();
 
     // === End of Script ===
-    console.log('Kershaw Law Firm Dashboard Initialized - Ready to Wow!');
+    console.log('Kershaw Law Firm Dashboard Initialized with API Integration - Ready to Wow!');
 });

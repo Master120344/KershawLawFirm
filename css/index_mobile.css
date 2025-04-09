@@ -5,27 +5,21 @@
     box-sizing: border-box;
 }
 
-/* Smooth Scroll */
-html {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+/* Disable Scroll */
+html, body {
     height: 100%;
+    overflow: hidden; /* Prevents scrolling */
 }
 
 /* Body Styling */
 body {
     font-family: 'EB Garamond', serif;
-    min-height: 100vh;
     color: #F5F6F5;
     line-height: 1.6;
     background-color: #1a1d24;
-    overflow-x: hidden;
     position: relative;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
-    padding-top: 100px;
-    padding-bottom: 60px;
-    height: 100%;
 }
 
 body.loaded {
@@ -37,14 +31,12 @@ body.loaded {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Changed to 100% to match viewport */
+    height: 100%;
     z-index: -2;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-image: url('../assets/austinbackground.jpg');
-    background-attachment: fixed; /* Ensures background stays in place */
-    will-change: transform; /* Improves rendering performance */
 }
 
 .overlay {
@@ -58,17 +50,18 @@ body.loaded {
 }
 
 .header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0;
+    padding: 10px 0; /* Reduced padding */
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
+    height: 70px; /* Fixed height */
 }
 
 .header-content {
@@ -90,11 +83,11 @@ body.loaded {
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 2rem;
+    font-size: 1.8rem; /* Slightly smaller */
     color: #F5F6F5;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
     letter-spacing: 1px;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     transition: color 0.3s ease;
     font-weight: 700;
 }
@@ -115,22 +108,22 @@ body.loaded {
 
 .logo-container:hover .header-line,
 .logo-container:active .header-line {
-    width: 150px;
+    width: 120px; /* Reduced expansion */
 }
 
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px; /* Reduced gap */
 }
 
 .login-button {
-    padding: 8px 25px;
+    padding: 6px 20px; /* Smaller padding */
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Smaller font */
     font-weight: 600;
     border-radius: 50px;
     transition: all 0.3s ease;
@@ -150,15 +143,15 @@ body.loaded {
 .user-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-family: 'EB Garamond', serif;
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Smaller font */
     color: #e0e0e0;
 }
 
 #user-email {
     font-weight: 500;
-    max-width: 120px;
+    max-width: 100px; /* Reduced width */
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -166,14 +159,12 @@ body.loaded {
 .logout-link {
     color: #E74C3C;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    padding: 4px 8px;
+    padding: 3px 6px; /* Smaller padding */
     border-radius: 5px;
-    background-color: rgba(245&
-```css
-, 246, 245, 0.1);
+    background-color: rgba(245, 246, 245, 0.1);
 }
 
 .logout-link:hover,
@@ -184,51 +175,52 @@ body.loaded {
 }
 
 .main-content-area {
-    position: relative;
+    position: absolute;
+    top: 70px; /* Below header */
+    bottom: 50px; /* Above tabs */
+    left: 0;
+    right: 0;
     z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .main-content-container {
+    width: 90%;
     max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    min-height: calc(100vh - 100px - 60px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
 .hero {
-    padding: 30px 0;
+    padding: 20px 0; /* Reduced padding */
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    font-size: 2.8rem;
+    font-size: 2rem; /* Scaled down */
     color: #FFFFFF;
     text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 700;
 }
 
 .hero .tagline {
     font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    color: #FFFFFF; /* Ensured pure white */
+    font-size: 1.2rem; /* Scaled down */
+    color: #FFFFFF;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: 400;
 }
 
 .cta-button {
-    padding: 12px 40px;
+    padding: 10px 30px; /* Smaller padding */
     background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
+    font-size: 1rem; /* Smaller font */
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -248,12 +240,12 @@ body.loaded {
 }
 
 .tabs {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0;
+    padding: 10px 0; /* Reduced padding */
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -261,16 +253,17 @@ body.loaded {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 20px; /* Reduced gap */
+    height: 50px; /* Fixed height */
 }
 
 .tabs a {
     color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    font-size: 1.1rem;
+    font-size: 0.9rem; /* Smaller font */
     font-weight: 500;
-    padding: 8px 15px;
+    padding: 6px 12px; /* Smaller padding */
     transition: all 0.3s ease;
     position: relative;
     text-transform: uppercase;
@@ -314,27 +307,27 @@ a:focus-visible, button:focus-visible {
 /* Media Query for Smaller Screens */
 @media (max-width: 400px) {
     .logo-container h1 {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
     .header-line {
         width: 60px;
     }
     .login-button {
-        padding: 6px 20px;
-        font-size: 0.9rem;
+        padding: 5px 15px;
+        font-size: 0.8rem;
     }
     .hero h2 {
-        font-size: 2.2rem;
+        font-size: 1.6rem;
     }
     .hero .tagline {
-        font-size: 1.2rem;
-    }
-    .cta-button {
-        padding: 10px 30px;
         font-size: 1rem;
     }
-    .tabs a {
+    .cta-button {
+        padding: 8px 25px;
         font-size: 0.9rem;
-        padding: 6px 12px;
+    }
+    .tabs a {
+        font-size: 0.8rem;
+        padding: 5px 10px;
     }
 }

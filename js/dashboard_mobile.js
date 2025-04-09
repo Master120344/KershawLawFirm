@@ -1,246 +1,166 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const mainContentArea = document.getElementById('main-content-area');
-    const navLinks = document.querySelectorAll('.nav-link');
+    // Element Selectors
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link');
     const contentSections = document.querySelectorAll('.content-section');
     const mainContentTitle = document.getElementById('main-content-title');
-    const breadcrumbBack = document.getElementById('breadcrumb-back');
-    const logoutButtonDropdown = document.getElementById('logout-button-dropdown');
+    const currentYear = document.getElementById('current-year');
     const loadingOverlay = document.getElementById('loading-overlay');
-    const currentYearSpan = document.getElementById('current-year');
-    const notificationCount = document.getElementById('notification-count');
 
-    // New elements from updated HTML
-    const globalSearch = document.getElementById('global-search');
-    const quickAddClientBtn = document.getElementById('quick-add-client-btn');
-    const quickAddTaskBtn = document.getElementById('quick-add-task-btn');
-    const clientDetailsModal = document.getElementById('client-details-modal');
-    const quickAddClientModal = document.getElementById('quick-add-client-modal');
-    const quickAddTaskModal = document.getElementById('quick-add-task-modal');
-    const modalCloseButtons = document.querySelectorAll('.modal-close');
-    const quickSaveClientBtn = document.getElementById('quick-save-client-btn');
-    const quickSaveTaskBtn = document.getElementById('quick-save-task-btn');
+    // Initial Setup
+    currentYear.textContent = new Date().getFullYear();
 
-    currentYearSpan.textContent = new Date().getFullYear();
-
-    let navigationHistory = ['dashboard-content'];
-
-    function showLoadingOverlay() {
-        loadingOverlay.classList.add('is-active');
-        setTimeout(() => loadingOverlay.classList.remove('is-active'), 500);
-    }
-
-    function switchContent(targetId) {
-        const currentSection = document.querySelector('.content-section.is-active');
-        const targetSection = document.getElementById(targetId);
-
-        if (currentSection && currentSection.id !== targetId) {
-            currentSection.classList.remove('is-active');
-            currentSection.classList.add('is-exiting');
-            setTimeout(() => currentSection.classList.remove('is-exiting'), 450);
-        }
-
-        if (targetSection) {
-            targetSection.classList.add('is-active');
-            showLoadingOverlay();
-
-            const newTitle = targetSection.dataset.title || document.querySelector(`.nav-link[data-target="${targetId}"]`)?.dataset.title || 'Dashboard';
-            mainContentTitle.textContent = newTitle;
-
-            if (navigationHistory[navigationHistory.length - 1] !== targetId) {
-                navigationHistory.push(targetId);
-            }
-
-            breadcrumbBack.style.display = navigationHistory.length > 1 ? 'inline-flex' : 'none';
-            sidebar.classList.remove('open');
-        }
-    }
-
-    function showModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'block';
-            setTimeout(() => modal.classList.add('is-active'), 50);
-        }
-    }
-
-    function hideModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('is-active');
-            setTimeout(() => modal.style.display = 'none', 300);
-        }
-    }
-
-    function updateNotification(message) {
-        const currentCount = parseInt(notificationCount.textContent) || 0;
-        notificationCount.textContent = currentCount + 1;
-        window.dispatchEvent(new CustomEvent('notificationAdded', { detail: { message } }));
-    }
-
-    sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-    });
-
-    mainContentArea.addEventListener('click', (e) => {
-        if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            sidebar.classList.remove('open');
-        }
-    });
-
-    navLinks.forEach(link => {
+    // Navigation Handler
+    sidebarLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('data-target');
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            switchContent(targetId);
+            const title = link.getAttribute('data-title');
+            switchSection(targetId, title);
         });
     });
 
-    document.querySelectorAll('.nav-link-trigger').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = trigger.getAttribute('data-target');
-            const correspondingNavLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
-            navLinks.forEach(l => l.classList.remove('active'));
-            if (correspondingNavLink) {
-                correspondingNavLink.classList.add('active');
-            }
-            switchContent(targetId);
+    function switchSection(targetId, title) {
+        loadingOverlay.classList.add('is-active');
+        contentSections.forEach(section => {
+            section.classList.remove('is-active');
+            section.classList.add('is-exiting');
         });
-    });
-
-    // Fix widget clickability
-    document.querySelectorAll('.widget.clickable').forEach(widget => {
-        widget.addEventListener('click', (e) => {
-            const targetId = widget.getAttribute('data-link-target');
-            if (targetId) {
-                const correspondingNavLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
-                navLinks.forEach(l => l.classList.remove('active'));
-                if (correspondingNavLink) {
-                    correspondingNavLink.classList.add('active');
+        setTimeout(() => {
+            contentSections.forEach(section => {
+                section.classList.remove('is-exiting');
+                if (section.id === targetId) {
+                    section.classList.add('is-active');
+                    mainContentTitle.textContent = title;
                 }
-                switchContent(targetId);
-            }
-        });
-    });
-
-    breadcrumbBack.addEventListener('click', () => {
-        if (navigationHistory.length > 1) {
-            navigationHistory.pop();
-            const previousTargetId = navigationHistory[navigationHistory.length - 1];
-            navLinks.forEach(l => l.classList.remove('active'));
-            const previousNavLink = document.querySelector(`.nav-link[data-target="${previousTargetId}"]`);
-            if (previousNavLink) {
-                previousNavLink.classList.add('active');
-            }
-            switchContent(previousTargetId);
-        }
-    });
-
-    logoutButtonDropdown.addEventListener('click', () => {
-        console.log('Logout clicked');
-        updateNotification('User logged out');
-    });
-
-    // Global Search Functionality
-    globalSearch.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        const sections = ['clients-content', 'tasks-content', 'documents-content', 'deadlines-content'];
-        sections.forEach(sectionId => {
-            const section = document.getElementById(sectionId);
-            const items = section.querySelectorAll('.client-item, .task-item, .document-item, .deadline-item');
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
             });
-        });
+            loadingOverlay.classList.remove('is-active');
+        }, 300);
+    }
+
+    // Client Management
+    const addClientBtn = document.getElementById('add-client-btn');
+    const clientTableBody = document.getElementById('client-table-body');
+    addClientBtn.addEventListener('click', () => {
+        const newClient = { name: 'New Client', email: 'new@example.com', phone: '555-000-0000', cases: 'N/A' };
+        addClientRow(newClient);
     });
 
-    // Quick Add Client Modal
-    quickAddClientBtn.addEventListener('click', () => {
-        showModal('quick-add-client-modal');
-        const clientSelect = document.getElementById('quick-task-client');
-        const clients = JSON.parse(localStorage.getItem('clients')) || [];
-        clientSelect.innerHTML = '<option value="">No Client</option>';
-        clients.forEach(client => {
-            const option = document.createElement('option');
-            option.value = client.name;
-            option.textContent = `${client.name} (${client.visaType})`;
-            clientSelect.appendChild(option);
-        });
+    function addClientRow(client) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${client.name}</td><td>${client.email}</td><td>${client.phone}</td><td>${client.cases}</td><td><button class="button small secondary">View</button></td>`;
+        clientTableBody.appendChild(row);
+    }
+
+    // Case Management
+    const addCaseBtn = document.getElementById('add-case-btn');
+    const caseTableBody = document.getElementById('case-table-body');
+    addCaseBtn.addEventListener('click', () => {
+        const newCase = { id: `H2A-${Math.floor(Math.random() * 1000)}`, client: 'New Client', visaType: 'H-2A', status: 'Pending', deadline: '2025-05-01' };
+        addCaseRow(newCase);
     });
 
-    quickSaveClientBtn.addEventListener('click', () => {
-        const name = document.getElementById('quick-client-name').value.trim();
-        const visaType = document.getElementById('quick-client-visa').value;
-        const email = document.getElementById('quick-client-email').value.trim();
-        const contactName = document.getElementById('quick-client-contact-name').value.trim();
-        const contactEmail = document.getElementById('quick-client-contact-email').value.trim();
-        const contactAddress = document.getElementById('quick-client-contact-address').value.trim();
-        const contactPhone = document.getElementById('quick-client-contact-phone').value.trim();
-        const contactRole = document.getElementById('quick-client-contact-role').value;
+    function addCaseRow(caseData) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${caseData.id}</td><td>${caseData.client}</td><td>${caseData.visaType}</td><td>${caseData.status}</td><td>${caseData.deadline}</td><td><button class="button small secondary">Edit</button></td>`;
+        caseTableBody.appendChild(row);
+    }
 
-        if (name && email) {
-            const clientData = { name, visaType, email, contactName, contactEmail, contactAddress, contactPhone, contactRole };
-            window.dispatchEvent(new CustomEvent('aiCommandProcessed', { detail: { command: `add client ${name} ${visaType} ${email}` } }));
-            hideModal('quick-add-client-modal');
-            document.getElementById('quick-client-name').value = '';
-            document.getElementById('quick-client-email').value = '';
-            document.getElementById('quick-client-contact-name').value = '';
-            document.getElementById('quick-client-contact-email').value = '';
-            document.getElementById('quick-client-contact-address').value = '';
-            document.getElementById('quick-client-contact-phone').value = '';
-        } else {
-            alert('Please fill in Name and Email.');
+    // Document Management
+    const uploadDocBtn = document.getElementById('upload-doc-btn');
+    const documentTableBody = document.getElementById('document-table-body');
+    uploadDocBtn.addEventListener('click', () => {
+        const newDoc = { fileName: 'New_Doc.pdf', client: 'New Client', caseId: 'H2B-999', uploaded: new Date().toISOString().split('T')[0], status: 'Pending Review' };
+        addDocumentRow(newDoc);
+    });
+
+    function addDocumentRow(doc) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${doc.fileName}</td><td>${doc.client}</td><td>${doc.caseId}</td><td>${doc.uploaded}</td><td>${doc.status}</td><td><button class="button small secondary">Review</button></td>`;
+        documentTableBody.appendChild(row);
+    }
+
+    // Form Generator
+    const formGeneratorForm = document.getElementById('form-generator-form');
+    const formPreview = document.getElementById('form-preview');
+    const formPreviewContent = document.getElementById('form-preview-content');
+    const downloadFormBtn = document.getElementById('download-form-btn');
+    formGeneratorForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(formGeneratorForm);
+        const formType = formData.get('formType');
+        const caseId = formData.get('caseId');
+        formPreviewContent.textContent = `Generated ${formType} for Case ID: ${caseId}\n\n[Simulated Form Content]`;
+        formPreview.style.display = 'block';
+    });
+    downloadFormBtn.addEventListener('click', () => alert('Simulated PDF download for form.'));
+
+    // Calendar
+    const calendarDays = document.getElementById('calendar-days');
+    const monthYear = document.getElementById('month-year');
+    const prevMonthBtn = document.getElementById('prev-month-btn');
+    const nextMonthBtn = document.getElementById('next-month-btn');
+    const todayBtn = document.getElementById('today-btn');
+    let currentDate = new Date(2025, 3, 9); // April 9, 2025
+
+    function renderCalendar() {
+        calendarDays.innerHTML = '';
+        const month = currentDate.getMonth();
+        const year = currentDate.getFullYear();
+        monthYear.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        for (let i = 0; i < firstDay; i++) {
+            calendarDays.innerHTML += '<div class="calendar-day"></div>';
         }
-    });
-
-    // Quick Add Task Modal
-    quickAddTaskBtn.addEventListener('click', () => {
-        showModal('quick-add-task-modal');
-        const clientSelect = document.getElementById('quick-task-client');
-        const clients = JSON.parse(localStorage.getItem('clients')) || [];
-        clientSelect.innerHTML = '<option value="">No Client</option>';
-        clients.forEach(client => {
-            const option = document.createElement('option');
-            option.value = client.name;
-            option.textContent = `${client.name} (${client.visaType})`;
-            clientSelect.appendChild(option);
-        });
-    });
-
-    quickSaveTaskBtn.addEventListener('click', () => {
-        const title = document.getElementById('quick-task-title').value.trim();
-        const clientName = document.getElementById('quick-task-client').value;
-        const dueDate = document.getElementById('quick-task-due').value;
-
-        if (title && dueDate) {
-            const command = `task ${title}${clientName ? ` for ${clientName}` : ''} by ${dueDate}`;
-            window.dispatchEvent(new CustomEvent('aiCommandProcessed', { detail: { command } }));
-            hideModal('quick-add-task-modal');
-            document.getElementById('quick-task-title').value = '';
-            document.getElementById('quick-task-client').value = '';
-            document.getElementById('quick-task-due').value = '';
-        } else {
-            alert('Please fill in Task Title and Due Date.');
+        for (let day = 1; day <= daysInMonth; day++) {
+            const isToday = day === 9 && month === 3 && year === 2025;
+            calendarDays.innerHTML += `<div class="calendar-day ${isToday ? 'current-day' : ''}"><span class="day-number">${day}</span></div>`;
         }
+    }
+    prevMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
+    nextMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
+    todayBtn.addEventListener('click', () => { currentDate = new Date(2025, 3, 9); renderCalendar(); });
+    renderCalendar();
+
+    // Task Management
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const taskTableBody = document.getElementById('task-table-body');
+    addTaskBtn.addEventListener('click', () => {
+        const newTask = { task: 'New Task', caseId: 'H2A-999', dueDate: '2025-04-15', status: 'Pending' };
+        addTaskRow(newTask);
     });
 
-    // Modal Close Buttons
-    modalCloseButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const modalId = button.getAttribute('data-modal');
-            hideModal(modalId);
-        });
-    });
+    function addTaskRow(task) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${task.task}</td><td>${task.caseId}</td><td>${task.dueDate}</td><td>${task.status}</td><td><button class="button small secondary">Complete</button></td>`;
+        taskTableBody.appendChild(row);
+    }
 
-    // Handle Touch Events for Mobile
-    document.querySelectorAll('.nav-link, .widget.clickable, .nav-link-trigger, .icon-button, .button').forEach(el => {
-        el.addEventListener('touchstart', () => {}, { passive: true });
+    // Report Generator
+    const reportGeneratorForm = document.getElementById('report-generator-form');
+    const reportPreview = document.getElementById('report-preview');
+    const reportPreviewContent = document.getElementById('report-preview-content');
+    const downloadReportBtn = document.getElementById('download-report-btn');
+    reportGeneratorForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(reportGeneratorForm);
+        const reportType = formData.get('reportType');
+        reportPreviewContent.textContent = `Generated ${reportType} Report\n\n[Simulated Report Data]`;
+        reportPreview.style.display = 'block';
     });
+    downloadReportBtn.addEventListener('click', () => alert('Simulated PDF download for report.'));
 
-    switchContent('dashboard-content');
+    // AI Assistant
+    const aiChatForm = document.getElementById('ai-chat-form');
+    const aiChatMessages = document.getElementById('ai-chat-messages');
+    aiChatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = document.getElementById('ai-chat-input').value;
+        aiChatMessages.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+        setTimeout(() => {
+            aiChatMessages.innerHTML += `<p><strong>AI:</strong> Here's a simulated response for "${message}". For H-2A/H-2B visas, I can assist with form guidance, case status updates, or deadlines as of April 9, 2025.</p>`;
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }, 500);
+        aiChatForm.reset();
+    });
 });

@@ -227,6 +227,8 @@
                         <div class="header-actions">
                             <button class="button secondary small">⚖️ Filters</button>
                             <button class="button primary small" id="upload-doc-btn">➕ Upload Document</button>
+                            <!-- Wet Signature Integration Note: 
+                                 This section includes wet signature functionality because certain H-2A/H-2B government forms (e.g., ETA-9142A, ETA-9142B) require physical ink signatures for DOL/USCIS submission as of April 9, 2025. This feature allows clients to draw signatures digitally, then download and print for compliance, ensuring the dashboard handles ALL visa-related needs seamlessly. -->
                         </div>
                     </div>
                     <p class="section-description">Review and manage client-uploaded H-2A/H-2B documents.</p>
@@ -424,6 +426,7 @@
 
     <script src="js/file_upload.js"></script>
     <script src="js/docusign.js"></script>
+    <script src="js/wet_signature.js"></script>
     <script src="js/dashboard_desktop.js"></script>
 </body>
 </html>

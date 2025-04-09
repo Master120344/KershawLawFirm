@@ -46,32 +46,6 @@
         <a href="contact_mobile.html">Contact Us</a>
     </nav>
 
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-      const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
-        projectId: "thekershawlawfirm-d5b54",
-        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
-        messagingSenderId: "588166358773",
-        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-        measurementId: "G-5SVMGTE290"
-      };
-
-      try {
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        window.firebaseApp = app;
-        window.firebaseAuth = auth;
-        window.firebaseOnAuthStateChanged = onAuthStateChanged;
-        window.firebaseSignOut = signOut;
-      } catch (error) {
-        console.error("Error initializing Firebase (Mobile):", error);
-        document.body.innerHTML += '<p style="color: #C0392B; text-align: center; padding: 10px; font-size: 14px;">Error loading application. Please try again later.</p>';
-      }
-    </script>
     <script src="js/index_mobile.js"></script>
 </body>
 </html>

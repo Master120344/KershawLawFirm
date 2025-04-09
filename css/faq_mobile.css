@@ -9,7 +9,7 @@
 html {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior: none; /* Prevents bounce effect */
+    overscroll-behavior: none;
 }
 
 /* Body Styling */
@@ -25,7 +25,7 @@ body {
     transition: opacity 0.6s ease-in-out;
     padding-top: 120px;
     padding-bottom: 70px;
-    will-change: scroll-position; /* Improves scroll performance */
+    will-change: scroll-position;
 }
 
 body.loaded {
@@ -171,7 +171,7 @@ body.loaded {
 .main-content-area {
     position: relative;
     z-index: 5;
-    overscroll-behavior: contain; /* Prevents overscroll effects */
+    overscroll-behavior: contain;
 }
 
 .main-content-container {
@@ -218,8 +218,8 @@ body.loaded {
     background: rgba(26, 29, 36, 0.9);
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+    overflow: visible; /* Changed to visible to prevent clipping */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .faq-question {
@@ -251,14 +251,14 @@ body.loaded {
 
 .faq-answer {
     max-height: 0;
-    overflow: hidden;
     padding: 0 20px;
-    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), padding 0.4s ease; /* Smoother transition */
+    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), padding 0.4s ease;
+    overflow-y: auto; /* Allow scrolling within answer if needed */
 }
 
 .faq-item.active .faq-answer {
     padding: 15px 20px;
-    max-height: none; /* Remove fixed max-height to show full content */
+    max-height: 300px; /* Increased to ensure visibility, with scroll if needed */
 }
 
 .faq-answer p {
@@ -296,7 +296,7 @@ body.loaded {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 2000; /* Increased z-index to stay above content */
     padding: 15px 0;
     background: rgba(26, 29, 36, 0.85);
     backdrop-filter: blur(10px);
@@ -386,7 +386,7 @@ button:focus-visible {
     }
     .cta-button {
         padding: 12px 30px;
-        font-sizeGST: 1.1rem;
+        font-size: 1.1rem;
     }
     .tabs a {
         font-size: 0.9rem;

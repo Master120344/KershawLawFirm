@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Element Selectors
     const loginButton = document.getElementById('login-button');
     const userInfoDiv = document.getElementById('user-info');
     const userEmailSpan = document.getElementById('user-email');
@@ -7,18 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const bodyElement = document.body;
     const faqItems = document.querySelectorAll('.faq-item');
 
-    // Fade-in Effect for Page Load
     if (bodyElement) {
         setTimeout(() => {
             bodyElement.classList.add('loaded');
         }, 50);
     }
 
-    // Firebase Auth Setup
     if (window.firebaseAuth && window.firebaseOnAuthStateChanged && window.firebaseSignOut) {
         const auth = window.firebaseAuth;
 
-        // Auth State Listener
         window.firebaseOnAuthStateChanged(auth, (user) => {
             if (user) {
                 loginButton.style.display = 'none';
@@ -31,14 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Logout Handler
         if (logoutButton && !logoutButton.hasAttribute('data-listener-attached')) {
             logoutButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.firebaseSignOut(auth)
-                    .then(() => {
-                        // UI updates handled by auth listener
-                    })
+                    .then(() => {})
                     .catch((error) => {
                         console.error("Logout failed:", error);
                         alert("Logout failed. Please try again.");
@@ -52,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         userInfoDiv.style.display = 'none';
     }
 
-    // FAQ Accordion Functionality
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         const answer = item.querySelector('.faq-answer');
@@ -60,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         question.addEventListener('click', () => {
             const isActive = item.classList.contains('active');
 
-            // Close all other items
             faqItems.forEach(i => {
                 if (i !== item) {
                     i.classList.remove('active');
@@ -68,20 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Toggle current item
             item.classList.toggle('active');
             if (!isActive) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
+                answer.style.maxHeight = `${answer.scrollHeight + 30}px`; /* Add padding to height */
+                answer.scrollTop = 0; /* Reset scroll position */
             } else {
                 answer.style.maxHeight = '0';
             }
         });
 
-        // Touch enhancement
         question.addEventListener('touchstart', () => {}, { passive: true });
     });
 
-    // Enhance touch responsiveness for other elements
     document.querySelectorAll('.tabs a, .cta-button, .login-button, .logout-link').forEach(el => {
         el.addEventListener('touchstart', () => {}, { passive: true });
     });

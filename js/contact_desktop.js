@@ -1,91 +1,23 @@
-// js/contact_desktop.js
-
 document.addEventListener('DOMContentLoaded', () => {
+    // Element Selectors
     const bodyElement = document.body;
     const contactForm = document.getElementById('contact-form');
     const thankYouMessage = document.getElementById('thank-you-message');
     const userNameSpan = document.getElementById('user-name');
-    const loginButton = document.getElementById('login-button');
-    const userInfoDiv = document.getElementById('user-info');
-    const userEmailSpan = document.getElementById('user-email');
-    const logoutButton = document.getElementById('logout-button');
-    const navTabs = document.getElementById('nav-tabs');
 
-    // Fade-in Effect
+    // Fade-in Effect for Page Load
     if (bodyElement) {
         setTimeout(() => {
             bodyElement.classList.add('loaded');
-            console.log("Body 'loaded' class added for fade-in.");
         }, 50);
-    } else {
-        console.error("Body element not found.");
-    }
-
-    // Firebase Auth Setup
-    if (window.firebaseAuth && window.firebaseOnAuthStateChanged && window.firebaseSignOut) {
-        const auth = window.firebaseAuth;
-
-        window.firebaseOnAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log("User logged in:", user.email);
-                if (loginButton) loginButton.style.display = 'none';
-                if (userInfoDiv) userInfoDiv.style.display = 'flex';
-                if (userEmailSpan) userEmailSpan.textContent = user.email;
-
-                // Update tabs for logged-in state
-                if (navTabs) {
-                    navTabs.innerHTML = `
-                        <a href="/KershawLawFirm/index2_desktop.html" id="tab-home">Home</a>
-                        <a href="/KershawLawFirm/visah2a_desktop.html" id="tab-h2a">H2-A</a>
-                        <a href="/KershawLawFirm/visah2b_desktop.html" id="tab-h2b">H2-B</a>
-                        <a href="/KershawLawFirm/videos_desktop.html" id="tab-videos">Videos</a>
-                        <a href="/KershawLawFirm/contact_desktop.html" id="tab-contact" class="active">Contact</a>
-                    `;
-                }
-            } else {
-                console.log("User logged out.");
-                if (loginButton) loginButton.style.display = 'inline-block';
-                if (userInfoDiv) userInfoDiv.style.display = 'none';
-                if (userEmailSpan) userEmailSpan.textContent = '';
-
-                // Reset tabs to logged-out state
-                if (navTabs) {
-                    navTabs.innerHTML = `
-                        <a href="/KershawLawFirm/index_desktop.html" id="tab-home">Home</a>
-                        <a href="/KershawLawFirm/faq_desktop.html" id="tab-faq">FAQ</a>
-                        <a href="/KershawLawFirm/contact_desktop.html" id="tab-contact" class="active">Contact Us</a>
-                    `;
-                }
-            }
-        });
-
-        if (logoutButton && !logoutButton.hasAttribute('data-listener-attached')) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                console.log("Logout clicked.");
-                window.firebaseSignOut(auth)
-                    .then(() => {
-                        console.log("Sign out successful.");
-                        window.location.href = '/KershawLawFirm/login_desktop.html';
-                    })
-                    .catch((error) => {
-                        console.error("Logout failed:", error);
-                        alert("Logout failed. Please try again.");
-                    });
-            });
-            logoutButton.setAttribute('data-listener-attached', 'true');
-        }
-    } else {
-        console.error("Firebase Auth not initialized.");
-        if (loginButton) loginButton.style.display = 'inline-block';
-        if (userInfoDiv) userInfoDiv.style.display = 'none';
     }
 
     // Contact Form Submission Handler
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Prevent page refresh
 
+            // Collect form data
             const formData = new FormData(contactForm);
             const data = {
                 name: formData.get('name'),
@@ -96,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submittedAt: new Date().toISOString()
             };
 
+            // Simulate saving data and sending email
             console.log("Saving contact inquiry data:", data);
             console.log("Triggering email to robert.kershaw@kershawlaw.com with details:", {
                 to: "robert.kershaw@kershawlaw.com",
@@ -110,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 `
             });
 
+            // Update Thank You message with user's name
             userNameSpan.textContent = data.name;
+
+            // Transition to Thank You Message
             contactForm.style.transition = 'opacity 0.3s ease';
             contactForm.style.opacity = '0';
             setTimeout(() => {
@@ -122,11 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 50);
             }, 300);
 
-            contactForm.reset();
+            // Reset form (optional, remove if not desired)
+            // contactForm.reset();
         });
     } else {
         console.error("Contact form not found. Check ID 'contact-form'.");
     }
-
-    console.log("Contact Desktop JS Initialized.");
 });

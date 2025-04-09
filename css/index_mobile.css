@@ -9,6 +9,7 @@
 html {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    height: 100%;
 }
 
 /* Body Styling */
@@ -23,7 +24,8 @@ body {
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
     padding-top: 100px;
-    padding-bottom: 110px; /* Increased to accommodate footer */
+    padding-bottom: 60px;
+    height: 100%;
 }
 
 body.loaded {
@@ -35,20 +37,14 @@ body.loaded {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh; /* Fixed height to prevent scaling */
+    height: 100%; /* Changed to 100% to match viewport */
     z-index: -2;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-image: url('../assets/austinbackground.jpg');
-    background-attachment: fixed; /* Prevents scroll scaling */
-}
-
-/* Fallback background image using GitHub link */
-@media (max-width: 0px), (min-width: 0px) {
-    #background-static {
-        background-image: url('https://github.com/Master120344/KershawLawFirm/blob/main/assets/austinbackground.jpg?raw=true');
-    }
+    background-attachment: fixed; /* Ensures background stays in place */
+    will-change: transform; /* Improves rendering performance */
 }
 
 .overlay {
@@ -175,7 +171,9 @@ body.loaded {
     transition: all 0.3s ease;
     padding: 4px 8px;
     border-radius: 5px;
-    background-color: rgba(245, 246, 245, 0.1);
+    background-color: rgba(245&
+```css
+, 246, 245, 0.1);
 }
 
 .logout-link:hover,
@@ -194,7 +192,7 @@ body.loaded {
     max-width: 900px;
     margin: 0 auto;
     padding: 40px 20px;
-    min-height: calc(100vh - 100px - 110px);
+    min-height: calc(100vh - 100px - 60px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -218,7 +216,7 @@ body.loaded {
 .hero .tagline {
     font-family: 'Cinzel', serif;
     font-size: 1.5rem;
-    color: #FFFFFF; /* Brightened from #e0e0e0 */
+    color: #FFFFFF; /* Ensured pure white */
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
     margin-bottom: 30px;
     font-weight: 400;
@@ -226,7 +224,7 @@ body.loaded {
 
 .cta-button {
     padding: 12px 40px;
-    background: #C0392B; /* Matches login button */
+    background: #C0392B;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
@@ -251,7 +249,7 @@ body.loaded {
 
 .tabs {
     position: fixed;
-    bottom: 50px; /* Adjusted for footer */
+    bottom: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -303,20 +301,6 @@ body.loaded {
 .tabs a.active::after,
 .tabs a:active::after {
     width: 70%;
-}
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #000000;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 15px 0;
-    font-family: 'EB Garamond', serif;
-    font-size: 1rem;
-    z-index: 1000;
 }
 
 a:focus, button:focus {

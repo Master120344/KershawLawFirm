@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Kershaw Law Firm P.C. - Mobile</title>
     <meta name="description" content="The Kershaw Law Firm P.C. specializes in H2A/H2B visa prescreening and processing. Mobile access.">
-    <link rel="stylesheet" href="css/index_mobile.css">
+    <!-- Security: Content Security Policy to prevent XSS -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:;">
+    <!-- Security: Prevent clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- Security: Prevent MIME-type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <title>The Kershaw Law Firm P.C. - Mobile</title>
+    <link rel="stylesheet" href="css/index_mobile.css?v=1.0.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Orange Circular Loader -->
+    <div id="loader" class="loader"></div>
+    
     <div id="background-static"></div>
     <div class="overlay"></div>
 
@@ -46,6 +55,6 @@
         <a href="contact_mobile.html">Contact Us</a>
     </nav>
 
-    <script src="js/index_mobile.js"></script>
+    <script src="js/index_mobile.js?v=1.0.0"></script>
 </body>
 </html>

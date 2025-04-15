@@ -21,7 +21,6 @@ body {
     position: relative;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
-    padding-top: 160px;
     padding-bottom: 100px;
 }
 
@@ -39,11 +38,11 @@ body.loaded {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url('../assets/austinbackground.jpg'); /* Primary path */
+    background-image: url('../assets/austinbackground.jpg');
 }
 
-/* Fallback background image using GitHub link */
-@media (max-width: 0px), (min-width: 0px) { /* This is a trick to apply fallback */
+/* Fallback background image */
+@media (max-width: 0px), (min-width: 0px) {
     #background-static {
         background-image: url('https://github.com/Master120344/KershawLawFirm/blob/main/assets/austinbackground.jpg?raw=true');
     }
@@ -59,184 +58,192 @@ body.loaded {
     z-index: -1;
 }
 
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 25px 0;
-    background: rgba(26, 29, 36, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-}
-
-.header-content {
-    width: 90%;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container {
-    text-align: center;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.logo-container h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 3.0rem;
-    color: #F5F6F5;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    transition: color 0.3s ease;
-    font-weight: 700;
-}
-
-.logo-container h1:hover {
-    color: #E74C3C;
-}
-
-.header-line {
-    width: 120px;
-    height: 3px;
-    background: #C0392B;
-    margin: 0 auto;
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 1px;
-}
-
-.logo-container:hover .header-line {
-    width: 350px;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.login-button {
-    padding: 12px 35px;
-    background: #C0392B;
-    color: #F5F6F5;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(192, 57, 43, 0.4);
-    border: 1px solid transparent;
-}
-
-.login-button:hover {
-    background: #E74C3C;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
-    border-color: #F5F6F5;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1rem;
-    color: #e0e0e0;
-}
-
-#user-email {
-    font-weight: 500;
-}
-
-.logout-link {
-    color: #E74C3C;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: color 0.3s ease, transform 0.2s ease;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: rgba(245, 246, 245, 0.1);
-}
-
-.logout-link:hover {
-    color: #F5F6F5;
-    background-color: rgba(231, 76, 60, 0.8);
-    transform: scale(1.05);
-}
-
-.main-content-area {
+/* Content Wrapper */
+.content-wrapper {
     position: relative;
     z-index: 5;
-}
-
-.main-content-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    min-height: calc(100vh - 160px - 100px);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    padding: 60px 40px;
+}
+
+/* Login Section */
+.login-section {
+    background: rgba(26, 29, 36, 0.9);
+    padding: 40px 60px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 700px;
     text-align: center;
+    transition: box-shadow 0.3s ease;
 }
 
-.hero {
-    padding: 40px 0;
+.login-section:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-.hero h2 {
+.login-section h2 {
     font-family: 'Cinzel', serif;
     font-size: 4.8rem;
     color: #FFFFFF;
     text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
-    margin-bottom: 15px;
-    font-weight: 700;
+    margin-bottom: 20px;
 }
 
-.hero .tagline {
+.subtitle {
     font-family: 'Cinzel', serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #e0e0e0;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 50px;
-    font-weight: 400;
+    margin-bottom: 30px;
 }
 
-.cta-button {
-    padding: 18px 55px;
+/* Login Form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: #F5F6F5;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.form-group input {
+    padding: 14px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    color: #333;
+    background: #FFFFFF;
+    border: 2px solid #C0392B;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(192, 57, 43, 0.3);
+}
+
+.form-group input:focus {
+    border-color: #E74C3C;
+    box-shadow: 0 0 12px rgba(231, 76, 60, 0.7);
+    background: #F5F6F5;
+}
+
+.login-button {
+    padding: 16px 50px;
     background: #C0392B;
     color: #F5F6F5;
-    text-decoration: none;
     font-family: 'Cinzel', serif;
     font-size: 1.6rem;
     font-weight: 700;
+    border: none;
     border-radius: 50px;
+    cursor: pointer;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 5px 18px rgba(192, 57, 43, 0.5);
-    border: 2px solid transparent;
-    display: inline-block;
+    text-decoration: none;
 }
 
-.cta-button:hover {
+.login-button:hover {
     background: #E74C3C;
     transform: translateY(-4px) scale(1.03);
     box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
-    border-color: #ffffff;
-    color: #ffffff;
 }
 
+/* Login Message */
+.login-message {
+    margin-top: 15px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.login-message.success {
+    color: #2ECC71;
+}
+
+.login-message.error {
+    color: #E74C3C;
+}
+
+/* Forgot Password */
+.forgot-password {
+    margin-top: 15px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+}
+
+.forgot-password a {
+    color: #E74C3C;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #FFFFFF;
+}
+
+/* User Info Section */
+.user-info {
+    margin-top: 20px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    color: #F5F6F5;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    background: rgba(26, 29, 36, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.user-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.user-info p {
+    margin: 0;
+}
+
+.logout-link {
+    padding: 12px 35px;
+    background: #C0392B;
+    color: #F5F6F5;
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 5px 18px rgba(192, 57, 43, 0.5);
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    background: #E74C3C;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
+}
+
+/* Navigation Tabs (Footer) */
 .tabs {
     position: fixed;
     bottom: 0;
@@ -290,10 +297,114 @@ body.loaded {
     width: 70%;
 }
 
-a:focus, button:focus {
+/* Accessibility */
+.login-button:focus, .logout-link:focus, input:focus {
     outline: none;
 }
-a:focus-visible, button:focus-visible {
+.login-button:focus-visible, .logout-link:focus-visible, input:focus-visible {
     outline: 2px solid #E74C3C;
     outline-offset: 2px;
+}
+
+/* Header Styling */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 40px;
+    background: rgba(26, 29, 36, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-container h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.header-line {
+    width: 80%;
+    height: 2px;
+    background: #C0392B;
+    margin-top: 5px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Main Content Area */
+.main-content-area {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 40px 60px;
+}
+
+.main-content-container {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+.hero {
+    padding: 60px 0;
+}
+
+.hero h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+.tagline {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.8rem;
+    color: #e0e0e0;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    padding: 16px 50px;
+    background: #C0392B;
+    color: #F5F6F5;
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 5px 18px rgba(192, 57, 43, 0.5);
+    text-decoration: none;
+}
+
+.cta-button:hover {
+    background: #E74C3C;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
 }

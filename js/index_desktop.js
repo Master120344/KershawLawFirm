@@ -25,10 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (user) {
                 console.log("User is logged in:", user.email);
                 if (loginButton) loginButton.style.display = 'none';
-                if (userInfoDiv) {
-                    userInfoDiv.style.display = 'flex';
-                    console.log("User info UI displayed with email:", user.email);
-                }
+                if (userInfoDiv) userInfoDiv.style.display = 'flex';
                 if (userEmailSpan) userEmailSpan.textContent = user.email;
             } else {
                 console.log("User is logged out.");

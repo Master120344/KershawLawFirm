@@ -19,7 +19,7 @@
     <div class="dashboard-wrapper">
 
         <header class="dashboard-header">
-            <div class="header-branding">
+             <div class="header-branding">
                  <h1 class="firm-name-header">THE KERSHAW LAW FIRM <span class="firm-name-pc">P.C.</span></h1>
                  <span class="firm-subheading">H-2A / H-2B Visa Portal</span>
             </div>
@@ -154,6 +154,24 @@
         </a>
     </nav>
 
+    <!-- START: Case Details Modal Structure -->
+    <div id="case-details-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="case-details-close-btn" class="modal-close-btn" aria-label="Close Case Details">×</button>
+            <h3 id="case-details-modal-title" class="modal-title">Detailed Case Steps</h3>
+            <div class="modal-body">
+                <ul id="case-details-steps-list" class="modal-steps-list">
+                    <!-- Steps will be populated by JS -->
+                    <li class="step-item status-loading"><i class="fa-solid fa-spinner fa-spin step-icon"></i><span class="step-text">Loading details...</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END: Case Details Modal Structure -->
+
+
     <script src="js/client_dashboard_mobile.js" defer></script>
+    <script src="js/case_details_mobile.js" defer></script> <!-- Corrected filename -->
+
 </body>
 </html>

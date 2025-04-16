@@ -1,268 +1,98 @@
-/* Global Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Element Selectors
+    const bodyElement = document.body;
+    const contactForm = document.getElementById('contact-form');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const userNameSpan = document.getElementById('user-name');
+    const messageTextarea = document.getElementById('message');
+    const charCountDisplay = document.getElementById('message-char-count');
+    const logoContainer = document.querySelector('.logo-container');
 
-/* Smooth Scroll */
-html {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Body Styling */
-body {
-    font-family: 'EB Garamond', serif;
-    min-height: 100vh;
-    color: #F5F6F5;
-    line-height: 1.5;
-    background-color: #1a1d24;
-    overflow-x: hidden;
-    position: relative;
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-    padding-top: 120px;
-    padding-bottom: 70px;
-}
-
-body.loaded {
-    opacity: 1;
-}
-
-#background-static {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('../assets/austinbackground.jpg');
-}
-
-/* Fallback background image */
-@media (max-width: 0px), (min-width: 0px) {
-    #background-static {
-        background-image: url('https://github.com/Master120344/KershawLawFirm/blob/main/assets/austinbackground.jpg?raw=true');
+    // Fade-in Effect for Page Load
+    if (bodyElement) {
+        setTimeout(() => {
+            bodyElement.classList.add('loaded');
+        }, 50);
     }
-}
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.6));
-    z-index: -1;
-}
+    // Logo Tap Highlight
+    if (logoContainer) {
+        logoContainer.addEventListener('touchstart', () => {
+            logoContainer.classList.add('tapped');
+            setTimeout(() => {
+                logoContainer.classList.remove('tapped');
+            }, 300);
+        }, { passive: true });
+    }
 
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 15px 0;
-    background: rgba(26, 29, 36, 0.98);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
+    // Character Count for Message
+    if (messageTextarea && charCountDisplay) {
+        const maxChars = 5000;
+        messageTextarea.addEventListener('input', () => {
+            const currentLength = messageTextarea.value.length;
+            if (currentLength <= maxChars) {
+                charCountDisplay.textContent = `${currentLength}/${maxChars}`;
+            } else {
+                messageTextarea.value = messageTextarea.value.slice(0, maxChars);
+                charCountDisplay.textContent = `${maxChars}/${maxChars}`;
+            }
+        });
+    }
 
-.header-content {
-    width: 95%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    // Contact Form Submission Handler
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent page refresh
 
-.logo-container {
-    text-align: center;
-    flex-grow: 1;
-}
+            // Collect form data
+            const formData = new FormData(contactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone') || 'Not provided',
+                service: formData.get('service'),
+                message: formData.get('message') || 'No message provided',
+                submittedAt: new Date().toISOString()
+            };
 
-.logo-container h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
-    color: #F5F6F5;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
-}
+            // Simulate saving data and sending email
+            console.log("Saving contact inquiry data:", data);
+            console.log("Triggering email to blatent4464@gmail.com with details:", {
+                to: "blatent4464@gmail.com",
+                subject: `New Contact Inquiry: ${data.service}`,
+                body: `
+                    Name: ${data.name}
+                    Email: ${data.email}
+                    Phone: ${data.phone}
+                    Service Needed: ${data.service}
+                    Message: ${data.message}
+                    Submitted: ${data.submittedAt}
+                `
+            });
 
-.logo-container h1:hover {
-    color: #E74C3C;
-}
+            // Update Thank You message with user's name
+            userNameSpan.textContent = data.name;
 
-.header-line {
-    width: 50px;
-    height: 2px;
-    background: #C0392B;
-    margin: 5px auto 0;
-    transition: width 0.3s ease;
-    border-radius: 1px;
-}
+            // Transition to Thank You Message
+            contactForm.style.transition = 'opacity 0.3s ease';
+            contactForm.style.opacity = '0';
+            setTimeout(() => {
+                contactForm.style.display = 'none';
+                thankYouMessage.style.display = 'block';
+                thankYouMessage.style.opacity = '0';
+                setTimeout(() => {
+                    thankYouMessage.style.transition = 'opacity 0.5s ease-in-out';
+                    thankYouMessage.style.opacity = '1';
+                    thankYouMessage.classList.add('visible');
+                }, 50);
+            }, 300);
+        });
+    } else {
+        console.error("Contact form not found. Check ID 'contact-form'.");
+    }
 
-.logo-container:hover .header-line {
-    width: 100px;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.login-button {
-    padding: 8px 20px;
-    background: #C0392B;
-    color: #F5F6F5;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.4);
-}
-
-.login-button:hover {
-    background: #E74C3C;
-    transform: scale(1.05);
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: #e0e0e0;
-}
-
-#user-email {
-    font-weight: 500;
-    max-width: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.logout-link {
-    color: #E74C3C;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.logout-link:hover {
-    color: #F5F6F5;
-    background: rgba(231, 76, 60, 0.9);
-}
-
-.main-content-area {
-    position: relative;
-    z-index: 5;
-}
-
-.main-content-container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px 10px;
-    min-height: calc(100vh - 120px - 70px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.costs-info h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    color: #FFFFFF;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-    margin-bottom: 15px;
-}
-
-.intro {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1rem;
-    color: #e0e0e0;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
-    margin-bottom: 20px;
-}
-
-.costs-info h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    color: #F5F6F5;
-    margin: 20px 0 10px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
-}
-
-.costs-info p {
-    font-size: 1rem;
-    color: #e0e0e0;
-    margin-bottom: 15px;
-}
-
-.tabs {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 10px 0;
-    background: rgba(26, 29, 36, 0.98);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-}
-
-.tabs a {
-    color: #cccccc;
-    text-decoration: none;
-    font-family: 'EB Garamond', serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 6px 12px;
-    transition: all 0.3s ease;
-    position: relative;
-    white-space: nowrap;
-}
-
-.tabs a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #C0392B;
-    transition: width 0.3s ease;
-}
-
-.tabs a:hover,
-.tabs a.active {
-    color: #FFFFFF;
-}
-
-.tabs a:hover::after,
-.tabs a.active::after {
-    width: 70%;
-}
-
-a:focus-visible,
-button:focus-visible {
-    outline: 2px solid #E74C3C;
-    outline-offset: 2px;
-}
+    // Enhance touch responsiveness
+    document.querySelectorAll('.tab-link, .submit-button, .login-button').forEach(el => {
+        el.addEventListener('touchstart', () => {}, { passive: true });
+    });
+});

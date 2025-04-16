@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 loader.style.display = 'none';
             }, 500); // Matches CSS transition duration
-        }, 1000); // Simulate loading delay (adjust as needed)
+        }, 1000); // Simulate loading delay
     }
 
     // Simulate Logged-in State (No API)
@@ -46,16 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Navigation with Loader and Cache Refresh
+    document.querySelectorAll('.tabs a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (loader) {
+                loader.classList.remove('hidden');
+                loader.style.display = 'block';
+            }
+            const href = link.getAttribute('href');
+            // Append cache-busting query parameter
+            const cacheBustUrl = `${href}?t=${new Date().getTime()}`;
+            setTimeout(() => {
+                window.location.href = cacheBustUrl;
+            }, 500); // Delay to show loader
+        });
+    });
+
     // Touch Optimization
     document.querySelectorAll('.tabs a, .cta-button, .login-button, .logout-link').forEach(el => {
         el.addEventListener('touchstart', () => {}, { passive: true });
     });
 
-    // Security: Example for sanitizing user email if dynamically set later
+    // Security: Sanitize user email if dynamically set
     if (userEmailSpan && userEmailSpan.textContent) {
         userEmailSpan.textContent = sanitizeText(userEmailSpan.textContent);
     }
-
-    // Future Cloudflare Note: Add async loading for scripts when integrating Cloudflare
-    // Example: <script async src="https://cdnjs.cloudflare.com/..."></script>
 });

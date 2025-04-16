@@ -3,161 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Client Portal - The Kershaw Law Firm PC</title> <!-- Renamed for better feel -->
-    <meta name="description" content="Securely manage your H-2 visa case, payments, documents, and communication with The Kershaw Law Firm.">
+    <title>Client Portal - The Kershaw Law Firm P.C.</title>
+    <meta name="description" content="Securely manage your H-2A or H-2B visa case, payments, documents, and communication with The Kershaw Law Firm P.C.">
     <meta name="robots" content="noindex, nofollow">
-    <!-- Link to NEW Mobile Dashboard CSS -->
     <link rel="stylesheet" href="css/client_dashboard_mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Using Inter for UI clarity, Cinzel for headings -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons (Replace with SVGs if preferred later) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="dashboard-body">
 
-    <!-- Background Gradient Element -->
-    <div class="background-gradient"></div>
+    <div class="background-overlay"></div>
 
-    <!-- Main Dashboard Structure -->
     <div class="dashboard-wrapper">
 
-        <!-- Dashboard Header -->
         <header class="dashboard-header">
-            <div class="header-user-info">
-                <div class="user-avatar-placeholder"><i class="fa-solid fa-user"></i></div>
-                <div class="user-details">
-                    <span class="welcome-text">Welcome Back,</span>
-                    <span id="client-name-header" class="client-name-header">Client Name</span>
-                </div>
+            <div class="header-branding">
+                 <h1 class="firm-name-header">THE KERSHAW LAW FIRM <span class="firm-name-pc">P.C.</span></h1>
+                 <span class="firm-subheading">H-2A / H-2B Visa Portal</span>
             </div>
             <div class="header-actions">
-                <button id="inbox-button" class="header-icon-button">
+                <button id="inbox-button" class="header-icon-button" aria-label="View Inbox">
                     <i class="fa-solid fa-envelope"></i>
                     <span id="inbox-badge" class="notification-badge" style="display: none;">0</span>
                 </button>
-                <button id="notifications-button" class="header-icon-button">
+                <button id="notifications-button" class="header-icon-button" aria-label="View Notifications">
                     <i class="fa-solid fa-bell"></i>
                     <span id="notifications-badge" class="notification-badge" style="display: none;">0</span>
                 </button>
-                <button id="logout-button" class="header-icon-button logout">
+                <button id="logout-button" class="header-icon-button logout" aria-label="Logout">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </button>
             </div>
         </header>
 
-        <!-- Main Content Area -->
+        <div class="user-welcome-bar">
+             <div class="user-avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+             <span id="client-name-welcome">Welcome, Client Name</span>
+        </div>
+
         <main class="dashboard-main-content">
 
-            <!-- Quick Overview / Status Section -->
-            <section class="overview-section card-style">
-                <h2 class="section-title"><i class="fa-solid fa-file-signature icon-gradient"></i> Case Overview</h2>
-                <div class="status-tracker">
-                    <p>Current Stage:</p>
-                    <div class="status-display-detailed">
-                        <span id="case-status-icon" class="status-icon-large status-pending"><i class="fa-solid fa-hourglass-half"></i></span>
-                        <strong id="case-status-text-detailed">Pending DOL Review</strong>
-                    </div>
-                    <div class="status-progress-bar">
-                        <div id="progress-bar-inner" class="progress-bar-inner" style="width: 30%;"></div> <!-- JS will update width -->
-                    </div>
-                    <small>Estimated Completion: <span id="estimated-completion">Q1 2024</span></small>
-                    <a href="#case-details" class="details-link subtle-link">View Detailed Steps →</a>
-                </div>
-            </section>
-
-            <!-- Action Required Section (Conditional Display) -->
             <section id="action-required-section" class="action-section card-style alert-card" style="display: none;">
-                 <h2 class="section-title alert"><i class="fa-solid fa-triangle-exclamation icon-gradient"></i> Action Required</h2>
+                 <h2 class="section-title alert"><i class="fa-solid fa-triangle-exclamation icon-gradient"></i> Immediate Action Required</h2>
                  <div id="action-items-list">
-                     <!-- JS will populate items like these -->
-                     <!-- <div class="action-item">
-                        <p><strong>Document Signature Needed:</strong> Engagement Letter</p>
-                        <button class="cta-button small-cta" data-action="sign" data-doc-id="eng123">Review & Sign</button>
-                    </div>
-                    <div class="action-item">
-                        <p><strong>Payment Due:</strong> Initial Retainer Fee</p>
-                        <button class="cta-button small-cta" data-action="pay" data-invoice-id="inv456">Make Payment</button>
-                    </div> -->
                  </div>
             </section>
 
-            <!-- Payment Section -->
+            <section class="overview-section card-style">
+                <h2 class="section-title"><i class="fa-solid fa-file-signature icon-gradient"></i> H-2 Visa Case Status</h2>
+                <div class="status-tracker">
+                    <div class="status-display-detailed">
+                        <span id="case-status-icon" class="status-icon-large status-pending"><i class="fa-solid fa-hourglass-half"></i></span>
+                        <div class="status-text-block">
+                            <span class="status-label">Current Stage:</span>
+                            <strong id="case-status-text-detailed">Pending DOL Review</strong>
+                        </div>
+                    </div>
+                    <div class="status-progress-bar-container">
+                        <span class="progress-label">Overall Progress:</span>
+                        <div class="status-progress-bar">
+                            <div id="progress-bar-inner" class="progress-bar-inner" style="width: 0%;"></div>
+                        </div>
+                        <span id="progress-percentage" class="progress-percentage-label">0%</span>
+                    </div>
+                    <div class="status-details">
+                        <p><i class="fa-solid fa-calendar-alt fa-fw detail-icon"></i> Est. Timeline: <strong id="estimated-completion">TBD</strong></p>
+                        <p><i class="fa-solid fa-id-card fa-fw detail-icon"></i> Visa Type: <strong id="visa-type">H-2A/B</strong></p>
+                    </div>
+                    <button id="view-case-details-btn" class="cta-button secondary small-cta full-width-cta">View Detailed Case Steps</button>
+                </div>
+            </section>
+
             <section class="payment-section card-style">
-                 <h2 class="section-title"><i class="fa-solid fa-credit-card icon-gradient"></i> Billing Portal</h2>
+                 <h2 class="section-title"><i class="fa-solid fa-credit-card icon-gradient"></i> Billing & Payments</h2>
                  <div id="payment-summary">
-                     <!-- Content changes based on status -->
                      <div id="payment-content-loading" class="loading-placeholder">
                          <div class="mini-loader"></div><p>Loading billing status...</p>
                      </div>
                      <div id="payment-content-paid" style="display: none;">
-                         <p class="payment-status-text success"><i class="fa-solid fa-check-circle"></i> All payments up to date.</p>
-                         <p>Last Payment: <span id="last-payment-date">--/--/----</span> (<span id="last-payment-amount">$0.00</span>)</p>
-                         <a href="#receipt-history" id="view-receipts-link" class="details-link subtle-link">View Payment History & Receipts →</a>
+                         <p class="payment-status-text success"><i class="fa-solid fa-circle-check"></i> All payments up to date.</p>
+                         <p class="payment-detail">Last Payment: <strong id="last-payment-date">--/--/----</strong> (<strong id="last-payment-amount">$0.00</strong>)</p>
+                         <button id="view-receipts-paid" class="cta-button secondary small-cta full-width-cta">View Payment History & Receipts</button>
                      </div>
                      <div id="payment-content-due" style="display: none;">
-                          <p class="payment-status-text warning"><i class="fa-solid fa-exclamation-circle"></i> Payment Due: <strong id="next-payment-amount">$0.00</strong></p>
-                          <p>Due Date: <span id="payment-due-date">--/--/----</span></p>
-                          <button id="make-payment-button-main" class="cta-button payment-cta">Pay Now</button>
-                          <a href="#receipt-history" class="details-link subtle-link">View Payment History →</a>
+                          <p class="payment-status-text warning"><i class="fa-solid fa-circle-exclamation"></i> Payment Due: <strong id="next-payment-amount">$0.00</strong></p>
+                          <p class="payment-detail">Due Date: <strong id="payment-due-date">--/--/----</strong></p>
+                          <button id="make-payment-button-main" class="cta-button payment-cta full-width-cta">Make Payment Now</button>
+                          <button id="view-receipts-due" class="cta-button secondary small-cta full-width-cta subtle-margin-top">View Payment History</button>
+                          <div id="payment-agreement-notice" style="display: none; margin-top: var(--space-md);">
+                              <p class="agreement-text"><i class="fa-solid fa-file-contract fa-fw"></i> By making a payment, you agree to the terms outlined in the <a href="#fee-agreement" id="fee-agreement-link" class="subtle-link-inline">Fee Agreement</a>.</p>
+                              <button id="sign-agreement-btn" class="cta-button secondary small-cta" style="margin-top: var(--space-sm);">Review & Sign Fee Agreement</button>
+                          </div>
                      </div>
                      <div id="payment-content-error" style="display: none;">
-                          <p class="payment-status-text error"><i class="fa-solid fa-times-circle"></i> Error loading billing status.</p>
-                           <button id="retry-payment-load" class="cta-button secondary small-cta">Retry</button>
+                          <p class="payment-status-text error"><i class="fa-solid fa-circle-xmark"></i> Unable to load billing status.</p>
+                           <button id="retry-payment-load" class="cta-button secondary small-cta">Try Again</button>
                      </div>
                  </div>
             </section>
 
-            <!-- Quick Links / Resources Grid -->
-             <section class="quick-links-section">
+             <section class="quick-access-section">
                  <h2 class="section-title standalone">Quick Access</h2>
-                 <div class="quick-links-grid">
+                 <div class="quick-access-grid">
                      <a href="#documents" id="documents-link" class="quick-link-card card-style">
-                         <i class="fa-solid fa-folder-open"></i>
-                         <span>Documents</span>
+                         <i class="fa-solid fa-folder-open quick-link-icon"></i>
+                         <span class="quick-link-label">Case Documents</span>
                      </a>
                      <a href="#messages" id="messages-link" class="quick-link-card card-style">
-                         <i class="fa-solid fa-comments"></i>
-                         <span>Messages</span>
+                         <i class="fa-solid fa-comments quick-link-icon"></i>
+                         <span class="quick-link-label">Secure Messages</span>
                           <span id="messages-quick-badge" class="notification-badge mini-badge" style="display: none;">0</span>
                      </a>
-                     <a href="#videos" id="videos-link" class="quick-link-card card-style">
-                         <i class="fa-solid fa-film"></i>
-                         <span>Video Guides</span>
+                     <a href="#resources" id="resources-link" class="quick-link-card card-style">
+                          <i class="fa-solid fa-book-open-reader quick-link-icon"></i>
+                         <span class="quick-link-label">H-2 Resources</span>
                      </a>
                       <a href="#profile" id="profile-link" class="quick-link-card card-style">
-                         <i class="fa-solid fa-user-gear"></i>
-                         <span>My Profile</span>
+                         <i class="fa-solid fa-user-gear quick-link-icon"></i>
+                         <span class="quick-link-label">My Profile</span>
                      </a>
                  </div>
              </section>
 
-        </main> <!-- /.dashboard-main-content -->
+        </main>
 
-    </div> <!-- /.dashboard-wrapper -->
+        <footer class="dashboard-footer">
+            <p>© 2025 The Kershaw Law Firm P.C. All rights reserved.</p>
+        </footer>
 
-    <!-- Navigation Tabs (Bottom Bar) -->
+    </div>
+
     <nav class="bottom-nav-tabs">
-        <a href="index_mobile.html" class="nav-tab-item">
+        <a href="index_mobile.html" class="nav-tab-item" aria-label="Home">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
-        <a href="services_mobile.html" class="nav-tab-item">
+        <a href="services_mobile.html" class="nav-tab-item" aria-label="Services">
             <i class="fa-solid fa-briefcase"></i>
             <span>Services</span>
         </a>
-        <a href="client_dashboard_mobile.html" class="nav-tab-item active">
+        <a href="#dashboard" class="nav-tab-item active" aria-label="Dashboard">
             <i class="fa-solid fa-gauge-high"></i>
             <span>Dashboard</span>
         </a>
-        <a href="faq_mobile.html" class="nav-tab-item">
+        <a href="faq_mobile.html" class="nav-tab-item" aria-label="FAQ">
             <i class="fa-solid fa-circle-question"></i>
             <span>FAQ</span>
         </a>
     </nav>
 
-    <!-- Link to NEW Mobile Dashboard JS -->
     <script src="js/client_dashboard_mobile.js" defer></script>
 </body>
 </html>

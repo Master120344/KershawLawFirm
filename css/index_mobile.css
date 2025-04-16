@@ -34,7 +34,7 @@ body.loaded {
     opacity: 1; /* Fade in when loaded */
 }
 
-/* Background & Overlay (Unchanged as requested) */
+/* Background & Overlay (Unchanged) */
 #background-static {
     position: fixed;
     top: 0;
@@ -110,15 +110,10 @@ body.loaded {
 
 .logo-container {
     text-align: center;
+    cursor: pointer; /* Add cursor pointer to indicate interactivity */
 }
 
-/* Added styling for the logo link wrapper if needed */
-.logo-link {
-    text-decoration: none; /* Remove underline from link */
-    color: inherit; /* Inherit color from h1 */
-    display: inline-block; /* Ensure it wraps the h1 correctly */
-}
-
+/* Style H1 directly, no longer needs link wrapper */
 .logo-container h1 {
     font-family: 'Cinzel', serif;
     font-size: 1.6rem;
@@ -126,13 +121,13 @@ body.loaded {
     text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
     transition: color 0.3s ease;
-    cursor: pointer; /* Indicate it's interactive */
-    margin: 0; /* Reset margin if link adds any */
+    margin: 0;
+    display: inline-block; /* Keep similar layout behavior */
 }
 
-/* --- CHANGE 1: Ensure H1 text highlights orange on tap --- */
-.logo-container .logo-link:active h1 { /* Target h1 within active link */
-    color: #D35400; /* Use the primary orange color */
+/* MODIFICATION: Target H1 directly within active logo-container */
+.logo-container:active h1 {
+    color: #D35400; /* Use the primary orange color for tap highlight */
 }
 
 .header-line {
@@ -144,8 +139,8 @@ body.loaded {
     border-radius: 2px;
 }
 
-/* --- CHANGE 1 (Alt): Expand line when logo area is tapped --- */
-.logo-container:active .header-line { /* Keep line expansion if desired */
+/* Keep line expansion on container tap if desired */
+.logo-container:active .header-line {
     width: 100px;
 }
 
@@ -246,9 +241,10 @@ body.loaded {
 .tagline {
     font-family: 'EB Garamond', serif;
     font-size: clamp(1rem, 4vw, 1.1rem);
-    color: #e0e0e0; /* Keeping original color */
+    /* MODIFICATION: Change color to white and make bold */
+    color: #F5F6F5; /* Use primary white/off-white text color */
+    font-weight: bold; /* Make text bolder */
     margin-bottom: 25px;
-    /* --- CHANGE 2: Enhanced text shadow for better readability --- */
     text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7), /* Darker shadow */
                  0 0 8px rgba(0, 0, 0, 0.5);  /* Optional subtle glow */
 }
@@ -320,7 +316,7 @@ body.loaded {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -2px;
+    bottom: -2px; /* Position underline slightly below text */
     left: 50%;
     transform: translateX(-50%);
     background: #D35400;
@@ -328,15 +324,16 @@ body.loaded {
     border-radius: 2px;
 }
 
-.tabs a:active, /* Highlight text on tap */
+/* MODIFICATION: Ensured :active state targets text color */
+.tabs a:active,
 .tabs a.active {
     color: #FFFFFF; /* White text for active/tapped tab */
 }
 
-/* --- CHANGE 3: Ensure underline shows on tap/active state --- */
-.tabs a:active::after, /* Show underline on tap */
-.tabs a.active::after { /* Show underline for the current page */
-    width: 70%; /* Slightly wider underline for better visibility */
+/* MODIFICATION: Ensured :active state targets underline */
+.tabs a:active::after,
+.tabs a.active::after {
+    width: 70%; /* Underline shown on tap/active */
 }
 
 /* Animations (Unchanged) */

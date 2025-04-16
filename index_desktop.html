@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Crucial for mobile responsiveness -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm - H2A/H2B Visa Services (Mobile)</title>
-    <meta name="description" content="The Kershaw Law Firm specializes in H2A and H2B visa processing for employers and workers. Contact us for expert legal assistance.">
-    <!-- Link to mobile CSS -->
-    <link rel="stylesheet" href="css/index_mobile.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Keep viewport for potential responsiveness -->
+    <title>The Kershaw Law Firm - H2A/H2B Visa Services</title>
+    <meta name="description" content="The Kershaw Law Firm specializes in H2A and H2B visa processing for employers and workers. Contact us for expert legal assistance on desktop.">
+    <!-- Link to desktop CSS -->
+    <link rel="stylesheet" href="css/index_desktop.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,19 +21,25 @@
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                <!-- Added tap target around H1 for potentially easier interaction -->
-                <a href="index_mobile.html" class="logo-link"> <!-- Link added for interaction if desired -->
+                <a href="index_desktop.html" class="logo-link"> <!-- Link added for interaction -->
                     <h1>The Kershaw Law Firm, P.C.</h1>
                 </a>
                 <div class="header-line"></div>
             </div>
+            <!-- Navigation moved inside header content for desktop -->
+            <nav class="tabs">
+                <a href="index_desktop.html" class="active">Home</a>
+                <a href="services_desktop.html">Services</a> <!-- Added Services Tab -->
+                <a href="faq_desktop.html">FAQ</a>
+                <a href="contact_desktop.html">Contact Us</a>
+            </nav>
             <div class="header-actions">
                 <div id="user-info" class="user-info" style="display: none;">
                     <span id="user-email">user@example.com</span>
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
-                <!-- Link to mobile login page -->
-                <a href="login_mobile.html" id="login-button" class="login-button">Login</a>
+                <!-- Link to desktop login page -->
+                <a href="login_desktop.html" id="login-button" class="login-button">Login</a>
             </div>
         </div>
     </header>
@@ -44,19 +49,14 @@
             <section class="hero">
                 <h2>Expert H-2A & H-2B Visa Solutions</h2>
                 <p class="tagline">Navigating the complexities of agricultural and non-agricultural temporary worker visas.</p>
-                <!-- Link to mobile get started page -->
-                <a href="getstarted_mobile.html" class="cta-button">Get Started Today</a>
+                <!-- Link to desktop get started page -->
+                <a href="getstarted_desktop.html" class="cta-button">Get Started Today</a>
             </section>
         </div>
     </div>
 
-    <nav class="tabs">
-        <!-- Added 'Services' tab and updated links/active state -->
-        <a href="index_mobile.html" class="active">Home</a>
-        <a href="services_mobile.html">Services</a> <!-- Added Services Tab -->
-        <a href="faq_mobile.html">FAQ</a>
-        <a href="contact_mobile.html">Contact Us</a>
-    </nav>
+    <!-- Footer could potentially go here for desktop -->
+    <!-- <footer class="footer"> ... </footer> -->
 
     <script type="module">
       // Firebase initialization code remains the same
@@ -77,10 +77,10 @@
 
       try {
         const app = initializeApp(firebaseConfig);
-        console.log("Firebase Initialized Successfully.");
+        console.log("Firebase Initialized Successfully (Desktop).");
         const auth = getAuth(app);
-        console.log("Firebase Auth Initialized.");
-        // Make auth functions globally accessible for index_mobile.js
+        console.log("Firebase Auth Initialized (Desktop).");
+        // Make auth functions globally accessible for index_desktop.js
         window.firebaseApp = app;
         window.firebaseAuth = auth;
         window.firebaseOnAuthStateChanged = onAuthStateChanged;
@@ -90,12 +90,11 @@
         document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
 
       } catch (error) {
-        console.error("Error initializing Firebase:", error);
-        // Optionally, inform the user or disable auth features
+        console.error("Error initializing Firebase (Desktop):", error);
          document.dispatchEvent(new CustomEvent('firebaseAuthError'));
       }
     </script>
-    <!-- Link to mobile JS, deferred for performance -->
-    <script src="js/index_mobile.js" defer></script>
+    <!-- Link to desktop JS, deferred for performance -->
+    <script src="js/index_desktop.js" defer></script>
 </body>
 </html>

@@ -52,8 +52,9 @@ body.loaded {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Adjusted gradient for brighter background visibility */
-    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.35), rgba(10, 10, 20, 0.15));
+    /* FURTHER Adjusted gradient for EVEN BRIGHTER background visibility */
+    /* Reduced alpha values significantly. Adjust 0.15/0.05 if needed */
+    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.15), rgba(10, 10, 20, 0.05));
     z-index: -1;
 }
 

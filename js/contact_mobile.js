@@ -4,12 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
     const thankYouMessage = document.getElementById('thank-you-message');
     const userNameSpan = document.getElementById('user-name');
+    const messageTextarea = document.getElementById('message');
+    const charCountDisplay = document.getElementById('message-char-count');
 
     // Fade-in Effect for Page Load
     if (bodyElement) {
         setTimeout(() => {
             bodyElement.classList.add('loaded');
         }, 50);
+    }
+
+    // Character Count for Message
+    if (messageTextarea && charCountDisplay) {
+        const maxChars = 5000;
+        messageTextarea.addEventListener('input', () => {
+            const currentLength = messageTextarea.value.length;
+            if (currentLength <= maxChars) {
+                charCountDisplay.textContent = `${currentLength}/${maxChars}`;
+            } else {
+                messageTextarea.value = messageTextarea.value.slice(0, maxChars);
+                charCountDisplay.textContent = `${maxChars}/${maxChars}`;
+            }
+        });
     }
 
     // Contact Form Submission Handler
@@ -22,16 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = {
                 name: formData.get('name'),
                 email: formData.get('email'),
-                phone: formData.get('phone'),
+                phone: formData.get('phone') || 'Not provided',
                 service: formData.get('service'),
-                message: formData.get('message'),
+                message: formData.get('message') || 'No message provided',
                 submittedAt: new Date().toISOString()
             };
 
             // Simulate saving data and sending email
             console.log("Saving contact inquiry data:", data);
-            console.log("Triggering email to robert.kershaw@kershawlaw.com with details:", {
-                to: "robert.kershaw@kershawlaw.com",
+            console.log("Triggering email to blatent4464@gmail.com with details:", {
+                to: "blatent4464@gmail.com",
                 subject: `New Contact Inquiry: ${data.service}`,
                 body: `
                     Name: ${data.name}
@@ -57,9 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     thankYouMessage.classList.add('visible');
                 }, 50);
             }, 300);
-
-            // Reset form (optional, remove if not desired)
-            // contactForm.reset();
         });
     } else {
         console.error("Contact form not found. Check ID 'contact-form'.");

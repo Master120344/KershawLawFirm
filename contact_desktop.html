@@ -3,97 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - The Kershaw Law Firm P.C. - Desktop</title>
-    <meta name="description" content="Contact The Kershaw Law Firm P.C. for expert H-2A/H-2B visa assistance. Desktop access.">
+    <title>Contact Us - The Kershaw Law Firm P.C. (Desktop)</title>
+    <meta name="description" content="Contact The Kershaw Law Firm P.C. for expert H-2A/H-2B visa assistance. Reach out via phone, email, or our online form.">
 
+    <!-- Link to desktop CSS -->
     <link rel="stylesheet" href="css/contact_desktop.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Consider adding an icon library like Font Awesome if you want icons for contact details -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
 </head>
 <body>
+    <!-- Loading Spinner (Optional - Add if you want consistency with index) -->
+    <!-- <div id="loader" class="loader"></div> -->
+
     <div id="background-static" class="background-animated"></div>
     <div class="overlay"></div>
 
-    <!-- Header -->
+    <!-- Header - Consistent with index_desktop.html -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                <h1>The Kershaw Law Firm P.C.</h1>
+                <a href="index_desktop.html" class="logo-link"> <!-- Link added -->
+                    <h1>The Kershaw Law Firm P.C.</h1>
+                </a>
                 <div class="header-line"></div>
             </div>
+            <!-- Navigation Tabs - Moved into header -->
+            <nav class="tabs">
+                <a href="index_desktop.html">Home</a>
+                <a href="services_desktop.html">Services</a> <!-- Added Services Tab -->
+                <a href="faq_desktop.html">FAQ</a>
+                <a href="contact_desktop.html" class="active">Contact Us</a> <!-- Marked Active -->
+            </nav>
             <div class="header-actions">
+                <!-- User Info / Login Button (Add Firebase logic later if needed on this page) -->
+                 <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
                 <a href="login_desktop.html" id="login-button" class="login-button">Login</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area - Redesigned Layout -->
     <div class="main-content-area">
         <div class="main-content-container">
-            <!-- Contact Info Section -->
-            <section class="contact-info">
-                <h2>Contact Us</h2>
-                <p class="subtitle">Excellence in Immigration Law</p>
-                <div class="info-details">
-                    <p>The Kershaw Law Firm</p>
-                    <p>A Professional Corporation</p>
-                    <p>Robert D. Kershaw, Attorney at Law</p>
+
+            <section class="contact-header">
+                <h2>Get In Touch With Us</h2>
+                <p class="subtitle">We're here to help with your H-2A and H-2B visa needs. Contact us today.</p>
+            </section>
+
+            <section class="contact-details-section">
+                 <div class="detail-item">
+                    <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                    <p>The Kershaw Law Firm, P.C.</p>
+                    <p>3355 Bee Caves Rd Suite 307<br>Austin, TX 78746</p>
+                    <!-- Add Google Maps embed link/button if desired -->
+                    <!-- <a href="#" target="_blank" class="map-link">View on Map</a> -->
+                </div>
+                <div class="detail-item">
+                    <h3><i class="fas fa-phone-alt"></i> Phone / Fax</h3>
                     <p>Telephone: <a href="tel:737-204-0093">737-204-0093</a></p>
                     <p>Fax: 737-204-0094</p>
-                    <p>Email: <a href="mailto:robert.kershaw@kershawlaw.com">robert.kershaw@kershawlaw.com</a></p>
-                    <p>Address: 3355 Bee Caves Rd Suite 307, Austin, TX 78746</p>
+                </div>
+                 <div class="detail-item">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>Robert D. Kershaw</p>
+                    <p><a href="mailto:robert.kershaw@kershawlaw.com">robert.kershaw@kershawlaw.com</a></p>
                 </div>
             </section>
 
-            <!-- Contact Form Section -->
-            <section class="contact-form">
-                <h3>Get in Touch</h3>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            <!-- Contact Form Section - More prominent -->
+            <section class="contact-form-section">
+                <h3>Send Us a Message</h3>
+                <form id="contact-form" class="contact-form-element">
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your Full Name">
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Optional Phone Number"> <!-- Made optional -->
+                        </div>
+                         <div class="form-group half-width">
+                            <label for="service">Legal Assistance Needed</label>
+                            <select id="service" name="service" required>
+                                <option value="" disabled selected>-- Select Service --</option>
+                                <option value="h2a">H-2A Visa Assistance</option>
+                                <option value="h2b">H-2B Visa Assistance</option>
+                                <option value="consultation">General Consultation</option>
+                                <option value="other">Other Inquiry</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Legal Assistance Needed</label>
-                        <select id="service" name="service" required>
-                            <option value="" disabled selected>Select an option</option>
-                            <option value="h2a">H-2A Visa Assistance</option>
-                            <option value="h2b">H-2B Visa Assistance</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label for="message">Your Message</label>
-                        <textarea id="message" name="message" rows="6" required placeholder="Describe your case or question..."></textarea>
+                        <textarea id="message" name="message" rows="6" required placeholder="Please describe your case or question in detail..."></textarea>
                     </div>
-                    <button type="submit" class="submit-button">Submit Inquiry</button>
+                    <div class="form-group full-width submit-container">
+                        <button type="submit" class="submit-button">Submit Inquiry</button>
+                    </div>
                 </form>
+
+                <!-- Thank You Message (Initially Hidden) -->
                 <div class="thank-you-message" id="thank-you-message" style="display: none; opacity: 0;">
-                    <h3 id="thank-you-title">Thank You, <span id="user-name"></span></h3>
-                    <p>The Kershaw Law Firm P.C. has received your details. A member of our team will contact you shortly at <strong>robert.kershaw@kershawlaw.com</strong>.</p>
+                    <h3 id="thank-you-title">Thank You, <span id="user-name"></span>!</h3>
+                    <p>Your message has been successfully sent to The Kershaw Law Firm P.C.<br>We will review your inquiry and contact you shortly.</p>
+                    <p>A confirmation has <em>not</em> been sent to your email (this is a simulation).</p>
+                    <!-- <p>If your matter is urgent, please call us at <a href="tel:737-204-0093">737-204-0093</a>.</p> -->
                 </div>
             </section>
-        </div>
-    </div>
 
-    <!-- Navigation Tabs (Footer) -->
-    <nav class="tabs">
-        <a href="index_desktop.html" class="tab-link">Home</a>
-        <a href="faq_desktop.html" class="tab-link">FAQ</a>
-        <a href="contact_desktop.html" class="tab-link active">Contact</a>
-    </nav>
+        </div> <!-- End main-content-container -->
+    </div> <!-- End main-content-area -->
 
+    <!-- Simple Footer -->
+    <footer class="footer">
+        <p>© <span id="current-year"></span> The Kershaw Law Firm P.C. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK (Optional - if needed for auth on this page) -->
+    <!-- Add the same Firebase setup script from index_desktop.html if login state is needed here -->
+
+    <!-- Link to Desktop Contact JS -->
     <script src="js/contact_desktop.js"></script>
 </body>
 </html>

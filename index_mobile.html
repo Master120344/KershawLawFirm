@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Loading Spinner (same as desktop) -->
+    <!-- Loading Spinner -->
     <div id="loader" class="loader"></div>
 
     <div id="background-static"></div>
@@ -22,7 +22,10 @@
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                <h1>The Kershaw Law Firm, P.C.</h1>
+                <!-- Added tap target around H1 for potentially easier interaction -->
+                <a href="index_mobile.html" class="logo-link"> <!-- Link added for interaction if desired -->
+                    <h1>The Kershaw Law Firm, P.C.</h1>
+                </a>
                 <div class="header-line"></div>
             </div>
             <div class="header-actions">
@@ -30,7 +33,7 @@
                     <span id="user-email">user@example.com</span>
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
-                <!-- Link to mobile login page (assuming it exists or will exist) -->
+                <!-- Link to mobile login page -->
                 <a href="login_mobile.html" id="login-button" class="login-button">Login</a>
             </div>
         </div>
@@ -41,15 +44,16 @@
             <section class="hero">
                 <h2>Expert H-2A & H-2B Visa Solutions</h2>
                 <p class="tagline">Navigating the complexities of agricultural and non-agricultural temporary worker visas.</p>
-                <!-- Link to mobile get started page (assuming it exists or will exist) -->
+                <!-- Link to mobile get started page -->
                 <a href="getstarted_mobile.html" class="cta-button">Get Started Today</a>
             </section>
         </div>
     </div>
 
     <nav class="tabs">
-        <!-- Link to mobile pages (assuming they exist or will exist) -->
+        <!-- Added 'Services' tab and updated links/active state -->
         <a href="index_mobile.html" class="active">Home</a>
+        <a href="services_mobile.html">Services</a> <!-- Added Services Tab -->
         <a href="faq_mobile.html">FAQ</a>
         <a href="contact_mobile.html">Contact Us</a>
     </nav>

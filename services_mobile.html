@@ -2,32 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Crucial for mobile responsiveness -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Kershaw Law Firm (Mobile)</title>
-    <meta name="description" content="Mobile view of H-2A and H-2B visa services offered by The Kershaw Law Firm P.C. Expert legal guidance for employers.">
-    <!-- Link to the CORRECT MOBILE CSS file -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- Mobile Optimization -->
+    <title>H-2 Visa Mastery - The Kershaw Law Firm PC (Mobile)</title>
+    <meta name="description" content="Strategic H-2A & H-2B visa solutions. Partner with The Kershaw Law Firm to secure your essential workforce and gain a competitive edge.">
+    <!-- Link to MOBILE CSS -->
     <link rel="stylesheet" href="css/services_mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Using same fonts as bright desktop -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Using EB Garamond for body text for elegance and readability on mobile -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Favicon Placeholder -->
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 </head>
 <body>
-    <!-- Optional Loader -->
-    <!-- <div id="loader" class="loader"></div> -->
+    <!-- Loading Spinner (Consistent with Index) -->
+    <div id="loader" class="loader"></div>
 
+    <!-- Background & Overlay (Consistent) -->
     <div id="background-static"></div>
-    <!-- Overlay removed for brighter theme -->
-    <!-- <div class="overlay"></div> -->
+    <div class="overlay"></div>
 
-    <!-- Header - Mobile Structure -->
+    <!-- Header (Consistent with Index Mobile) -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                 <a href="index_mobile.html" class="logo-link"> <!-- Link to mobile index -->
-                    <h1>The Kershaw Law Firm P.C.</h1>
-                 </a>
+                <h1>The Kershaw Law Firm PC</h1>
                 <div class="header-line"></div>
             </div>
             <div class="header-actions">
@@ -35,115 +34,113 @@
                     <span id="user-email">user@example.com</span>
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
-                <!-- Link to mobile login page -->
-                <a href="login_mobile.html" id="login-button" class="login-button">Login</a>
+                <a href="login_mobile.html" id="login-button" class="login-button">Client Login</a>
             </div>
         </div>
     </header>
 
+    <!-- Main Content Area -->
     <div class="main-content-area">
-        <div class="services-container">
+        <div class="services-container-mobile">
 
-            <!-- Hero Section -->
-            <section class="hero services-hero animate-on-scroll" data-animation="fade-in-up">
-                <h2>H-2A & H-2B Visa Services</h2> <!-- Simplified for mobile -->
-                <p class="tagline">Expert guidance for your essential workforce needs.</p>
+            <!-- Hero Section - More Assertive -->
+            <section class="hero-mobile animate-on-scroll" data-animation="fade-in-up">
+                <span class="hero-icon icon-mastery"></span> <!-- Symbolic Icon -->
+                <h2>Mastering H-2 Visa Complexity</h2>
+                <p class="tagline-mobile">Unlock Your Essential Workforce. Secure Your Success.</p>
             </section>
 
-            <!-- Introduction -->
-            <section class="intro-section animate-on-scroll" data-animation="fade-in">
-                 <span class="intro-accent-line"></span>
-                 <p>Securing reliable seasonal labor is crucial. The Kershaw Law Firm navigates complex H-2A and H-2B visa processes, turning challenges into your advantage.</p>
-                 <span class="intro-accent-line bottom"></span>
+            <!-- Introduction - Strategic Framing -->
+            <section class="intro-mobile animate-on-scroll" data-animation="fade-in">
+                <p>Seasonal labor isn't just a need; it's a strategic imperative. The H-2 visa landscape is intentionally complex. We transform this labyrinth into your streamlined pathway, ensuring operational continuity and a distinct competitive advantage.</p>
+                <span class="accent-divider"></span>
             </section>
 
-            <!-- Visa Explanations (Will stack vertically) -->
-            <div class="visa-details-wrapper">
-                <section class="visa-section h2a-section animate-on-scroll" data-animation="fade-in-up"> <!-- Changed animation -->
-                    <div class="visa-icon-wrapper">
-                        <div class="icon agriculture-icon"></div>
+            <!-- Visa Explanations - Clear & Benefit-Driven Cards -->
+            <section class="visa-focus-mobile">
+                 <h3 class="section-heading-mobile animate-on-scroll" data-animation="fade-in">Your Strategic Visa Solutions</h3>
+
+                 <article class="visa-card-mobile h2a-card animate-on-scroll" data-animation="fade-in-left">
+                    <div class="visa-card-header">
+                        <span class="visa-icon icon-agriculture"></span>
+                        <h4>H-2A Visa: Agricultural Dominance</h4>
                     </div>
-                    <h3 class="visa-title">H-2A Visa</h3>
-                    <h4 class="visa-subtitle">Agricultural Workforce</h4>
-                    <p>For agricultural employers needing temporary foreign workers when domestic labor is scarce. Ensure smooth operations from planting to harvest.</p>
-                </section>
+                    <div class="visa-card-body">
+                        <p>Secure the dedicated agricultural workforce essential for seamless operations, from planting to harvest. We navigate the specific requirements to ensure your seasonal needs are met with precision.</p>
+                        <!-- Potential Future Tap Target -->
+                         <!-- <a href="#h2a-details" class="details-link">Learn More →</a> -->
+                    </div>
+                 </article>
 
-                <section class="visa-section h2b-section animate-on-scroll" data-animation="fade-in-up"> <!-- Changed animation -->
-                     <div class="visa-icon-wrapper">
-                         <div class="icon industry-icon"></div>
+                 <article class="visa-card-mobile h2b-card animate-on-scroll" data-animation="fade-in-right">
+                     <div class="visa-card-header">
+                        <span class="visa-icon icon-industry"></span>
+                        <h4>H-2B Visa: Non-Agricultural Strength</h4>
                      </div>
-                    <h3 class="visa-title">H-2B Visa</h3>
-                    <h4 class="visa-subtitle">Non-Agricultural Labor</h4>
-                    <p>For sectors like landscaping, hospitality, etc., needing temporary non-agricultural workers for seasonal or peak load demands.</p>
-                </section>
-            </div>
-
-            <!-- The Kershaw Advantage Section -->
-            <section class="advantage-section animate-on-scroll" data-animation="fade-in-up">
-                <h2 class="section-title">Why Choose Us?</h2>
-                <p class="section-subtitle">Gain a strategic partner dedicated to your success.</p>
-                <div class="advantage-grid">
-                     <!-- Items will stack vertically -->
-                     <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;">
-                        <div class="icon experience-icon"></div>
-                        <h4>Decades of Expertise</h4>
-                        <p>25+ years focused exclusively on H-2A/H-2B visas.</p>
-                    </div>
-                    <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;">
-                         <div class="icon nationwide-icon"></div>
-                        <h4>Nationwide Reach</h4>
-                        <p>Assisting clients across all states, sourcing workers globally.</p>
-                    </div>
-                    <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;">
-                         <div class="icon strategy-icon"></div>
-                        <h4>Strategic Counsel</h4>
-                        <p>Proactive advice, compliance support, and client briefings.</p>
-                    </div>
-                    <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;">
-                         <div class="icon partnership-icon"></div>
-                        <h4>Dedicated Support</h4>
-                        <p>Direct access, clear communication, focus on your goals.</p>
-                    </div>
-                     <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;">
-                         <div class="icon advocacy-icon"></div>
-                        <h4>Industry Advocacy</h4>
-                        <p>Actively supporting sensible H-2B reform (via SEA).</p>
-                    </div>
-                     <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 6;">
-                         <div class="icon clarity-icon"></div> <!-- Flashlight Icon -->
-                        <h4>Clear Process</h4>
-                        <p>Structured approach and clear communication simplify the journey.</p>
-                    </div>
-                </div>
+                     <div class="visa-card-body">
+                        <p>Empower your non-agricultural business (landscaping, hospitality, construction) by accessing crucial temporary labor during peak seasons or intermittent demands when US workers are unavailable.</p>
+                        <!-- Potential Future Tap Target -->
+                         <!-- <a href="#h2b-details" class="details-link">Learn More →</a> -->
+                     </div>
+                 </article>
             </section>
 
-             <!-- Simplified Process Section -->
-            <section class="process-section animate-on-scroll" data-animation="fade-in">
-                <h2 class="section-title">Our Process</h2>
-                <p class="section-subtitle">We manage the visa steps efficiently:</p>
-                <div class="process-steps">
-                     <!-- Steps will stack or wrap -->
-                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;"><span>1</span> Consultation</div>
-                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;"><span>2</span> Labor Cert (DOL)</div>
-                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;"><span>3</span> Petition (USCIS)</div>
-                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;"><span>4</span> Consular Process</div>
-                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;"><span>5</span> Compliance Aid</div>
-                </div>
-                <p class="process-assurance">Clarity. Efficiency. Results.</p>
+            <!-- The Kershaw Advantage - Bullet Points Reinvented -->
+            <section class="advantage-mobile">
+                <h3 class="section-heading-mobile animate-on-scroll" data-animation="fade-in">The Kershaw Advantage: Why Leaders Choose Us</h3>
+                <ul class="advantage-list-mobile">
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;">
+                        <span class="advantage-icon icon-expertise"></span>
+                        <div><strong>Unrivaled Expertise:</strong> 25+ years mastering *only* H-2 visas. We anticipate challenges others don't see.</div>
+                    </li>
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;">
+                         <span class="advantage-icon icon-strategy"></span>
+                        <div><strong>Strategic Partnership:</strong> Beyond processing – proactive counsel, compliance fortification, insider briefings.</div>
+                    </li>
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;">
+                         <span class="advantage-icon icon-nationwide"></span>
+                        <div><strong>Nationwide Command:</strong> Federally licensed, representing elite clients across all states, sourcing globally.</div>
+                    </li>
+                     <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;">
+                        <span class="advantage-icon icon-access"></span>
+                        <div><strong>Direct Executive Access:</strong> Clear communication, decisive action. Your goals are our direct mandate.</div>
+                    </li>
+                     <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;">
+                        <span class="advantage-icon icon-advocacy"></span>
+                        <div><strong>Influential Advocacy:</strong> Shaping the future of H-2 policy (via SEA) to protect your interests.</div>
+                    </li>
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 6;">
+                        <span class="advantage-icon icon-clarity"></span>
+                        <div><strong>Process Clarity & Control:</strong> Our structured methodology (incl. Client Handbook) demystifies complexity.</div>
+                    </li>
+                </ul>
+                 <!-- Potential Future Tap Target Area -->
             </section>
 
-            <!-- Call to Action Section -->
-            <section class="cta-section animate-on-scroll" data-animation="fade-in-up">
-                <h2 class="cta-title">Ready to Start?</h2>
-                <p class="cta-subtitle">Contact us today to discuss your H-2A or H-2B visa needs.</p>
-                <!-- Link to mobile get started page -->
-                <a href="getstarted_mobile.html" class="cta-button primary-cta">Request Consultation</a>
+             <!-- Simplified Process - Focus on Firm's Control -->
+            <section class="process-mobile">
+                <h3 class="section-heading-mobile animate-on-scroll" data-animation="fade-in">Our Streamlined Command Process</h3>
+                <ol class="process-steps-mobile">
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;"><span>1</span> Strategic Assessment & Blueprint</li>
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;"><span>2</span> Labor Certification (DOL) Dominance</li>
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;"><span>3</span> Precision Petition Filing (USCIS)</li>
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;"><span>4</span> Consular Coordination Mastery</li>
+                    <li class="animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;"><span>5</span> Proactive Compliance Shield</li>
+                </ol>
+                <p class="process-assurance-mobile animate-on-scroll" data-animation="fade-in">Precision. Compliance. Results. Delivered.</p>
             </section>
 
-        </div> <!-- /.services-container -->
+            <!-- Call to Action - More Urgent/Exclusive -->
+            <section class="cta-mobile animate-on-scroll" data-animation="fade-in-up">
+                <h2 class="cta-title-mobile">Secure Your Competitive Edge</h2>
+                <p class="cta-subtitle-mobile">Don't leave your essential workforce to chance. Partner with the definitive experts in H-2 visa strategy.</p>
+                <a href="getstarted_mobile.html" class="cta-button-mobile primary-cta">Initiate Consultation</a>
+            </section>
+
+        </div> <!-- /.services-container-mobile -->
     </div> <!-- /.main-content-area -->
 
-    <!-- Navigation Tabs (Bottom Bar for Mobile) -->
+    <!-- Navigation Tabs (Consistent with Index Mobile) -->
     <nav class="tabs">
         <a href="index_mobile.html">Home</a>
         <a href="services_mobile.html" class="active">Services</a>
@@ -151,25 +148,24 @@
         <a href="contact_mobile.html">Contact Us</a>
     </nav>
 
-    <!-- Footer (Simple text, potentially above tabs if needed, or omitted if tabs serve as footer) -->
-    <!-- <footer class="footer"> -->
-    <!-- <p>© <span id="current-year"></span> The Kershaw Law Firm P.C.</p> -->
-    <!-- </footer> -->
+    <!-- Footer (Consistent) -->
+    <footer class="footer-mobile">
+        <p>© <span id="current-year"></span> The Kershaw Law Firm PC. All Rights Reserved.</p>
+    </footer>
 
-    <!-- Firebase Scripts -->
+    <!-- Firebase Scripts (Consistent - ENSURE YOUR CONFIG IS HERE) -->
      <script type="module">
-        // Firebase Init Code (Ensure YOUR config is correct)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         const firebaseConfig = {
-             apiKey: "YOUR_API_KEY", // Replace with your actual API key
+            apiKey: "YOUR_API_KEY", // Replace with your actual API key
             authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
             projectId: "thekershawlawfirm-d5b54",
             storageBucket: "thekershawlawfirm-d5b54.appspot.com",
             messagingSenderId: "588166358773",
             appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
             measurementId: "G-5SVMGTE290"
-         }; // Replace with your actual config
+         };
         try {
             const app = initializeApp(firebaseConfig); const auth = getAuth(app);
             window.firebaseApp = app; window.firebaseAuth = auth;
@@ -181,9 +177,7 @@
              document.dispatchEvent(new CustomEvent('firebaseAuthError'));
         }
     </script>
-    <!-- Link to shared auth script -->
-    <script src="js/auth_header_handler.js" defer></script>
-    <!-- Link to the CORRECT MOBILE JS file -->
+    <!-- Link to MOBILE JS -->
     <script src="js/services_mobile.js" defer></script>
 </body>
 </html>

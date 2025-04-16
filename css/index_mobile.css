@@ -23,7 +23,6 @@ body {
     position: relative;
     opacity: 0; /* Start hidden for fade-in */
     transition: opacity 0.6s ease-in-out;
-    /* Adjusted padding for typical mobile header/footer heights */
     padding-top: 100px; /* Adjust if header height changes */
     padding-bottom: 60px; /* Adjust if tab bar height changes */
     will-change: opacity;
@@ -110,24 +109,28 @@ body.loaded {
 
 .logo-container {
     text-align: center;
-    cursor: pointer; /* Add cursor pointer to indicate interactivity */
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Helps :active state on touch */
+    user-select: none; /* Prevent text selection on tap */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
-/* Style H1 directly, no longer needs link wrapper */
 .logo-container h1 {
     font-family: 'Cinzel', serif;
     font-size: 1.6rem;
     color: #F5F6F5;
     text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease; /* Slightly faster transition */
     margin: 0;
-    display: inline-block; /* Keep similar layout behavior */
+    display: inline-block;
 }
 
-/* MODIFICATION: Target H1 directly within active logo-container */
+/* MODIFICATION: Ensure H1 highlight works on tap */
 .logo-container:active h1 {
-    color: #D35400; /* Use the primary orange color for tap highlight */
+    color: #D35400; /* Orange color on tap */
 }
 
 .header-line {
@@ -214,19 +217,21 @@ body.loaded {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px 5px;
+    /* Adjusted min-height slightly in case header/footer heights change */
     min-height: calc(100vh - 100px - 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Center content vertically */
 }
 
 /* Hero Section - Mobile */
 .hero {
     width: 100%;
     text-align: center;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+    /* Reduced padding slightly now that tagline is gone */
+    padding-top: 3vh;
+    padding-bottom: 3vh;
 }
 
 .hero h2 {
@@ -234,25 +239,18 @@ body.loaded {
     font-size: clamp(1.8rem, 7vw, 2.1rem);
     color: #FFFFFF;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
-    margin-bottom: 10px;
+    /* Adjusted margin slightly */
+    margin-bottom: 20px;
     animation: fadeIn 0.8s ease-in-out;
 }
 
-.tagline {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(1rem, 4vw, 1.1rem);
-    /* MODIFICATION: Change color to white and make bold */
-    color: #F5F6F5; /* Use primary white/off-white text color */
-    font-weight: bold; /* Make text bolder */
-    margin-bottom: 25px;
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7), /* Darker shadow */
-                 0 0 8px rgba(0, 0, 0, 0.5);  /* Optional subtle glow */
-}
+/* Tagline CSS rule removed as element is deleted */
 
 /* CTA Button - Mobile */
 .cta-button {
     display: inline-block;
-    margin-top: 25px;
+    /* Adjusted margin slightly */
+    margin-top: 15px;
     padding: 12px 30px;
     background: #D35400;
     color: #F5F6F5;
@@ -286,29 +284,30 @@ body.loaded {
     backdrop-filter: blur(8px);
     box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
     display: flex;
-    justify-content: space-around; /* Better distribution with more tabs */
+    justify-content: space-around;
     align-items: center;
-    gap: 3px; /* Reduce gap slightly if needed */
+    gap: 3px;
 }
 
 .tabs a {
-    flex-grow: 1; /* Allow tabs to share space */
-    flex-basis: 0; /* Ensure equal base size before growing */
+    flex-grow: 1;
+    flex-basis: 0;
     text-align: center;
     color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    font-size: 0.85rem; /* Slightly smaller font if needed for 4 tabs */
+    font-size: 0.85rem;
     font-weight: 500;
-    padding: 8px 3px; /* Adjust padding */
+    padding: 8px 3px;
     transition: all 0.2s ease;
     position: relative;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     touch-action: manipulation;
     white-space: nowrap;
-    overflow: hidden; /* Prevent text overflow issues */
-    text-overflow: ellipsis; /* Add ellipsis if text is too long */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Ensure no system highlight interferes */
 }
 
 .tabs a::after {
@@ -316,7 +315,7 @@ body.loaded {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -2px; /* Position underline slightly below text */
+    bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
     background: #D35400;
@@ -324,16 +323,16 @@ body.loaded {
     border-radius: 2px;
 }
 
-/* MODIFICATION: Ensured :active state targets text color */
+/* Text color for active/tapped tab */
 .tabs a:active,
 .tabs a.active {
-    color: #FFFFFF; /* White text for active/tapped tab */
+    color: #FFFFFF;
 }
 
-/* MODIFICATION: Ensured :active state targets underline */
+/* Underline for active/tapped tab - THIS RULE HANDLES THE TAP HIGHLIGHT */
 .tabs a:active::after,
 .tabs a.active::after {
-    width: 70%; /* Underline shown on tap/active */
+    width: 70%; /* Underline appears when tapped/active */
 }
 
 /* Animations (Unchanged) */

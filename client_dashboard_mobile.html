@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Client Dashboard - The Kershaw Law Firm PC</title>
+    <meta name="description" content="Manage your H-2A/H-2B visa process, payments, communication, and resources securely.">
+    <meta name="robots" content="noindex, nofollow">
+    <!-- Link to MOBILE Dashboard CSS -->
+    <link rel="stylesheet" href="css/client_dashboard_mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loader" class="loader"></div>
+
+    <!-- Background & Overlay (Consistent) -->
+    <div id="background-static"></div>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container-dash">
+                <h1>Client Dashboard</h1>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;"> <!-- Hidden until logged in -->
+                    <span id="user-email-display">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                 <a href="login_mobile.html" id="login-button" class="login-button" style="display: none;">Client Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area - STARTS HIDDEN BY CSS AND JS LOGIC -->
+    <!-- It only becomes visible if JS confirms authentication -->
+    <div class="main-content-area dashboard-protected-content" style="visibility: hidden;">
+        <div class="dashboard-container-mobile">
+
+            <!-- Welcome Message -->
+            <section class="welcome-section animate-on-scroll" data-animation="fade-in">
+                <h2>Welcome, <span id="client-name" class="client-name-placeholder">Client</span>!</h2>
+                <p>Your central hub for managing your visa process.</p>
+            </section>
+
+            <!-- Dashboard Grid/Cards -->
+            <div class="dashboard-grid">
+
+                <!-- 1. Case Status Card -->
+                <article class="dashboard-card status-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;">
+                    <div class="card-header">
+                        <span class="card-icon icon-status"></span>
+                        <h3>Your Visa Journey</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Current Status:</p>
+                        <div class="status-display">
+                            <span id="case-status-indicator" class="status-indicator status-pending"></span>
+                            <strong id="case-status-text">Processing Application</strong>
+                        </div>
+                        <small>Last Updated: <span id="case-status-updated">--/--/----</span></small>
+                    </div>
+                </article>
+
+                <!-- 2. Payment Card (Dynamic Content) -->
+                <article class="dashboard-card payment-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;" id="payment-section" data-status="loading">
+                    <div class="card-header">
+                        <span class="card-icon icon-payment"></span>
+                        <h3>Billing & Payments</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="payment-content-loading">
+                            <p>Loading payment status...</p><div class="mini-loader"></div>
+                        </div>
+                        <div class="payment-content-due" style="display: none;">
+                            <p class="payment-alert"><span class="alert-icon">!</span>Action Required: Payment Due</p>
+                            <p>Amount: <strong id="payment-due-amount">$0.00</strong></p>
+                            <button id="make-payment-button" class="cta-button-dash">Proceed to Payment</button>
+                        </div>
+                        <div class="payment-content-paid" style="display: none;">
+                            <p class="payment-confirmation"><span class="confirm-icon">✓</span>Payment Confirmed</p>
+                            <p>Last Payment Date: <span id="payment-date">--/--/----</span></p>
+                            <a href="#" id="view-receipt-link" class="details-link">View Receipt →</a>
+                        </div>
+                         <div class="payment-content-error" style="display: none;">
+                            <p class="payment-error">Could not load payment status. Please refresh or contact support.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. Secure Inbox Card -->
+                <article class="dashboard-card inbox-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;">
+                    <div class="card-header">
+                        <span class="card-icon icon-inbox"></span>
+                        <h3>Secure Communication</h3>
+                        <span id="message-count-badge" class="message-badge" style="display: none;">0</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Review messages or send inquiries directly to our team.</p>
+                        <a href="#" id="view-messages-link" class="cta-button-dash secondary">Open Inbox</a>
+                    </div>
+                </article>
+
+                <!-- 4. Client Signature Card -->
+                <article class="dashboard-card signature-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;">
+                    <div class="card-header">
+                        <span class="card-icon icon-signature"></span>
+                        <h3>Document Actions</h3>
+                         <span id="signature-required-badge" class="action-required-badge" style="display: none;">!</span>
+                    </div>
+                    <div class="card-body">
+                        <p id="signature-status-text">Check for documents requiring your signature or attention.</p>
+                        <a href="#" id="signature-link" class="cta-button-dash secondary">Review Documents</a>
+                    </div>
+                </article>
+
+                 <!-- 5. Video Resources Card -->
+                <article class="dashboard-card resources-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;">
+                    <div class="card-header">
+                        <span class="card-icon icon-video"></span>
+                        <h3>Resource Library</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Access helpful videos and guides about the H-2 visa process.</p>
+                        <a href="#" id="view-videos-link" class="cta-button-dash secondary">View Videos</a>
+                    </div>
+                </article>
+
+            </div> <!-- /.dashboard-grid -->
+
+        </div> <!-- /.dashboard-container-mobile -->
+    </div> <!-- /.main-content-area -->
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+        <a href="index_mobile.html">Home</a>
+        <a href="services_mobile.html">Services</a>
+        <a href="client_dashboard_mobile.html" class="active">Dashboard</a>
+        <a href="faq_mobile.html">FAQ</a>
+    </nav>
+
+    <!-- Firebase Scripts (MUST BE CONFIGURED) -->
+     <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        // import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = { /* PASTE YOUR CONFIG HERE */ }; // VERY IMPORTANT
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            // const db = getFirestore(app);
+
+            window.firebaseApp = app; window.firebaseAuth = auth;
+            window.firebaseOnAuthStateChanged = onAuthStateChanged; window.firebaseSignOut = signOut;
+            // window.firebaseDB = db; window.firebaseDoc = doc; window.firebaseGetDoc = getDoc;
+
+            document.dispatchEvent(new CustomEvent('firebaseReady'));
+            console.log("Firebase Initialized (Client Dashboard Mobile).")
+        } catch (error) {
+             console.error("Firebase Init Error (Client Dashboard Mobile):", error);
+             document.dispatchEvent(new CustomEvent('firebaseError'));
+        }
+    </script>
+
+    <!-- Link to MOBILE DASHBOARD JS -->
+    <script src="js/client_dashboard_mobile.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+/* ==========================================================================
+   CLIENT DASHBOARD MOBILE STYLESHEET
+   - Secure, Clear, Actionable, Elegant
+   - Builds upon base mobile styles
+   ========================================================================== */
+
+/* --- Configuration & Variables (Inherit/Override from services_mobile) --- */
+:root {
+    /* Using variables defined in services_mobile.css for consistency */
+    /* Add any dashboard-specific variables if needed */
+    --color-status-good: #27ae60; /* Green */
+    --color-status-pending: #f39c12; /* Orange/Yellow */
+    --color-status-action: #e74c3c; /* Red */
+    --color-status-info: #3498db; /* Blue */
+    --color-bg-card: #ffffff; /* White cards for contrast */
+    --color-text-placeholder: #bdc3c7; /* Light grey for loading text */
+    --card-padding: 18px 15px;
+    --card-border-radius: 8px;
+    --card-shadow: 0 4px 12px rgba(44, 62, 80, 0.08);
+    --card-shadow-hover: 0 6px 16px rgba(44, 62, 80, 0.12);
+}
+
+/* --- Base Body & Layout (Dashboard Specific) --- */
+body {
+    /* Inherits from services_mobile.css */
+    background-color: var(--color-bg-subtle); /* Use subtle background for dashboard */
+}
+
+/* --- IMPORTANT: Hides content until JS confirms auth & loads data --- */
+.dashboard-protected-content {
+    transition: visibility 0s linear 0.5s, opacity 0.5s ease-in-out; /* Delay visibility change until fade-in */
+    opacity: 0; /* Start faded out */
+    visibility: hidden; /* Start hidden */
+}
+.dashboard-protected-content.visible {
+    visibility: visible; /* Made visible by JS */
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+
+.dashboard-container-mobile {
+    width: 94%;
+    max-width: 600px;
+    margin: 25px auto 30px auto; /* Adjust margins */
+    padding: 0;
+}
+
+/* --- Header Adjustments for Dashboard --- */
+.header .logo-container-dash {
+    text-align: center;
+    padding-bottom: 5px;
+}
+.header .logo-container-dash h1 {
+    font-family: var(--font-primary);
+    font-size: 1.4rem; /* Slightly smaller */
+    color: var(--color-text-primary);
+    margin: 0;
+    font-weight: 700;
+}
+.firm-name-dash {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    display: block;
+    margin-top: -2px;
+}
+
+/* --- Welcome Section --- */
+.welcome-section {
+    text-align: center;
+    padding: 10px 0 25px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    margin-bottom: 25px;
+}
+.welcome-section h2 {
+    font-family: var(--font-primary);
+    font-size: clamp(1.6rem, 6vw, 2rem);
+    color: var(--color-text-primary);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.client-name-placeholder {
+    color: var(--color-text-placeholder); /* Style placeholder */
+    font-style: italic;
+}
+.welcome-section p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* --- Dashboard Grid --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    gap: 20px; /* Space between cards */
+}
+
+/* --- Dashboard Card Styling --- */
+.dashboard-card {
+    background-color: var(--color-bg-card);
+    border-radius: var(--card-border-radius);
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: var(--card-shadow);
+    overflow: hidden; /* Contain elements */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.dashboard-card:active { /* Subtle tap feedback */
+    transform: scale(0.99);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    background-color: rgba(247, 248, 250, 0.5); /* Very subtle header bg */
+}
+.card-header h3 {
+    font-family: var(--font-primary);
+    font-size: 1.1rem;
+    color: var(--color-text-primary);
+    margin: 0;
+    font-weight: 700;
+    flex-grow: 1; /* Push badges to the right */
+}
+.card-icon {
+    width: 24px; height: 24px; flex-shrink: 0;
+    opacity: 0.8;
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    /* Add specific icons */
+    /* Placeholders */
+}
+.icon-status { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233498db'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm-1-13h2v6h-2zm0 7h2v2h-2z'/%3E%3C/svg%3E"); } /* Info icon */
+.icon-payment { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2327ae60'%3E%3Cpath d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zM4 6h16v2H4V6zm8 7H8v-2h4v2zm4 0h-2v-2h2v2z'/%3E%3C/svg%3E"); } /* Credit card icon */
+.icon-inbox { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233498db'%3E%3Cpath d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zM4 6l8 5 8-5H4z'/%3E%3C/svg%3E"); } /* Mail icon */
+.icon-signature { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e74c3c'%3E%3Cpath d='M14.1 9.4L12 11.5l-2.1-2.1L8.5 11l3.5 3.5 3.5-3.5zm6.5 1.2l-4.4-4.4c-.4-.4-1-.4-1.4 0L3.5 17.5c-.4.4-.4 1 0 1.4.2.2.5.3.7.3s.5-.1.7-.3l11.3-11.3 4.4 4.4c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4zM3.8 20.3c-.1 0-.3-.1-.4-.2-.4-.4-.4-1 0-1.4l1.8-1.8.7.7-1.8 1.8c-.1.1-.2.2-.3.2zM19 2H5c-1.7 0-3 1.3-3 3v14c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3V5c0-1.7-1.3-3-3-3zm1 17c0 .6-.4 1-1 1H5c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1h14c.6 0 1 .4 1 1v14z'/%3E%3C/svg%3E"); } /* Pen/Signature icon */
+.icon-video { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233498db'%3E%3Cpath d='M17 10.5V7c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-3.5l4 4v-11l-4 4zM15 16H5V8h10v8z'/%3E%3C/svg%3E"); } /* Video icon */
+
+.card-body {
+    padding: var(--card-padding);
+}
+.card-body p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+.card-body p:last-of-type {
+    margin-bottom: 0;
+}
+.card-body small {
+    font-size: 0.75rem;
+    color: var(--color-text-placeholder);
+    display: block;
+    margin-top: 8px;
+}
+.card-body strong {
+    color: var(--color-text-primary);
+    font-weight: 700; /* EB Garamond bold */
+}
+
+/* --- Specific Card Content Styling --- */
+
+/* Status Card */
+.status-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.status-indicator {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: var(--color-text-placeholder); /* Default */
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.status-indicator.status-good { background-color: var(--color-status-good); }
+.status-indicator.status-pending { background-color: var(--color-status-pending); }
+.status-indicator.status-action { background-color: var(--color-status-action); }
+.status-indicator.status-info { background-color: var(--color-status-info); }
+
+#case-status-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+/* Payment Card */
+.payment-card[data-status="due"] { border-left: 4px solid var(--color-status-action); }
+.payment-card[data-status="paid"] { border-left: 4px solid var(--color-status-good); }
+.payment-card[data-status="error"] { border-left: 4px solid var(--color-status-action); } /* Style error state */
+
+
+.payment-alert, .payment-confirmation, .payment-error {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 700; font-size: 0.95rem; margin-bottom: 15px;
+}
+.payment-alert { color: var(--color-status-action); }
+.payment-confirmation { color: var(--color-status-good); }
+.payment-error { color: var(--color-status-action); font-size: 0.9rem; }
+
+.alert-icon, .confirm-icon {
+    width: 18px; height: 18px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: white; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;
+}
+.alert-icon { background-color: var(--color-status-action); }
+.confirm-icon { background-color: var(--color-status-good); }
+
+.mini-loader {
+    width: 25px; height: 25px; border: 3px solid rgba(0,0,0,0.1);
+    border-top: 3px solid var(--color-text-secondary); border-radius: 50%;
+    animation: spin 0.8s linear infinite; margin: 10px auto;
+}
+.payment-content-loading p { color: var(--color-text-placeholder); text-align: center; }
+
+
+/* Inbox Card */
+.message-badge, .action-required-badge {
+    background-color: var(--color-status-action);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 2px 6px;
+    min-width: 18px; height: 18px;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 1;
+    margin-left: auto; /* Pushes badge to the right */
+}
+.action-required-badge { font-size: 0.8rem; }
+
+/* Signature Card */
+#signature-status-text { margin-bottom: 15px; }
+.signature-card[data-action-required="true"] { border-left: 4px solid var(--color-status-action); }
+
+
+/* --- Dashboard Buttons & Links --- */
+.cta-button-dash {
+    display: block; /* Full width */
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 15px;
+    background: var(--color-accent-orange); color: var(--color-text-light);
+    text-decoration: none; font-family: var(--font-primary); font-size: 0.9rem;
+    font-weight: 700; border-radius: 20px; border: none; letter-spacing: 0.8px;
+    text-align: center;
+    transition: var(--transition-bounce); text-transform: uppercase;
+    box-shadow: 0 3px 8px var(--color-shadow-accent);
+    cursor: pointer; touch-action: manipulation;
+}
+.cta-button-dash:active {
+    background: var(--color-accent-orange-light);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 4px 10px rgba(211, 84, 0, 0.3);
+}
+.cta-button-dash.secondary {
+    background-color: transparent;
+    color: var(--color-accent-orange);
+    border: 1.5px solid var(--color-accent-orange);
+    box-shadow: none;
+}
+.cta-button-dash.secondary:active {
+    background-color: rgba(211, 84, 0, 0.05); /* Slight orange bg on tap */
+    transform: translateY(0) scale(1); /* Less dramatic */
+    box-shadow: none;
+}
+
+.details-link { /* Consistent link style */
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--color-accent-orange);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: var(--transition-fast);
+}
+.details-link:active {
+    color: var(--color-accent-orange-light);
+    letter-spacing: 0.3px;
+}
+
+
+/* --- Navigation Tabs (Copied/Adjusted from services_mobile) --- */
+.tabs {
+    position: fixed; bottom: 0; left: 0; width: 100%; z-index: 2000;
+    padding: 10px 0; background: rgba(253, 253, 254, 0.95); /* Match dashboard header */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -2px 8px var(--color-shadow-soft);
+    border-top: 1px solid var(--color-border-subtle);
+    display: flex; justify-content: space-around; align-items: center; gap: 2px;
+}
+.tabs a {
+    flex-grow: 1; flex-basis: 0; text-align: center; color: var(--color-text-secondary);
+    text-decoration: none; font-family: var(--font-secondary); font-size: 0.75rem; /* Smaller */
+    font-weight: 500; padding: 8px 2px; transition: var(--transition-fast);
+    position: relative; text-transform: uppercase; letter-spacing: 0.4px;
+    touch-action: manipulation; white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.tabs a::after {
+    content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 50%;
+    transform: translateX(-50%); background: var(--color-accent-orange);
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px;
+}
+.tabs a:active, .tabs a.active { color: var(--color-accent-orange); font-weight: 700; }
+.tabs a:active::after, .tabs a.active::after { width: 55%; } /* Adjust width */
+
+
+/* --- Footer (If used) --- */
+.footer-mobile { /* Same as services */
+    position: relative; padding: 15px 20px; margin-top: 20px; text-align: center;
+    color: var(--color-text-secondary); font-size: 0.8rem;
+    background-color: var(--color-bg-subtle); border-top: 1px solid var(--color-border-subtle);
+    z-index: 10;
+}
+
+/* --- Animation (Copied from services_mobile) --- */
+[data-animation] { opacity: 0; transition: opacity 0.7s ease-out, transform 0.7s ease-out; will-change: opacity, transform; }
+[data-animation="fade-in"] { transform: none; }
+[data-animation="fade-in-up"] { transform: translateY(25px); } /* Slightly less movement */
+[data-animation].is-visible {
+    opacity: 1; transform: none !important;
+    transition-delay: calc(0.1s * var(--animation-order, 0)); /* Stagger */
+}
+a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--color-accent-orange); outline-offset: 2px; border-radius: 3px;
+}
+
+/* --- Error Banner Styling --- */
+.error-banner {
+    background-color: var(--color-status-action);
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    margin: 0 auto 20px auto; /* Position below welcome */
+    max-width: 95%;
+}
+
+
+/* --- Small Screen Adjustments --- */
+@media (max-width: 360px) {
+    .dashboard-container-mobile { width: 96%; }
+    .card-header h3 { font-size: 1rem; }
+    .card-body p { font-size: 0.85rem; }
+    .cta-button-dash { font-size: 0.85rem; padding: 9px 12px; }
+    .tabs a { font-size: 0.7rem; }
+    .welcome-section h2 { font-size: 1.5rem; }
+}

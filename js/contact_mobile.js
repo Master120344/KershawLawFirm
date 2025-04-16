@@ -68,8 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 contactForm.style.display = 'none';
                 thankYouMessage.style.display = 'block';
-                thankYouMessage.style.transition = 'opacity 0.5s ease-in-out';
+                thankYouMessage.style.opacity = '0';
                 setTimeout(() => {
+                    thankYouMessage.style.transition = 'opacity 0.5s ease-in-out';
+                    thankYouMessage.style.opacity = '1';
                     thankYouMessage.classList.add('visible');
                 }, 50);
             }, 300);

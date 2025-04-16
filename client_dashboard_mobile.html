@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Client Dashboard - The Kershaw Law Firm PC</title>
+    <title>Client Dashboard - The Kershaw Law Firm PC (View Mode)</title>
     <meta name="description" content="Manage your H-2A/H-2B visa process, payments, communication, and resources securely.">
+    <!-- Noindex still recommended even for viewing -->
     <meta name="robots" content="noindex, nofollow">
     <!-- Link to MOBILE Dashboard CSS -->
     <link rel="stylesheet" href="css/client_dashboard_mobile.css">
@@ -27,8 +28,10 @@
                 <h1>Client Dashboard</h1>
             </div>
             <div class="header-actions">
-                <div id="user-info" class="user-info" style="display: none;"> <!-- Hidden until logged in -->
-                    <span id="user-email-display">user@example.com</span>
+                <!-- User info display can be shown with placeholder for viewing -->
+                <div id="user-info" class="user-info" style="display: flex;">
+                    <span id="user-email-display">view_mode@example.com</span>
+                    <!-- Logout button would link nowhere without JS logic -->
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
                  <a href="login_mobile.html" id="login-button" class="login-button" style="display: none;">Client Login</a>
@@ -36,13 +39,12 @@
         </div>
     </header>
 
-    <!-- Main Content Area - STARTS HIDDEN BY CSS AND JS LOGIC -->
-    <!-- It only becomes visible if JS confirms authentication -->
-    <div class="main-content-area dashboard-protected-content" style="visibility: hidden;">
+    <!-- Main Content Area - MODIFIED: Removed style="visibility: hidden;" so it's visible by default -->
+    <div class="main-content-area dashboard-protected-content visible"> <!-- Added 'visible' class directly -->
         <div class="dashboard-container-mobile">
 
             <!-- Welcome Message -->
-            <section class="welcome-section animate-on-scroll" data-animation="fade-in">
+            <section class="welcome-section"> <!-- Removed animation data for direct viewing -->
                 <h2>Welcome, <span id="client-name" class="client-name-placeholder">Client</span>!</h2>
                 <p>Your central hub for managing your visa process.</p>
             </section>
@@ -51,7 +53,7 @@
             <div class="dashboard-grid">
 
                 <!-- 1. Case Status Card -->
-                <article class="dashboard-card status-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;">
+                <article class="dashboard-card status-card">
                     <div class="card-header">
                         <span class="card-icon icon-status"></span>
                         <h3>Your Visa Journey</h3>
@@ -67,13 +69,14 @@
                 </article>
 
                 <!-- 2. Payment Card (Dynamic Content) -->
-                <article class="dashboard-card payment-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;" id="payment-section" data-status="loading">
+                <article class="dashboard-card payment-card" id="payment-section" data-status="loading">
                     <div class="card-header">
                         <span class="card-icon icon-payment"></span>
                         <h3>Billing & Payments</h3>
                     </div>
                     <div class="card-body">
-                        <div class="payment-content-loading">
+                        <!-- JS will toggle visibility of these based on mock data -->
+                        <div class="payment-content-loading" style="display: none;"> <!-- Hide loading by default in view mode -->
                             <p>Loading payment status...</p><div class="mini-loader"></div>
                         </div>
                         <div class="payment-content-due" style="display: none;">
@@ -93,7 +96,7 @@
                 </article>
 
                 <!-- 3. Secure Inbox Card -->
-                <article class="dashboard-card inbox-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;">
+                <article class="dashboard-card inbox-card">
                     <div class="card-header">
                         <span class="card-icon icon-inbox"></span>
                         <h3>Secure Communication</h3>
@@ -106,7 +109,7 @@
                 </article>
 
                 <!-- 4. Client Signature Card -->
-                <article class="dashboard-card signature-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;">
+                <article class="dashboard-card signature-card">
                     <div class="card-header">
                         <span class="card-icon icon-signature"></span>
                         <h3>Document Actions</h3>
@@ -119,7 +122,7 @@
                 </article>
 
                  <!-- 5. Video Resources Card -->
-                <article class="dashboard-card resources-card animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;">
+                <article class="dashboard-card resources-card">
                     <div class="card-header">
                         <span class="card-icon icon-video"></span>
                         <h3>Resource Library</h3>
@@ -143,30 +146,7 @@
         <a href="faq_mobile.html">FAQ</a>
     </nav>
 
-    <!-- Firebase Scripts (MUST BE CONFIGURED) -->
-     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        // import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        const firebaseConfig = { /* PASTE YOUR CONFIG HERE */ }; // VERY IMPORTANT
-
-        try {
-            const app = initializeApp(firebaseConfig);
-            const auth = getAuth(app);
-            // const db = getFirestore(app);
-
-            window.firebaseApp = app; window.firebaseAuth = auth;
-            window.firebaseOnAuthStateChanged = onAuthStateChanged; window.firebaseSignOut = signOut;
-            // window.firebaseDB = db; window.firebaseDoc = doc; window.firebaseGetDoc = getDoc;
-
-            document.dispatchEvent(new CustomEvent('firebaseReady'));
-            console.log("Firebase Initialized (Client Dashboard Mobile).")
-        } catch (error) {
-             console.error("Firebase Init Error (Client Dashboard Mobile):", error);
-             document.dispatchEvent(new CustomEvent('firebaseError'));
-        }
-    </script>
+    <!-- Firebase Script Block REMOVED for view mode -->
 
     <!-- Link to MOBILE DASHBOARD JS -->
     <script src="js/client_dashboard_mobile.js" defer></script>

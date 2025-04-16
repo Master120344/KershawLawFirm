@@ -1,15 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Client Dashboard Mobile JS Initialized (View Mode).');
+    console.log('Client Dashboard Mobile JS Initialized (View Mode - Simplified).');
 
     // --- Essential DOM Element References ---
-    const loader = document.getElementById('loader');
-    const dashboardContent = document.querySelector('.dashboard-protected-content');
-    const clientNameSpan = document.getElementById('client-name');
-    // User info elements (can be left as placeholders in view mode)
-    // const userEmailDisplay = document.getElementById('user-email-display');
-    // const logoutButton = document.getElementById('logout-button');
-    // const userInfoDiv = document.getElementById('user-info');
+    // Loader removed from default HTML, so no need to hide it
+    // const loader = document.getElementById('loader');
+    // const dashboardContent = document.querySelector('.main-content-area'); // Content is always visible now
 
+    const clientNameSpan = document.getElementById('client-name');
     // Card Specific Elements
     const caseStatusIndicator = document.getElementById('case-status-indicator');
     const caseStatusText = document.getElementById('case-status-text');
@@ -35,23 +32,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewVideosLink = document.getElementById('view-videos-link');
 
 
-    // --- MOCK DATA (Used directly now) ---
+    // --- MOCK DATA ---
     const mockData = {
-        clientName: "Example Client Inc.", // Placeholder name
-        caseStatus: "pending_review",
-        caseStatusText: "Pending DOL Review",
-        caseStatusUpdated: "2023-10-26",
+        clientName: "Visible Client Ltd.", // Updated Name
+        caseStatus: "approved", // Example: Approved status
+        caseStatusText: "Visa Approved",
+        caseStatusUpdated: "2023-11-01",
         // --- >> CHANGE THIS << to 'paid' or 'due' to see different payment states ---
-        paymentStatus: "due",
+        paymentStatus: "paid",
         // ---------------------------------------------------------------------------
         paymentDueAmount: "1500.00",
-        lastPaymentDate: "2023-09-15", // Used if status is 'paid'
+        lastPaymentDate: "2023-10-15", // Used if status is 'paid'
         receiptUrl: "#view-receipt-placeholder", // Placeholder URL
-        unreadMessages: 2,
-        // --- >> CHANGE THIS << to false to hide the signature alert ---
-        signatureRequired: true,
+        unreadMessages: 0, // No new messages example
+        // --- >> CHANGE THIS << to true to show the signature alert ---
+        signatureRequired: false,
         // -------------------------------------------------------------
-        signatureStatusText: "Employment agreement requires signature.",
+        signatureStatusText: "Employment agreement requires signature.", // Text shown if required=true
     };
     // --- End Mock Data ---
 
@@ -98,17 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const sigCard = document.querySelector('.signature-card');
         if (sigCard) sigCard.setAttribute('data-action-required', data.signatureRequired);
 
-        // Add Event Listeners (still useful for seeing button interactions)
+        // Add Event Listeners (Placeholders)
         setupActionListeners(data);
     }
 
     // --- Update Payment Section Logic ---
     function updatePaymentSection(data) {
-         // Hide all payment content initially
-        paymentLoadingDiv.style.display = 'none';
-        paymentDueDiv.style.display = 'none';
-        paymentPaidDiv.style.display = 'none';
-        paymentErrorDiv.style.display = 'none';
+         paymentLoadingDiv.style.display = 'none';
+         paymentDueDiv.style.display = 'none';
+         paymentPaidDiv.style.display = 'none';
+         paymentErrorDiv.style.display = 'none';
 
          const status = data.paymentStatus;
          paymentSection.setAttribute('data-status', status || 'unknown');
@@ -122,49 +118,49 @@ document.addEventListener('DOMContentLoaded', () => {
              paymentPaidDiv.style.display = 'block';
          } else {
              console.log("Payment status unknown or needs specific handling:", status);
-             paymentErrorDiv.style.display = 'block'; // Show error for unknown states now
+             paymentErrorDiv.style.display = 'block';
              paymentSection.setAttribute('data-status', 'error');
          }
     }
 
     // --- Setup Action Button Listeners (Placeholders) ---
     function setupActionListeners(data) {
-        const addClickListenerOnce = (element, handler) => {
-            if (element && !element.hasAttribute('data-listener-set')) {
-                element.addEventListener('click', handler);
-                element.setAttribute('data-listener-set', 'true');
-            }
-        };
+         const addClickListenerOnce = (element, handler) => {
+             if (element && !element.hasAttribute('data-listener-set')) {
+                 element.addEventListener('click', handler);
+                 element.setAttribute('data-listener-set', 'true');
+             }
+         };
 
-        addClickListenerOnce(makePaymentButton, () => {
-            alert("ACTION: Proceed to Payment (Placeholder)");
-        });
+         addClickListenerOnce(makePaymentButton, () => {
+             alert("ACTION: Proceed to Payment (Placeholder)");
+         });
 
-        addClickListenerOnce(viewReceiptLink, (e) => {
-            e.preventDefault();
-            alert(`ACTION: View Receipt (Placeholder URL: ${data.receiptUrl || '#'})`);
-        });
+         addClickListenerOnce(viewReceiptLink, (e) => {
+             e.preventDefault();
+             alert(`ACTION: View Receipt (Placeholder URL: ${data.receiptUrl || '#'})`);
+         });
 
-        addClickListenerOnce(viewMessagesLink, (e) => {
-            e.preventDefault(); alert("ACTION: Open Inbox (Placeholder)");
-        });
+         addClickListenerOnce(viewMessagesLink, (e) => {
+             e.preventDefault(); alert("ACTION: Open Inbox (Placeholder)");
+         });
 
-        addClickListenerOnce(signatureLink, (e) => {
-            e.preventDefault(); alert("ACTION: Review Documents (Placeholder)");
-        });
+         addClickListenerOnce(signatureLink, (e) => {
+             e.preventDefault(); alert("ACTION: Review Documents (Placeholder)");
+         });
 
-        addClickListenerOnce(viewVideosLink, (e) => {
-            e.preventDefault(); alert("ACTION: View Videos (Placeholder)");
-        });
+         addClickListenerOnce(viewVideosLink, (e) => {
+             e.preventDefault(); alert("ACTION: View Videos (Placeholder)");
+         });
 
-        // Logout button listener removed as Firebase is removed
-         const logoutButton = document.getElementById('logout-button');
-         if (logoutButton) {
-            addClickListenerOnce(logoutButton, (e) => {
-                e.preventDefault();
-                alert("ACTION: Logout (Placeholder - Would normally redirect to login)");
-            });
-         }
+         // Logout button placeholder action
+          const logoutButton = document.getElementById('logout-button');
+          if (logoutButton) {
+             addClickListenerOnce(logoutButton, (e) => {
+                 e.preventDefault();
+                 alert("ACTION: Logout (Placeholder)");
+             });
+          }
     }
 
     // --- Helper Function ---
@@ -172,45 +168,38 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!dateString) return null;
         try {
             const date = new Date(dateString);
-            const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-            return adjustedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            // Simple format, adjust as needed
+            return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
         } catch (e) { return dateString; }
     }
 
     // --- Initialize View ---
-    // Hide loader immediately
-    if (loader) loader.classList.add('hidden');
+    populateDashboard(mockData); // Populate directly
 
-    // Make dashboard content visible (already done via class in HTML, but ensure)
-    if (dashboardContent) dashboardContent.classList.add('visible');
-
-    // Populate with mock data
-    populateDashboard(mockData);
-
-    // Setup animations (Optional for view mode, but keeps the effect)
+    // Setup animations (Optional)
+    // Ensure this runs after the DOM is fully ready and populated
     const observerOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 };
     const observerCallback = (entries, observer) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                // Find '[data-animation]' within the visible entry
-                const animatedElement = entry.target.querySelector('[data-animation]') || entry.target;
-                 if (animatedElement.hasAttribute('data-animation')){
-                     animatedElement.classList.add('is-visible');
-                     observer.unobserve(entry.target); // Unobserve the container/card
-                 }
-            }
-        });
-    };
-    // Observe the CARDS now, not the inner elements with data-animation attribute directly
+         entries.forEach((entry) => {
+             if (entry.isIntersecting) {
+                 // Add 'is-visible' to trigger CSS animation
+                 entry.target.classList.add('is-visible');
+                 observer.unobserve(entry.target); // Animate only once
+             }
+         });
+     };
     const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
-    const elementsToObserve = document.querySelectorAll('.dashboard-card, .welcome-section'); // Observe cards/sections
-    if (elementsToObserve.length > 0) {
-         console.log(`Observing ${elementsToObserve.length} dashboard elements for scroll animation.`);
-         elementsToObserve.forEach(el => scrollObserver.observe(el));
+    const elementsToAnimate = document.querySelectorAll('.dashboard-card, .welcome-section'); // Observe cards/sections
+    if (elementsToAnimate.length > 0) {
+          console.log(`Observing ${elementsToAnimate.length} elements for scroll animation.`);
+          elementsToAnimate.forEach(el => {
+              // Add the data-animation attribute if missing, for simplicity in view mode
+              if (!el.hasAttribute('data-animation')) {
+                  el.setAttribute('data-animation', 'fade-in-up'); // Default animation
+              }
+              scrollObserver.observe(el)
+          });
     }
 
-    // Update footer year (If footer exists)
-    // const footerYearSpan = document.getElementById('current-year');
-    // if (footerYearSpan) footerYearSpan.textContent = new Date().getFullYear();
 
 }); // End DOMContentLoaded

@@ -1,37 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Services Mobile JS Initialized.'); // Changed log message
+    console.log('Services Mobile JS Initialized (Brighter Theme).'); // Log clarity
 
     // --- Intersection Observer for Scroll Animations ---
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.1 // Trigger earlier on mobile if needed, e.g., 0.05
+        // Adjust rootMargin slightly for mobile potentially
+        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.1
     };
 
     const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                // Optional: Unobserve after animation
-                // observer.unobserve(entry.target);
+                observer.unobserve(entry.target); // Unobserve after trigger
             }
-            // Optional: Re-animate
-            // else {
-            //     entry.target.classList.remove('is-visible');
-            // }
         });
     };
 
     const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
 
-    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    // Select elements for scroll animation
+    const elementsToAnimate = document.querySelectorAll('[data-animation]');
 
-    elementsToAnimate.forEach(el => {
-        scrollObserver.observe(el);
-    });
+    if (elementsToAnimate.length > 0) {
+        elementsToAnimate.forEach(el => {
+            scrollObserver.observe(el);
+        });
+        console.log(`Observing ${elementsToAnimate.length} elements for scroll animation (Mobile).`);
+    } else {
+        console.warn("No elements found for scroll animation ([data-animation]) (Mobile).");
+    }
 
-    // --- Other Mobile Specific JS (if any) ---
+    // --- Footer Year Update (Removed - No footer element in mobile HTML) ---
+    // const footerYearSpan = document.getElementById('current-year');
+    // if (footerYearSpan) {
+    //     footerYearSpan.textContent = new Date().getFullYear();
+    // } else {
+    //     // This is expected now, so maybe remove the warning or make it less prominent
+    //     // console.warn("Footer year span (#current-year) not found (Mobile - Expected).");
+    // }
 
 });
 
-// Assume Firebase auth header logic is handled by `js/auth_header_handler_mobile.js` linked in HTML.
+// Assumes shared 'auth_header_handler.js' is linked in HTML for header auth state.

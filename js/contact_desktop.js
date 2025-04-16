@@ -4,64 +4,103 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
     const thankYouMessage = document.getElementById('thank-you-message');
     const userNameSpan = document.getElementById('user-name');
+    const footerYear = document.getElementById('current-year');
 
-    // Fade-in Effect for Page Load
+    console.log("Contact Desktop JS Initialized.");
+
+    // Set current year in footer
+    if (footerYear) {
+        footerYear.textContent = new Date().getFullYear();
+    }
+
+    // Fade-in Effect for Page Body on Load
     if (bodyElement) {
-        setTimeout(() => {
-            bodyElement.classList.add('loaded');
-        }, 50);
+        // Use requestAnimationFrame for smoother start
+        requestAnimationFrame(() => {
+             bodyElement.classList.add('loaded');
+             console.log("Body fade-in triggered (Desktop Contact).");
+        });
+    } else {
+         console.error("Body element not found (Desktop Contact).");
     }
 
     // Contact Form Submission Handler
-    if (contactForm) {
+    if (contactForm && thankYouMessage && userNameSpan) {
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent page refresh
+            e.preventDefault(); // Prevent default form submission (page refresh)
+            console.log("Contact form submission initiated.");
 
-            // Collect form data
+            // --- Form Data Collection ---
             const formData = new FormData(contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                service: formData.get('service'),
-                message: formData.get('message'),
-                submittedAt: new Date().toISOString()
+            const name = formData.get('name')?.trim() || 'Valued Client'; // Use fallback name
+            const email = formData.get('email')?.trim();
+            const phone = formData.get('phone')?.trim();
+            const service = formData.get('service');
+            const message = formData.get('message')?.trim();
+
+            // Basic Validation Example (can be expanded)
+            if (!name || !email || !service || !message) {
+                alert('Please fill out all required fields (Name, Email, Service, Message).');
+                console.warn("Form submission blocked due to missing required fields.");
+                return; // Stop submission
+            }
+
+             const submissionData = {
+                name: name,
+                email: email,
+                phone: phone || 'Not Provided', // Handle optional phone
+                service: service,
+                message: message,
+                submittedAt: new Date().toISOString(),
+                page: 'Desktop Contact'
             };
 
-            // Simulate saving data and sending email
-            console.log("Saving contact inquiry data:", data);
-            console.log("Triggering email to robert.kershaw@kershawlaw.com with details:", {
-                to: "robert.kershaw@kershawlaw.com",
-                subject: `New Contact Inquiry: ${data.service}`,
-                body: `
-                    Name: ${data.name}
-                    Email: ${data.email}
-                    Phone: ${data.phone}
-                    Service Needed: ${data.service}
-                    Message: ${data.message}
-                    Submitted: ${data.submittedAt}
-                `
-            });
+            // --- Simulation ---
+            // In a real application, you would send this data to a server/backend
+            // (e.g., using fetch API to your own endpoint, or a service like Formspree, Netlify Forms, Firebase Functions)
+            console.log("--- Simulating Backend Interaction ---");
+            console.log("Data to be sent:", JSON.stringify(submissionData, null, 2));
+            console.log("Simulating email to robert.kershaw@kershawlaw.com...");
+            // Placeholder for actual fetch/AJAX call
+            // fetch('/api/contact', { method: 'POST', body: JSON.stringify(submissionData), headers: {'Content-Type': 'application/json'} })
+            //  .then(response => response.json())
+            //  .then(data => { console.log('Success:', data); /* Proceed to show thank you */ })
+            //  .catch((error) => { console.error('Error:', error); alert('Submission failed. Please try again.'); });
+            console.log("--- Simulation Complete ---");
 
-            // Update Thank You message with user's name
-            userNameSpan.textContent = data.name;
 
-            // Transition to Thank You Message
-            contactForm.style.transition = 'opacity 0.3s ease';
+            // --- UI Update: Show Thank You Message ---
+
+            // Update Thank You message content
+            userNameSpan.textContent = name; // Display the name entered
+
+            // Smoothly hide the form and show the thank you message
             contactForm.style.opacity = '0';
-            setTimeout(() => {
-                contactForm.style.display = 'none';
-                thankYouMessage.style.display = 'block';
-                thankYouMessage.style.transition = 'opacity 0.5s ease-in-out';
-                setTimeout(() => {
-                    thankYouMessage.classList.add('visible');
-                }, 50);
-            }, 300);
+            contactForm.style.pointerEvents = 'none'; // Prevent interaction during transition
 
-            // Reset form (optional, remove if not desired)
+            setTimeout(() => {
+                contactForm.style.display = 'none'; // Hide form completely after fade out
+
+                thankYouMessage.style.display = 'block'; // Make thank you message block-level
+                 // Use rAF for smoother visual transition start
+                 requestAnimationFrame(() => {
+                    thankYouMessage.classList.add('visible'); // Add class to trigger fade-in (defined in CSS)
+                    console.log("Thank you message displayed.");
+                     // Scroll to the thank you message if needed (optional)
+                     thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                 });
+
+            }, 400); // Wait for form fade-out transition (match CSS duration)
+
+            // Optional: Reset the form fields after submission (uncomment if desired)
             // contactForm.reset();
+            // console.log("Form fields reset.");
+
         });
     } else {
-        console.error("Contact form not found. Check ID 'contact-form'.");
+        // Log errors if essential elements are missing
+        if (!contactForm) console.error("Contact form element (#contact-form) not found.");
+        if (!thankYouMessage) console.error("Thank you message element (#thank-you-message) not found.");
+        if (!userNameSpan) console.error("User name span element (#user-name) not found.");
     }
 });

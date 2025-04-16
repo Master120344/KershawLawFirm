@@ -1,356 +1,163 @@
-/* Inherit base styles if using a shared base CSS, or redefine basics */
-/* Assuming similar base resets and body styles as index_desktop.css */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-2A & H-2B Visa Services - The Kershaw Law Firm P.C.</title> <!-- Comma removed -->
+    <meta name="description" content="Elite legal strategies for employers securing H-2A agricultural and H-2B non-agricultural temporary work visas. Partner with The Kershaw Law Firm for indispensable expertise and strategic success.">
+    <!-- Link to the NEW enhanced CSS -->
+    <link rel="stylesheet" href="css/services_desktop_enhanced.css"> <!-- <<<<<<<<<<<< NEW CSS FILENAME -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Consider adding Merriweather or another elegant body font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;700&family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Optional Loader -->
+    <!-- <div id="loader" class="loader"></div> -->
 
-/* Global Reset (Example - Use your main reset) */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+    <div id="background-static"></div>
+    <div class="overlay"></div>
 
-body {
-    font-family: 'EB Garamond', serif;
-    min-height: 100vh;
-    color: #F5F6F5; /* Light text */
-    line-height: 1.6; /* Improved readability */
-    background-color: #1a1d24; /* Dark background */
-    overflow-x: hidden;
-    position: relative;
-    opacity: 1; /* Assume loaded for now, JS can handle fade if needed */
-    padding-top: 120px; /* Adjust if header height differs */
-    padding-bottom: 70px; /* Adjust if footer height differs */
-}
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <!-- Link back to homepage -->
+                <h1><a href="index_desktop.html">The Kershaw Law Firm P.C.</a></h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <a href="login_desktop.html" id="login-button" class="login-button">Client Login</a> <!-- Changed text -->
+            </div>
+        </div>
+    </header>
 
-/* Background & Overlay (Consistent with index) */
-#background-static {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -2; background-size: cover; background-position: center;
-    background-repeat: no-repeat; background-image: url('../assets/austinbackground.jpg');
-}
-.overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.25), rgba(10, 10, 20, 0.15)); /* Slightly darker overlay for content focus */
-    z-index: -1;
-}
+    <div class="main-content-area">
+        <div class="services-container">
 
-/* Header & Tabs Styling (Assume consistent with index_desktop.css) */
-/* Copy relevant .header, .header-content, .logo-container, .header-actions, .tabs styles here */
-/* --- Reusing Header Styles --- */
-.header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 20px 0; background: rgba(26, 29, 36, 0.98); backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); }
-.header-content { width: 95%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-.logo-container { text-align: center; flex-grow: 1; }
-.logo-container h1 { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 4vw, 2rem); color: #F5F6F5; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); letter-spacing: 1.2px; transition: color 0.3s ease; }
-.logo-container h1 a { color: inherit; text-decoration: none; } /* Style link within H1 */
-.logo-container h1 a:hover, .logo-container h1:hover { color: #D35400; }
-.header-line { width: 70px; height: 3px; background: #D35400; margin: 6px auto 0; transition: width 0.3s ease; border-radius: 2px; }
-.logo-container:hover .header-line { width: 120px; }
-.header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.login-button { padding: 8px 22px; background: #D35400; color: #F5F6F5; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 600; border-radius: 25px; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(211, 84, 0, 0.5); touch-action: manipulation; }
-.login-button:hover, .login-button:active { background: #E67E22; transform: scale(1.05); box-shadow: 0 5px 15px rgba(211, 84, 0, 0.7); }
-.user-info { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #e0e0e0; }
-#user-email { font-weight: 500; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.logout-link { color: #D35400; text-decoration: none; font-weight: 600; padding: 5px 10px; border-radius: 5px; transition: all 0.3s ease; }
-.logout-link:hover, .logout-link:active { color: #F5F6F5; background: rgba(211, 84, 0, 0.9); }
+            <!-- Hero Section -->
+            <section class="hero services-hero animate-on-scroll" data-animation="fade-in-up">
+                <h2>Command Your Workforce Strategy</h2> <!-- More assertive -->
+                <p class="tagline">Unlock Peak Operational Performance with Masterfully Executed H-2A & H-2B Visa Solutions.</p>
+            </section>
 
-/* --- Reusing Tabs Styles --- */
-.tabs { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 2000; padding: 15px 0; background: rgba(26, 29, 36, 0.9); backdrop-filter: blur(10px); box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; align-items: center; gap: 30px; }
-.tabs a { color: #cccccc; text-decoration: none; font-family: 'EB Garamond', serif; font-size: 1.1rem; font-weight: 500; padding: 8px 15px; transition: all 0.3s ease; position: relative; text-transform: uppercase; letter-spacing: 1px; touch-action: manipulation; }
-.tabs a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; transform: translateX(-50%); background: #D35400; transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 2px; }
-.tabs a:hover, .tabs a.active, .tabs a:active { color: #FFFFFF; }
-.tabs a:hover::after, .tabs a.active::after, .tabs a:active::after { width: 70%; }
+            <!-- Introduction -->
+            <section class="intro-section animate-on-scroll" data-animation="fade-in">
+                 <span class="intro-accent-line"></span> <!-- Decorative line -->
+                <p>Securing reliable seasonal labor transcends necessity—it dictates operational dominance. The labyrinthine H-2A and H-2B visa pathways demand more than navigation; they require strategic mastery. The Kershaw Law Firm engineers this complex process into your decisive advantage, guaranteeing the essential workforce fundamental to your success.</p>
+                 <span class="intro-accent-line bottom"></span> <!-- Decorative line -->
+            </section>
 
-/* Main Content Area Styling */
-.main-content-area {
-    position: relative;
-    z-index: 5;
-}
+            <!-- Visa Explanations -->
+            <div class="visa-details-wrapper">
+                <section class="visa-section h2a-section animate-on-scroll" data-animation="fade-in-left">
+                    <div class="visa-icon-wrapper">
+                        <div class="icon agriculture-icon"></div> <!-- CSS Background Icon -->
+                    </div>
+                    <h3 class="visa-title">H-2A Visa</h3>
+                    <h4 class="visa-subtitle">Agricultural Workforce Command</h4>
+                    <p>Engineered for agricultural leaders facing domestic labor scarcity. The H-2A program ensures the timely deployment of a compliant, foreign workforce for critical seasonal operations – from cultivation to harvest. Secure your agricultural objectives.</p>
+                </section>
 
-.services-container {
-    width: 90%;
-    max-width: 1100px; /* Slightly wider max-width for content */
-    margin: 40px auto; /* Add margin top/bottom */
-    padding: 30px 15px;
-    background: rgba(26, 29, 36, 0.7); /* Semi-transparent background for content area */
-    border-radius: 10px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
+                <section class="visa-section h2b-section animate-on-scroll" data-animation="fade-in-right">
+                     <div class="visa-icon-wrapper">
+                         <div class="icon industry-icon"></div> <!-- CSS Background Icon -->
+                     </div>
+                    <h3 class="visa-title">H-2B Visa</h3>
+                    <h4 class="visa-subtitle">Non-Agricultural Sector Dominance</h4>
+                    <p>Indispensable for non-agricultural industries (landscaping, hospitality, construction) demanding seasonal, peak, or intermittent labor. Access vital foreign workers when U.S. options are exhausted, ensuring uninterrupted peak performance and contract fulfillment.</p>
+                </section>
+            </div>
 
-/* Section Base Styles */
-section {
-    margin-bottom: 50px; /* Space between sections */
-    padding: 20px 0;
-}
+            <!-- The Kershaw Advantage Section -->
+            <section class="advantage-section animate-on-scroll" data-animation="fade-in-up">
+                <h2 class="section-title">The Kershaw Imperative: Your Strategic Edge</h2>
+                <p class="section-subtitle">Engaging The Kershaw Law Firm is not merely retaining counsel; it's activating a decisive operational advantage. This is why industry leaders partner with us:</p>
+                <div class="advantage-grid">
+                    <!-- Items will be animated by JS based on scroll -->
+                    <div class="advantage-item" style="--animation-order: 1;">
+                        <div class="icon experience-icon"></div>
+                        <h4>Unrivaled Expertise</h4>
+                        <p>Over 25 years singularly devoted to H-2A/H-2B mastery. We navigate regulatory tempests where others falter. Your success is built on our proven history.</p>
+                    </div>
+                    <div class="advantage-item" style="--animation-order: 2;">
+                         <div class="icon nationwide-icon"></div>
+                        <h4>Jurisdictional Supremacy</h4>
+                        <p>Federal authority, nationwide execution. We operate seamlessly across all states, securing talent from any eligible nation. Geography is irrelevant to our reach.</p>
+                    </div>
+                    <div class="advantage-item" style="--animation-order: 3;">
+                         <div class="icon strategy-icon"></div>
+                        <h4>Proactive Strategic Counsel</h4>
+                        <p>Beyond processing – we deliver actionable intelligence, compliance fortification, and exclusive insights through client-only briefings. We shape your strategy.</p>
+                    </div>
+                    <div class="advantage-item" style="--animation-order: 4;">
+                         <div class="icon partnership-icon"></div>
+                        <h4>Dedicated Client Command</h4>
+                        <p>Direct access to assigned legal architects ensures continuity, rapid response, and unwavering focus on your objectives. We are your embedded advantage.</p>
+                    </div>
+                     <div class="advantage-item" style="--animation-order: 5;">
+                         <div class="icon advocacy-icon"></div>
+                        <h4>Influential Advocacy</h4>
+                        <p>We actively champion H-2B reform (via SEA), safeguarding the programs vital to your future. We fight on the front lines, securing your long-term interests.</p>
+                    </div>
+                     <div class="advantage-item" style="--animation-order: 6;">
+                         <div class="icon clarity-icon"></div>
+                        <h4>Illuminated Pathway</h4>
+                        <p>Our structured methodology and transparent communication (including the comprehensive Client Handbook) conquer complexity. We provide absolute clarity and control.</p>
+                    </div>
+                </div>
+            </section>
 
-/* Hero Section Styles */
-.services-hero {
-    text-align: center;
-    border-bottom: 1px solid rgba(211, 84, 0, 0.3); /* Subtle separator */
-    padding-bottom: 30px;
-    margin-bottom: 30px;
-}
+             <!-- Simplified Process Section -->
+            <section class="process-section animate-on-scroll" data-animation="fade-in">
+                <h2 class="section-title">Executing the Blueprint: Our Methodical Approach</h2>
+                <p class="section-subtitle">The multi-agency H-2A/H-2B gauntlet demands precision. Missteps are costly. We command the critical path:</p>
+                <div class="process-steps">
+                    <div class="step" style="--animation-order: 1;"><span>1</span> Strategic Assessment & Planning</div>
+                    <div class="step" style="--animation-order: 2;"><span>2</span> Labor Certification Directorate (DOL)</div>
+                    <div class="step" style="--animation-order: 3;"><span>3</span> Petition Adjudication (USCIS)</div>
+                    <div class="step" style="--animation-order: 4;"><span>4</span> Consular Coordination & Counsel</div>
+                    <div class="step" style="--animation-order: 5;"><span>5</span> Ongoing Compliance Governance</div>
+                </div>
+                <p class="process-assurance">Precision. Foresight. Execution.</p>
+            </section>
 
-.services-hero h2 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
-    color: #FFFFFF;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
-    margin-bottom: 10px;
-}
+            <!-- Call to Action Section -->
+            <section class="cta-section animate-on-scroll" data-animation="fade-in-up">
+                <h2 class="cta-title">Secure Your Decisive Advantage Now</h2>
+                <p class="cta-subtitle">In the high-stakes arena of seasonal labor, rely on proven command. Delay is a liability. Engage the architects of H-2A/H-2B success.</p>
+                <a href="getstarted_desktop.html" class="cta-button primary-cta">Initiate Strategic Consultation</a>
+            </section>
 
-.services-hero .tagline {
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    color: #e0e0e0;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
-    max-width: 800px;
-    margin: 0 auto;
-}
+        </div> <!-- /.services-container -->
+    </div> <!-- /.main-content-area -->
 
-/* Introduction Section */
-.intro-section p {
-    font-size: 1.15rem;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    color: #e0e0e0;
-}
+    <nav class="tabs">
+        <a href="index_desktop.html">Home</a>
+        <a href="services_desktop.html" class="active">Services</a> <!-- Assumes this HTML file is named services_desktop.html -->
+        <a href="faq_desktop.html">FAQ</a>
+        <a href="contact_desktop.html">Contact Us</a>
+    </nav>
 
-/* Visa Details Section */
-.visa-details-wrapper {
-    display: flex;
-    gap: 30px;
-    justify-content: space-around; /* Distribute space */
-    margin-top: 40px;
-    flex-wrap: wrap; /* Allow wrapping on narrower viewports if needed */
-}
-
-.visa-section {
-    flex-basis: 47%; /* Roughly half width, accounting for gap */
-    min-width: 300px; /* Prevent excessive shrinking */
-    padding: 25px;
-    background: rgba(40, 44, 52, 0.5); /* Slightly different background */
-    border-radius: 8px;
-    border: 1px solid rgba(211, 84, 0, 0.2);
-    text-align: center;
-}
-
-.visa-icon {
-    margin-bottom: 15px;
-}
-
-.visa-icon img {
-    height: 50px; /* Adjust icon size */
-    width: auto;
-    opacity: 0.8;
-    filter: invert(55%) sepia(88%) saturate(1437%) hue-rotate(349deg) brightness(88%) contrast(88%); /* Orange tint to icon */
-}
-
-.visa-section h3 {
-    font-family: 'Cinzel', serif;
-    color: #D35400; /* Orange heading */
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-.visa-section p {
-    font-size: 1.05rem;
-    color: #ccc; /* Lighter text for contrast */
-}
-
-/* Advantage Section */
-.advantage-section {
-    text-align: center;
-}
-
-.advantage-section h2 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: #FFFFFF;
-    margin-bottom: 10px;
-}
-
-.advantage-intro {
-    font-size: 1.1rem;
-    color: #e0e0e0;
-    max-width: 800px;
-    margin: 0 auto 30px auto;
-}
-
-.advantage-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 25px;
-    margin-top: 30px;
-    text-align: left;
-}
-
-.advantage-item {
-    background: rgba(40, 44, 52, 0.6);
-    padding: 25px;
-    border-radius: 8px;
-    border-left: 4px solid #D35400; /* Orange accent */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.advantage-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.advantage-icon {
-    margin-bottom: 10px;
-    height: 35px; /* Container for icon */
-}
-.advantage-icon img {
-    height: 100%; /* Scale icon to container */
-    width: auto;
-     opacity: 0.8;
-    filter: invert(55%) sepia(88%) saturate(1437%) hue-rotate(349deg) brightness(88%) contrast(88%); /* Orange tint */
-}
-
-
-.advantage-item h4 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.25rem;
-    color: #F5F6F5;
-    margin-bottom: 10px;
-}
-
-.advantage-item p {
-    font-size: 1rem;
-    color: #ccc;
-    line-height: 1.5;
-}
-
-/* Process Section */
-.process-section {
-    text-align: center;
-}
-.process-section h2 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: #FFFFFF;
-    margin-bottom: 10px;
-}
-.process-section > p { /* Target direct paragraph children */
-    font-size: 1.1rem;
-    color: #e0e0e0;
-    max-width: 800px;
-    margin: 0 auto 30px auto;
-}
-
-.process-steps {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping */
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.step {
-    background: rgba(211, 84, 0, 0.15); /* Subtle orange background */
-    color: #F5F6F5;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    border: 1px solid rgba(211, 84, 0, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.step span { /* Style the number */
-    background: #D35400;
-    color: #F5F6F5;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-}
-
-.process-assurance {
-    font-style: italic;
-    color: #bbb;
-    font-size: 1rem;
-}
-
-/* CTA Section */
-.cta-section {
-    text-align: center;
-    background: rgba(40, 44, 52, 0.7);
-    padding: 40px 20px;
-    border-radius: 8px;
-    margin-top: 40px;
-}
-
-.cta-section h2 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    color: #FFFFFF;
-    margin-bottom: 15px;
-}
-
-.cta-section p {
-    font-size: 1.1rem;
-    color: #e0e0e0;
-    max-width: 700px;
-    margin: 0 auto 25px auto;
-}
-
-.cta-button { /* Reusing/Adapting from index */
-    display: inline-block;
-    padding: 14px 35px;
-    background: #D35400;
-    color: #F5F6F5;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 30px;
-    border: none;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.6);
-    touch-action: manipulation;
-    cursor: pointer;
-}
-.cta-button:hover, .cta-button:active {
-    background: #E67E22;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(211, 84, 0, 0.8);
-}
-
-/* Animation Base Styles */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px); /* Start slightly lower */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    will-change: opacity, transform;
-}
-
-.animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Accessibility */
-a:focus-visible, button:focus-visible {
-    outline: 2px solid #D35400; outline-offset: 2px; border-radius: 3px;
-}
-
-/* Responsive Adjustments (Example) */
-@media (max-width: 768px) {
-    .visa-details-wrapper {
-        flex-direction: column; /* Stack visa sections */
-        gap: 20px;
-    }
-    .visa-section {
-        flex-basis: 100%; /* Full width when stacked */
-    }
-     .advantage-grid {
-        grid-template-columns: 1fr; /* Single column grid */
-    }
-    .process-steps {
-        justify-content: flex-start; /* Align steps left */
-    }
-}
+    <!-- Firebase Scripts (Keep as is) -->
+     <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        const firebaseConfig = { /* Your Config */ };
+        try {
+            const app = initializeApp(firebaseConfig); const auth = getAuth(app);
+            window.firebaseApp = app; window.firebaseAuth = auth;
+            window.firebaseOnAuthStateChanged = onAuthStateChanged; window.firebaseSignOut = signOut;
+            document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
+        } catch (error) { console.error("FB Init Error:", error); document.dispatchEvent(new CustomEvent('firebaseAuthError')); }
+    </script>
+    <!-- Link to shared auth script -->
+    <script src="js/auth_header_handler.js" defer></script>
+    <!-- Link to NEW enhanced JS for animations -->
+    <script src="js/services_desktop_enhanced.js" defer></script> <!-- <<<<<<<<<<<< NEW JS FILENAME -->
+</body>
+</html>

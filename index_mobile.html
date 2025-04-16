@@ -1,357 +1,97 @@
-/* Global Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Crucial for mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kershaw Law Firm - H2A/H2B Visa Services (Mobile)</title>
+    <meta name="description" content="The Kershaw Law Firm specializes in H2A and H2B visa processing for employers and workers. Contact us for expert legal assistance.">
+    <!-- Link to mobile CSS -->
+    <link rel="stylesheet" href="css/index_mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Spinner (same as desktop) -->
+    <div id="loader" class="loader"></div>
 
-/* Smooth Scroll */
-html {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: none;
-}
+    <div id="background-static"></div>
+    <div class="overlay"></div>
 
-/* Body Styling */
-body {
-    font-family: 'EB Garamond', serif;
-    min-height: 100vh;
-    color: #F5F6F5;
-    line-height: 1.5;
-    background-color: #1a1d24;
-    overflow-x: hidden;
-    position: relative;
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-    padding-top: 120px;
-    padding-bottom: 70px;
-    will-change: scroll-position;
-}
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>The Kershaw Law Firm, P.C.</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span>
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                </div>
+                <!-- Link to mobile login page (assuming it exists or will exist) -->
+                <a href="login_mobile.html" id="login-button" class="login-button">Login</a>
+            </div>
+        </div>
+    </header>
 
-body.loaded {
-    opacity: 1;
-}
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <section class="hero">
+                <h2>Expert H-2A & H-2B Visa Solutions</h2>
+                <p class="tagline">Navigating the complexities of agricultural and non-agricultural temporary worker visas.</p>
+                <!-- Link to mobile get started page (assuming it exists or will exist) -->
+                <a href="getstarted_mobile.html" class="cta-button">Get Started Today</a>
+            </section>
+        </div>
+    </div>
 
-#background-static {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('../assets/austinbackground.jpg');
-    filter: brightness(2.0) contrast(1.3);
-}
+    <nav class="tabs">
+        <!-- Link to mobile pages (assuming they exist or will exist) -->
+        <a href="index_mobile.html" class="active">Home</a>
+        <a href="faq_mobile.html">FAQ</a>
+        <a href="contact_mobile.html">Contact Us</a>
+    </nav>
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.6));
-    z-index: -1;
-}
+    <script type="module">
+      // Firebase initialization code remains the same
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-/* Loader Styling */
-.loader {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(211, 84, 0, 0.2);
-    border-top: 5px solid #D35400;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    z-index: 3000;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
+      const firebaseConfig = {
+        // Your config details here - Keep it secure!
+        apiKey: "YOUR_API_KEY", // Replace with your actual API key
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
 
-.loader.hidden {
-    opacity: 0;
-}
+      try {
+        const app = initializeApp(firebaseConfig);
+        console.log("Firebase Initialized Successfully.");
+        const auth = getAuth(app);
+        console.log("Firebase Auth Initialized.");
+        // Make auth functions globally accessible for index_mobile.js
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
 
-@keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
+        // Dispatch an event when Firebase Auth is ready
+        document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
 
-/* Header Styling */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 20px 0;
-    background: rgba(26, 29, 36, 0.98);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.header-content {
-    width: 95%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container {
-    text-align: center;
-    flex-grow: 1;
-}
-
-.logo-container h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    color: #F5F6F5;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
-    letter-spacing: 1.2px;
-    transition: color 0.3s ease;
-}
-
-.logo-container h1:active,
-.logo-container h1:hover {
-    color: #D35400;
-}
-
-.header-line {
-    width: 70px;
-    height: 3px;
-    background: #D35400;
-    margin: 6px auto 0;
-    transition: width 0.3s ease;
-    border-radius: 2px;
-}
-
-.logo-container:active .header-line,
-.logo-container:hover .header-line {
-    width: 120px;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.login-button {
-    padding: 8px 22px;
-    background: #D35400;
-    color: #F5F6F5;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(211, 84, 0, 0.5);
-    touch-action: manipulation;
-}
-
-.login-button:hover,
-.login-button:active {
-    background: #E67E22;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.7);
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: #e0e0e0;
-}
-
-#user-email {
-    font-weight: 500;
-    max-width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.logout-link {
-    color: #D35400;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.logout-link:hover,
-.logout-link:active {
-    color: #F5F6F5;
-    background: rgba(211, 84, 0, 0.9);
-}
-
-/* Main Content Area */
-.main-content-area {
-    position: relative;
-    z-index: 5;
-    overscroll-behavior: contain;
-}
-
-.main-content-container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 25px 10px;
-    min-height: calc(100vh - 120px - 70px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Hero Section */
-.hero {
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    padding-top: 20vh; /* Lower content */
-}
-
-.hero h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.5rem;
-    color: #FFFFFF;
-    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
-    margin-bottom: 15px;
-    animation: fadeIn 1s ease-in-out;
-}
-
-.tagline {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.3rem;
-    color: #e0e0e0;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-}
-
-.cta-button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 14px 35px;
-    background: #D35400;
-    color: #F5F6F5;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 30px;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.6);
-    touch-action: manipulation;
-}
-
-.cta-button:hover,
-.cta-button:active {
-    background: #E67E22;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(211, 84, 0, 0.8);
-}
-
-/* Navigation Tabs */
-.tabs {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 2000;
-    padding: 15px 0;
-    background: rgba(26, 29, 36, 0.85);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-}
-
-.tabs a {
-    color: #cccccc;
-    text-decoration: none;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 8px 15px;
-    transition: all 0.3s ease;
-    position: relative;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    touch-action: manipulation;
-}
-
-.tabs a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #C0392B;
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 2px;
-}
-
-.tabs a:hover,
-.tabs a.active,
-.tabs a:active {
-    color: #FFFFFF;
-}
-
-.tabs a:hover::after,
-.tabs a.active::after,
-.tabs a:active::after {
-    width: 70%;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Accessibility */
-a:focus-visible,
-button:focus-visible {
-    outline: 2px solid #D35400;
-    outline-offset: 2px;
-}
-
-/* Media Query for Smaller Screens */
-@media (max-width: 400px) {
-    .logo-container h1 {
-        font-size: 1.6rem;
-    }
-    .header-line {
-        width: 50px;
-    }
-    .login-button {
-        padding: 6px 18px;
-        font-size: 0.85rem;
-    }
-    .hero h2 {
-        font-size: 2rem;
-    }
-    .tagline {
-        font-size: 1.1rem;
-    }
-    .cta-button {
-        padding: 12px 30px;
-        font-size: 1.1rem;
-    }
-    .tabs a {
-        font-size: 0.9rem;
-        padding: 6px 12px;
-    }
-}
+      } catch (error) {
+        console.error("Error initializing Firebase:", error);
+        // Optionally, inform the user or disable auth features
+         document.dispatchEvent(new CustomEvent('firebaseAuthError'));
+      }
+    </script>
+    <!-- Link to mobile JS, deferred for performance -->
+    <script src="js/index_mobile.js" defer></script>
+</body>
+</html>

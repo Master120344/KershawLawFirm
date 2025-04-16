@@ -17,15 +17,15 @@ body {
     font-family: 'EB Garamond', serif;
     min-height: 100vh;
     color: #F5F6F5;
-    line-height: 1.5; /* Slightly tighter line-height might be okay on mobile */
+    line-height: 1.5;
     background-color: #1a1d24; /* Fallback color */
     overflow-x: hidden; /* Prevent horizontal scroll */
     position: relative;
     opacity: 0; /* Start hidden for fade-in */
-    transition: opacity 0.6s ease-in-out; /* Slightly faster fade for mobile */
+    transition: opacity 0.6s ease-in-out;
     /* Adjusted padding for typical mobile header/footer heights */
-    padding-top: 100px;
-    padding-bottom: 60px;
+    padding-top: 100px; /* Adjust if header height changes */
+    padding-bottom: 60px; /* Adjust if tab bar height changes */
     will-change: opacity;
     -webkit-tap-highlight-color: transparent; /* Remove tap highlight on links/buttons */
 }
@@ -34,7 +34,7 @@ body.loaded {
     opacity: 1; /* Fade in when loaded */
 }
 
-/* Background & Overlay (Same as desktop, brightness adjusted previously) */
+/* Background & Overlay (Unchanged as requested) */
 #background-static {
     position: fixed;
     top: 0;
@@ -58,13 +58,13 @@ body.loaded {
     z-index: -1;
 }
 
-/* Loader Styling (Same as desktop) */
+/* Loader Styling (Unchanged) */
 .loader {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 45px; /* Slightly smaller loader */
+    width: 45px;
     height: 45px;
     border: 4px solid rgba(211, 84, 0, 0.2);
     border-top: 4px solid #D35400;
@@ -93,78 +93,86 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0; /* Reduced padding */
+    padding: 15px 0;
     background: rgba(26, 29, 36, 0.98);
-    backdrop-filter: blur(8px); /* Slightly less blur might perform better */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); /* Less intense shadow */
+    backdrop-filter: blur(8px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {
     width: 95%;
     margin: 0 auto;
     display: flex;
-    /* Stack logo and actions vertically */
     flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    gap: 10px; /* Space between logo area and actions area */
+    align-items: center;
+    gap: 10px;
 }
 
 .logo-container {
     text-align: center;
-    /* Removed flex-grow as it's stacked */
+}
+
+/* Added styling for the logo link wrapper if needed */
+.logo-link {
+    text-decoration: none; /* Remove underline from link */
+    color: inherit; /* Inherit color from h1 */
+    display: inline-block; /* Ensure it wraps the h1 correctly */
 }
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 1.6rem; /* Smaller font size for mobile */
+    font-size: 1.6rem;
     color: #F5F6F5;
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5); /* Less intense shadow */
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
     transition: color 0.3s ease;
-    cursor: default;
+    cursor: pointer; /* Indicate it's interactive */
+    margin: 0; /* Reset margin if link adds any */
 }
 
-.logo-container h1:active { /* Use active for touch feedback */
-    color: #D35400;
+/* --- CHANGE 1: Ensure H1 text highlights orange on tap --- */
+.logo-container .logo-link:active h1 { /* Target h1 within active link */
+    color: #D35400; /* Use the primary orange color */
 }
 
 .header-line {
-    width: 60px; /* Smaller line */
-    height: 2px; /* Thinner line */
+    width: 60px;
+    height: 2px;
     background: #D35400;
-    margin: 4px auto 0; /* Less margin */
+    margin: 4px auto 0;
     transition: width 0.3s ease;
     border-radius: 2px;
 }
 
-.logo-container:active .header-line { /* Expand on touch */
+/* --- CHANGE 1 (Alt): Expand line when logo area is tapped --- */
+.logo-container:active .header-line { /* Keep line expansion if desired */
     width: 100px;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center actions horizontally */
-    gap: 10px; /* Space between email/logout and login button */
-    width: 100%; /* Take full width in the column layout */
-    flex-wrap: wrap; /* Allow wrapping if needed, though unlikely here */
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .login-button {
-    padding: 7px 20px; /* Smaller padding */
+    padding: 7px 20px;
     background: #D35400;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem; /* Smaller font */
+    font-size: 0.9rem;
     font-weight: 600;
-    border-radius: 20px; /* Adjust radius */
-    transition: all 0.2s ease; /* Faster transition */
+    border-radius: 20px;
+    transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(211, 84, 0, 0.4);
     touch-action: manipulation;
 }
 
-.login-button:active { /* Active state for touch */
+.login-button:active {
     background: #E67E22;
     transform: scale(1.03);
     box-shadow: 0 4px 12px rgba(211, 84, 0, 0.6);
@@ -173,14 +181,14 @@ body.loaded {
 .user-info {
     display: flex;
     align-items: center;
-    gap: 8px; /* Less gap */
-    font-size: 0.85rem; /* Smaller font */
+    gap: 8px;
+    font-size: 0.85rem;
     color: #e0e0e0;
 }
 
 #user-email {
     font-weight: 500;
-    max-width: 120px; /* Restrict width */
+    max-width: 120px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -190,12 +198,12 @@ body.loaded {
     color: #D35400;
     text-decoration: none;
     font-weight: 600;
-    padding: 4px 8px; /* Smaller padding */
+    padding: 4px 8px;
     border-radius: 5px;
     transition: all 0.2s ease;
 }
 
-.logout-link:active { /* Active state for touch */
+.logout-link:active {
     color: #F5F6F5;
     background: rgba(211, 84, 0, 0.9);
 }
@@ -208,10 +216,9 @@ body.loaded {
 
 .main-content-container {
     width: 90%;
-    max-width: 500px; /* Keep max width constrained */
+    max-width: 500px;
     margin: 0 auto;
-    padding: 20px 5px; /* Less horizontal padding */
-    /* Adjusted min-height based on new body padding */
+    padding: 20px 5px;
     min-height: calc(100vh - 100px - 60px);
     display: flex;
     flex-direction: column;
@@ -223,39 +230,41 @@ body.loaded {
 .hero {
     width: 100%;
     text-align: center;
-    padding-top: 5vh; /* Less padding */
+    padding-top: 5vh;
     padding-bottom: 5vh;
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.8rem, 7vw, 2.1rem); /* Responsive mobile font size */
+    font-size: clamp(1.8rem, 7vw, 2.1rem);
     color: #FFFFFF;
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6); /* Less intense shadow */
-    margin-bottom: 10px; /* Less margin */
-    animation: fadeIn 0.8s ease-in-out; /* Faster animation */
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 .tagline {
     font-family: 'EB Garamond', serif;
-    font-size: clamp(1rem, 4vw, 1.1rem); /* Responsive mobile font size */
-    color: #e0e0e0;
-    margin-bottom: 25px; /* Less margin */
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    font-size: clamp(1rem, 4vw, 1.1rem);
+    color: #e0e0e0; /* Keeping original color */
+    margin-bottom: 25px;
+    /* --- CHANGE 2: Enhanced text shadow for better readability --- */
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7), /* Darker shadow */
+                 0 0 8px rgba(0, 0, 0, 0.5);  /* Optional subtle glow */
 }
 
 /* CTA Button - Mobile */
 .cta-button {
     display: inline-block;
-    margin-top: 25px; /* Less margin */
-    padding: 12px 30px; /* Slightly smaller padding */
+    margin-top: 25px;
+    padding: 12px 30px;
     background: #D35400;
     color: #F5F6F5;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.1rem; /* Slightly smaller font */
+    font-size: 1.1rem;
     font-weight: 700;
-    border-radius: 25px; /* Adjust radius */
+    border-radius: 25px;
     border: none;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 4px 12px rgba(211, 84, 0, 0.5);
@@ -263,9 +272,9 @@ body.loaded {
     cursor: pointer;
 }
 
-.cta-button:active { /* Active state for touch */
+.cta-button:active {
     background: #E67E22;
-    transform: translateY(-2px); /* Less movement */
+    transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(211, 84, 0, 0.7);
 }
 
@@ -276,31 +285,34 @@ body.loaded {
     left: 0;
     width: 100%;
     z-index: 2000;
-    padding: 10px 0; /* Reduced padding */
-    background: rgba(26, 29, 36, 0.95); /* Slightly less transparent */
+    padding: 10px 0;
+    background: rgba(26, 29, 36, 0.95);
     backdrop-filter: blur(8px);
     box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
     display: flex;
-    justify-content: center; /* Use space-around for better distribution on small screens */
+    justify-content: space-around; /* Better distribution with more tabs */
     align-items: center;
-    gap: 5px; /* Minimal gap, rely on padding */
+    gap: 3px; /* Reduce gap slightly if needed */
 }
 
 .tabs a {
-    flex-grow: 1; /* Allow items to grow and fill space */
-    text-align: center; /* Center text within each tab */
+    flex-grow: 1; /* Allow tabs to share space */
+    flex-basis: 0; /* Ensure equal base size before growing */
+    text-align: center;
     color: #cccccc;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    font-size: 0.9rem; /* Smaller font */
+    font-size: 0.85rem; /* Slightly smaller font if needed for 4 tabs */
     font-weight: 500;
-    padding: 8px 5px; /* Adjust padding */
+    padding: 8px 3px; /* Adjust padding */
     transition: all 0.2s ease;
     position: relative;
     text-transform: uppercase;
-    letter-spacing: 0.5px; /* Less spacing */
+    letter-spacing: 0.5px;
     touch-action: manipulation;
-    white-space: nowrap; /* Prevent wrapping on very narrow screens if possible */
+    white-space: nowrap;
+    overflow: hidden; /* Prevent text overflow issues */
+    text-overflow: ellipsis; /* Add ellipsis if text is too long */
 }
 
 .tabs a::after {
@@ -308,7 +320,7 @@ body.loaded {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -2px; /* Closer to text */
+    bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
     background: #D35400;
@@ -316,23 +328,24 @@ body.loaded {
     border-radius: 2px;
 }
 
-.tabs a:active, /* Use active state for touch */
+.tabs a:active, /* Highlight text on tap */
 .tabs a.active {
-    color: #FFFFFF;
+    color: #FFFFFF; /* White text for active/tapped tab */
 }
 
-.tabs a:active::after,
-.tabs a.active::after {
-    width: 60%; /* Slightly smaller underline */
+/* --- CHANGE 3: Ensure underline shows on tap/active state --- */
+.tabs a:active::after, /* Show underline on tap */
+.tabs a.active::after { /* Show underline for the current page */
+    width: 70%; /* Slightly wider underline for better visibility */
 }
 
-/* Animations (Same as desktop) */
+/* Animations (Unchanged) */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-15px); } /* Less movement */
+    from { opacity: 0; transform: translateY(-15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Accessibility (Same as desktop) */
+/* Accessibility (Unchanged) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
@@ -340,6 +353,3 @@ input:focus-visible {
     outline-offset: 2px;
     border-radius: 3px;
 }
-
-/* Remove Desktop Media Queries - these styles ARE the mobile view */
-/* No @media blocks needed here unless targeting specific smaller/larger mobile sizes */

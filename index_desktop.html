@@ -1,118 +1,105 @@
-// Wait for the entire page (including images, CSS) to load
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
-    const bodyElement = document.body;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated Title and Description -->
+    <title>The Kershaw Law Firm - H-2A & H-2B Visa Expertise (Blue Theme)</title>
+    <meta name="description" content="The Kershaw Law Firm offers expert H-2A and H-2B visa processing. Desktop optimized with an Austin skyline theme and blue accents.">
+    <!-- Link to desktop CSS -->
+    <link rel="stylesheet" href="css/index_desktop.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Spinner (Updated Accent Color via CSS) -->
+    <div id="loader" class="loader"></div>
 
-    // Ensure elements exist before manipulating
-    if (bodyElement) {
-        // Add 'loaded' class to trigger the body fade-in (defined in CSS)
-        bodyElement.classList.add('loaded');
-        console.log("Body 'loaded' class added for fade-in (Desktop - Blue Theme)."); // Log updated
-    } else {
-        console.error("Body element not found. Fade-in cannot be applied (Desktop - Blue Theme)."); // Log updated
-    }
+    <!-- Background Image Container (Main Visual) -->
+    <div id="background-static"></div>
+    <!-- No separate overlay div needed -->
 
-    if (loader) {
-        // Wait a brief moment after body fade starts, then hide loader
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            console.log("Loader hidden (Desktop - Blue Theme)."); // Log updated
-        }, 300); // Keep delay consistent or adjust if needed
-    } else {
-        console.error("Loader element not found (Desktop - Blue Theme)."); // Log updated
-    }
-});
+    <!-- Header - Updated Blue Theme -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                 <a href="index_desktop.html" class="logo-link">
+                    <h1>The Kershaw Law Firm</h1> <!-- Color via CSS -->
+                 </a>
+                <div class="header-line"></div> <!-- Color updated via CSS -->
+            </div>
+            <div class="header-actions">
+                 <!-- User Info / Login Button -->
+                 <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span> <!-- Color via CSS -->
+                    <a href="#" id="logout-button" class="logout-link">Logout</a> <!-- Color updated via CSS -->
+                </div>
+                <!-- Button color updated via CSS -->
+                <a href="login_desktop.html" id="login-button" class="login-button">Client Login</a>
+            </div>
+        </div>
+    </header>
 
+    <!-- Main Content Area - Centered Hero -->
+    <div class="main-content-area">
+        <div class="main-content-container">
+            <!-- Updated Hero Section -->
+            <section class="hero">
+                <!-- Heading updated: Text content, white color, bold, shadow (via CSS) -->
+                <h2>Expert H-2A & H-2B Visa</h2>
+                <!-- Tagline Removed previously, remains removed -->
+                <!-- RESTORED: CTA Button -->
+                <a href="getstarted_desktop.html" class="cta-button">
+                    <i class="fa-solid fa-rocket"></i> Get Started Today
+                </a>
+            </section>
+        </div>
+    </div>
 
-// Function to handle Firebase Auth UI updates
-function setupFirebaseAuthUi() {
-    const loginButton = document.getElementById('login-button');
-    const userInfoDiv = document.getElementById('user-info');
-    const userEmailSpan = document.getElementById('user-email');
-    const logoutButton = document.getElementById('logout-button');
+    <!-- Navigation Tabs (Footer Style) - Updated Blue Theme -->
+    <nav class="tabs">
+        <a href="/KershawLawFirm/index_desktop.html" class="active">Home</a>
+        <a href="/KershawLawFirm/services_desktop.html">Services</a>
+        <a href="/KershawLawFirm/faq_desktop.html">FAQ</a>
+        <a href="/KershawLawFirm/contact_desktop.html">Contact Us</a>
+        <!-- Colors updated via CSS -->
+    </nav>
 
-    // Check if Firebase Auth functions are available on the window object
-    if (window.firebaseAuth && window.firebaseOnAuthStateChanged && window.firebaseSignOut) {
-        const auth = window.firebaseAuth;
-        console.log("Firebase auth object found, setting up listener (Desktop - Blue Theme)."); // Log updated
+    <script type="module">
+      // Firebase initialization - No changes needed here
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        window.firebaseOnAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is logged in
-                console.log("User is logged in (Desktop - Blue Theme):", user.email); // Log updated
-                if (loginButton) loginButton.style.display = 'none';
-                if (userInfoDiv) userInfoDiv.style.display = 'flex'; // Use flex for horizontal layout
-                if (userEmailSpan) userEmailSpan.textContent = user.email;
-            } else {
-                // User is logged out
-                console.log("User is logged out (Desktop - Blue Theme)."); // Log updated
-                if (loginButton) loginButton.style.display = 'inline-block'; // Or 'flex'
-                if (userInfoDiv) userInfoDiv.style.display = 'none';
-                if (userEmailSpan) userEmailSpan.textContent = '';
-            }
-        });
+      const firebaseConfig = {
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290"
+      };
 
-        // Setup logout button listener only once
-        if (logoutButton && !logoutButton.hasAttribute('data-listener-attached')) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default anchor behavior
-                console.log("Logout button clicked (Desktop - Blue Theme)."); // Log updated
-                window.firebaseSignOut(auth).then(() => {
-                    console.log("Firebase sign out successful (Desktop - Blue Theme)."); // Log updated
-                    // UI updates automatically via onAuthStateChanged listener
-                }).catch((error) => {
-                    console.error("Firebase sign out failed (Desktop - Blue Theme):", error); // Log updated
-                    alert("Logout failed. Please try again."); // User feedback
-                });
-            });
-            logoutButton.setAttribute('data-listener-attached', 'true'); // Mark as attached
-        }
-    } else {
-        // Firebase Auth not ready or failed to initialize
-        console.error("Essential Firebase Auth functions not found on window object. UI fallback (Desktop - Blue Theme)."); // Log updated
-        // Ensure default state (logged out view) is shown
-        if (loginButton) loginButton.style.display = 'inline-block'; // Or 'flex'
-        if (userInfoDiv) userInfoDiv.style.display = 'none';
-    }
-}
-
-// --- Firebase Initialization Handling ---
-document.addEventListener('firebaseAuthReady', () => {
-    console.log("Firebase Auth Ready event received. Setting up UI (Desktop - Blue Theme)."); // Log updated
-    setupFirebaseAuthUi();
-});
-
-let firebaseCheckInterval = null;
-let checkAttempts = 0;
-
-function checkFirebaseAuth() {
-    checkAttempts++;
-    if (window.firebaseAuth && window.firebaseOnAuthStateChanged && window.firebaseSignOut) {
-        console.log("Firebase Auth detected via interval check. Setting up UI (Desktop - Blue Theme)."); // Log updated
-        if (firebaseCheckInterval) clearInterval(firebaseCheckInterval);
-        setupFirebaseAuthUi();
-    } else if (checkAttempts > 20) { // Stop checking after ~5 seconds
-         console.error("Firebase Auth check timed out. Auth UI may not work (Desktop - Blue Theme)."); // Log updated
-         if (firebaseCheckInterval) clearInterval(firebaseCheckInterval);
-         setupFirebaseAuthUi(); // Call it anyway to set the default state
-    }
-}
-
-// Check immediately in case Firebase loads very fast
-if (window.firebaseAuth && window.firebaseOnAuthStateChanged && window.firebaseSignOut) {
-    console.log("Firebase Auth detected on script load. Setting up UI (Desktop - Blue Theme)."); // Log updated
-    setupFirebaseAuthUi();
-} else {
-    // Set interval check as fallback
-    firebaseCheckInterval = setInterval(checkFirebaseAuth, 250);
-}
-
-
-document.addEventListener('firebaseAuthError', () => {
-     console.error("Firebase Auth Error event received. Auth UI may not work (Desktop - Blue Theme)."); // Log updated
-     if (firebaseCheckInterval) clearInterval(firebaseCheckInterval); // Stop checking
-     setupFirebaseAuthUi(); // Ensure default logged-out state
-});
-
-
-console.log("Desktop Homepage JS Initialized (Blue Theme)."); // Final log updated
+      try {
+        const app = initializeApp(firebaseConfig);
+        console.log("Firebase Initialized (Index Desktop - Blue Theme)."); // Updated log
+        const auth = getAuth(app);
+        console.log("Firebase Auth Initialized (Index Desktop - Blue Theme)."); // Updated log
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+        document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
+      } catch (error) {
+        console.error("Error initializing Firebase (Index Desktop - Blue Theme):", error); // Updated log
+         document.dispatchEvent(new CustomEvent('firebaseAuthError'));
+      }
+    </script>
+    <!-- Link to desktop JS, deferred - No changes needed here -->
+    <script src="js/index_desktop.js" defer></script>
+</body>
+</html>

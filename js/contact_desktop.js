@@ -4,22 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
     const thankYouMessage = document.getElementById('thank-you-message');
     const userNameSpan = document.getElementById('user-name');
-    const footerYear = document.getElementById('current-year');
+    // Removed footerYear selector, assuming it's handled by inline script or not present
 
     console.log("Contact Desktop JS Initialized.");
 
-    // Set current year in footer
-    if (footerYear) {
-        footerYear.textContent = new Date().getFullYear();
-    }
-
     // Fade-in Effect for Page Body on Load
     if (bodyElement) {
-        // Use requestAnimationFrame for smoother start
-        requestAnimationFrame(() => {
+        // Use setTimeout for simplicity, ensure styles are applied first
+        setTimeout(() => {
              bodyElement.classList.add('loaded');
              console.log("Body fade-in triggered (Desktop Contact).");
-        });
+        }, 50); // Small delay
     } else {
          console.error("Body element not found (Desktop Contact).");
     }
@@ -57,15 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- Simulation ---
             // In a real application, you would send this data to a server/backend
-            // (e.g., using fetch API to your own endpoint, or a service like Formspree, Netlify Forms, Firebase Functions)
             console.log("--- Simulating Backend Interaction ---");
             console.log("Data to be sent:", JSON.stringify(submissionData, null, 2));
-            console.log("Simulating email to robert.kershaw@kershawlaw.com...");
-            // Placeholder for actual fetch/AJAX call
-            // fetch('/api/contact', { method: 'POST', body: JSON.stringify(submissionData), headers: {'Content-Type': 'application/json'} })
-            //  .then(response => response.json())
-            //  .then(data => { console.log('Success:', data); /* Proceed to show thank you */ })
-            //  .catch((error) => { console.error('Error:', error); alert('Submission failed. Please try again.'); });
+            // **Important:** The email address here is just console logging the simulated destination.
+            // The actual destination depends on your (unseen) backend logic.
+            // Ensure your backend sends emails to support@kershawlaw.com
+            console.log("Simulating processing for submission (destination should be support@kershawlaw.com)...");
             console.log("--- Simulation Complete ---");
 
 
@@ -84,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 thankYouMessage.style.display = 'block'; // Make thank you message block-level
                  // Use rAF for smoother visual transition start
                  requestAnimationFrame(() => {
-                    thankYouMessage.classList.add('visible'); // Add class to trigger fade-in (defined in CSS)
+                     // Make sure the 'visible' class exists in your CSS with opacity: 1 and transition
+                     thankYouMessage.style.opacity = '1'; // Directly set opacity for fade-in
                     console.log("Thank you message displayed.");
                      // Scroll to the thank you message if needed (optional)
                      thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });

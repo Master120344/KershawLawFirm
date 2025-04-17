@@ -1,17 +1,17 @@
 // --- Case Details Modal Logic (Desktop) ---
 
 // Note: This script assumes 'AppState' and 'DOM' are globally accessible objects
-// defined in client_dashboard_desktop.js and that helper functions (like format...)
+// defined in client_dashboard_desktop.js and that helper functions (like getStatusTextAndClass)
 // are available from dashboard_helpers_desktop.js.
 // This script should be loaded AFTER dashboard_helpers_desktop.js and client_dashboard_desktop.js
-// defines the DOM object, but BEFORE setupModalLogic is called within client_dashboard_desktop.js.
+// defines the DOM object, but BEFORE setupModalLogicDesktop is called within client_dashboard_desktop.js.
 
 const H2VisaStepsDesktop = {
     'initial_review': [
         { name: 'Account Setup & Initial Consultation', status: 'complete', details: 'Portal access granted. Discussed case requirements and strategy.' },
-        { name: 'Document Collection (Initial)', status: 'pending', details: 'Awaiting initial business and job offer documents upload.' },
-        { name: 'Firm Review & Analysis', status: 'pending', details: 'Will begin once initial documents are received.' },
         { name: 'Fee Agreement Review', status: 'action', details: 'Please review and sign the Fee Agreement found in your Documents section or Action Items.' },
+        { name: 'Document Collection (Initial)', status: 'pending', details: 'Awaiting initial business and job offer documents upload after agreement.' },
+        { name: 'Firm Review & Analysis', status: 'pending', details: 'Will begin once initial documents are received.' },
         { name: 'Initial Payment Due', status: 'pending', details: 'Required upon Fee Agreement signature.' },
         { name: 'LCA Preparation', status: 'pending', details: 'Will commence upon receipt of signed agreement and payment.' }
     ],
@@ -87,7 +87,8 @@ const H2VisaStepsDesktop = {
  * @returns {Array} Array of step objects.
  */
 function getStatusStepsDesktop(statusKey) {
-    const currentStatus = statusKey || AppState.caseStatus || 'default';
+    // Ensure AppState is available
+    const currentStatus = (typeof AppState !== 'undefined' && AppState.caseStatus) ? (statusKey || AppState.caseStatus) : (statusKey || 'default');
     return H2VisaStepsDesktop[currentStatus] || H2VisaStepsDesktop['default'];
 }
 
@@ -97,7 +98,8 @@ function getStatusStepsDesktop(statusKey) {
  * @param {Array} steps - Array of step objects from getStatusStepsDesktop.
  */
 function renderStepsDesktop(steps) {
-    if (!DOM || !DOM.modalStepsListDesktop) {
+    // Ensure DOM and the specific element are available
+    if (typeof DOM === 'undefined' || !DOM.modalStepsListDesktop) {
         console.error("DOM object or modal steps list not available for rendering.");
         return;
     }
@@ -125,50 +127,49 @@ function renderStepsDesktop(steps) {
         textSpan.className = 'step-text-desktop';
         textSpan.textContent = step.name;
 
-        let detailSpan = null;
+        li.appendChild(iconSpan); // Add icon first
+
+        // Create a container for text and details to sit next to the icon
+        const textBlock = document.createElement('div');
+        textBlock.style.display = 'flex';
+        textBlock.style.flexDirection = 'column';
+        textBlock.appendChild(textSpan); // Add main text
+
         if (step.details) {
-            detailSpan = document.createElement('span');
-            detailSpan.className = 'step-details-desktop';
+            const detailSpan = document.createElement('span');
+            detailSpan.className = 'step-details-desktop'; // Apply specific detail styling
             detailSpan.textContent = step.details;
+            textBlock.appendChild(detailSpan); // Add details below main text
         }
 
-        li.appendChild(iconSpan);
-        li.appendChild(textSpan);
-        if (detailSpan) {
-             // Append details inside the text block conceptually
-             const textBlock = document.createElement('div'); // Create a container for text and details
-             textBlock.style.display = 'flex';
-             textBlock.style.flexDirection = 'column';
-             textBlock.appendChild(textSpan);
-             textBlock.appendChild(detailSpan);
-             li.appendChild(textBlock);
-        } else {
-            li.appendChild(textSpan); // Append only text if no details
-        }
-
+        li.appendChild(textBlock); // Add the text block container
         DOM.modalStepsListDesktop.appendChild(li);
     });
 }
+
 
 /**
  * Opens the case details modal and populates it.
  * Relies on global AppState and DOM objects.
  */
 function openModalDesktop() {
-    if (!DOM || !DOM.modalDesktop || !AppState) {
-        console.error("DOM object, modal element, or AppState not available for opening modal.");
+    // Ensure dependencies are available
+    if (typeof DOM === 'undefined' || !DOM.modalDesktop || typeof AppState === 'undefined' || typeof getStatusTextAndClass === 'undefined') {
+        console.error("DOM object, modal element, AppState, or helper functions not available for opening modal.");
         return;
     }
     const currentStatusKey = AppState.caseStatus || 'default';
     const steps = getStatusStepsDesktop(currentStatusKey);
-    renderStepsDesktop(steps);
+    renderStepsDesktop(steps); // Render steps first
 
-    // Update modal title
-    const statusText = getStatusTextAndClass(currentStatusKey).text || 'Details'; // Use helper function for consistency
+    // Update modal title using helper function for status text
+    const statusInfo = getStatusTextAndClass(currentStatusKey);
+    const statusText = statusInfo.text || 'Details';
     if (DOM.modalTitleDesktop) {
         DOM.modalTitleDesktop.textContent = `Detailed Case Steps (${statusText})`;
     }
 
+    // Make modal visible and lock body scroll
     DOM.modalDesktop.classList.add('visible');
     document.body.classList.add('modal-open-desktop');
 }
@@ -178,7 +179,7 @@ function openModalDesktop() {
  * Relies on global DOM object.
  */
 function closeModalDesktop() {
-     if (!DOM || !DOM.modalDesktop) {
+     if (typeof DOM === 'undefined' || !DOM.modalDesktop) {
         console.error("DOM object or modal element not available for closing modal.");
         return;
     }
@@ -188,31 +189,31 @@ function closeModalDesktop() {
 
 /**
  * Sets up the event listeners for the modal (open, close, escape key).
- * Relies on global DOM object.
- * Needs to be called once after the DOM is ready.
+ * Relies on global DOM object. Ensures listeners are added only once.
+ * Needs to be called once after the DOM is ready and DOM object is populated.
  */
 function setupModalLogicDesktop() {
-     if (!DOM) {
+     if (typeof DOM === 'undefined') {
         console.error("DOM object not available for setting up modal logic.");
         return;
     }
-    // Ensure elements exist before adding listeners
+    // Add listener to the "View Detailed Case Steps" button
     if (DOM.viewCaseDetailsBtnDesktop) {
-        // Prevent multiple listeners if called again
         if (!DOM.viewCaseDetailsBtnDesktop.hasAttribute('data-modal-listener')) {
              DOM.viewCaseDetailsBtnDesktop.addEventListener('click', openModalDesktop);
              DOM.viewCaseDetailsBtnDesktop.setAttribute('data-modal-listener', 'true');
         }
-    } else { console.error("View Case Details Button not found for modal."); }
+    } else { console.error("View Case Details Button (#view-case-details-btn-desktop) not found for modal."); }
 
+    // Add listener to the modal's close button
     if (DOM.modalCloseButtonDesktop) {
         if (!DOM.modalCloseButtonDesktop.hasAttribute('data-modal-listener')) {
             DOM.modalCloseButtonDesktop.addEventListener('click', closeModalDesktop);
             DOM.modalCloseButtonDesktop.setAttribute('data-modal-listener', 'true');
          }
-    } else { console.error("Modal Close Button not found."); }
+    } else { console.error("Modal Close Button (#case-details-close-btn-desktop) not found."); }
 
-    // Overlay click listener
+    // Add listener for clicking on the modal overlay (background)
     if (DOM.modalDesktop) {
          if (!DOM.modalDesktop.hasAttribute('data-modal-listener')) {
             DOM.modalDesktop.addEventListener('click', (event) => {
@@ -223,11 +224,12 @@ function setupModalLogicDesktop() {
             });
             DOM.modalDesktop.setAttribute('data-modal-listener', 'true');
         }
-    } else { console.error("Modal Overlay not found."); }
+    } else { console.error("Modal Overlay (#case-details-modal-desktop) not found."); }
 
-    // Escape key listener (add only once to the document)
+    // Add Escape key listener to the document (only once)
     if (!document.body.hasAttribute('data-escape-listener-set')) {
         document.addEventListener('keydown', (event) => {
+            // Check if modal exists and is visible before attempting to close
             if (event.key === 'Escape' && DOM.modalDesktop?.classList.contains('visible')) {
                  closeModalDesktop();
             }

@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started - The Kershaw Law Firm - Desktop</title>
-    <meta name="description" content="Apply for H-2A/H-2B visa prescreening with The Kershaw Law Firm. Desktop access.">
+    <!-- Updated Title and Description -->
+    <title>Request Consultation - The Kershaw Law Firm - Desktop</title>
+    <meta name="description" content="Request an H-2A/H-2B visa consultation with The Kershaw Law Firm. Desktop access.">
+    <!-- Link CSS -->
     <link rel="stylesheet" href="css/getstarted_desktop.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome (Optional, if needed for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <div id="background-static"></div>
-    <div class="overlay"></div>
+    <!-- Loader (Added for consistency) -->
+    <div id="loader" class="loader"></div>
 
+    <!-- Background Image (Overlay removed/lightened via CSS) -->
+    <div id="background-static"></div>
+    <!-- <div class="overlay"></div> NO DARK OVERLAY -->
+
+    <!-- Header - Consistent Blue Theme -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                <h1>The Kershaw Law Firm</h1>
+                 <a href="index_desktop.html" class="logo-link"> <!-- Added Link -->
+                    <h1>The Kershaw Law Firm</h1>
+                 </a>
                 <div class="header-line"></div>
             </div>
             <div class="header-actions">
@@ -25,73 +37,88 @@
                     <span id="user-email">user@example.com</span>
                     <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
-                <a href="/KershawLawFirm/login_desktop.html" id="login-button" class="login-button">Login</a>
+                 <!-- Login button text consistency -->
+                <a href="/KershawLawFirm/login_desktop.html" id="login-button" class="login-button">Client Login</a>
             </div>
         </div>
     </header>
 
+    <!-- Main Content Area -->
     <div class="main-content-area">
+        <!-- Container with subtle border like services page -->
         <div class="main-content-container">
-            <section class="prescreen-form" id="prescreen-form">
-                <h2>Begin Your Visa Journey</h2>
-                <p class="form-intro">Let our experts prescreen your H-2A/H-2B visa needs with precision and care.</p>
-                <form id="visa-prescreen-form">
-                    <div class="form-group">
-                        <label for="full-name">Full Name</label>
-                        <input type="text" id="full-name" name="full-name" required placeholder="John Doe">
-                    </div>
-                    <div class="form-group">
-                        <label for="company-name">Company Name</label>
-                        <input type="text" id="company-name" name="company-name" required placeholder="Acme Corp">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="you@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="(123) 456-7890">
-                    </div>
-                    <div class="form-group">
-                        <label for="visa-type">Visa Type</label>
-                        <select id="visa-type" name="visa-type" required>
-                            <option value="" disabled selected>Select an option</option>
-                            <option value="h2a">H-2A (Agricultural)</option>
-                            <option value="h2b">H-2B (Non-Agricultural)</option>
-                            <option value="both">Both H-2A and H-2B</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="worker-count">Number of Workers Needed</label>
-                        <input type="number" id="worker-count" name="worker-count" min="1" required placeholder="e.g., 10">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Additional Details</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Tell us more about your needs..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Submit Prescreening</button>
+            <!-- Renamed Section and ID -->
+            <section class="consultation-form-section" id="consultation-form-section">
+                <h2>Request Your Consultation</h2> <!-- Updated Heading -->
+                <p class="form-intro">Provide your details below, and our team will contact you to discuss your H-2A/H-2B visa needs.</p> <!-- Updated Intro -->
+                <!-- Renamed Form ID -->
+                <form id="consultation-request-form">
+                    <div class="form-grid"> <!-- Use grid for better layout -->
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="full-name" required placeholder="e.g., Jane Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="company-name">Company Name</label>
+                            <input type="text" id="company-name" name="company-name" required placeholder="e.g., Smith Farms">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="jane.smith@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                        </div>
+                        <div class="form-group form-group-span-2"> <!-- Span visa type across grid -->
+                            <label for="visa-type">Primary Visa Type Needed</label>
+                            <select id="visa-type" name="visa-type" required>
+                                <option value="" disabled selected>-- Select Visa --</option>
+                                <option value="h2a">H-2A (Agricultural)</option>
+                                <option value="h2b">H-2B (Non-Agricultural)</option>
+                                <option value="both">Both / Unsure</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-group-span-2"> <!-- Span worker count -->
+                            <label for="worker-count">Approx. Number of Workers Needed</label>
+                            <input type="number" id="worker-count" name="worker-count" min="1" required placeholder="e.g., 15">
+                        </div>
+                         <div class="form-group form-group-span-2"> <!-- Span textarea -->
+                            <label for="message">Briefly Describe Your Needs</label>
+                            <textarea id="message" name="message" rows="5" placeholder="e.g., Peak season dates, type of work, previous experience with H-2 visas..."></textarea>
+                        </div>
+                    </div> <!-- /.form-grid -->
+                    <button type="submit" class="submit-button">Request Consultation</button> <!-- Updated Button Text -->
                 </form>
             </section>
 
+            <!-- Thank You Section -->
             <section class="thank-you" id="thank-you" style="display: none; opacity: 0;">
-                <h2>Thank You for Your Submission</h2>
-                <p>We’ve received your prescreening details. Our team will review your request and email you shortly with an update at <strong>visa-screening@kershawlawfirm.com</strong>.</p>
+                 <!-- Updated Thank You Message -->
+                <h2>Consultation Request Received!</h2>
+                <p>Thank you for your interest. We have received your details and will contact you via email shortly to schedule your consultation. You can typically expect a response within 1-2 business days.</p>
+                <!-- Removed email address display here for privacy/simplicity -->
             </section>
-        </div>
-    </div>
+        </div> <!-- /.main-content-container -->
+    </div> <!-- /.main-content-area -->
 
+    <!-- Navigation Tabs - Consistent Blue Theme -->
     <nav class="tabs">
         <a href="/KershawLawFirm/index_desktop.html">Home</a>
+        <a href="/KershawLawFirm/services_desktop.html">Services</a> <!-- Added Services Tab -->
         <a href="/KershawLawFirm/faq_desktop.html">FAQ</a>
         <a href="/KershawLawFirm/contact_desktop.html">Contact Us</a>
+        <!-- Active class will need to be set dynamically if needed, or manually removed -->
     </nav>
 
+     <!-- Firebase Scripts -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+      // IMPORTANT: Replace with your actual Firebase config
       const firebaseConfig = {
-        apiKey: "YOUR_API_KEY", // Replace with secure env variable in production
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // USE YOUR SECURE KEY
         authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
         projectId: "thekershawlawfirm-d5b54",
         storageBucket: "thekershawlawfirm-d5b54.appspot.com",
@@ -107,10 +134,14 @@
         window.firebaseAuth = auth;
         window.firebaseOnAuthStateChanged = onAuthStateChanged;
         window.firebaseSignOut = signOut;
+        document.dispatchEvent(new CustomEvent('firebaseAuthReady')); // Notify JS file
+        console.log("Firebase Initialized (Get Started - Blue Theme)."); // Updated Log
       } catch (error) {
-        console.error("Error initializing Firebase (Desktop):", error);
+        console.error("Error initializing Firebase (Get Started - Blue Theme):", error); // Updated Log
+        document.dispatchEvent(new CustomEvent('firebaseAuthError')); // Notify JS file
       }
     </script>
-    <script src="js/getstarted_desktop.js"></script>
+     <!-- Link JS -->
+    <script src="js/getstarted_desktop.js" defer></script> <!-- Defer loading -->
 </body>
 </html>

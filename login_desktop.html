@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Login - The Kershaw Law Firm (Dark Blue Theme)</title> <!-- Updated Title -->
+    <title>Client Login - The Kershaw Law Firm (Dark Blue Theme)</title>
     <meta name="description" content="Secure client portal login for The Kershaw Law Firm. Access your case information with our refined dark blue interface.">
-    <!-- Correct link to CSS file -->
     <link rel="stylesheet" href="css/login_desktop.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <div id="loader" class="loader" style="display: none;"></div>
+    <!-- Loader visible initially -->
+    <div id="loader" class="loader"></div>
     <div id="background-static"></div>
 
     <!-- Header (Remains Light) -->
@@ -23,27 +23,21 @@
                  <a href="index_desktop.html" class="logo-link">
                     <h1>The Kershaw Law Firm</h1>
                  </a>
-                <div class="header-line"></div> <!-- Color via CSS (Dark Blue) -->
+                <div class="header-line"></div>
             </div>
-            <!-- Header actions can be added here if needed, or kept minimal -->
-            <!-- Example: <a href="index_desktop.html" class="back-home-link">Back to Home</a> -->
         </div>
     </header>
 
     <!-- Main Content Area - Centered -->
     <div class="main-content-area">
-        <!-- Login Container with Dark Blue Theme Styling -->
         <div class="login-container">
-
             <section class="login-header">
-                <!-- Logo is in main header -->
                 <h2>Client Portal Login</h2>
                 <p class="subtitle">Securely access your account information.</p>
             </section>
 
-            <!-- Login Form Section -->
-            <section id="login-section" class="login-section">
-                <form id="login-form" class="login-form-element" novalidate> <!-- novalidate prevents browser default popups if using custom handling -->
+            <section id="login-section" class="login-section" style="display: none;"> <!-- Hide initially -->
+                <form id="login-form" class="login-form-element" novalidate>
                     <div class="form-group">
                         <label for="login-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
                         <input type="email" id="login-email" name="email" required placeholder="your.email@example.com">
@@ -64,29 +58,29 @@
                  </p>
             </section>
 
-            <!-- Password Reset Section (Initially Hidden) -->
             <section id="reset-password-section" class="reset-password-section" style="display: none;">
-                <h3>Reset Password</h3>
-                <p>Enter your email address below, and we'll send you a link to reset your password.</p>
-                <form id="reset-password-form" class="login-form-element" novalidate>
+                 <h3>Reset Password</h3>
+                 <p>Enter your email address below, and we'll send you a link to reset your password.</p>
+                 <form id="reset-password-form" class="login-form-element" novalidate>
                      <div class="form-group">
-                        <label for="reset-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
-                        <input type="email" id="reset-email" name="reset-email" required placeholder="your.email@example.com">
-                    </div>
+                         <label for="reset-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
+                         <input type="email" id="reset-email" name="reset-email" required placeholder="your.email@example.com">
+                     </div>
                      <div class="form-group submit-container">
-                         <button type="submit" id="reset-submit-button" class="login-button reset-button">
-                            <i class="fa-solid fa-envelope icon"></i> Send Reset Link
-                         </button>
-                    </div>
-                    <p id="reset-message" class="message" aria-live="assertive"></p>
-                </form>
-                <button id="cancel-reset-button" class="cancel-button">Cancel</button>
+                          <button type="submit" id="reset-submit-button" class="login-button reset-button">
+                             <i class="fa-solid fa-envelope icon"></i> Send Reset Link
+                          </button>
+                     </div>
+                     <p id="reset-message" class="message" aria-live="assertive"></p>
+                 </form>
+                 <button id="cancel-reset-button" class="cancel-button">Cancel</button>
             </section>
+            <!-- General error message area if needed -->
+             <p id="init-error-message" class="message error" style="display: none;" aria-live="assertive"></p> <!-- Added hidden init error message area -->
+        </div>
+    </div>
 
-        </div> <!-- End login-container -->
-    </div> <!-- End main-content-area -->
-
-    <!-- Navigation Tabs (Footer Style - Light Background, Dark Blue Accent) -->
+    <!-- Navigation Tabs -->
     <nav class="tabs">
         <a href="index_desktop.html">Home</a>
         <a href="services_desktop.html">Services</a>
@@ -96,33 +90,35 @@
 
     <!-- Firebase SDK -->
     <script type="module">
+      // Import necessary functions from Firebase SDKs
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import {
           getAuth,
           signInWithEmailAndPassword,
           sendPasswordResetEmail,
           onAuthStateChanged,
-          signOut // Included signOut just in case
+          signOut // Keep signOut for potential use
         } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      // Removed getAnalytics import as it wasn't used in the login script
 
-      // *** CRITICAL: VERIFY THIS CONFIGURATION IS CORRECT ***
+      // *** CORRECTED Firebase Configuration ***
       const firebaseConfig = {
-        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // thekershawlawfirm-d5b54 config
-        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
-        projectId: "thekershawlawfirm-d5b54",
-        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
-        messagingSenderId: "588166358773",
-        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-        measurementId: "G-5SVMGTE290" // Optional
+        apiKey: "AIzaSyCsrBEdTay9oTjrfR2dwh-AehGn_AgH5XQ", // Key from lawfirmwebdesign-69bd2
+        authDomain: "lawfirmwebdesign-69bd2.firebaseapp.com", // Domain from lawfirmwebdesign-69bd2
+        projectId: "lawfirmwebdesign-69bd2", // ProjectID from lawfirmwebdesign-69bd2
+        storageBucket: "lawfirmwebdesign-69bd2.firebasestorage.app", // StorageBucket from lawfirmwebdesign-69bd2
+        messagingSenderId: "1010126587829", // SenderID from lawfirmwebdesign-69bd2
+        appId: "1:1010126587829:web:63595d00a71bfc8898bbfc", // AppID from lawfirmwebdesign-69bd2
+        measurementId: "G-TMVRL6LNSH" // Optional MeasurementID from lawfirmwebdesign-69bd2
       };
 
       try {
           const app = initializeApp(firebaseConfig);
-          console.log("Firebase Initialized (Login Page - Dark Blue).");
+          console.log("Firebase Initialized (Login Page - Correct Config).");
           const auth = getAuth(app);
-          console.log("Firebase Auth Initialized (Login Page - Dark Blue).");
+          console.log("Firebase Auth Initialized (Login Page - Correct Config).");
 
-          // Make functions globally available for the deferred script
+          // Make functions globally available
           window.firebaseAuth = auth;
           window.signInWithEmailAndPassword = signInWithEmailAndPassword;
           window.sendPasswordResetEmail = sendPasswordResetEmail;
@@ -131,17 +127,24 @@
 
           document.dispatchEvent(new CustomEvent('firebaseReady'));
       } catch (error) {
-          console.error("Firebase Initialization Error (Login Page - Dark Blue):", error);
-          const loginMsgElement = document.getElementById('login-message');
-          if (loginMsgElement) {
-              loginMsgElement.textContent = 'Error initializing authentication. Please refresh or contact support.';
-              loginMsgElement.className = 'message error visible';
+          console.error("CRITICAL Firebase Initialization Error (Login Page):", error);
+          // Display a user-friendly message directly on the page
+          const initErrorElement = document.getElementById('init-error-message');
+          if (initErrorElement) {
+              initErrorElement.textContent = 'Failed to connect to authentication services. Please check the configuration or try again later.';
+              initErrorElement.style.display = 'block'; // Make it visible
           }
+          // Also hide the forms if init fails
+          const loginSect = document.getElementById('login-section');
+          const resetSect = document.getElementById('reset-password-section');
+          if(loginSect) loginSect.style.display = 'none';
+          if(resetSect) resetSect.style.display = 'none';
+
           document.dispatchEvent(new CustomEvent('firebaseError'));
       }
     </script>
 
-    <!-- Link JS, defer ensures HTML is parsed first -->
+    <!-- Link JS -->
     <script type="module" src="js/login_desktop.js" defer></script>
 
 </body>

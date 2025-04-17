@@ -3,34 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Consultation - The Kershaw Law Firm (Polished)</title> <!-- Updated Title -->
-    <meta name="description" content="Request a polished H-2A/H-2B visa consultation experience with The Kershaw Law Firm. Desktop access.">
-    <link rel="stylesheet" href="css/getstarted_desktop.css">
+    <!-- Updated Title and Description -->
+    <title>H-2A & H-2B Visa Services - The Kershaw Law Firm (Bordered Content)</title>
+    <meta name="description" content="Explore premier H-2A and H-2B visa services. Content area framed with a subtle border over the Austin backdrop.">
+    <!-- Link to the CSS -->
+    <link rel="stylesheet" href="css/services_desktop.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"> <!-- Keep Font Awesome -->
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
+    <!-- Loader (Color updated via CSS) -->
     <div id="loader" class="loader"></div>
-    <div id="background-static"></div>
 
-    <!-- Header -->
+    <!-- Background Image -->
+    <div id="background-static"></div>
+    <!-- No Overlay Div -->
+
+    <!-- Header - Consistent Theme -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                 <!-- FIXED: Link points correctly to index_desktop.html -->
-                 <a href="index_desktop.html" class="logo-link">
+                <a href="index_desktop.html" class="logo-link">
                     <h1>The Kershaw Law Firm</h1>
-                 </a>
-                <div class="header-line"></div> <!-- Color via CSS (Blue) -->
+                </a>
+                <div class="header-line"></div>
             </div>
             <div class="header-actions">
                 <div id="user-info" class="user-info" style="display: none;">
                     <span id="user-email">user@example.com</span>
-                    <a href="#" id="logout-button" class="logout-link">Logout</a> <!-- Color via CSS (Blue) -->
+                    <a href="#" id="logout-button" class="logout-link">Logout</a>
                 </div>
-                 <!-- Login button uses blue theme -->
                 <a href="login_desktop.html" id="login-button" class="login-button">Client Login</a>
             </div>
         </div>
@@ -38,99 +44,148 @@
 
     <!-- Main Content Area -->
     <div class="main-content-area">
-        <!-- Container with refined border -->
-        <div class="main-content-container">
-            <!-- Consultation Form Section -->
-            <section class="consultation-form-section" id="consultation-form-section">
-                <h2>Request Your Consultation</h2>
-                <p class="form-intro">Provide your details below, and our team will contact you to discuss your H-2A/H-2B visa needs.</p>
-                <!-- Form with refined styling -->
-                <form id="consultation-request-form">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="full-name">Full Name</label>
-                            <input type="text" id="full-name" name="full-name" required placeholder="e.g., Jane Smith">
-                        </div>
-                        <div class="form-group">
-                            <label for="company-name">Company Name</label>
-                            <input type="text" id="company-name" name="company-name" required placeholder="e.g., Smith Farms">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="jane.smith@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
-                        </div>
-                        <div class="form-group form-group-span-2">
-                            <label for="visa-type">Primary Visa Type Needed</label>
-                            <select id="visa-type" name="visa-type" required>
-                                <option value="" disabled selected>-- Select Visa --</option>
-                                <option value="h2a">H-2A (Agricultural)</option>
-                                <option value="h2b">H-2B (Non-Agricultural)</option>
-                                <option value="both">Both / Unsure</option>
-                            </select>
-                        </div>
-                        <div class="form-group form-group-span-2">
-                            <label for="worker-count">Approx. Number of Workers Needed</label>
-                            <input type="number" id="worker-count" name="worker-count" min="1" required placeholder="e.g., 15">
-                        </div>
-                         <div class="form-group form-group-span-2">
-                            <label for="message">Briefly Describe Your Needs</label>
-                            <textarea id="message" name="message" rows="5" placeholder="e.g., Peak season dates, type of work, previous experience with H-2 visas..."></textarea>
-                        </div>
+        <!-- Container now has a border via CSS -->
+        <div class="services-container">
+
+            <!-- Hero Section -->
+            <section class="hero services-hero animate-on-scroll" data-animation="fade-in-up">
+                <h2>H-2A & H-2B Visa Legal Services</h2>
+                <p class="tagline">Expert strategy and processing for your temporary workforce needs.</p>
+            </section>
+
+            <!-- Introduction -->
+            <section class="intro-section animate-on-scroll" data-animation="fade-in">
+                <span class="intro-accent-line"></span>
+                <p>Reliable seasonal labor is vital. The Kershaw Law Firm expertly navigates the intricate H-2A and H-2B visa processes, transforming regulatory challenges into successful workforce solutions for your business.</p>
+                <span class="intro-accent-line bottom"></span>
+            </section>
+
+            <!-- Visa Explanations -->
+            <div class="visa-details-wrapper">
+                <section class="visa-section h2a-section animate-on-scroll" data-animation="fade-in-left">
+                    <div class="visa-icon-wrapper">
+                         <i class="fa-solid fa-tractor icon-display"></i>
                     </div>
-                     <!-- Submit button with icon -->
-                    <button type="submit" class="submit-button">
-                        <i class="fas fa-paper-plane"></i> Request Consultation
-                    </button>
-                </form>
+                    <h3 class="visa-title">H-2A Visas</h3>
+                    <h4 class="visa-subtitle">Agricultural Workforce</h4>
+                    <p>For agricultural employers needing temporary/seasonal labor. We handle the process to ensure smooth operations, from field preparation to final harvest.</p>
+                </section>
+
+                <section class="visa-section h2b-section animate-on-scroll" data-animation="fade-in-right">
+                     <div class="visa-icon-wrapper">
+                          <i class="fa-solid fa-helmet-safety icon-display"></i>
+                     </div>
+                    <h3 class="visa-title">H-2B Visas</h3>
+                    <h4 class="visa-subtitle">Non-Agricultural Workforce</h4>
+                    <p>For non-agricultural sectors (landscaping, hospitality, construction, etc.) needing temporary workers for seasonal, peak, or intermittent needs when US workers are unavailable.</p>
+                </section>
+            </div>
+
+            <!-- The Kershaw Advantage Section -->
+            <section class="advantage-section animate-on-scroll" data-animation="fade-in-up">
+                <h2 class="section-title">The Kershaw Law Advantage</h2>
+                <p class="section-subtitle">Partnering with us provides more than just visa processing; it offers a strategic advantage.</p>
+                <div class="advantage-grid">
+                     <!-- Items styling adjusted via CSS -->
+                     <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;">
+                        <i class="fa-solid fa-medal advantage-icon"></i>
+                        <h4>Proven Expertise</h4>
+                        <p>25+ years exclusively focused on H-2 visas, mastering the nuances for effective results.</p>
+                    </div>
+                    <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;">
+                         <i class="fa-solid fa-globe-americas advantage-icon"></i>
+                        <h4>Nationwide Reach</h4>
+                        <p>Federally licensed to assist clients across all states, sourcing workers worldwide.</p>
+                    </div>
+                    <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;">
+                         <i class="fa-solid fa-lightbulb advantage-icon"></i>
+                        <h4>Strategic Counsel</h4>
+                        <p>Proactive advice, compliance support, and valuable insights via client resources.</p>
+                    </div>
+                    <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;">
+                         <i class="fa-solid fa-headset advantage-icon"></i>
+                        <h4>Dedicated Support</h4>
+                        <p>Direct team access ensures clear communication and focus on your specific goals.</p>
+                    </div>
+                     <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;">
+                          <i class="fa-solid fa-landmark advantage-icon"></i>
+                        <h4>Industry Advocacy</h4>
+                        <p>Active participation (via SEA) in advocating for sensible H-2B cap reform.</p>
+                    </div>
+                     <div class="advantage-item animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 6;">
+                          <i class="fa-solid fa-clipboard-check advantage-icon"></i>
+                        <h4>Streamlined Process</h4>
+                        <p>Structured approach and clear guides simplify the complex visa journey.</p>
+                    </div>
+                </div>
             </section>
 
-            <!-- Thank You Section -->
-            <section class="thank-you" id="thank-you" style="display: none; opacity: 0;">
-                <h2>Consultation Request Received!</h2>
-                <p>Thank you for your interest. We have received your details and will contact you via email shortly to schedule your consultation. You can typically expect a response within 1-2 business days.</p>
+             <!-- Process Section -->
+            <section class="process-section animate-on-scroll" data-animation="fade-in">
+                <h2 class="section-title">Our Efficient Process</h2>
+                <p class="section-subtitle">We manage each stage with precision for timely results.</p>
+                <div class="process-steps">
+                    <!-- Steps styling adjusted via CSS -->
+                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 1;"><span class="step-number">1</span> Strategy & Consultation</div>
+                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 2;"><span class="step-number">2</span> Labor Certification (DOL)</div>
+                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 3;"><span class="step-number">3</span> Petition Filing (USCIS)</div>
+                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 4;"><span class="step-number">4</span> Consular Support</div>
+                    <div class="step animate-on-scroll" data-animation="fade-in-up" style="--animation-order: 5;"><span class="step-number">5</span> Ongoing Compliance</div>
+                </div>
+                 <div class="process-connector"></div>
             </section>
-        </div>
-    </div>
 
-    <!-- Navigation Tabs -->
+            <!-- Call to Action Section -->
+            <section class="cta-section animate-on-scroll" data-animation="fade-in-up">
+                <h2 class="cta-title">Ready to Secure Your Workforce?</h2>
+                <p class="cta-subtitle">Contact The Kershaw Law Firm today to discuss your H-2A or H-2B visa requirements.</p>
+                <a href="getstarted_desktop.html" class="cta-button primary-cta">
+                    <i class="fa-solid fa-comments"></i> Request a Consultation
+                </a>
+            </section>
+
+        </div> <!-- /.services-container -->
+    </div> <!-- /.main-content-area -->
+
+    <!-- Navigation Tabs (Footer Style) -->
     <nav class="tabs">
-        <a href="index_desktop.html">Home</a> <!-- Fixed Link -->
-        <a href="services_desktop.html">Services</a> <!-- Fixed Link -->
-        <a href="faq_desktop.html">FAQ</a> <!-- Fixed Link -->
-        <a href="contact_desktop.html">Contact Us</a> <!-- Fixed Link -->
+        <a href="/KershawLawFirm/index_desktop.html">Home</a>
+        <a href="/KershawLawFirm/services_desktop.html" class="active">Services</a>
+        <a href="/KershawLawFirm/faq_desktop.html">FAQ</a>
+        <a href="/KershawLawFirm/contact_desktop.html">Contact Us</a>
     </nav>
 
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>© <span id="current-year"></span> The Kershaw Law Firm P.C. All Rights Reserved.</p>
+    </footer>
+
     <!-- Firebase Scripts -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-      const firebaseConfig = {
-        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // USE YOUR SECURE KEY
-        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
-        projectId: "thekershawlawfirm-d5b54",
-        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
-        messagingSenderId: "588166358773",
-        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-        measurementId: "G-5SVMGTE290"
-      };
-      try {
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        window.firebaseApp = app;
-        window.firebaseAuth = auth;
-        window.firebaseOnAuthStateChanged = onAuthStateChanged;
-        window.firebaseSignOut = signOut;
-        document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
-        console.log("Firebase Initialized (Get Started - Polished Theme)."); // Updated Log
-      } catch (error) {
-        console.error("Error initializing Firebase (Get Started - Polished Theme):", error); // Updated Log
-        document.dispatchEvent(new CustomEvent('firebaseAuthError'));
-      }
+     <script type="module">
+        // Firebase Init Code (Using thekershawlawfirm-d5b54 config)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // USE YOUR WORKING KEY
+            authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+            projectId: "thekershawlawfirm-d5b54",
+            storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+            messagingSenderId: "588166358773",
+            appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+            measurementId: "G-5SVMGTE290"
+         };
+        try {
+            const app = initializeApp(firebaseConfig); const auth = getAuth(app);
+            window.firebaseApp = app; window.firebaseAuth = auth;
+            window.firebaseOnAuthStateChanged = onAuthStateChanged; window.firebaseSignOut = signOut;
+            document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
+            console.log("Firebase Initialized (Services Desktop - Bordered Theme).") // Updated log
+        } catch (error) {
+             console.error("Firebase Init Error (Services Desktop - Bordered Theme):", error); // Updated log
+             document.dispatchEvent(new CustomEvent('firebaseAuthError'));
+        }
     </script>
-    <script src="js/getstarted_desktop.js" defer></script>
+    <!-- Link to the specific JS file -->
+    <script src="js/services_desktop.js" defer></script>
 </body>
 </html>

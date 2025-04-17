@@ -1,149 +1,262 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Login - The Kershaw Law Firm (Blue Theme)</title> <!-- Updated Title -->
-    <meta name="description" content="Secure client portal login for The Kershaw Law Firm. Access your case information with our refined interface.">
-    <link rel="stylesheet" href="css/login_desktop.css"> <!-- Link CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"> <!-- Font Awesome -->
-</head>
-<body>
-    <!-- Loader -->
-    <div id="loader" class="loader" style="display: none;"></div> <!-- Initially hidden -->
+/* ==========================================================================
+   LOGIN DESKTOP STYLESHEET (Polished Dark Blue Theme)
+   ========================================================================== */
 
-    <!-- Background Image Container (No dark overlay) -->
-    <div id="background-static"></div>
+/* Global Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-    <!-- Main Content Area - Centered -->
-    <div class="main-content-area">
-        <!-- Login Container with Border/Background -->
-        <div class="login-container">
+/* Define Polished DARK Blue/Neutral Palette */
+:root {
+    /* Header/Footer (Light) */
+    --color-bg-header-footer: rgba(250, 250, 250, 0.93); /* Slightly more opaque */
+    --color-text-header-footer: #2c3e50;
+    --color-border-header-footer: rgba(44, 62, 80, 0.12);
 
-            <section class="login-header">
-                <!-- Logo Added -->
-                <div class="logo-container">
-                    <a href="index_desktop.html" class="logo-link">
-                        <h1>The Kershaw Law Firm</h1>
-                    </a>
-                    <div class="header-line"></div>
-                </div>
-                <h2>Client Portal Login</h2> <!-- Updated heading -->
-                <p class="subtitle">Securely access your account information.</p> <!-- Updated subtitle -->
-            </section>
+    /* Main Content (Dark Blue Base) */
+    --color-text-on-dark-bg: #FFFFFF;
+    --color-text-heading: #FFFFFF;
+    --color-text-subtitle: rgba(255, 255, 255, 0.85);
+    --color-primary-dark-blue: #0B3D91; /* Darker Primary Blue */
+    --color-accent-lighter-blue: #4FC3F7; /* Lighter Accent Blue for hover/focus */
+    --color-border-container: rgba(79, 195, 247, 0.3); /* Light blue border for container */
+    --color-bg-login-container: rgba(11, 61, 145, 0.25); /* Dark blueish, more transparent bg */
 
-            <!-- Login Form Section -->
-            <section id="login-section" class="login-section">
-                <form id="login-form" class="login-form-element">
-                    <div class="form-group">
-                        <label for="login-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
-                        <input type="email" id="login-email" name="email" required placeholder="your.email@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password"><i class="fa-solid fa-lock icon"></i> Password</label>
-                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
-                    </div>
-                    <div class="form-group submit-container">
-                         <button type="submit" id="login-submit-button" class="login-button">
-                            <i class="fa-solid fa-right-to-bracket icon"></i> Sign In
-                         </button>
-                    </div>
-                     <p id="login-message" class="message" aria-live="assertive"></p>
-                </form>
-                 <p class="forgot-password">
-                    <a href="#" id="forgot-password-link">Forgot Password?</a>
-                 </p>
-            </section>
+    /* Form Elements */
+    --color-border-input: #78909C; /* Grey-blue border */
+    --color-border-input-focus: var(--color-accent-lighter-blue);
+    --color-bg-input: #FFFFFF;
+    --color-text-input: #263238;
+    --color-placeholder-text: #90A4AE;
+    --color-label-text: rgba(255, 255, 255, 0.9);
 
-            <!-- Password Reset Section (Initially Hidden) -->
-            <section id="reset-password-section" class="reset-password-section" style="display: none;">
-                <h3>Reset Password</h3>
-                <p>Enter your email address below, and we'll send you a link to reset your password.</p>
-                <form id="reset-password-form" class="login-form-element">
-                     <div class="form-group">
-                        <label for="reset-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
-                        <input type="email" id="reset-email" name="reset-email" required placeholder="your.email@example.com">
-                    </div>
-                     <div class="form-group submit-container">
-                         <button type="submit" id="reset-submit-button" class="login-button reset-button">
-                            <i class="fa-solid fa-envelope icon"></i> Send Reset Link
-                         </button>
-                    </div>
-                    <p id="reset-message" class="message" aria-live="assertive"></p>
-                </form>
-                <button id="cancel-reset-button" class="cancel-button">Cancel</button>
-            </section>
+    /* Status Colors */
+    --color-text-error: #FF6B6B; /* Brighter red for dark bg */
+    --color-text-success: #69F0AE; /* Brighter green for dark bg */
 
-            <!-- Minimal Logged In State (Optional, usually just redirect) -->
-            <!-- <section id="user-info-section" class="user-info-section" style="display: none;">
-                <p>Welcome, <span id="user-email-display"></span>!</p>
-                <p>Redirecting to dashboard...</p>
-            </section> -->
+    /* Shadows */
+    --color-shadow-text: 1px 1px 8px rgba(0, 0, 0, 0.6);
+    --color-shadow-container: 0 12px 40px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    --color-shadow-input-focus: rgba(79, 195, 247, 0.4); /* Lighter blue focus glow */
+    --color-shadow-button: 0 4px 14px rgba(11, 61, 145, 0.4); /* Dark blue button shadow */
+    --color-shadow-button-hover: 0 7px 20px rgba(79, 195, 247, 0.5); /* Lighter blue hover shadow */
 
-        </div> <!-- End login-container -->
-    </div> <!-- End main-content-area -->
+    /* Fonts & Transitions */
+    --font-primary: 'Cinzel', serif;
+    --font-secondary: 'EB Garamond', serif;
+    --footer-height: 65px;
+    --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-form: all 0.25s ease-in-out;
+}
 
-    <!-- Navigation Tabs (Footer Style - Consistent Blue Theme) -->
-    <nav class="tabs">
-        <a href="index_desktop.html">Home</a>
-        <a href="services_desktop.html">Services</a> <!-- Services tab added -->
-        <a href="faq_desktop.html">FAQ</a>
-        <a href="contact_desktop.html">Contact Us</a>
-    </nav>
+/* Body Styling */
+body {
+    font-family: var(--font-secondary);
+    min-height: 100vh;
+    color: var(--color-text-on-dark-bg);
+    line-height: 1.7;
+    background-color: #0a192f; /* Dark blue fallback */
+    overflow-x: hidden; position: relative; opacity: 1;
+    padding-bottom: var(--footer-height);
+    display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
 
-    <!-- Firebase SDK -->
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import {
-          getAuth,
-          signInWithEmailAndPassword,
-          sendPasswordResetEmail,
-          onAuthStateChanged,
-          signOut // Import signOut if needed elsewhere, maybe not on login page itself
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+/* Background */
+#background-static {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; background-size: cover; background-position: center center;
+    background-repeat: no-repeat; background-image: url('../assets/austinbackground.jpg');
+    filter: brightness(1.0) saturate(1.0); /* Keep background natural */
+    animation: subtleZoom 45s infinite alternate ease-in-out;
+}
+@keyframes subtleZoom { from { transform: scale(1); } to { transform: scale(1.02); } }
 
-      // Your web app's Firebase configuration (Using thekershawlawfirm-d5b54)
-      const firebaseConfig = {
-        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // YOUR KEY
-        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
-        projectId: "thekershawlawfirm-d5b54",
-        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
-        messagingSenderId: "588166358773",
-        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-        measurementId: "G-5SVMGTE290" // Optional
-      };
+/* Header (Light Theme) */
+.header {
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to top */
+    left: 0; width: 100%; z-index: 1000;
+    height: auto; /* Adjust height based on content */
+    min-height: 75px; /* Minimum height */
+    display: flex; align-items: center;
+    padding: 10px 0; /* Vertical padding */
+    background: var(--color-bg-header-footer);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+    border-bottom: 1px solid var(--color-border-header-footer);
+    color: var(--color-text-header-footer);
+}
+.header-content { width: 90%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.logo-container { text-align: left; flex-shrink: 0; }
+.logo-link { text-decoration: none; color: inherit; }
+.logo-container h1 { font-family: var(--font-primary); font-size: clamp(1.8rem, 3vw, 2.2rem); color: var(--color-text-header-footer); font-weight: 700; margin: 0; transition: color var(--transition-fast); text-shadow: none; letter-spacing: 1px; }
+.logo-container .logo-link:hover h1 { color: var(--color-primary-dark-blue); } /* Dark blue hover */
+.header-line { /* Uses DARK BLUE */
+    width: 70px; height: 2.5px; background: var(--color-primary-dark-blue);
+    margin: 5px 0 0 0; transition: width 0.3s ease; border-radius: 1px;
+}
+.logo-container:hover .header-line { width: 120px; }
+/* Header actions styling (buttons, etc.) are inside the form container now */
 
-      // Initialize Firebase
-      try {
-          const app = initializeApp(firebaseConfig);
-          console.log("Firebase Initialized (Login Page).");
-          // Initialize Firebase Authentication and get a reference to the service
-          const auth = getAuth(app);
-          console.log("Firebase Auth Initialized (Login Page).");
+/* Main Content Area */
+.main-content-area {
+    position: relative; z-index: 5; flex-grow: 1;
+    display: flex; justify-content: center; align-items: center;
+    padding: 50px 20px; /* Adjusted padding */
+}
 
-          // Make auth functions available globally for the login script
-          window.firebaseAuth = auth;
-          window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-          window.sendPasswordResetEmail = sendPasswordResetEmail;
-          window.onAuthStateChanged = onAuthStateChanged;
-          window.signOut = signOut; // Make signOut available if needed
+/* Login Container Styling */
+.login-container {
+    width: 100%; max-width: 500px; /* Optimized width */
+    margin: auto; padding: 40px 45px; /* Adjusted padding */
+    border: 1px solid var(--color-border-container);
+    border-radius: 12px; /* Slightly softer radius */
+    background-color: var(--color-bg-login-container);
+    box-shadow: var(--color-shadow-container);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); /* More blur */
+    text-align: center; display: flex; flex-direction: column; gap: 25px;
+}
 
-          document.dispatchEvent(new CustomEvent('firebaseReady')); // Notify script
-      } catch (error) {
-          console.error("Firebase Initialization Error (Login Page):", error);
-          // Handle initialization error (e.g., display message to user)
-          document.getElementById('login-message').textContent = 'Error loading essential services. Please refresh.';
-          document.getElementById('login-message').className = 'message error visible';
-          document.dispatchEvent(new CustomEvent('firebaseError')); // Notify script
-      }
-    </script>
+/* Login Header inside container */
+.login-header { margin-bottom: 5px; } /* Reduced margin */
+/* Logo is now in the main header, not repeated here */
+.login-header h2 {
+    font-family: var(--font-primary); font-size: clamp(1.7rem, 4.5vw, 2.1rem);
+    color: var(--color-text-heading); text-shadow: var(--color-shadow-text);
+    margin-bottom: 8px; font-weight: 700;
+}
+.subtitle {
+    font-family: var(--font-secondary); font-size: clamp(1rem, 2.8vw, 1.1rem);
+    color: var(--color-text-subtitle); text-shadow: var(--color-shadow-text);
+    margin-bottom: 0; font-weight: 400;
+}
 
-    <!-- Link to Desktop Login JS (defer ensures HTML is parsed first) -->
-    <script type="module" src="js/login_desktop.js" defer></script>
+/* Form Sections */
+.login-section, .reset-password-section { width: 100%; }
 
-</body>
-</html>
+/* Shared Form Styling */
+.login-form-element { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+.form-group { display: flex; flex-direction: column; text-align: left; }
+.form-group label {
+    display: flex; align-items: center; gap: 9px;
+    font-family: var(--font-secondary); font-size: 0.95rem; /* Slightly smaller label */
+    color: var(--color-label-text); margin-bottom: 6px;
+    font-weight: 500; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.form-group label .icon { font-size: 0.9em; width: 15px; text-align: center; opacity: 0.7; }
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    padding: 12px 15px; font-family: var(--font-secondary); font-size: 1rem;
+    color: var(--color-text-input); background: var(--color-bg-input);
+    border: 1px solid var(--color-border-input); border-radius: 6px; /* Softer radius */
+    outline: none; transition: var(--transition-form);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+::placeholder { color: var(--color-placeholder-text); opacity: 1; }
+::-ms-input-placeholder { color: var(--color-placeholder-text); }
+:-ms-input-placeholder { color: var(--color-placeholder-text); }
+
+.form-group input:focus {
+    border-color: var(--color-border-input-focus);
+    box-shadow: 0 0 9px var(--color-shadow-input-focus); /* Refined focus glow */
+}
+.submit-container { margin-top: 8px; }
+
+/* Login/Reset Buttons (Dark Blue) */
+.login-button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 12px 30px; /* Slightly smaller padding */
+    background: var(--color-primary-dark-blue); /* Dark Blue */
+    color: var(--color-text-on-dark-bg);
+    font-family: var(--font-primary); font-size: 1rem; /* Adjusted size */
+    font-weight: 700; border: none; border-radius: 50px;
+    transition: var(--transition-smooth); box-shadow: var(--color-shadow-button);
+    cursor: pointer; text-transform: uppercase; letter-spacing: 1px; text-shadow: none;
+}
+.login-button .icon { font-size: 1em; }
+.login-button:hover {
+    background: var(--color-accent-lighter-blue); /* Lighter blue hover */
+    transform: translateY(-3px); box-shadow: var(--color-shadow-button-hover);
+}
+.login-button:disabled { background-color: #546E7A; cursor: not-allowed; box-shadow: none; transform: none; }
+
+/* Message Styling */
+.message {
+    margin-top: 12px; font-size: 0.9rem; font-weight: 500;
+    min-height: 1.4em; opacity: 0; transition: opacity 0.3s ease-in-out;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.message.visible { opacity: 1; }
+.message.success { color: var(--color-text-success); }
+.message.error { color: var(--color-text-error); }
+
+/* Forgot Password Link */
+.forgot-password { margin-top: 18px; font-size: 0.9rem; }
+.forgot-password a {
+    color: var(--color-accent-lighter-blue); /* Lighter blue link */
+    text-decoration: none; transition: color var(--transition-fast);
+}
+.forgot-password a:hover { color: var(--color-text-on-dark-bg); text-decoration: underline; }
+
+/* Reset Password Section */
+.reset-password-section { border-top: 1px solid rgba(79, 195, 247, 0.15); padding-top: 25px; }
+.reset-password-section h3 { font-family: var(--font-primary); font-size: 1.4rem; color: var(--color-text-heading); text-shadow: var(--color-shadow-text); margin-bottom: 8px; font-weight: 700; }
+.reset-password-section p { font-size: 0.9rem; color: var(--color-text-subtitle); margin-bottom: 20px; max-width: 95%; margin-left: auto; margin-right: auto; }
+.cancel-button { background: none; border: none; color: var(--color-text-subtitle); font-family: var(--font-secondary); font-size: 0.85rem; cursor: pointer; margin-top: 12px; padding: 5px; transition: color var(--transition-fast); }
+.cancel-button:hover { color: var(--color-text-on-dark-bg); }
+
+/* Tabs Styling (Light Background, Dark Blue Accent) */
+.tabs {
+    position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000;
+    height: var(--footer-height); display: flex; align-items: center; justify-content: center;
+    gap: 45px; padding: 0; background: var(--color-bg-header-footer);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.07);
+    border-top: 1px solid var(--color-border-header-footer);
+    color: var(--color-text-header-footer);
+}
+.tabs a { color: var(--color-text-header-footer); text-decoration: none; font-family: var(--font-secondary); font-size: 1.15rem; font-weight: 500; padding: 10px 15px; transition: all var(--transition-fast); position: relative; text-transform: uppercase; letter-spacing: 1.2px; }
+.tabs a::after { /* Uses DARK BLUE */
+    content: ''; position: absolute; width: 0; height: 2.5px; bottom: 5px;
+    left: 50%; transform: translateX(-50%); background: var(--color-primary-dark-blue);
+    transition: width 0.4s ease; border-radius: 1px;
+}
+.tabs a:hover, .tabs a.active { color: var(--color-primary-dark-blue); }
+.tabs a:hover::after, .tabs a.active::after { width: 70%; }
+
+/* Focus Styles (Lighter Blue Accent) */
+a:focus, button:focus, input:focus { outline: none; }
+a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2.5px solid var(--color-accent-lighter-blue);
+    outline-offset: 2px; border-radius: 3px;
+    box-shadow: 0 0 10px var(--color-shadow-input-focus);
+}
+.form-group input:focus-visible { box-shadow: 0 0 10px var(--color-shadow-input-focus); }
+
+/* Loader (Lighter Blue Accent) */
+.loader { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; border: 4px solid rgba(79, 195, 247, 0.3); border-top: 4px solid var(--color-accent-lighter-blue); border-radius: 50%; animation: spin 1s linear infinite; z-index: 1001; }
+@keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-content-area { padding: 40px 15px; }
+    .login-container { padding: 35px 30px; max-width: 95%;}
+    .header { position: static; min-height: 0; padding: 15px 0;} /* Header becomes static */
+    .header-content { flex-direction: column; gap: 15px; }
+    .logo-container { text-align: center; }
+    .header-line { margin: 4px auto 0 auto; }
+    .tabs { gap: 25px; }
+    .tabs a { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+    .login-container { padding: 30px 20px; }
+    .login-header h2 { font-size: 1.5rem; }
+    .subtitle { font-size: 0.9rem; }
+    .form-group label { font-size: 0.9rem; }
+    .form-group input { font-size: 0.95rem; padding: 11px 14px; }
+    .login-button { font-size: 0.95rem; padding: 11px 28px; }
+    .tabs { gap: 15px; }
+    .tabs a { font-size: 0.9rem; padding: 8px 5px; }
+}

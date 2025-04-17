@@ -1,3 +1,7 @@
+/* ==========================================================================
+   LOGIN DESKTOP STYLESHEET (Polished Dark Blue Theme V2 - Centered Header)
+   ========================================================================== */
+
 /* Global Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -73,41 +77,18 @@ body {
 
 /* Header (Light Theme, Centered Logo) */
 .header {
-    position: fixed; /* Changed back to fixed for consistent look */
-    top: 0; left: 0; width: 100%; z-index: 1000;
-    height: 85px; /* Fixed height */
-    display: flex; align-items: center; /* Vertically center */
-    padding: 0; /* Padding handled by content */
-    background: var(--color-bg-header-footer);
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    height: 85px; display: flex; align-items: center;
+    padding: 0; background: var(--color-bg-header-footer);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
     border-bottom: 1px solid var(--color-border-header-footer);
     color: var(--color-text-header-footer);
 }
-.header-content {
-    width: 90%; max-width: 1400px; margin: 0 auto;
-    display: flex; justify-content: center; /* Center the logo container */
-    align-items: center;
-}
-.logo-container { /* Styles for the centered container */
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.logo-container h1 {
-    font-family: var(--font-primary); font-size: clamp(2rem, 4vw, 2.5rem); /* Adjusted size */
-    color: var(--color-text-header-footer); font-weight: 700;
-    margin: 0 0 5px 0; /* Margin below H1 */
-    transition: color var(--transition-fast);
-    text-shadow: none; letter-spacing: 1.5px; /* Increased spacing */
-    padding: 0; /* Remove any padding */
-}
-/* Removed hover effect for title on login page */
-.header-line { /* Centered underline using dark blue */
-    width: 100px; height: 3px; background: var(--color-header-underline);
-    margin: 0 auto; border-radius: 1px;
-}
+.header-content { width: 90%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+.logo-container { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.logo-container h1 { font-family: var(--font-primary); font-size: clamp(2rem, 4vw, 2.5rem); color: var(--color-text-header-footer); font-weight: 700; margin: 0 0 5px 0; transition: color var(--transition-fast); text-shadow: none; letter-spacing: 1.5px; padding: 0; }
+.header-line { width: 100px; height: 3px; background: var(--color-header-underline); margin: 0 auto; border-radius: 1px; }
 
 /* Main Content Area */
 .main-content-area {
@@ -118,8 +99,7 @@ body {
 
 /* Login Container Styling */
 .login-container {
-    width: 100%; max-width: 480px; /* Optimized width */
-    margin: auto; padding: 35px 40px; /* Adjusted padding */
+    width: 100%; max-width: 480px; margin: auto; padding: 35px 40px;
     border: 1px solid var(--color-border-container);
     border-radius: 12px; background-color: var(--color-bg-login-container);
     box-shadow: var(--color-shadow-container);
@@ -136,7 +116,7 @@ body {
 .login-section, .reset-password-section { width: 100%; }
 
 /* Shared Form Styling */
-.login-form-element { display: flex; flex-direction: column; gap: 18px; width: 100%; } /* Reduced gap */
+.login-form-element { display: flex; flex-direction: column; gap: 18px; width: 100%; }
 .form-group { display: flex; flex-direction: column; text-align: left; }
 .form-group label { display: flex; align-items: center; gap: 8px; font-family: var(--font-secondary); font-size: 0.9rem; color: var(--color-label-text); margin-bottom: 5px; font-weight: 500; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
 .form-group label .icon { font-size: 0.9em; width: 14px; text-align: center; opacity: 0.7; }

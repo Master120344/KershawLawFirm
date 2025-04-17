@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Login - The Kershaw Law Firm (Dark Blue Theme)</title>
-    <meta name="description" content="Secure client portal login for The Kershaw Law Firm. Access your case information with our refined dark blue interface.">
+    <title>Client Login - The Kershaw Law Firm P.C. (Dark Blue)</title> <!-- Added P.C. -->
+    <meta name="description" content="Secure client portal login for The Kershaw Law Firm P.C. Access your case information.">
     <link rel="stylesheet" href="css/login_desktop.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,27 +16,32 @@
     <div id="loader" class="loader"></div>
     <div id="background-static"></div>
 
-    <!-- Header (Remains Light) -->
+    <!-- Header (Light Background, Centered Logo) -->
     <header class="header">
         <div class="header-content">
+            <!-- Centered Logo Container -->
             <div class="logo-container">
-                 <a href="index_desktop.html" class="logo-link">
-                    <h1>The Kershaw Law Firm</h1>
-                 </a>
-                <div class="header-line"></div>
+                 <!-- No link needed on login page? Or link to index -->
+                 <!-- <a href="index_desktop.html" class="logo-link"> -->
+                    <h1>THE KERSHAW LAW FIRM P.C.</h1> <!-- Updated Name -->
+                 <!-- </a> -->
+                <div class="header-line"></div> <!-- Centered underline via CSS -->
             </div>
+            <!-- Actions removed from login header -->
         </div>
     </header>
 
     <!-- Main Content Area - Centered -->
     <div class="main-content-area">
+        <!-- Login Container -->
         <div class="login-container">
             <section class="login-header">
+                <!-- Logo REMOVED from here -->
                 <h2>Client Portal Login</h2>
                 <p class="subtitle">Securely access your account information.</p>
             </section>
 
-            <section id="login-section" class="login-section" style="display: none;"> <!-- Hide initially -->
+            <section id="login-section" class="login-section" style="display: none;"> <!-- Hide initially until Firebase check -->
                 <form id="login-form" class="login-form-element" novalidate>
                     <div class="form-group">
                         <label for="login-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
@@ -75,12 +80,11 @@
                  </form>
                  <button id="cancel-reset-button" class="cancel-button">Cancel</button>
             </section>
-            <!-- General error message area if needed -->
-             <p id="init-error-message" class="message error" style="display: none;" aria-live="assertive"></p> <!-- Added hidden init error message area -->
+             <p id="init-error-message" class="message error" style="display: none;" aria-live="assertive"></p>
         </div>
     </div>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Tabs (Light Background, Dark Blue Accent) -->
     <nav class="tabs">
         <a href="index_desktop.html">Home</a>
         <a href="services_desktop.html">Services</a>
@@ -90,26 +94,24 @@
 
     <!-- Firebase SDK -->
     <script type="module">
-      // Import necessary functions from Firebase SDKs
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import {
           getAuth,
           signInWithEmailAndPassword,
           sendPasswordResetEmail,
           onAuthStateChanged,
-          signOut // Keep signOut for potential use
+          signOut
         } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-      // Removed getAnalytics import as it wasn't used in the login script
 
-      // *** CORRECTED Firebase Configuration ***
+      // *** USING THE CORRECT lawfirmwebdesign-69bd2 CONFIGURATION ***
       const firebaseConfig = {
-        apiKey: "AIzaSyCsrBEdTay9oTjrfR2dwh-AehGn_AgH5XQ", // Key from lawfirmwebdesign-69bd2
-        authDomain: "lawfirmwebdesign-69bd2.firebaseapp.com", // Domain from lawfirmwebdesign-69bd2
-        projectId: "lawfirmwebdesign-69bd2", // ProjectID from lawfirmwebdesign-69bd2
-        storageBucket: "lawfirmwebdesign-69bd2.firebasestorage.app", // StorageBucket from lawfirmwebdesign-69bd2
-        messagingSenderId: "1010126587829", // SenderID from lawfirmwebdesign-69bd2
-        appId: "1:1010126587829:web:63595d00a71bfc8898bbfc", // AppID from lawfirmwebdesign-69bd2
-        measurementId: "G-TMVRL6LNSH" // Optional MeasurementID from lawfirmwebdesign-69bd2
+        apiKey: "AIzaSyCsrBEdTay9oTjrfR2dwh-AehGn_AgH5XQ",
+        authDomain: "lawfirmwebdesign-69bd2.firebaseapp.com",
+        projectId: "lawfirmwebdesign-69bd2",
+        storageBucket: "lawfirmwebdesign-69bd2.firebasestorage.app",
+        messagingSenderId: "1010126587829",
+        appId: "1:1010126587829:web:63595d00a71bfc8898bbfc",
+        measurementId: "G-TMVRL6LNSH" // Optional
       };
 
       try {
@@ -118,7 +120,6 @@
           const auth = getAuth(app);
           console.log("Firebase Auth Initialized (Login Page - Correct Config).");
 
-          // Make functions globally available
           window.firebaseAuth = auth;
           window.signInWithEmailAndPassword = signInWithEmailAndPassword;
           window.sendPasswordResetEmail = sendPasswordResetEmail;
@@ -128,13 +129,11 @@
           document.dispatchEvent(new CustomEvent('firebaseReady'));
       } catch (error) {
           console.error("CRITICAL Firebase Initialization Error (Login Page):", error);
-          // Display a user-friendly message directly on the page
           const initErrorElement = document.getElementById('init-error-message');
           if (initErrorElement) {
-              initErrorElement.textContent = 'Failed to connect to authentication services. Please check the configuration or try again later.';
-              initErrorElement.style.display = 'block'; // Make it visible
+              initErrorElement.textContent = 'Failed to connect to authentication services. Please verify configuration or try again later.';
+              initErrorElement.style.display = 'block';
           }
-          // Also hide the forms if init fails
           const loginSect = document.getElementById('login-section');
           const resetSect = document.getElementById('reset-password-section');
           if(loginSect) loginSect.style.display = 'none';
@@ -144,7 +143,6 @@
       }
     </script>
 
-    <!-- Link JS -->
     <script type="module" src="js/login_desktop.js" defer></script>
 
 </body>

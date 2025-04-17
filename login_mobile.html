@@ -2,37 +2,160 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Crucial viewport tag for mobile responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - The Kershaw Law Firm P.C.</title>
+    <title>Client Login - TKLF Mobile</title> <!-- Mobile specific title -->
+    <meta name="description" content="Secure client portal login for The Kershaw Law Firm P.C. Mobile access.">
+    <!-- Link to MOBILE CSS -->
     <link rel="stylesheet" href="css/login_mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <main class="content-wrapper">
-        <section class="login-section">
-            <h2>Client Login</h2>
-            <p class="subtitle">Access Your Account Securely</p>
-            <form id="login-form" class="login-form">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" class="login-button">Login</button>
-                <p id="login-message" class="login-message"></p>
-                <p class="forgot-password"><a href="#">Forgot Password?</a></p>
-            </form>
-            <div id="user-info" class="user-info" style="display: none;">
-                <p>Welcome, <span id="user-email"></span></p>
-                <button id="logout-button" class="logout-button">Logout</button>
+    <!-- Loader visible initially -->
+    <div id="loader" class="loader"></div>
+    <div id="background-static"></div>
+
+    <!-- Header (Styling adapted for mobile via CSS) -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <h1>THE KERSHAW LAW FIRM P.C.</h1>
+                <div class="header-line"></div>
             </div>
-        </section>
-    </main>
-    <script src="js/login_mobile.js"></script>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="main-content-area">
+        <!-- Login Container (Styling adapted for mobile via CSS) -->
+        <div class="login-container">
+            <section class="login-header">
+                <h2>Client Portal Login</h2>
+                <p class="subtitle">Securely access your account.</p> <!-- Slightly shorter subtitle -->
+            </section>
+
+            <p id="init-error-message" class="message error" style="display: none;" aria-live="assertive"></p>
+            <p id="init-status-message" class="message" style="display: none;" aria-live="assertive">Initializing...</p>
+
+            <!-- Login Form Section (Hidden initially) -->
+            <section id="login-section" class="login-section" style="display: none;">
+                <form id="login-form" class="login-form-element" novalidate>
+                     <div class="form-group">
+                         <label for="login-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
+                         <input type="email" id="login-email" name="email" required placeholder="your.email@example.com">
+                     </div>
+                     <div class="form-group">
+                         <label for="login-password"><i class="fa-solid fa-lock icon"></i> Password</label>
+                         <input type="password" id="login-password" name="password" required placeholder="Enter password"> <!-- Shorter placeholder -->
+                     </div>
+                     <div class="form-group submit-container">
+                          <button type="submit" id="login-submit-button" class="login-button">
+                             <i class="fa-solid fa-right-to-bracket icon"></i> Sign In
+                          </button>
+                     </div>
+                      <p id="login-message" class="message" aria-live="assertive"></p>
+                 </form>
+                  <p class="forgot-password">
+                     <a href="#" id="forgot-password-link">Forgot Password?</a>
+                  </p>
+            </section>
+
+            <!-- Reset Password Section (Hidden) -->
+            <section id="reset-password-section" class="reset-password-section" style="display: none;">
+                 <h3>Reset Password</h3>
+                 <p>Enter your email below.</p> <!-- Shorter text -->
+                 <form id="reset-password-form" class="login-form-element" novalidate>
+                      <div class="form-group">
+                          <label for="reset-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
+                          <input type="email" id="reset-email" name="reset-email" required placeholder="your.email@example.com">
+                      </div>
+                      <div class="form-group submit-container">
+                           <button type="submit" id="reset-submit-button" class="login-button reset-button">
+                              <i class="fa-solid fa-envelope icon"></i> Send Link
+                           </button>
+                      </div>
+                      <p id="reset-message" class="message" aria-live="assertive"></p>
+                  </form>
+                  <button id="cancel-reset-button" class="cancel-button">Cancel</button>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Navigation Tabs (Mobile Links) -->
+    <nav class="tabs">
+        <a href="index_mobile.html">Home</a>
+        <a href="services_mobile.html">Services</a>
+        <a href="faq_mobile.html">FAQ</a>
+        <a href="contact_mobile.html">Contact</a> <!-- Shorter Text -->
+    </nav>
+
+    <!-- Firebase SDK (Identical Config) -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+          getAuth,
+          signInWithEmailAndPassword,
+          sendPasswordResetEmail,
+          onAuthStateChanged,
+          signOut
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+      // Using lawfirmwebdesign-69bd2 configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCsrBEdTay9oTjrfR2dwh-AehGn_AgH5XQ",
+        authDomain: "lawfirmwebdesign-69bd2.firebaseapp.com",
+        projectId: "lawfirmwebdesign-69bd2",
+        storageBucket: "lawfirmwebdesign-69bd2.firebasestorage.app",
+        messagingSenderId: "1010126587829",
+        appId: "1:1010126587829:web:63595d00a71bfc8898bbfc",
+        measurementId: "G-TMVRL6LNSH"
+      };
+
+       // Get references to elements needed for init status/error
+       const initErrorElement = document.getElementById('init-error-message');
+       const initStatusElement = document.getElementById('init-status-message');
+       const loaderElement = document.getElementById('loader');
+       const loginSectElement = document.getElementById('login-section');
+       const resetSectElement = document.getElementById('reset-password-section');
+
+       if(initStatusElement) initStatusElement.style.display = 'block'; // Show initializing
+
+      try {
+          console.log("[Inline Script - Mobile] Attempting Firebase Initialization...");
+          const app = initializeApp(firebaseConfig);
+          console.log("[Inline Script - Mobile] Firebase App Initialized.");
+          const auth = getAuth(app);
+          console.log("[Inline Script - Mobile] Firebase Auth Initialized.");
+
+          window._firebaseAuthInstance = auth;
+          console.log("[Inline Script - Mobile] Auth instance assigned to window.");
+
+           if(initStatusElement) initStatusElement.style.display = 'none'; // Hide initializing message
+           document.dispatchEvent(new CustomEvent('firebaseInitSuccess'));
+           console.log("[Inline Script - Mobile] firebaseInitSuccess event dispatched.");
+
+      } catch (error) {
+          console.error("CRITICAL Firebase Initialization Error (Mobile):", error);
+          if (initErrorElement) {
+              initErrorElement.textContent = 'Auth services failed to load. Please refresh.';
+              initErrorElement.style.display = 'block';
+          }
+          if(initStatusElement) initStatusElement.style.display = 'none';
+          if(loginSectElement) loginSectElement.style.display = 'none';
+          if(resetSectElement) resetSectElement.style.display = 'none';
+          if(loaderElement) loaderElement.style.display = 'none';
+
+          document.dispatchEvent(new CustomEvent('firebaseInitError'));
+          console.log("[Inline Script - Mobile] firebaseInitError event dispatched.");
+      }
+    </script>
+
+    <!-- Link MOBILE JS -->
+    <script type="module" src="js/login_mobile.js" defer></script>
+
 </body>
 </html>

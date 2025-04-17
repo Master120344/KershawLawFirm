@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - The Kershaw Law Firm P.C.</title>
+    <meta name="description" content="Securely manage your H-2A or H-2B visa case, payments, documents, and communication with The Kershaw Law Firm P.C. via your desktop portal.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="css/client_dashboard_desktop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dashboard-body-desktop">
+
+    <div class="dashboard-container-desktop">
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-desktop">
+            <div class="sidebar-header">
+                <h1 class="firm-name-sidebar">THE KERSHAW LAW FIRM <span class="firm-name-pc">P.C.</span></h1>
+                <span class="firm-subheading-sidebar">H-2A / H-2B Visa Portal</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" data-target="dashboard-overview"><i class="fas fa-tachometer-alt fa-fw nav-icon"></i><span>Dashboard</span></a></li>
+                    <li><a href="#case-status" class="nav-link" data-target="case-status-section"><i class="fas fa-briefcase fa-fw nav-icon"></i><span>Case Status</span></a></li>
+                    <li><a href="#documents" class="nav-link" data-target="documents-section"><i class="fas fa-file-alt fa-fw nav-icon"></i><span>Documents</span></a></li>
+                    <li><a href="#payments" class="nav-link" data-target="payments-section"><i class="fas fa-credit-card fa-fw nav-icon"></i><span>Payments</span></a></li>
+                    <li><a href="#inbox" class="nav-link" data-target="inbox-section"><i class="fas fa-envelope fa-fw nav-icon"></i><span>Inbox</span><span id="inbox-badge-sidebar" class="notification-badge-sidebar">0</span></a></li>
+                    <li><a href="#profile" class="nav-link" data-target="profile-section"><i class="fas fa-user-cog fa-fw nav-icon"></i><span>Profile Settings</span></a></li>
+                </ul>
+            </nav>
+             <div class="sidebar-user-info">
+                <div class="user-avatar-sidebar"><i class="fa-solid fa-user"></i></div>
+                <div class="user-details-sidebar">
+                    <span id="client-name-sidebar">Client Name</span>
+                    <a href="#logout" id="logout-button-sidebar" class="logout-link-sidebar"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
+                </div>
+            </div>
+            <footer class="sidebar-footer">
+                <p>© 2025 The Kershaw Law Firm P.C.<br>All rights reserved.</p>
+            </footer>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content-desktop">
+            <header class="main-header-desktop">
+                <h2 id="page-title-desktop">Dashboard Overview</h2>
+                <div class="header-actions-desktop">
+                    <button id="notifications-button-desktop" class="header-icon-button-desktop" aria-label="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span id="notifications-badge-desktop" class="notification-badge-header">0</span>
+                    </button>
+                    <!-- User info moved to sidebar bottom for cleaner header -->
+                </div>
+            </header>
+
+            <div class="content-area-desktop">
+                <!-- Content sections will be loaded/shown here based on sidebar clicks -->
+                <!-- Initial Dashboard View -->
+                <div id="dashboard-overview" class="content-section active">
+                    <section id="action-required-section-desktop" class="action-section-desktop card-style-desktop alert-card-desktop" style="display: none;">
+                         <h3 class="section-title-desktop alert"><i class="fa-solid fa-triangle-exclamation icon-gradient"></i> Immediate Action Required</h3>
+                         <div id="action-items-list-desktop">
+                             <!-- JS populates -->
+                         </div>
+                    </section>
+
+                    <div class="dashboard-grid">
+                        <section class="overview-section-desktop card-style-desktop">
+                            <h3 class="section-title-desktop"><i class="fa-solid fa-file-signature icon-gradient"></i> H-2 Visa Case Status</h3>
+                            <div class="status-tracker-desktop">
+                                <div class="status-display-detailed-desktop">
+                                    <span id="case-status-icon-desktop" class="status-icon-large-desktop"><i class="fa-solid fa-hourglass-half"></i></span>
+                                    <div class="status-text-block-desktop">
+                                        <span class="status-label-desktop">Current Stage:</span>
+                                        <strong id="case-status-text-detailed-desktop">Loading...</strong>
+                                    </div>
+                                </div>
+                                <div class="status-progress-bar-container-desktop">
+                                    <span class="progress-label-desktop">Overall Progress:</span>
+                                    <div class="status-progress-bar-desktop">
+                                        <div id="progress-bar-inner-desktop" class="progress-bar-inner-desktop" style="width: 0%;"></div>
+                                    </div>
+                                    <span id="progress-percentage-desktop" class="progress-percentage-label-desktop">0%</span>
+                                </div>
+                                <div class="status-details-desktop">
+                                    <p><i class="fa-solid fa-calendar-alt fa-fw detail-icon"></i> Est. Timeline: <strong id="estimated-completion-desktop">TBD</strong></p>
+                                    <p><i class="fa-solid fa-id-card fa-fw detail-icon"></i> Visa Type: <strong id="visa-type-desktop">H-2A/B</strong></p>
+                                </div>
+                                <button id="view-case-details-btn-desktop" class="cta-button-desktop secondary small-cta full-width-cta">View Detailed Case Steps</button>
+                            </div>
+                        </section>
+
+                        <section class="payment-section-desktop card-style-desktop">
+                             <h3 class="section-title-desktop"><i class="fa-solid fa-credit-card icon-gradient"></i> Billing & Payments</h3>
+                             <div id="payment-summary-desktop">
+                                 <div id="payment-content-loading-desktop" class="loading-placeholder-desktop">
+                                     <div class="mini-loader-desktop"></div><p>Loading billing...</p>
+                                 </div>
+                                 <div id="payment-content-paid-desktop" style="display: none;">
+                                     <p class="payment-status-text-desktop success"><i class="fa-solid fa-circle-check"></i> All payments up to date.</p>
+                                     <p class="payment-detail-desktop">Last Payment: <strong id="last-payment-date-desktop">--/--/----</strong> (<strong id="last-payment-amount-desktop">$0.00</strong>)</p>
+                                     <button id="view-receipts-paid-desktop" class="cta-button-desktop secondary small-cta full-width-cta">View Payment History & Receipts</button>
+                                 </div>
+                                 <div id="payment-content-due-desktop" style="display: none;">
+                                      <p class="payment-status-text-desktop warning"><i class="fa-solid fa-circle-exclamation"></i> Payment Due: <strong id="next-payment-amount-desktop">$0.00</strong></p>
+                                      <p class="payment-detail-desktop">Due Date: <strong id="payment-due-date-desktop">--/--/----</strong></p>
+                                      <button id="make-payment-button-main-desktop" class="cta-button-desktop payment-cta full-width-cta">Make Payment Now</button>
+                                      <button id="view-receipts-due-desktop" class="cta-button-desktop secondary small-cta full-width-cta subtle-margin-top">View Payment History</button>
+                                      <div id="payment-agreement-notice-desktop" style="display: none; margin-top: var(--space-sm);">
+                                          <p class="agreement-text-desktop"><i class="fa-solid fa-file-contract fa-fw"></i> Requires signed <a href="#fee-agreement" id="fee-agreement-link-desktop" class="subtle-link-inline">Fee Agreement</a>.</p>
+                                          <button id="sign-agreement-btn-desktop" class="cta-button-desktop secondary small-cta" style="margin-top: var(--space-xs);">Review & Sign</button>
+                                      </div>
+                                 </div>
+                                 <div id="payment-content-error-desktop" style="display: none;">
+                                      <p class="payment-status-text-desktop error"><i class="fa-solid fa-circle-xmark"></i> Unable to load billing.</p>
+                                       <button id="retry-payment-load-desktop" class="cta-button-desktop secondary small-cta">Try Again</button>
+                                 </div>
+                             </div>
+                        </section>
+                    </div> <!-- end .dashboard-grid -->
+
+                    <section class="quick-access-section-desktop">
+                         <h3 class="section-title-desktop standalone"><i class="fa-solid fa-bolt icon-gradient"></i> Quick Access</h3>
+                         <div class="quick-access-grid-desktop">
+                             <a href="#documents" id="documents-link-desktop" class="quick-link-card-desktop card-style-desktop">
+                                 <i class="fa-solid fa-folder-open quick-link-icon-desktop"></i>
+                                 <span class="quick-link-label-desktop">Case Documents</span>
+                             </a>
+                             <a href="#messages" id="messages-link-desktop" class="quick-link-card-desktop card-style-desktop">
+                                 <i class="fa-solid fa-comments quick-link-icon-desktop"></i>
+                                 <span class="quick-link-label-desktop">Secure Messages</span>
+                                  <span id="messages-quick-badge-desktop" class="notification-badge-quicklink">0</span>
+                             </a>
+                             <a href="#resources" id="resources-link-desktop" class="quick-link-card-desktop card-style-desktop">
+                                  <i class="fa-solid fa-book-open-reader quick-link-icon-desktop"></i>
+                                 <span class="quick-link-label-desktop">H-2 Resources</span>
+                             </a>
+                              <a href="#profile" id="profile-link-desktop" class="quick-link-card-desktop card-style-desktop">
+                                 <i class="fa-solid fa-user-gear quick-link-icon-desktop"></i>
+                                 <span class="quick-link-label-desktop">My Profile</span>
+                             </a>
+                         </div>
+                     </section>
+
+                </div> <!-- End #dashboard-overview -->
+
+                <!-- Placeholder sections for other views (Documents, Inbox, etc.) -->
+                <div id="case-status-section" class="content-section"> /* Case status details would load here */ </div>
+                <div id="documents-section" class="content-section"> /* Document list/viewer would load here */ </div>
+                <div id="payments-section" class="content-section"> /* Full payment history/details would load here */ </div>
+                <div id="inbox-section" class="content-section"> /* Messaging interface would load here */ </div>
+                <div id="profile-section" class="content-section"> /* Profile settings form would load here */ </div>
+
+            </div> <!-- End .content-area-desktop -->
+        </main>
+
+    </div> <!-- End .dashboard-container-desktop -->
+
+    <!-- Case Details Modal Structure (Reused from mobile concept, styled for desktop) -->
+    <div id="case-details-modal-desktop" class="modal-overlay-desktop">
+        <div class="modal-content-desktop">
+            <button id="case-details-close-btn-desktop" class="modal-close-btn-desktop" aria-label="Close Case Details">×</button>
+            <h3 id="case-details-modal-title-desktop" class="modal-title-desktop">Detailed Case Steps</h3>
+            <div class="modal-body-desktop">
+                <ul id="case-details-steps-list-desktop" class="modal-steps-list-desktop">
+                    <!-- Steps will be populated by JS -->
+                    <li class="step-item-desktop status-loading"><i class="fa-solid fa-spinner fa-spin step-icon-desktop"></i><span class="step-text-desktop">Loading details...</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END: Case Details Modal Structure -->
+
+    <script src="js/client_dashboard_desktop.js" defer></script>
+    <!-- Note: case_details logic will be integrated into client_dashboard_desktop.js for now -->
+
+</body>
+</html>

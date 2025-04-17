@@ -3,108 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Login - The Kershaw Law Firm P.C.</title>
-    <meta name="description" content="Secure client portal login for The Kershaw Law Firm P.C. Access your case information.">
-    <!-- Link to updated desktop CSS -->
-    <link rel="stylesheet" href="css/login_desktop.css">
-    <!-- Google Fonts -->
+    <title>Client Login - The Kershaw Law Firm (Blue Theme)</title> <!-- Updated Title -->
+    <meta name="description" content="Secure client portal login for The Kershaw Law Firm. Access your case information with our refined interface.">
+    <link rel="stylesheet" href="css/login_desktop.css"> <!-- Link CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"> <!-- Font Awesome -->
 </head>
 <body>
-    <!-- Background Image Container -->
-    <div id="background-static"></div>
-    <!-- Overlay -->
-    <div class="overlay"></div>
+    <!-- Loader -->
+    <div id="loader" class="loader" style="display: none;"></div> <!-- Initially hidden -->
 
-    <!-- Main Content Area -->
+    <!-- Background Image Container (No dark overlay) -->
+    <div id="background-static"></div>
+
+    <!-- Main Content Area - Centered -->
     <div class="main-content-area">
+        <!-- Login Container with Border/Background -->
         <div class="login-container">
 
             <section class="login-header">
-                <h2>Client Portal</h2>
-                <p class="subtitle">Securely Access Your Account</p>
+                <!-- Logo Added -->
+                <div class="logo-container">
+                    <a href="index_desktop.html" class="logo-link">
+                        <h1>The Kershaw Law Firm</h1>
+                    </a>
+                    <div class="header-line"></div>
+                </div>
+                <h2>Client Portal Login</h2> <!-- Updated heading -->
+                <p class="subtitle">Securely access your account information.</p> <!-- Updated subtitle -->
             </section>
 
             <!-- Login Form Section -->
             <section id="login-section" class="login-section">
                 <form id="login-form" class="login-form-element">
                     <div class="form-group">
-                        <label for="email"><i class="fa-solid fa-at"></i> Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        <label for="login-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
+                        <input type="email" id="login-email" name="email" required placeholder="your.email@example.com">
                     </div>
                     <div class="form-group">
-                        <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
-                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        <label for="login-password"><i class="fa-solid fa-lock icon"></i> Password</label>
+                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
                     </div>
                     <div class="form-group submit-container">
-                         <button type="submit" id="login-button" class="login-button">
-                            <i class="fa-solid fa-right-to-bracket"></i> Login
+                         <button type="submit" id="login-submit-button" class="login-button">
+                            <i class="fa-solid fa-right-to-bracket icon"></i> Sign In
                          </button>
                     </div>
-                     <p id="login-message" class="login-message" aria-live="assertive"></p> <!-- Aria-live for screen readers -->
+                     <p id="login-message" class="message" aria-live="assertive"></p>
                 </form>
                  <p class="forgot-password">
                     <a href="#" id="forgot-password-link">Forgot Password?</a>
                  </p>
             </section>
 
-             <!-- User Info Section (Initially Hidden) -->
-            <section id="user-info-section" class="user-info-section" style="display: none;">
-                <p>Welcome, <span id="user-email-display"></span>!</p>
-                <p>You are logged in.</p>
-                 <button id="logout-button" class="logout-button">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
-                 </button>
+            <!-- Password Reset Section (Initially Hidden) -->
+            <section id="reset-password-section" class="reset-password-section" style="display: none;">
+                <h3>Reset Password</h3>
+                <p>Enter your email address below, and we'll send you a link to reset your password.</p>
+                <form id="reset-password-form" class="login-form-element">
+                     <div class="form-group">
+                        <label for="reset-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
+                        <input type="email" id="reset-email" name="reset-email" required placeholder="your.email@example.com">
+                    </div>
+                     <div class="form-group submit-container">
+                         <button type="submit" id="reset-submit-button" class="login-button reset-button">
+                            <i class="fa-solid fa-envelope icon"></i> Send Reset Link
+                         </button>
+                    </div>
+                    <p id="reset-message" class="message" aria-live="assertive"></p>
+                </form>
+                <button id="cancel-reset-button" class="cancel-button">Cancel</button>
             </section>
+
+            <!-- Minimal Logged In State (Optional, usually just redirect) -->
+            <!-- <section id="user-info-section" class="user-info-section" style="display: none;">
+                <p>Welcome, <span id="user-email-display"></span>!</p>
+                <p>Redirecting to dashboard...</p>
+            </section> -->
 
         </div> <!-- End login-container -->
     </div> <!-- End main-content-area -->
 
-    <!-- Navigation Tabs (Footer Style) -->
+    <!-- Navigation Tabs (Footer Style - Consistent Blue Theme) -->
     <nav class="tabs">
-        <a href="/KershawLawFirm/index_desktop.html">Home</a>
-        <a href="/KershawLawFirm/services_desktop.html">Services</a>
-        <a href="/KershawLawFirm/faq_desktop.html">FAQ</a>
-        <a href="/KershawLawFirm/contact_desktop.html">Contact Us</a>
-        <!-- Add link to Client Dashboard if needed, maybe only show when logged in? -->
-        <!-- <a href="/KershawLawFirm/client_dashboard_desktop.html">Dashboard</a> -->
+        <a href="index_desktop.html">Home</a>
+        <a href="services_desktop.html">Services</a> <!-- Services tab added -->
+        <a href="faq_desktop.html">FAQ</a>
+        <a href="contact_desktop.html">Contact Us</a>
     </nav>
 
     <!-- Firebase SDK -->
-    <!-- Make sure you replace this with your actual Firebase config -->
     <script type="module">
       // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      // Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-      import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      import {
+          getAuth,
+          signInWithEmailAndPassword,
+          sendPasswordResetEmail,
+          onAuthStateChanged,
+          signOut // Import signOut if needed elsewhere, maybe not on login page itself
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-      // Your web app's Firebase configuration
+      // Your web app's Firebase configuration (Using thekershawlawfirm-d5b54)
       const firebaseConfig = {
-        apiKey: "AIzaSyCsrBEdTay9oTjrfR2dwh-AehGn_AgH5XQ", // USE YOUR ACTUAL KEY
-        authDomain: "lawfirmwebdesign-69bd2.firebaseapp.com",
-        projectId: "lawfirmwebdesign-69bd2",
-        storageBucket: "lawfirmwebdesign-69bd2.firebasestorage.app",
-        messagingSenderId: "1010126587829",
-        appId: "1:1010126587829:web:63595d00a71bfc8898bbfc",
-        measurementId: "G-TMVRL6LNSH" // Optional
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // YOUR KEY
+        authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
+        projectId: "thekershawlawfirm-d5b54",
+        storageBucket: "thekershawlawfirm-d5b54.appspot.com",
+        messagingSenderId: "588166358773",
+        appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
+        measurementId: "G-5SVMGTE290" // Optional
       };
 
       // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      // Initialize Firebase Authentication and get a reference to the service
-      const auth = getAuth(app);
+      try {
+          const app = initializeApp(firebaseConfig);
+          console.log("Firebase Initialized (Login Page).");
+          // Initialize Firebase Authentication and get a reference to the service
+          const auth = getAuth(app);
+          console.log("Firebase Auth Initialized (Login Page).");
 
-      // Make auth available globally or pass it to your script
-      window.firebaseAuth = auth;
+          // Make auth functions available globally for the login script
+          window.firebaseAuth = auth;
+          window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+          window.sendPasswordResetEmail = sendPasswordResetEmail;
+          window.onAuthStateChanged = onAuthStateChanged;
+          window.signOut = signOut; // Make signOut available if needed
+
+          document.dispatchEvent(new CustomEvent('firebaseReady')); // Notify script
+      } catch (error) {
+          console.error("Firebase Initialization Error (Login Page):", error);
+          // Handle initialization error (e.g., display message to user)
+          document.getElementById('login-message').textContent = 'Error loading essential services. Please refresh.';
+          document.getElementById('login-message').className = 'message error visible';
+          document.dispatchEvent(new CustomEvent('firebaseError')); // Notify script
+      }
     </script>
 
-    <!-- Link to Desktop Login JS -->
-    <script type="module" src="js/login_desktop.js"></script>
+    <!-- Link to Desktop Login JS (defer ensures HTML is parsed first) -->
+    <script type="module" src="js/login_desktop.js" defer></script>
 
 </body>
 </html>

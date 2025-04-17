@@ -2,42 +2,36 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Desktop Client Dashboard JS Initialized.');
 
     // --- Global State (Represents a NEW USER login) ---
-    // Accessed by other scripts like dashboard_modal_desktop.js
-    const AppState = {
-        clientName: "New Client Example Inc.", // Changed name for clarity
-        visaType: "H-2A", // Or H-2B, can be set during onboarding potentially
-        caseId: null, // No case ID assigned yet initially
-        caseStatus: "initial_review", // Starting point
-        caseProgressPercent: 5, // Very low initial progress (e.g., account created)
+    const AppState = { /* ... (AppState remains the same as previous step) ... */
+        clientName: "New Client Example Inc.",
+        visaType: "H-2A",
+        caseId: null,
+        caseStatus: "initial_review",
+        caseProgressPercent: 5,
         estimatedCompletion: "TBD",
-        paymentStatus: "signing_required", // Assume fee agreement is the first step
-        feeAgreementSigned: false, // NEW USER: Fee agreement not signed yet
-        lastPayment: null, // NEW USER: No last payment
-        nextPayment: { amount: "1500.00", dueDate: null, invoiceId: "invKLR-Initial" }, // Initial retainer amount, no due date until agreement signed?
-        receiptHistoryUrl: "#/billing/history", // Link still exists, but history will be empty
-        feeAgreementUrl: "#/documents/fee-agreement", // Link to the agreement
-        unreadMessages: 0, // NEW USER: No messages
-        unreadNotifications: 0, // NEW USER: No specific notifications yet
+        paymentStatus: "signing_required",
+        feeAgreementSigned: false,
+        lastPayment: null,
+        nextPayment: { amount: "1500.00", dueDate: null, invoiceId: "invKLR-Initial" },
+        receiptHistoryUrl: "#/billing/history",
+        feeAgreementUrl: "#/documents/fee-agreement",
+        unreadMessages: 0, // No messages for new user
+        unreadNotifications: 2, // START WITH SOME UNREAD NOTIFS for demo
         actionsRequired: [
-            // NEW USER: Initial required actions
-            { type: 'signature', description: 'Review and sign the Fee Agreement to begin case processing.', docId: 'fee-agreement-initial', requiresAgreement: false }, // Action to sign the agreement itself
-            { type: 'payment', description: 'Initial retainer payment required after agreement signing.', invoiceId: 'invKLR-Initial', requiresAgreement: true } // Payment is dependent on signing
-            // Maybe add an 'information' type action if initial info is needed?
-            // { type: 'information', description: 'Complete your company profile.', link: '#/profile/edit' }
+            { type: 'signature', description: 'Review and sign the Fee Agreement to begin case processing.', docId: 'fee-agreement-initial', requiresAgreement: false },
+            { type: 'payment', description: 'Initial retainer payment required after agreement signing.', invoiceId: 'invKLR-Initial', requiresAgreement: true }
         ],
-        // URLs remain the same structure
         dashboardUrl: "#dashboard",
-        caseDetailsUrl: "#/case/details", // Used by modal opener button
+        caseDetailsUrl: "#/case/details",
         documentsUrl: "#/documents",
         paymentsUrl: "#/payments",
         messagesUrl: "#/messaging",
         profileUrl: "#/profile",
-        resourcesUrl: "#/resources", // Added resources link target
-        logoutUrl: "/logout" // Placeholder for actual logout endpoint
+        resourcesUrl: "#/resources",
+        logoutUrl: "/logout"
     };
 
     // --- DOM Element References ---
-    // Accessed by other scripts like dashboard_modal_desktop.js
     const DOM = {
         // Sidebar
         sidebarNavLinks: document.querySelectorAll('.sidebar-nav .nav-link'),
@@ -47,8 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Header
         pageTitleDesktop: document.getElementById('page-title-desktop'),
-        notificationsButtonDesktop: document.getElementById('notifications-button-desktop'),
-        notificationsBadgeDesktop: document.getElementById('notifications-badge-desktop'),
+        headerActionsDesktop: document.querySelector('.header-actions-desktop'), // Needed for notification panel insertion
+        notificationsButtonDesktop: document.getElementById('notifications-button-desktop'), // Needed for notification logic
+        notificationsBadgeDesktop: document.getElementById('notifications-badge-desktop'), // Needed for notification logic
 
         // Main Content Area
         contentArea: document.querySelector('.content-area-desktop'),
@@ -65,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         progressPercentageDesktop: document.getElementById('progress-percentage-desktop'),
         estimatedCompletionDesktop: document.getElementById('estimated-completion-desktop'),
         visaTypeDesktop: document.getElementById('visa-type-desktop'),
-        viewCaseDetailsBtnDesktop: document.getElementById('view-case-details-btn-desktop'), // Needed for modal setup
+        viewCaseDetailsBtnDesktop: document.getElementById('view-case-details-btn-desktop'),
 
         // Payment Card
         paymentSummaryDesktop: document.getElementById('payment-summary-desktop'),
@@ -92,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profileLinkDesktop: document.getElementById('profile-link-desktop'),
         messagesQuickBadgeDesktop: document.getElementById('messages-quick-badge-desktop'),
 
-        // Case Details Modal Elements (Needed for modal setup)
+        // Case Details Modal Elements (Needed by modal logic)
         modalDesktop: document.getElementById('case-details-modal-desktop'),
         modalContentDesktop: document.querySelector('.modal-content-desktop'),
         modalCloseButtonDesktop: document.getElementById('case-details-close-btn-desktop'),
@@ -103,17 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
         elementsToAnimate: document.querySelectorAll('.card-style-desktop, .quick-link-card-desktop')
     };
 
-    // --- Helper Functions ---
-    // MOVED to js/dashboard_helpers_desktop.js
-    // - formatCurrency
-    // - formatDate
-    // - updateBadge
-    // - getStatusTextAndClass
-    // - updateStatusIcon
-    // - getActionTitle
-    // - getActionButtonText
+    // --- Helper Functions (Loaded from dashboard_helpers_desktop.js) ---
 
     // --- Populating Sections ---
+    // populateActionItems function remains here
+    // updatePaymentSection function remains here
 
     /**
      * Populates the Action Items section based on AppState.actionsRequired.
@@ -258,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function populateDashboard(data) {
         if (!data) { console.error("Data missing for dashboard population!"); return; }
-         // Ensure helper functions are loaded
+        // Ensure helper functions are loaded
         if (typeof updateBadge === 'undefined' || typeof getStatusTextAndClass === 'undefined' || typeof updateStatusIcon === 'undefined') {
              console.error("Helper functions not loaded. Cannot populate dashboard.");
              return;
@@ -267,8 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sidebar & Header Badges/Info
         if (DOM.clientNameSidebar) DOM.clientNameSidebar.textContent = data.clientName || 'Valued Client';
         updateBadge(DOM.inboxBadgeSidebar, data.unreadMessages);
+        // Update notification badge using data from AppState (will be refined by notification script later)
         updateBadge(DOM.notificationsBadgeDesktop, data.unreadNotifications);
-        updateBadge(DOM.messagesQuickBadgeDesktop, data.unreadMessages); // For quick link
+        updateBadge(DOM.messagesQuickBadgeDesktop, data.unreadMessages);
 
         // Action Required Banner
         populateActionItems(data.actionsRequired);
@@ -282,39 +272,49 @@ document.addEventListener('DOMContentLoaded', () => {
         if (DOM.progressPercentageDesktop) DOM.progressPercentageDesktop.textContent = `${progress}%`;
         if (DOM.estimatedCompletionDesktop) DOM.estimatedCompletionDesktop.textContent = data.estimatedCompletion || 'TBD';
         if (DOM.visaTypeDesktop) DOM.visaTypeDesktop.textContent = data.visaType || 'H-2A/B';
-        // Link the view details button URL (used by modal logic)
         if (DOM.viewCaseDetailsBtnDesktop) DOM.viewCaseDetailsBtnDesktop.dataset.url = data.caseDetailsUrl || '#';
 
         // Payment Card
         updatePaymentSection(data);
 
-        // Setup Quick Access Links (hrefs - navigation handled by listeners)
+        // Setup Quick Access Links
         if (DOM.documentsLinkDesktop) DOM.documentsLinkDesktop.href = data.documentsUrl || '#';
         if (DOM.messagesLinkDesktop) DOM.messagesLinkDesktop.href = data.messagesUrl || '#';
         if (DOM.resourcesLinkDesktop) DOM.resourcesLinkDesktop.href = data.resourcesUrl || '#';
         if (DOM.profileLinkDesktop) DOM.profileLinkDesktop.href = data.profileUrl || '#';
 
         // Set initial page title
-        if (DOM.pageTitleDesktop) DOM.pageTitleDesktop.textContent = 'Dashboard Overview'; // Default title
+        if (DOM.pageTitleDesktop) DOM.pageTitleDesktop.textContent = 'Dashboard Overview';
 
-        // Initial setup of listeners (important after elements are populated)
-        setupActionListeners(data); // Setup button/link clicks
-        setupSidebarNavigation(); // Setup main navigation
+        // --- Setup Listeners and Other Logic ---
+        setupActionListeners(data);    // Setup button/link clicks in dashboard cards/actions
+        setupSidebarNavigation();      // Setup main navigation links
 
-        // Setup Modal Logic (Call the function from dashboard_modal_desktop.js)
+        // Setup Modal Logic (Ensure function exists from modal script)
         if (typeof setupModalLogicDesktop === 'function') {
             setupModalLogicDesktop();
         } else {
             console.error("setupModalLogicDesktop function not found. Modal will not work.");
         }
 
-        // Setup animations (if desired)
+        // Setup Notification Logic (Ensure function exists from notification script)
+        if (typeof setupNotificationLogicDesktop === 'function') {
+            setupNotificationLogicDesktop();
+        } else {
+            console.error("setupNotificationLogicDesktop function not found. Notifications will not work.");
+        }
+
+        // Setup animations (Optional)
         setupScrollAnimations();
     }
 
     // --- Event Listeners & Navigation ---
-
-    /**
+    // setupActionListeners function remains here
+    // setupSidebarNavigation function remains here
+    // handleActionItemClick function remains here
+    // navigateTo function remains here
+    // initiatePayment function remains here
+        /**
      * Adds event listeners to static and dynamic elements on the dashboard.
      * Uses a helper to prevent adding duplicate listeners.
      * @param {object} state - The AppState object (for URLs, etc.).
@@ -330,7 +330,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // --- Static Element Listeners ---
-        addClickListenerOnce(DOM.notificationsButtonDesktop, () => alert('Notifications Panel (Desktop Placeholder)'));
+        // Note: Notification button listener is now handled in notifications_desktop.js
+        // addClickListenerOnce(DOM.notificationsButtonDesktop, () => alert('Notifications Panel (Desktop Placeholder)')); // REMOVED
+
         addClickListenerOnce(DOM.logoutButtonSidebar, (e) => {
              e.preventDefault(); // Prevent default link behavior
              if (confirm('Are you sure you want to logout?')) {
@@ -534,15 +536,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // In a real app, this would likely redirect to Stripe, LawPay, or show an embedded payment form.
     }
 
-    // --- Case Details Modal Logic ---
-    // MOVED to js/dashboard_modal_desktop.js
-    // - H2VisaStepsDesktop object
-    // - getStatusStepsDesktop function
-    // - renderStepsDesktop function
-    // - openModalDesktop function
-    // - closeModalDesktop function
-    // - setupModalLogic function (now setupModalLogicDesktop)
-    // The CALL to setupModalLogicDesktop() happens within populateDashboard()
 
     // --- Animations (Optional - Basic Fade/Slide In on Scroll) ---
     function setupScrollAnimations() {
@@ -608,9 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(DOM.paymentLoadingDivDesktop) DOM.paymentLoadingDivDesktop.style.display = 'none';
 
             // Populate dashboard with the AppState data
-            populateDashboard(AppState);
-
-            // Note: Animations and modal setup are called within populateDashboard
+            populateDashboard(AppState); // This now calls setupNotificationLogicDesktop internally
 
         }, 600); // Simulate 600ms delay
     }

@@ -3,143 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Login - The Kershaw Law Firm (Dark Blue Theme)</title> <!-- Updated Title -->
-    <meta name="description" content="Secure client portal login for The Kershaw Law Firm. Access your case information with our refined dark blue interface.">
-    <link rel="stylesheet" href="css/login_desktop.css"> <!-- Link CSS -->
+    <!-- Updated Title and Description -->
+    <title>The Kershaw Law Firm - H-2A & H-2B Visa Expertise (Blue Theme)</title>
+    <meta name="description" content="The Kershaw Law Firm offers expert H-2A and H-2B visa processing. Desktop optimized with an Austin skyline theme and blue accents.">
+    <!-- Link to desktop CSS -->
+    <link rel="stylesheet" href="css/index_desktop.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <div id="loader" class="loader" style="display: none;"></div>
-    <div id="background-static"></div>
+    <!-- Loading Spinner (Updated Accent Color via CSS) -->
+    <div id="loader" class="loader"></div>
 
-    <!-- Header (Remains Light) -->
+    <!-- Background Image Container (Main Visual) -->
+    <div id="background-static"></div>
+    <!-- No separate overlay div needed -->
+
+    <!-- Header - Updated Blue Theme -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                 <a href="index_desktop.html" class="logo-link">
-                    <h1>The Kershaw Law Firm</h1>
+                 <a href="index_desktop.html" class="logo-link"> <!-- Added Link -->
+                    <h1>The Kershaw Law Firm</h1> <!-- Color via CSS -->
                  </a>
-                <div class="header-line"></div> <!-- Color via CSS (Dark Blue) -->
+                <div class="header-line"></div> <!-- Color updated via CSS -->
             </div>
-            <!-- Header actions remain the same -->
+            <div class="header-actions">
+                 <!-- User Info / Login Button -->
+                 <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-email">user@example.com</span> <!-- Color via CSS -->
+                    <a href="#" id="logout-button" class="logout-link">Logout</a> <!-- Color updated via CSS -->
+                </div>
+                <!-- Button color updated via CSS -->
+                <a href="login_desktop.html" id="login-button" class="login-button">Client Login</a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content Area - Centered -->
+    <!-- Main Content Area - Centered Hero -->
     <div class="main-content-area">
-        <!-- Login Container with Dark Blue Theme Styling -->
-        <div class="login-container">
-
-            <section class="login-header">
-                <!-- Logo removed from here, kept in main header -->
-                <h2>Client Portal Login</h2>
-                <p class="subtitle">Securely access your account information.</p>
+        <div class="main-content-container">
+            <!-- Updated Hero Section -->
+            <section class="hero">
+                <!-- Heading updated: Text content, white color, bold, shadow (via CSS) -->
+                <h2>Expert H-2A & H-2B Visa</h2>
+                <!-- Tagline Removed previously, remains removed -->
+                <!-- RESTORED: CTA Button -->
+                <a href="getstarted_desktop.html" class="cta-button">
+                    <i class="fa-solid fa-rocket"></i> Get Started Today
+                </a>
             </section>
+        </div>
+    </div>
 
-            <!-- Login Form Section -->
-            <section id="login-section" class="login-section">
-                <form id="login-form" class="login-form-element">
-                    <div class="form-group">
-                        <label for="login-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
-                        <input type="email" id="login-email" name="email" required placeholder="your.email@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password"><i class="fa-solid fa-lock icon"></i> Password</label>
-                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
-                    </div>
-                    <div class="form-group submit-container">
-                         <button type="submit" id="login-submit-button" class="login-button">
-                            <i class="fa-solid fa-right-to-bracket icon"></i> Sign In
-                         </button>
-                    </div>
-                     <p id="login-message" class="message" aria-live="assertive"></p>
-                </form>
-                 <p class="forgot-password">
-                    <a href="#" id="forgot-password-link">Forgot Password?</a>
-                 </p>
-            </section>
-
-            <!-- Password Reset Section (Initially Hidden) -->
-            <section id="reset-password-section" class="reset-password-section" style="display: none;">
-                <h3>Reset Password</h3>
-                <p>Enter your email address below, and we'll send you a link to reset your password.</p>
-                <form id="reset-password-form" class="login-form-element">
-                     <div class="form-group">
-                        <label for="reset-email"><i class="fa-solid fa-at icon"></i> Email Address</label>
-                        <input type="email" id="reset-email" name="reset-email" required placeholder="your.email@example.com">
-                    </div>
-                     <div class="form-group submit-container">
-                         <button type="submit" id="reset-submit-button" class="login-button reset-button">
-                            <i class="fa-solid fa-envelope icon"></i> Send Reset Link
-                         </button>
-                    </div>
-                    <p id="reset-message" class="message" aria-live="assertive"></p>
-                </form>
-                <button id="cancel-reset-button" class="cancel-button">Cancel</button>
-            </section>
-
-        </div> <!-- End login-container -->
-    </div> <!-- End main-content-area -->
-
-    <!-- Navigation Tabs (Footer Style - Light Background, Dark Blue Accent) -->
+    <!-- Navigation Tabs (Footer Style) - Updated Blue Theme -->
     <nav class="tabs">
-        <a href="index_desktop.html">Home</a>
-        <a href="services_desktop.html">Services</a>
-        <a href="faq_desktop.html">FAQ</a>
-        <a href="contact_desktop.html">Contact Us</a>
+        <a href="/KershawLawFirm/index_desktop.html" class="active">Home</a>
+        <a href="/KershawLawFirm/services_desktop.html">Services</a>
+        <a href="/KershawLawFirm/faq_desktop.html">FAQ</a>
+        <a href="/KershawLawFirm/contact_desktop.html">Contact Us</a>
+        <!-- Colors updated via CSS -->
     </nav>
 
-    <!-- Firebase SDK -->
     <script type="module">
+      // Firebase initialization - No changes needed here
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import {
-          getAuth,
-          signInWithEmailAndPassword,
-          sendPasswordResetEmail,
-          onAuthStateChanged,
-          signOut
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-      // *** CRITICAL: VERIFY THIS CONFIGURATION IS CORRECT ***
       const firebaseConfig = {
-        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc", // From thekershawlawfirm-d5b54
+        apiKey: "AIzaSyCMA-3ebJfqRrV10p3i-hI4kjNAt01EJSc",
         authDomain: "thekershawlawfirm-d5b54.firebaseapp.com",
         projectId: "thekershawlawfirm-d5b54",
         storageBucket: "thekershawlawfirm-d5b54.appspot.com",
         messagingSenderId: "588166358773",
         appId: "1:588166358773:web:5a7484e320af8dcaea07bc",
-        measurementId: "G-5SVMGTE290" // Optional
+        measurementId: "G-5SVMGTE290"
       };
 
       try {
-          const app = initializeApp(firebaseConfig);
-          console.log("Firebase Initialized (Login Page - Dark Blue).");
-          const auth = getAuth(app);
-          console.log("Firebase Auth Initialized (Login Page - Dark Blue).");
-
-          window.firebaseAuth = auth;
-          window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-          window.sendPasswordResetEmail = sendPasswordResetEmail;
-          window.onAuthStateChanged = onAuthStateChanged;
-          window.signOut = signOut;
-
-          document.dispatchEvent(new CustomEvent('firebaseReady'));
+        const app = initializeApp(firebaseConfig);
+        console.log("Firebase Initialized (Index Desktop - Blue Theme)."); // Updated log
+        const auth = getAuth(app);
+        console.log("Firebase Auth Initialized (Index Desktop - Blue Theme)."); // Updated log
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+        document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
       } catch (error) {
-          console.error("Firebase Initialization Error (Login Page - Dark Blue):", error);
-          // Display error message prominently if init fails
-          const loginMsgElement = document.getElementById('login-message');
-          if (loginMsgElement) {
-              loginMsgElement.textContent = 'Error initializing authentication. Please refresh or contact support.';
-              loginMsgElement.className = 'message error visible';
-          }
-          document.dispatchEvent(new CustomEvent('firebaseError'));
+        console.error("Error initializing Firebase (Index Desktop - Blue Theme):", error); // Updated log
+         document.dispatchEvent(new CustomEvent('firebaseAuthError'));
       }
     </script>
-
-    <script type="module" src="js/login_desktop.js" defer></script>
-
+    <!-- Link to desktop JS, deferred - No changes needed here -->
+    <script src="js/index_desktop.js" defer></script>
 </body>
 </html>

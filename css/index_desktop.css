@@ -10,27 +10,28 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Body Styling - Desktop Focus */
+/* Body Styling - Light Theme */
 body {
     font-family: 'EB Garamond', serif;
     min-height: 100vh;
-    color: #F5F6F5; /* Default text color */
-    line-height: 1.6; /* Standard line height for readability */
-    background-color: #1a1d24; /* Fallback */
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    color: #1A5276; /* DEEP BLUE text - High contrast, not grey/black */
+    line-height: 1.6;
+    background-color: #f8fcff; /* Very light fallback */
+    overflow-x: hidden;
     position: relative;
-    opacity: 0; /* Start hidden for fade-in */
-    transition: opacity 0.8s ease-in-out; /* Slightly slower fade for desktop */
-    padding-top: 80px; /* Adjust based on fixed header height */
-    /* No fixed bottom padding needed unless there's a fixed footer */
-    will-change: opacity;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    padding-top: 85px; /* Adjust based on final header height */
+    padding-bottom: 65px; /* Adjust based on final footer nav height */
+    display: flex;
+    flex-direction: column;
 }
 
 body.loaded {
-    opacity: 1; /* Fade in when loaded */
+    opacity: 1;
 }
 
-/* Background & Overlay */
+/* Background & Overlay - WALLPAPER PRIMARY */
 #background-static {
     position: fixed;
     top: 0;
@@ -42,30 +43,25 @@ body.loaded {
     background-position: center;
     background-repeat: no-repeat;
     background-image: url('../assets/austinbackground.jpg'); /* Ensure path is correct */
-    /* Brightness/filter applied previously if needed */
+    /* No filter, no overlay div needed */
+    animation: subtleZoom 40s infinite alternate ease-in-out;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Adjusted gradient for potentially less intensity */
-    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.1), rgba(10, 10, 20, 0.0));
-    z-index: -1;
+@keyframes subtleZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.03); }
 }
 
-/* Loader Styling */
+/* Loader Styling (Using Accent Color) */
 .loader {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px; /* Standard size */
-    height: 50px;
-    border: 5px solid rgba(211, 84, 0, 0.2); /* Slightly thicker */
-    border-top: 5px solid #D35400; /* Accent color */
+    width: 45px;
+    height: 45px;
+    border: 4px solid rgba(243, 156, 18, 0.2); /* Light orange border */
+    border-top: 4px solid #F39C12; /* Solid Gold/Orange */
     border-radius: 50%;
     animation: spin 1s linear infinite;
     z-index: 3000;
@@ -73,291 +69,232 @@ body.loaded {
     transition: opacity 0.5s ease-out;
     pointer-events: auto;
 }
-
-.loader.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
+.loader.hidden { opacity: 0; pointer-events: none; }
 @keyframes spin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Header Styling - Desktop Adaptation */
+/* Header Styling - Light & Airy */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0; /* Vertical padding */
-    background: rgba(26, 29, 36, 0.9); /* Slightly less opaque */
+    padding: 18px 0; /* Slightly more padding */
+    /* Light, translucent background with blur */
+    background: rgba(235, 245, 255, 0.85); /* Very light blue tint */
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 3px 10px rgba(100, 100, 150, 0.15); /* Softer shadow */
+    border-bottom: 1px solid rgba(0, 86, 134, 0.1); /* Subtle border using text color */
 }
 
 .header-content {
-    width: 90%; /* Container width */
-    max-width: 1200px; /* Max width for large screens */
-    margin: 0 auto; /* Center container */
+    width: 90%;
+    max-width: 1300px; /* Slightly wider max */
+    margin: 0 auto;
     display: flex;
-    align-items: center; /* Vertically align items */
-    justify-content: space-between; /* Space out logo, nav, actions */
-    gap: 20px; /* Add some space between elements */
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.logo-container {
-    text-align: left; /* Align logo text left */
-    flex-shrink: 0; /* Prevent logo container from shrinking */
-}
-
-.logo-link {
-    text-decoration: none;
-    color: inherit;
-    display: inline-block;
-}
+.logo-container { text-align: left; flex-shrink: 0; }
+.logo-link { text-decoration: none; color: inherit; display: inline-block; }
 
 .logo-container h1 {
     font-family: 'Cinzel', serif;
-    font-size: 1.9rem; /* Larger font for desktop */
-    color: #F5F6F5;
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4);
-    letter-spacing: 1.5px; /* More spacing */
+    font-size: 2.1rem; /* Adjust size as needed */
+    color: #1A5276; /* Deep Blue logo text */
+    text-shadow: none; /* Remove shadow on light background */
+    letter-spacing: 1px;
     transition: color 0.3s ease;
     cursor: pointer;
     margin: 0;
+    font-weight: 700;
 }
-
-/* --- Desktop Logo Interaction --- */
-.logo-container .logo-link:hover h1 {
-    color: #E67E22; /* Lighter orange on hover */
-}
-.logo-container .logo-link:active h1 {
-    color: #D35400; /* Darker orange on click */
-}
+.logo-container .logo-link:hover h1 { color: #E67E22; } /* Orange hover */
 
 .header-line {
-    width: 80px; /* Wider line */
-    height: 2px;
-    background: #D35400;
-    margin: 5px 0 0; /* Margin top, aligned left */
+    width: 70px;
+    height: 2.5px; /* Slightly thicker line */
+    background: #F39C12; /* Gold/Orange Accent */
+    margin: 4px 0 0;
     transition: width 0.3s ease;
-    border-radius: 2px;
+    border-radius: 1px;
 }
-
-.logo-container:hover .header-line { /* Expand line on hover */
-    width: 120px;
-}
-
-/* Desktop Navigation Tabs (inside header) */
-.tabs {
-    display: flex;
-    align-items: center;
-    gap: 25px; /* Spacing between tabs */
-    flex-grow: 1; /* Allow nav to take available space */
-    justify-content: center; /* Center tabs */
-}
-
-.tabs a {
-    color: #cccccc;
-    text-decoration: none;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1rem; /* Desktop font size */
-    font-weight: 500;
-    padding: 5px 0; /* Minimal padding, rely on gap */
-    transition: all 0.2s ease;
-    position: relative;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.tabs a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px; /* Position underline below text */
-    left: 50%;
-    transform: translateX(-50%);
-    background: #D35400;
-    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 2px;
-}
-
-/* --- Desktop Tab Interaction --- */
-.tabs a:hover,
-.tabs a:focus-visible, /* Include focus for keyboard nav */
-.tabs a.active {
-    color: #FFFFFF; /* White text for active/hover */
-}
-
-.tabs a:hover::after,
-.tabs a:focus-visible::after,
-.tabs a.active::after {
-    width: 80%; /* Underline width on hover/active */
-}
+.logo-container:hover .header-line { width: 110px; }
 
 /* Header Actions (Login/User Info) */
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Space between email/logout and login */
-    flex-shrink: 0; /* Prevent actions from shrinking */
-}
+.header-actions { display: flex; align-items: center; gap: 18px; }
 
 .login-button {
-    padding: 8px 25px; /* Desktop padding */
-    background: #D35400;
-    color: #F5F6F5;
+    padding: 10px 28px; /* Adjust padding */
+    background: #E67E22; /* Accent Orange */
+    color: #FFFFFF; /* White text on button */
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1rem; /* Desktop font size */
+    font-size: 1.05rem;
     font-weight: 600;
-    border-radius: 25px;
-    transition: all 0.25s ease;
-    box-shadow: 0 3px 10px rgba(211, 84, 0, 0.4);
+    border-radius: 50px; /* Pill shape */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35);
+    border: none; /* No border needed */
 }
-
-.login-button:hover,
-.login-button:focus-visible {
-    background: #E67E22; /* Lighter orange on hover */
+.login-button:hover {
+    background: #F39C12; /* Brighter Gold/Orange on hover */
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.6);
-}
-.login-button:active {
-    transform: translateY(0); /* Return to original position on click */
-    background: #CD6100; /* Slightly darker on click */
+    box-shadow: 0 6px 16px rgba(243, 156, 18, 0.45);
 }
 
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.95rem; /* Slightly larger */
-    color: #e0e0e0;
-}
-
-#user-email {
-    font-weight: 500;
-    /* No max-width usually needed on desktop */
-}
+.user-info { display: flex; align-items: center; gap: 10px; font-size: 1rem; }
+#user-email { font-weight: 500; color: #1A5276; /* Dark blue email */ }
 
 .logout-link {
-    color: #D35400;
+    color: #E67E22; /* Orange link */
     text-decoration: none;
     font-weight: 600;
-    padding: 5px 10px;
+    padding: 5px 8px;
     border-radius: 5px;
     transition: all 0.2s ease;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+.logout-link:hover {
+    color: #F39C12;
+    background-color: rgba(243, 156, 18, 0.1); /* Very light orange background */
+    border-color: rgba(243, 156, 18, 0.3);
 }
 
-.logout-link:hover,
-.logout-link:focus-visible {
-    color: #F5F6F5;
-    background: rgba(211, 84, 0, 0.8);
-}
-.logout-link:active {
-     background: rgba(211, 84, 0, 1);
-}
-
-/* Main Content Area - Desktop */
+/* Main Content Area - Centered Hero */
 .main-content-area {
     position: relative;
-    z-index: 5;
+    z-index: 1; /* Above background */
+    flex-grow: 1; /* Take remaining space */
+    display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
 }
 
 .main-content-container {
-    width: 85%; /* Content width */
-    max-width: 1100px; /* Max width */
-    margin: 40px auto; /* Vertical and horizontal centering/spacing */
-    padding: 40px 20px; /* Padding inside container */
-    min-height: calc(100vh - 80px - 100px); /* Adjust min-height based on header/footer */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 90%;
+    max-width: 900px; /* Control width of hero area */
+    /* No background needed for container - text is directly over wallpaper */
 }
 
-/* Hero Section - Desktop */
+/* Hero Section - Text Styling Over Wallpaper */
 .hero {
     width: 100%;
-    max-width: 800px; /* Constrain hero text width */
     text-align: center;
-    padding: 6vh 0; /* Vertical padding */
+    padding: 5vh 0; /* Vertical padding */
 }
 
 .hero h2 {
     font-family: 'Cinzel', serif;
-    font-size: 2.8rem; /* Larger heading for desktop */
-    color: #FFFFFF;
-    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
-    margin-bottom: 15px;
-    animation: fadeIn 1s ease-in-out; /* Slightly slower animation */
+    font-size: 3rem; /* Adjust size */
+    color: #FFFFFF; /* WHITE text for MAX contrast over image */
+    /* STRONG text shadow for readability */
+    text-shadow: 2px 2px 4px rgba(0, 40, 80, 0.7), /* Dark blue shadow */
+                 0 0 15px rgba(0, 40, 80, 0.5);    /* Softer glow */
+    margin-bottom: 18px;
+    animation: fadeIn 1s ease-out 0.2s backwards; /* Delay animation slightly */
 }
 
 .tagline {
     font-family: 'EB Garamond', serif;
-    font-size: 1.3rem; /* Larger tagline */
-    color: #e0e0e0;
-    margin-bottom: 35px;
-    /* --- Adjusted Text Shadow for Desktop Readability --- */
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6),
-                 0 0 8px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
+    font-size: 1.4rem; /* Adjust size */
+    color: #f8fcff; /* Very light text color (almost white) */
+    margin-bottom: 40px;
+    line-height: 1.7;
+    /* Stronger shadow for tagline as well */
+    text-shadow: 1px 1px 3px rgba(0, 40, 80, 0.8), /* Dark blue shadow */
+                 0 0 10px rgba(0, 40, 80, 0.6);    /* Softer glow */
+    animation: fadeIn 1s ease-out 0.4s backwards;
 }
 
-/* CTA Button - Desktop */
+/* CTA Button - Uses Accent */
 .cta-button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 40px; /* Larger padding */
-    background: #D35400;
-    color: #F5F6F5;
+    display: inline-flex; /* Align icon */
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+    margin-top: 25px;
+    padding: 14px 35px; /* Adjust padding */
+    background: #E67E22; /* Accent Orange */
+    color: #FFFFFF; /* White text */
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-size: 1.3rem; /* Larger font */
+    font-size: 1.25rem;
     font-weight: 700;
-    border-radius: 30px;
+    border-radius: 50px;
     border: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(100, 50, 0, 0.4); /* Shadow using darker orange */
     cursor: pointer;
+    animation: fadeIn 1s ease-out 0.6s backwards;
+}
+.cta-button i { font-size: 1em; } /* Adjust icon size if needed */
+
+.cta-button:hover {
+    background: #F39C12; /* Brighter Gold/Orange on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(150, 75, 0, 0.5);
 }
 
-.cta-button:hover,
-.cta-button:focus-visible {
-    background: #E67E22;
-    transform: translateY(-3px); /* Slightly more lift */
-    box-shadow: 0 8px 20px rgba(211, 84, 0, 0.7);
+/* Navigation Tabs (Footer Style) - Light & Airy */
+.tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    /* Matches header background */
+    background: rgba(235, 245, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -3px 10px rgba(100, 100, 150, 0.15);
+    border-top: 1px solid rgba(0, 86, 134, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 45px; /* Wider gap */
 }
-.cta-button:active {
-     transform: translateY(0); /* Return on click */
-     background: #CD6100; /* Slightly darker on click */
+
+.tabs a {
+    color: #1A5276; /* Dark Blue text */
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    padding: 8px 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
+.tabs a::after {
+    content: ''; position: absolute; width: 0; height: 2.5px; bottom: -4px;
+    left: 50%; transform: translateX(-50%); background: #F39C12; /* Gold/Orange underline */
+    transition: width 0.4s ease; border-radius: 1px;
+}
+.tabs a:hover { color: #E67E22; /* Orange hover text */ }
+.tabs a.active {
+    color: #005686; /* Slightly darker blue for active */
+    font-weight: 700;
+}
+.tabs a:hover::after, .tabs a.active::after { width: 70%; }
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); } /* More movement */
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 /* Accessibility Focus Styles */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible {
-    outline: 3px solid #E67E22; /* More prominent outline */
-    outline-offset: 3px;
-    border-radius: 4px;
+a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid #F39C12; /* Gold/Orange focus */
+    outline-offset: 2px;
+    box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);
 }
-
-/* Optional: Footer styling if you add one */
-/*
-.footer {
-    padding: 20px 0;
-    text-align: center;
-    margin-top: 40px;
-    color: #aaa;
-    font-size: 0.9rem;
-    background: rgba(26, 29, 36, 0.8);
-}
-*/

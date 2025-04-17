@@ -1,34 +1,38 @@
 /* ==========================================================================
-   SERVICES DESKTOP STYLESHEET (Enhanced Light Blue Theme)
+   SERVICES DESKTOP STYLESHEET (Clear Theme - Austin Background Focus)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Configuration & Variables (Light Blue Palette)
+   Configuration & Variables (Blue/Neutral Palette)
    -------------------------------------------------------------------------- */
 :root {
     --font-primary: 'Cinzel', serif;
-    --font-secondary: 'EB Garamond', serif; /* Using Garamond for body too */
+    --font-secondary: 'EB Garamond', serif;
 
-    /* Light Blue Palette */
-    --color-bg-base: #F4F8FB; /* Very light blue/off-white base */
-    --color-bg-container: rgba(235, 245, 255, 0.88); /* Semi-transparent light blue for container */
-    --color-bg-card: rgba(255, 255, 255, 0.8); /* Slightly lighter/whiter for cards */
-    --color-text-primary: #1A5276; /* Deep Blue primary text */
-    --color-text-secondary: #005686; /* Slightly darker blue for headings/emphasis */
-    --color-text-light: #FFFFFF; /* For buttons */
-    --color-accent-primary: #E67E22; /* Orange */
-    --color-accent-secondary: #F39C12; /* Gold/Yellow */
-    --color-border: rgba(133, 193, 233, 0.4); /* Softer blue border */
-    --color-border-accent: rgba(243, 156, 18, 0.5); /* Accent border */
-    --color-shadow: rgba(133, 193, 233, 0.15); /* Soft blue shadow */
-    --color-shadow-hover: rgba(133, 193, 233, 0.25);
+    /* Blue/Neutral Palette (No Orange/Gold) */
+    --color-bg-base: #F4F8FB; /* Very light fallback background */
+    --color-bg-header-footer: rgba(250, 250, 250, 0.88); /* Light neutral for header/footer */
+    --color-bg-card-subtle: rgba(255, 255, 255, 0.1); /* VERY subtle white for cards if needed */
+    --color-text-on-dark-bg: #FFFFFF; /* White text for main content */
+    --color-text-header-footer: #2c3e50; /* Dark Slate for header/footer text */
+    --color-text-heading: #FFFFFF; /* White for headings over background */
+    --color-accent-blue-primary: #005686; /* Darker blue for main accents */
+    --color-accent-blue-secondary: #5DADE2; /* Lighter blue for hover/secondary accents */
+    --color-border-light: rgba(255, 255, 255, 0.3); /* Light border for contrast */
+    --color-border-accent: rgba(0, 86, 134, 0.6); /* Dark blue accent border */
+    --color-shadow-text: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    --color-shadow-subtle: rgba(44, 62, 80, 0.15); /* Subtle shadow for header/footer */
+    --color-shadow-hover: rgba(44, 62, 80, 0.25);
 
     --header-height: 85px;
-    --footer-height: 65px; /* Footer nav height */
-    --footer-copy-height: 50px; /* Optional copyright footer */
+    --footer-height: 65px;
+    --footer-copy-height: 50px;
 
     --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
     --transition-fast: all 0.2s ease-out;
+
+    /* Global Text Shadow for Readability */
+    --text-shadow-global: var(--color-shadow-text);
 }
 
 /* --------------------------------------------------------------------------
@@ -41,21 +45,21 @@ html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antiali
 body {
     font-family: var(--font-secondary);
     min-height: 100vh;
-    color: var(--color-text-primary);
+    color: var(--color-text-on-dark-bg); /* Default text is white */
     line-height: 1.7;
-    background-color: var(--color-bg-base);
+    background-color: var(--color-bg-base); /* Fallback if image fails */
     overflow-x: hidden;
     position: relative;
-    opacity: 1; /* Assume loaded initially */
+    opacity: 1;
     padding-top: var(--header-height);
-    padding-bottom: var(--footer-height); /* Space for footer nav */
+    padding-bottom: var(--footer-height);
     display: flex;
     flex-direction: column;
 }
 
-/* Selection Style */
-::selection { background-color: var(--color-accent-secondary); color: var(--color-text-primary); }
-::-moz-selection { background-color: var(--color-accent-secondary); color: var(--color-text-primary); }
+/* Selection Style (Using Blue) */
+::selection { background-color: var(--color-accent-blue-secondary); color: var(--color-text-on-dark-bg); }
+::-moz-selection { background-color: var(--color-accent-blue-secondary); color: var(--color-text-on-dark-bg); }
 
 /* ==========================================================================
    Background (Wallpaper)
@@ -64,7 +68,6 @@ body {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: -2; background-size: cover; background-position: center center;
     background-repeat: no-repeat; background-image: url('../assets/austinbackground.jpg');
-    /* Keeping wallpaper bright */
     animation: subtleZoom 45s infinite alternate ease-in-out;
 }
 @keyframes subtleZoom {
@@ -73,24 +76,25 @@ body {
 }
 
 /* ==========================================================================
-   Header & Footer Navigation (Consistent Light Blue)
+   Header & Footer Navigation (Neutral Background, Blue Accents)
    ========================================================================== */
 .header, .tabs {
     position: fixed; left: 0; width: 100%; z-index: 1000;
-    padding: 0; /* Padding controlled by content */
-    background: rgba(220, 238, 252, 0.85); /* Slightly different light blue */
+    padding: 0;
+    background: var(--color-bg-header-footer); /* Light Neutral Background */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 2px 8px rgba(133, 193, 233, 0.2);
+    box-shadow: 0 2px 8px var(--color-shadow-subtle);
+    color: var(--color-text-header-footer); /* Dark text for header/footer */
 }
 .header {
     top: 0; height: var(--header-height); display: flex; align-items: center;
-    border-bottom: 1px solid rgba(133, 193, 233, 0.3);
+    border-bottom: 1px solid rgba(44, 62, 80, 0.15); /* Subtle dark border */
 }
 .tabs {
     bottom: 0; height: var(--footer-height); display: flex; align-items: center; justify-content: center;
     gap: 50px;
-    border-top: 1px solid rgba(133, 193, 233, 0.3);
+    border-top: 1px solid rgba(44, 62, 80, 0.15); /* Subtle dark border */
 }
 
 .header-content {
@@ -101,12 +105,12 @@ body {
 .logo-link { text-decoration: none; color: inherit; }
 .logo-container h1 {
     font-family: var(--font-primary); font-size: clamp(1.8rem, 3vw, 2.2rem);
-    color: var(--color-text-secondary); font-weight: 700;
-    margin: 0; transition: color 0.3s ease;
+    color: var(--color-text-header-footer); /* Dark text */
+    font-weight: 700; margin: 0; transition: color 0.3s ease;
 }
-.logo-container .logo-link:hover h1 { color: var(--color-accent-primary); }
+.logo-container .logo-link:hover h1 { color: var(--color-accent-blue-primary); } /* Dark Blue hover */
 .header-line {
-    width: 70px; height: 2.5px; background: var(--color-accent-secondary);
+    width: 70px; height: 2.5px; background: var(--color-accent-blue-primary); /* Dark Blue Accent */
     margin: 5px 0 0 0; transition: width 0.3s ease; border-radius: 1px;
 }
 .logo-container:hover .header-line { width: 120px; }
@@ -114,236 +118,258 @@ body {
 /* Header Actions */
 .header-actions { display: flex; align-items: center; gap: 18px; }
 .login-button {
-    padding: 9px 25px; background: var(--color-accent-primary); color: var(--color-text-light);
+    padding: 9px 25px; background: var(--color-accent-blue-primary); /* Dark Blue */
+    color: var(--color-text-on-dark-bg); /* White text */
     text-decoration: none; font-family: var(--font-primary); font-size: 0.85rem; font-weight: 700;
     border-radius: 5px; transition: var(--transition-smooth); border: none;
     text-transform: uppercase; letter-spacing: 1px;
-    box-shadow: 0 3px 8px rgba(230, 126, 34, 0.25);
+    box-shadow: 0 3px 8px rgba(0, 86, 134, 0.25); /* Blue shadow */
 }
 .login-button:hover {
-    background: var(--color-accent-secondary); transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(243, 156, 18, 0.35);
+    background: var(--color-accent-blue-secondary); /* Lighter Blue */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(93, 173, 226, 0.35); /* Lighter blue shadow */
 }
 .user-info { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
-#user-email { font-weight: 600; color: var(--color-text-primary); }
+#user-email { font-weight: 600; color: var(--color-text-header-footer); } /* Dark text */
 .logout-link {
-    color: var(--color-accent-primary); text-decoration: none; font-weight: 600;
+    color: var(--color-accent-blue-primary); /* Dark Blue */
+    text-decoration: none; font-weight: 600;
     padding: 6px 9px; border-radius: 5px; transition: var(--transition-fast);
     font-size: 0.9rem;
 }
-.logout-link:hover { color: var(--color-accent-secondary); background: rgba(243, 156, 18, 0.08); }
+.logout-link:hover { color: var(--color-accent-blue-secondary); background: rgba(93, 173, 226, 0.1); } /* Subtle light blue bg */
 
 /* Footer Tabs */
 .tabs a {
-    color: var(--color-text-primary); text-decoration: none; font-family: var(--font-secondary);
+    color: var(--color-text-header-footer); /* Dark text */
+    text-decoration: none; font-family: var(--font-secondary);
     font-size: 1.1rem; font-weight: 500; padding: 10px 15px;
     transition: var(--transition-fast); position: relative; text-transform: uppercase; letter-spacing: 1.2px;
 }
 .tabs a::after {
-    content: ''; position: absolute; width: 0; height: 2.5px; bottom: 5px; /* Raise underline slightly */
-    left: 50%; transform: translateX(-50%); background: var(--color-accent-secondary);
+    content: ''; position: absolute; width: 0; height: 2.5px; bottom: 5px;
+    left: 50%; transform: translateX(-50%);
+    background: var(--color-accent-blue-primary); /* Dark Blue Underline */
     transition: width 0.4s ease; border-radius: 1px;
 }
-.tabs a:hover { color: var(--color-accent-primary); }
-.tabs a.active { color: var(--color-text-secondary); font-weight: 700; }
+.tabs a:hover { color: var(--color-accent-blue-primary); } /* Dark blue hover text */
+.tabs a.active { color: var(--color-accent-blue-primary); font-weight: 700; }
 .tabs a:hover::after, .tabs a.active::after { width: 65%; }
 
 /* ==========================================================================
-   Main Content Area & Container (Enhanced Light Blue)
+   Main Content Area & Container (Transparent)
    ========================================================================== */
 .main-content-area {
-    position: relative; z-index: 1; flex-grow: 1; /* Push footer down */
-    padding: 60px 0 80px 0; /* Add padding top/bottom */
+    position: relative; z-index: 1; flex-grow: 1;
+    padding: 60px 0 80px 0;
 }
 
 .services-container {
-    width: 90%; max-width: 1200px; /* Balanced max-width */
-    margin: 0 auto; /* Centered */
-    padding: 50px 60px; /* Generous padding */
-    background-color: var(--color-bg-container); /* Semi-transparent light blue */
-    border-radius: 12px; /* More rounded */
-    box-shadow: 0 10px 40px var(--color-shadow); /* Softer shadow */
-    border: 1px solid var(--color-border);
-    backdrop-filter: blur(15px); /* Stronger blur for readability */
-    -webkit-backdrop-filter: blur(15px);
+    width: 90%; max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 60px;
+    /* REMOVED background-color, backdrop-filter, box-shadow, border */
+    background-color: transparent;
+    border-radius: 0; /* Optional: remove radius if no container visually exists */
+    box-shadow: none;
+    border: none;
+}
+
+/* Universal Text Shadow for Readability on Background */
+.services-container h2,
+.services-container h3,
+.services-container h4,
+.services-container p,
+.services-container .step { /* Apply to specific elements */
+    text-shadow: var(--text-shadow-global);
 }
 
 /* ==========================================================================
-   Section Styling (Enhanced)
+   Section Styling (Adapted for Transparency)
    ========================================================================== */
-section { margin-bottom: 70px; padding: 0; } /* Remove default padding */
+section { margin-bottom: 70px; padding: 0; }
 section:last-of-type { margin-bottom: 0; }
 
 /* Section Titles */
 .section-title {
     font-family: var(--font-primary); font-size: clamp(2rem, 4vw, 2.6rem);
-    color: var(--color-text-secondary); font-weight: 700; text-align: center;
+    color: var(--color-text-heading); /* White */
+    font-weight: 700; text-align: center;
     margin-bottom: 15px; letter-spacing: 0.5px;
 }
 .section-subtitle {
     font-family: var(--font-secondary); font-size: 1.15rem;
-    color: var(--color-text-primary); text-align: center;
+    color: var(--color-text-on-dark-bg); /* White */
+    text-align: center;
     max-width: 750px; margin: 0 auto 45px auto; font-weight: 400;
-    line-height: 1.65; opacity: 0.9;
+    line-height: 1.65; opacity: 0.95; /* Slightly less opacity for subtitle */
 }
 
-/* --- Enhanced Hero --- */
-.services-hero { text-align: center; padding-bottom: 40px; border-bottom: 1px solid var(--color-border); margin-bottom: 50px;}
-.services-hero h2 { font-size: clamp(2.6rem, 5vw, 3.4rem); color: var(--color-text-secondary); margin-bottom: 10px; }
-.services-hero .tagline { font-size: clamp(1.3rem, 2.5vw, 1.6rem); color: var(--color-text-primary); opacity: 0.9; }
+/* --- Hero --- */
+.services-hero { text-align: center; padding-bottom: 40px; border-bottom: 1px solid var(--color-border-light); margin-bottom: 50px;}
+.services-hero h2 { font-size: clamp(2.6rem, 5vw, 3.4rem); color: var(--color-text-heading); margin-bottom: 10px; }
+.services-hero .tagline { font-size: clamp(1.3rem, 2.5vw, 1.6rem); color: var(--color-text-on-dark-bg); opacity: 0.9; }
 
-/* --- Enhanced Intro --- */
+/* --- Intro --- */
 .intro-section { text-align: center; padding: 20px 0; position: relative; }
-.intro-section p { font-size: 1.2rem; max-width: 850px; margin: 20px auto; font-weight: 500; }
-.intro-accent-line { display: block; width: 80px; height: 3px; background: var(--color-accent-secondary); margin: 0 auto; border-radius: 1px; }
+.intro-section p { font-size: 1.2rem; max-width: 850px; margin: 20px auto; font-weight: 500; color: var(--color-text-on-dark-bg); }
+.intro-accent-line { display: block; width: 80px; height: 3px; background: var(--color-accent-blue-secondary); margin: 0 auto; border-radius: 1px; } /* Lighter blue accent */
 .intro-accent-line.bottom { margin-top: 35px; }
 
-/* --- Enhanced Visa Details --- */
+/* --- Visa Details (Cards with Subtle Background/Border) --- */
 .visa-details-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
 .visa-section {
     padding: 40px; text-align: center;
-    background-color: var(--color-bg-card); /* Slightly whiter card */
-    border-radius: 10px; border: 1px solid var(--color-border);
-    box-shadow: 0 6px 20px var(--color-shadow);
+    background-color: var(--color-bg-card-subtle); /* Very subtle white background */
+    border-radius: 10px; border: 1px solid var(--color-border-light); /* Light border */
+    box-shadow: 0 6px 20px rgba(0,0,0, 0.1); /* Subtle dark shadow for depth */
     transition: var(--transition-smooth); position: relative; overflow: hidden;
 }
 .visa-section:hover {
     transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 10px 30px var(--color-shadow-hover);
-    border-color: var(--color-border-accent);
+    box-shadow: 0 10px 30px rgba(0,0,0, 0.15);
+    border-color: var(--color-accent-blue-secondary); /* Lighter blue border on hover */
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly more visible on hover */
 }
 .visa-icon-wrapper { margin-bottom: 25px; }
-.icon-display { /* Style for Font Awesome icons */
-    font-size: 2.8rem; color: var(--color-accent-primary);
+.icon-display {
+    font-size: 2.8rem; color: var(--color-accent-blue-secondary); /* Lighter blue icon */
     transition: var(--transition-fast);
+    text-shadow: none; /* Icons usually don't need text shadow */
 }
-.visa-section:hover .icon-display { color: var(--color-accent-secondary); transform: scale(1.1); }
+.visa-section:hover .icon-display { color: var(--color-text-on-dark-bg); transform: scale(1.1); } /* White on hover */
 
 .visa-title {
-    font-family: var(--font-primary); color: var(--color-text-secondary);
+    font-family: var(--font-primary); color: var(--color-text-heading); /* White */
     font-size: 1.8rem; margin-bottom: 8px; font-weight: 700;
 }
 .visa-subtitle {
-    font-family: var(--font-secondary); color: var(--color-accent-primary);
+    font-family: var(--font-secondary); color: var(--color-accent-blue-secondary); /* Light blue */
     font-size: 1rem; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    text-shadow: none; /* Subtitles often look cleaner without shadow */
 }
-.visa-section p { font-size: 1.05rem; color: var(--color-text-primary); line-height: 1.7; }
+.visa-section p { font-size: 1.05rem; color: var(--color-text-on-dark-bg); line-height: 1.7; } /* White text */
 
-/* --- Enhanced Advantage Section --- */
+/* --- Advantage Section (Similar Card Styling) --- */
 .advantage-section { padding: 50px 0; }
 .advantage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; margin-top: 40px; }
 .advantage-item {
-    background: var(--color-bg-card); padding: 30px; border-radius: 8px;
-    border: 1px solid transparent; /* Start transparent */
-    border-left: 4px solid var(--color-accent-secondary); /* Accent border on left */
-    box-shadow: 0 5px 15px var(--color-shadow);
+    background: var(--color-bg-card-subtle); padding: 30px; border-radius: 8px;
+    border: 1px solid var(--color-border-light);
+    border-left: 4px solid var(--color-accent-blue-primary); /* Dark Blue accent border */
+    box-shadow: 0 5px 15px rgba(0,0,0, 0.1);
     transition: var(--transition-smooth);
-    display: flex; flex-direction: column; /* Align items */
-    align-items: flex-start; /* Align icon/text left */
+    display: flex; flex-direction: column; align-items: flex-start;
 }
 .advantage-item:hover {
-    border-color: var(--color-border-accent);
-    box-shadow: 0 8px 25px var(--color-shadow-hover);
+    border-color: var(--color-accent-blue-secondary);
+    border-left-color: var(--color-accent-blue-secondary);
+    box-shadow: 0 8px 25px rgba(0,0,0, 0.15);
     transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 .advantage-icon {
-    font-size: 2rem; color: var(--color-accent-primary); margin-bottom: 18px;
+    font-size: 2rem; color: var(--color-accent-blue-secondary); margin-bottom: 18px; /* Light blue */
     transition: var(--transition-fast);
+    text-shadow: none;
 }
-.advantage-item:hover .advantage-icon { color: var(--color-accent-secondary); transform: scale(1.1); }
+.advantage-item:hover .advantage-icon { color: var(--color-text-on-dark-bg); transform: scale(1.1); } /* White on hover */
 
 .advantage-item h4 {
-    font-family: var(--font-primary); font-size: 1.35rem; color: var(--color-text-secondary);
+    font-family: var(--font-primary); font-size: 1.35rem; color: var(--color-text-heading); /* White */
     margin-bottom: 12px; font-weight: 700;
 }
-.advantage-item p { font-size: 1rem; color: var(--color-text-primary); line-height: 1.65; }
+.advantage-item p { font-size: 1rem; color: var(--color-text-on-dark-bg); line-height: 1.65; } /* White */
 
-/* --- Enhanced Process Section --- */
+/* --- Process Section (No Background Box) --- */
 .process-section { padding: 60px 0; margin-top: 40px; position: relative; text-align: center; }
-/* Adding a subtle background pattern or gradient */
-.process-section::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(234, 242, 248, 0.5) 0%, rgba(214, 234, 248, 0.5) 100%);
-    z-index: -1; margin: 0 -100px; /* Extend beyond container */
-    border-radius: 10px;
-}
+/* REMOVED: .process-section::before rule */
+
 .process-steps {
     display: flex; justify-content: center; flex-wrap: wrap;
     gap: 25px; margin: 50px auto 40px auto; max-width: 1100px;
-    position: relative; /* For connector line */
+    position: relative;
 }
 .step {
-    background: var(--color-bg-card);
-    color: var(--color-text-primary); padding: 15px 25px; border-radius: 50px; /* Pill shape */
+    background: rgba(0, 86, 134, 0.6); /* Dark blue semi-transparent background */
+    color: var(--color-text-on-dark-bg); padding: 15px 25px; border-radius: 50px;
     font-size: 1rem; font-weight: 600; font-family: var(--font-secondary);
-    border: 1px solid var(--color-border); display: flex; align-items: center;
+    border: 1px solid var(--color-accent-blue-secondary); /* Light blue border */
+    display: flex; align-items: center;
     gap: 12px; transition: var(--transition-smooth);
-    box-shadow: 0 4px 10px var(--color-shadow);
+    box-shadow: 0 4px 10px rgba(0,0,0, 0.2);
 }
 .step:hover {
-    border-color: var(--color-border-accent);
-    color: var(--color-text-secondary); transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 6px 15px var(--color-shadow-hover);
+    border-color: var(--color-text-on-dark-bg); /* White border */
+    background: rgba(0, 86, 134, 0.8); /* Slightly darker blue */
+    color: var(--color-text-on-dark-bg); transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0,0,0, 0.3);
 }
-.step-number { /* Nicer Number */
-    background: var(--color-accent-secondary); color: var(--color-text-primary);
+.step-number {
+    background: var(--color-text-on-dark-bg); /* White background */
+    color: var(--color-accent-blue-primary); /* Dark blue text */
     border-radius: 50%; width: 28px; height: 28px; display: inline-flex;
     justify-content: center; align-items: center; font-weight: 700; font-size: 0.9rem;
     font-family: var(--font-primary); box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-shadow: none; /* No shadow for number */
 }
-.process-connector { /* Visual line connecting steps (simplified) */
-    display: none; /* Hide complex line for now, can be added with JS/more CSS */
-}
+.process-connector { display: none; }
 
-/* --- Enhanced CTA Section --- */
+/* --- CTA Section (Blue Gradient) --- */
 .cta-section {
     text-align: center; padding: 60px 40px; margin-top: 60px;
-    background: linear-gradient(45deg, var(--color-accent-primary), var(--color-accent-secondary));
+    background: linear-gradient(45deg, var(--color-accent-blue-primary), var(--color-accent-blue-secondary)); /* Blue gradient */
     border-radius: 10px; position: relative; overflow: hidden;
-    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 86, 134, 0.3); /* Blue shadow */
 }
 .cta-title {
     font-family: var(--font-primary); font-size: clamp(2rem, 4.5vw, 2.8rem);
-    color: var(--color-text-light); margin-bottom: 15px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    color: var(--color-text-on-dark-bg); margin-bottom: 15px; /* White text */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 .cta-subtitle {
-    font-family: var(--font-secondary); font-size: 1.2rem; color: rgba(255, 255, 255, 0.9);
+    font-family: var(--font-secondary); font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); /* Off-white text */
     max-width: 700px; margin: 0 auto 40px auto; font-weight: 400;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 .cta-button.primary-cta {
-    padding: 16px 40px; background: var(--color-text-light); /* White button */
-    color: var(--color-accent-primary); /* Orange text */
+    padding: 16px 40px; background: var(--color-text-on-dark-bg); /* White button */
+    color: var(--color-accent-blue-primary); /* Dark Blue text */
     text-decoration: none; font-family: var(--font-primary); font-size: 1.1rem;
     font-weight: 700; border-radius: 5px; border: none; letter-spacing: 1px;
     transition: var(--transition-smooth); text-transform: uppercase;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     display: inline-flex; align-items: center; gap: 10px;
+    text-shadow: none; /* No shadow for button text */
 }
 .cta-button.primary-cta:hover {
-    background: #fff; color: var(--color-accent-secondary);
+    background: #f0f0f0; /* Slightly off-white hover */
+    color: var(--color-accent-blue-secondary); /* Lighter blue text */
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 .cta-button.primary-cta i { font-size: 1.1em; }
 
 /* ==========================================================================
-   Footer (Optional Simple Copyright)
+   Footer (Neutral Background)
    ========================================================================== */
 .footer {
     height: var(--footer-copy-height); display: flex; align-items: center; justify-content: center;
-    text-align: center; padding: 10px 20px; margin-top: auto; /* Push below main content */
-    color: var(--color-text-primary); opacity: 0.7; font-size: 0.85rem;
-    background-color: var(--color-bg-base);
-    border-top: 1px solid var(--color-border); z-index: 5; position: relative;
+    text-align: center; padding: 10px 20px; margin-top: auto;
+    color: var(--color-text-header-footer); opacity: 0.7; font-size: 0.85rem; /* Dark text */
+    background-color: var(--color-bg-header-footer); /* Light Neutral */
+    border-top: 1px solid rgba(44, 62, 80, 0.15); /* Subtle dark border */
+    z-index: 5; position: relative;
+    text-shadow: none; /* No shadow for footer text */
 }
 
 /* ==========================================================================
-   Animation & Accessibility (Unchanged logic)
+   Animation & Accessibility (Updated Focus Color)
    ========================================================================== */
 [data-animation] { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform; }
 [data-animation="fade-in"] { transform: none; }
-[data-animation="fade-in-up"] { transform: translateY(30px); } /* Subtle up */
+[data-animation="fade-in-up"] { transform: translateY(30px); }
 [data-animation="fade-in-left"] { transform: translateX(-30px); }
 [data-animation="fade-in-right"] { transform: translateX(30px); }
 
@@ -353,13 +379,15 @@ section:last-of-type { margin-bottom: 0; }
 }
 
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-    outline: 2.5px solid var(--color-accent-secondary); outline-offset: 2px; border-radius: 3px;
-    box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+    outline: 2.5px solid var(--color-accent-blue-secondary); /* Light Blue Focus */
+    outline-offset: 2px; border-radius: 3px;
+    box-shadow: 0 0 8px rgba(93, 173, 226, 0.5); /* Light Blue Shadow */
 }
 
 /* ==========================================================================
-   Responsive Adjustments
+   Responsive Adjustments (Content styling might need tweaks)
    ========================================================================== */
+/* Existing media queries remain largely the same structure, but visual outcome changes due to transparency */
 @media (max-width: 1200px) {
     .advantage-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 }
@@ -375,14 +403,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 @media (max-width: 768px) {
-    :root { --header-height: auto; /* Let header flow */ }
-    body { padding-top: 0; padding-bottom: var(--footer-height); /* Only footer space */ }
-    .header { position: static; /* Header scrolls with content */ }
+    :root { --header-height: auto; }
+    body { padding-top: 0; padding-bottom: var(--footer-height); }
+    .header { position: static; }
     .header-content { flex-direction: column; gap: 15px; padding: 15px 0; }
     .logo-container { text-align: center; }
     .header-line { margin: 4px auto 0 auto; }
-    .header-actions { order: 2; } /* Actions above footer nav */
-    .main-content-area { padding: 30px 0 50px 0; } /* Adjust main padding */
+    .header-actions { order: 2; }
+    .main-content-area { padding: 30px 0 50px 0; }
     .services-container { width: 95%; padding: 30px 20px; margin: 0 auto; }
     .section-title { font-size: clamp(1.8rem, 5vw, 2.2rem); }
     .section-subtitle { font-size: 1.05rem; }
@@ -393,7 +421,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .cta-section { padding: 50px 20px; }
     .cta-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
     .cta-subtitle { font-size: 1.1rem; }
-    .tabs { padding: 12px 0; gap: 25px; } /* Footer nav */
+    .tabs { padding: 12px 0; gap: 25px; }
     .tabs a { font-size: 0.9rem; padding: 8px; letter-spacing: 0.8px;}
 }
 
@@ -415,7 +443,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .tabs a { font-size: 0.8rem; padding: 8px 5px; }
 }
 
-/* Loader (Keep consistent) */
-.loader { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; border: 4px solid rgba(243, 156, 18, 0.2); border-top: 4px solid var(--color-accent-secondary); border-radius: 50%; animation: spin 1s linear infinite; z-index: 3000; opacity: 1; transition: opacity 0.5s ease-out; pointer-events: none; }
+/* Loader (Updated Accent Color - Blue) */
+.loader { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; border: 4px solid rgba(93, 173, 226, 0.3); /* Light Blue Transparent */ border-top: 4px solid var(--color-accent-blue-primary); /* Dark Blue */ border-radius: 50%; animation: spin 1s linear infinite; z-index: 3000; opacity: 1; transition: opacity 0.5s ease-out; pointer-events: none; }
 .loader.hidden { opacity: 0; }
 @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }

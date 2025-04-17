@@ -24,6 +24,7 @@
             </div>
             <nav class="sidebar-nav">
                 <ul>
+                    <!-- Ensure 'active' class is set by JS or matches initial view -->
                     <li><a href="#dashboard" class="nav-link active" data-target="dashboard-overview"><i class="fas fa-tachometer-alt fa-fw nav-icon"></i><span>Dashboard</span></a></li>
                     <li><a href="#case-status" class="nav-link" data-target="case-status-section"><i class="fas fa-briefcase fa-fw nav-icon"></i><span>Case Status</span></a></li>
                     <li><a href="#documents" class="nav-link" data-target="documents-section"><i class="fas fa-file-alt fa-fw nav-icon"></i><span>Documents</span></a></li>
@@ -53,32 +54,37 @@
                         <i class="fas fa-bell"></i>
                         <span id="notifications-badge-desktop" class="notification-badge-header">0</span>
                     </button>
-                    <!-- User info moved to sidebar bottom for cleaner header -->
+                    <!-- User info moved to sidebar bottom -->
                 </div>
             </header>
 
             <div class="content-area-desktop">
                 <!-- Content sections will be loaded/shown here based on sidebar clicks -->
-                <!-- Initial Dashboard View -->
+                <!-- Initial Dashboard View (Should have 'active' class) -->
                 <div id="dashboard-overview" class="content-section active">
+                    <!-- Action Required Section (Initially hidden, shown by JS if needed) -->
                     <section id="action-required-section-desktop" class="action-section-desktop card-style-desktop alert-card-desktop" style="display: none;">
                          <h3 class="section-title-desktop alert"><i class="fa-solid fa-triangle-exclamation icon-gradient"></i> Immediate Action Required</h3>
                          <div id="action-items-list-desktop">
-                             <!-- JS populates -->
+                             <!-- Action items populated by JS -->
                          </div>
                     </section>
 
+                    <!-- Main Dashboard Grid -->
                     <div class="dashboard-grid">
+                        <!-- Case Status Card -->
                         <section class="overview-section-desktop card-style-desktop">
                             <h3 class="section-title-desktop"><i class="fa-solid fa-file-signature icon-gradient"></i> H-2 Visa Case Status</h3>
                             <div class="status-tracker-desktop">
+                                <!-- Status Icon & Text -->
                                 <div class="status-display-detailed-desktop">
-                                    <span id="case-status-icon-desktop" class="status-icon-large-desktop"><i class="fa-solid fa-hourglass-half"></i></span>
+                                    <span id="case-status-icon-desktop" class="status-icon-large-desktop status-default"><i class="fa-solid fa-circle-question"></i></span>
                                     <div class="status-text-block-desktop">
                                         <span class="status-label-desktop">Current Stage:</span>
                                         <strong id="case-status-text-detailed-desktop">Loading...</strong>
                                     </div>
                                 </div>
+                                <!-- Progress Bar -->
                                 <div class="status-progress-bar-container-desktop">
                                     <span class="progress-label-desktop">Overall Progress:</span>
                                     <div class="status-progress-bar-desktop">
@@ -86,6 +92,7 @@
                                     </div>
                                     <span id="progress-percentage-desktop" class="progress-percentage-label-desktop">0%</span>
                                 </div>
+                                <!-- Details & Button -->
                                 <div class="status-details-desktop">
                                     <p><i class="fa-solid fa-calendar-alt fa-fw detail-icon"></i> Est. Timeline: <strong id="estimated-completion-desktop">TBD</strong></p>
                                     <p><i class="fa-solid fa-id-card fa-fw detail-icon"></i> Visa Type: <strong id="visa-type-desktop">H-2A/B</strong></p>
@@ -94,35 +101,42 @@
                             </div>
                         </section>
 
+                        <!-- Billing & Payments Card -->
                         <section class="payment-section-desktop card-style-desktop">
                              <h3 class="section-title-desktop"><i class="fa-solid fa-credit-card icon-gradient"></i> Billing & Payments</h3>
                              <div id="payment-summary-desktop">
-                                 <div id="payment-content-loading-desktop" class="loading-placeholder-desktop">
-                                     <div class="mini-loader-desktop"></div><p>Loading billing...</p>
+                                 <!-- Loading State (Shown initially by JS) -->
+                                 <div id="payment-content-loading-desktop" class="loading-placeholder-desktop" style="display: none;">
+                                     <div class="mini-loader-desktop"></div><p>Loading billing information...</p>
                                  </div>
+                                 <!-- Paid State -->
                                  <div id="payment-content-paid-desktop" style="display: none;">
                                      <p class="payment-status-text-desktop success"><i class="fa-solid fa-circle-check"></i> All payments up to date.</p>
                                      <p class="payment-detail-desktop">Last Payment: <strong id="last-payment-date-desktop">--/--/----</strong> (<strong id="last-payment-amount-desktop">$0.00</strong>)</p>
                                      <button id="view-receipts-paid-desktop" class="cta-button-desktop secondary small-cta full-width-cta">View Payment History & Receipts</button>
                                  </div>
+                                 <!-- Due / Signing Required State -->
                                  <div id="payment-content-due-desktop" style="display: none;">
                                       <p class="payment-status-text-desktop warning"><i class="fa-solid fa-circle-exclamation"></i> Payment Due: <strong id="next-payment-amount-desktop">$0.00</strong></p>
                                       <p class="payment-detail-desktop">Due Date: <strong id="payment-due-date-desktop">--/--/----</strong></p>
+                                      <!-- Agreement Notice (Shown by JS if agreement needed) -->
+                                      <div id="payment-agreement-notice-desktop" style="display: none; margin-top: var(--space-xs); margin-bottom: var(--space-md);">
+                                          <p class="agreement-text-desktop"><i class="fa-solid fa-file-contract fa-fw"></i> Requires signed <a href="#fee-agreement" id="fee-agreement-link-desktop" class="subtle-link-inline">Fee Agreement</a>.</p>
+                                          <button id="sign-agreement-btn-desktop" class="cta-button-desktop secondary small-cta" style="display: none; margin-left: var(--space-sm);">Review & Sign</button>
+                                      </div>
                                       <button id="make-payment-button-main-desktop" class="cta-button-desktop payment-cta full-width-cta">Make Payment Now</button>
                                       <button id="view-receipts-due-desktop" class="cta-button-desktop secondary small-cta full-width-cta subtle-margin-top">View Payment History</button>
-                                      <div id="payment-agreement-notice-desktop" style="display: none; margin-top: var(--space-sm);">
-                                          <p class="agreement-text-desktop"><i class="fa-solid fa-file-contract fa-fw"></i> Requires signed <a href="#fee-agreement" id="fee-agreement-link-desktop" class="subtle-link-inline">Fee Agreement</a>.</p>
-                                          <button id="sign-agreement-btn-desktop" class="cta-button-desktop secondary small-cta" style="margin-top: var(--space-xs);">Review & Sign</button>
-                                      </div>
                                  </div>
+                                 <!-- Error State -->
                                  <div id="payment-content-error-desktop" style="display: none;">
-                                      <p class="payment-status-text-desktop error"><i class="fa-solid fa-circle-xmark"></i> Unable to load billing.</p>
+                                      <p class="payment-status-text-desktop error"><i class="fa-solid fa-circle-xmark"></i> Unable to load billing information.</p>
                                        <button id="retry-payment-load-desktop" class="cta-button-desktop secondary small-cta">Try Again</button>
                                  </div>
                              </div>
                         </section>
                     </div> <!-- end .dashboard-grid -->
 
+                    <!-- Quick Access Section -->
                     <section class="quick-access-section-desktop">
                          <h3 class="section-title-desktop standalone"><i class="fa-solid fa-bolt icon-gradient"></i> Quick Access</h3>
                          <div class="quick-access-grid-desktop">
@@ -148,19 +162,35 @@
 
                 </div> <!-- End #dashboard-overview -->
 
-                <!-- Placeholder sections for other views (Documents, Inbox, etc.) -->
-                <div id="case-status-section" class="content-section"> /* Case status details would load here */ </div>
-                <div id="documents-section" class="content-section"> /* Document list/viewer would load here */ </div>
-                <div id="payments-section" class="content-section"> /* Full payment history/details would load here */ </div>
-                <div id="inbox-section" class="content-section"> /* Messaging interface would load here */ </div>
-                <div id="profile-section" class="content-section"> /* Profile settings form would load here */ </div>
+                <!-- Placeholder sections for other views (Initially hidden) -->
+                <div id="case-status-section" class="content-section">
+                    <h2>Case Status Details</h2>
+                    <p>Full case status history and details would be loaded here when clicked.</p>
+                 </div>
+                <div id="documents-section" class="content-section">
+                    <h2>Documents</h2>
+                    <p>Document list, upload functionality, and viewer would be loaded here.</p>
+                 </div>
+                <div id="payments-section" class="content-section">
+                     <h2>Billing & Payments</h2>
+                     <p>Full payment history, invoices, receipts, and payment methods would be loaded here.</p>
+                     <!-- This is where your payment form might eventually live -->
+                 </div>
+                <div id="inbox-section" class="content-section">
+                     <h2>Inbox</h2>
+                     <p>Secure messaging interface with the law firm would be loaded here.</p>
+                 </div>
+                <div id="profile-section" class="content-section">
+                     <h2>Profile Settings</h2>
+                     <p>User profile information, contact details, password change, etc., would be loaded here.</p>
+                 </div>
 
             </div> <!-- End .content-area-desktop -->
         </main>
 
     </div> <!-- End .dashboard-container-desktop -->
 
-    <!-- Case Details Modal Structure (Reused from mobile concept, styled for desktop) -->
+    <!-- Case Details Modal Structure -->
     <div id="case-details-modal-desktop" class="modal-overlay-desktop">
         <div class="modal-content-desktop">
             <button id="case-details-close-btn-desktop" class="modal-close-btn-desktop" aria-label="Close Case Details">×</button>
@@ -175,8 +205,13 @@
     </div>
     <!-- END: Case Details Modal Structure -->
 
+    <!-- SCRIPT LOADING ORDER IS IMPORTANT -->
+    <!-- Load helper script FIRST -->
+    <script src="js/dashboard_helpers_desktop.js" defer></script>
+    <!-- Load main dashboard script (defines AppState, DOM, calls initial setup) -->
     <script src="js/client_dashboard_desktop.js" defer></script>
-    <!-- Note: case_details logic will be integrated into client_dashboard_desktop.js for now -->
+    <!-- Load modal logic script AFTER main script (needs AppState, DOM) -->
+    <script src="js/dashboard_modal_desktop.js" defer></script>
 
 </body>
 </html>

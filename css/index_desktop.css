@@ -10,19 +10,19 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Body Styling - Light Theme */
+/* Body Styling - Light Blue Theme */
 body {
     font-family: 'EB Garamond', serif;
     min-height: 100vh;
-    color: #1A5276; /* DEEP BLUE text - High contrast, not grey/black */
+    color: #1A5276; /* Deep Blue text for contrast */
     line-height: 1.6;
-    background-color: #f8fcff; /* Very light fallback */
+    background-color: #EAF2F8; /* Very Light Blue fallback */
     overflow-x: hidden;
     position: relative;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
-    padding-top: 85px; /* Adjust based on final header height */
-    padding-bottom: 65px; /* Adjust based on final footer nav height */
+    padding-top: 85px;
+    padding-bottom: 65px;
     display: flex;
     flex-direction: column;
 }
@@ -31,7 +31,7 @@ body.loaded {
     opacity: 1;
 }
 
-/* Background & Overlay - WALLPAPER PRIMARY */
+/* Background */
 #background-static {
     position: fixed;
     top: 0;
@@ -42,8 +42,7 @@ body.loaded {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url('../assets/austinbackground.jpg'); /* Ensure path is correct */
-    /* No filter, no overlay div needed */
+    background-image: url('../assets/austinbackground.jpg');
     animation: subtleZoom 40s infinite alternate ease-in-out;
 }
 
@@ -52,20 +51,16 @@ body.loaded {
     to { transform: scale(1.03); }
 }
 
-/* Loader Styling (Using Accent Color) */
+/* Loader Styling (Accent Color) */
 .loader {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 45px;
-    height: 45px;
-    border: 4px solid rgba(243, 156, 18, 0.2); /* Light orange border */
-    border-top: 4px solid #F39C12; /* Solid Gold/Orange */
+    width: 45px; height: 45px;
+    border: 4px solid rgba(243, 156, 18, 0.2);
+    border-top: 4px solid #F39C12; /* Gold/Orange */
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    z-index: 3000;
-    opacity: 1;
+    z-index: 3000; opacity: 1;
     transition: opacity 0.5s ease-out;
     pointer-events: auto;
 }
@@ -75,55 +70,39 @@ body.loaded {
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Header Styling - Light & Airy */
+/* Header Styling - Light Blue */
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: fixed; top: 0; left: 0; width: 100%;
     z-index: 1000;
-    padding: 18px 0; /* Slightly more padding */
-    /* Light, translucent background with blur */
-    background: rgba(235, 245, 255, 0.85); /* Very light blue tint */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 3px 10px rgba(100, 100, 150, 0.15); /* Softer shadow */
-    border-bottom: 1px solid rgba(0, 86, 134, 0.1); /* Subtle border using text color */
+    padding: 18px 0;
+    background: rgba(214, 234, 248, 0.9); /* Light Blue translucent */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 3px 10px rgba(174, 214, 241, 0.3); /* Lighter shadow */
+    border-bottom: 1px solid rgba(133, 193, 233, 0.3); /* Subtle light blue border */
 }
 
 .header-content {
-    width: 90%;
-    max-width: 1300px; /* Slightly wider max */
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    width: 90%; max-width: 1300px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 
 .logo-container { text-align: left; flex-shrink: 0; }
 .logo-link { text-decoration: none; color: inherit; display: inline-block; }
 
 .logo-container h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.1rem; /* Adjust size as needed */
+    font-family: 'Cinzel', serif; font-size: 2.1rem;
     color: #1A5276; /* Deep Blue logo text */
-    text-shadow: none; /* Remove shadow on light background */
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
-    cursor: pointer;
-    margin: 0;
-    font-weight: 700;
+    text-shadow: none;
+    letter-spacing: 1px; transition: color 0.3s ease;
+    cursor: pointer; margin: 0; font-weight: 700;
 }
 .logo-container .logo-link:hover h1 { color: #E67E22; } /* Orange hover */
 
 .header-line {
-    width: 70px;
-    height: 2.5px; /* Slightly thicker line */
+    width: 70px; height: 2.5px;
     background: #F39C12; /* Gold/Orange Accent */
-    margin: 4px 0 0;
-    transition: width 0.3s ease;
-    border-radius: 1px;
+    margin: 4px 0 0; transition: width 0.3s ease; border-radius: 1px;
 }
 .logo-container:hover .header-line { width: 110px; }
 
@@ -131,21 +110,13 @@ body.loaded {
 .header-actions { display: flex; align-items: center; gap: 18px; }
 
 .login-button {
-    padding: 10px 28px; /* Adjust padding */
-    background: #E67E22; /* Accent Orange */
-    color: #FFFFFF; /* White text on button */
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    border-radius: 50px; /* Pill shape */
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35);
-    border: none; /* No border needed */
+    padding: 10px 28px; background: #E67E22; color: #FFFFFF;
+    text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.05rem;
+    font-weight: 600; border-radius: 50px; transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35); border: none;
 }
 .login-button:hover {
-    background: #F39C12; /* Brighter Gold/Orange on hover */
-    transform: translateY(-2px);
+    background: #F39C12; transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(243, 156, 18, 0.45);
 }
 
@@ -153,126 +124,87 @@ body.loaded {
 #user-email { font-weight: 500; color: #1A5276; /* Dark blue email */ }
 
 .logout-link {
-    color: #E67E22; /* Orange link */
-    text-decoration: none;
-    font-weight: 600;
-    padding: 5px 8px;
-    border-radius: 5px;
-    transition: all 0.2s ease;
-    background-color: transparent;
-    border: 1px solid transparent;
+    color: #E67E22; text-decoration: none; font-weight: 600;
+    padding: 5px 8px; border-radius: 5px; transition: all 0.2s ease;
+    background-color: transparent; border: 1px solid transparent;
 }
 .logout-link:hover {
     color: #F39C12;
-    background-color: rgba(243, 156, 18, 0.1); /* Very light orange background */
+    background-color: rgba(243, 156, 18, 0.1);
     border-color: rgba(243, 156, 18, 0.3);
 }
 
 /* Main Content Area - Centered Hero */
 .main-content-area {
-    position: relative;
-    z-index: 1; /* Above background */
-    flex-grow: 1; /* Take remaining space */
-    display: flex;
-    align-items: center; /* Vertically center */
-    justify-content: center; /* Horizontally center */
+    position: relative; z-index: 1;
+    flex-grow: 1; display: flex;
+    align-items: center; justify-content: center;
 }
 
 .main-content-container {
-    width: 90%;
-    max-width: 900px; /* Control width of hero area */
-    /* No background needed for container - text is directly over wallpaper */
+    width: 90%; max-width: 850px; /* Slightly narrower container */
 }
 
-/* Hero Section - Text Styling Over Wallpaper */
+/* Hero Section - Light Blue Background for Text */
 .hero {
-    width: 100%;
-    text-align: center;
-    padding: 5vh 0; /* Vertical padding */
+    width: 100%; text-align: center;
+    padding: 50px 40px; /* Generous padding */
+    /* Semi-transparent light blue background */
+    background: rgba(234, 242, 248, 0.8); /* Adjust alpha (0.8) for desired transparency */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 5px 20px rgba(133, 193, 233, 0.2); /* Soft shadow */
+    backdrop-filter: blur(5px); /* Optional subtle blur behind the text area */
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .hero h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 3rem; /* Adjust size */
-    color: #FFFFFF; /* WHITE text for MAX contrast over image */
-    /* STRONG text shadow for readability */
-    text-shadow: 2px 2px 4px rgba(0, 40, 80, 0.7), /* Dark blue shadow */
-                 0 0 15px rgba(0, 40, 80, 0.5);    /* Softer glow */
-    margin-bottom: 18px;
-    animation: fadeIn 1s ease-out 0.2s backwards; /* Delay animation slightly */
+    font-family: 'Cinzel', serif; font-size: 2.8rem; /* Slightly smaller if background is present */
+    color: #1A5276; /* Dark Blue Text */
+    text-shadow: none; /* No shadow needed with background */
+    margin-bottom: 15px;
+    animation: fadeIn 1s ease-out 0.2s backwards;
 }
 
 .tagline {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.4rem; /* Adjust size */
-    color: #f8fcff; /* Very light text color (almost white) */
-    margin-bottom: 40px;
+    font-family: 'EB Garamond', serif; font-size: 1.3rem;
+    color: #005686; /* Slightly darker blue for tagline */
+    margin-bottom: 35px;
     line-height: 1.7;
-    /* Stronger shadow for tagline as well */
-    text-shadow: 1px 1px 3px rgba(0, 40, 80, 0.8), /* Dark blue shadow */
-                 0 0 10px rgba(0, 40, 80, 0.6);    /* Softer glow */
+    text-shadow: none;
     animation: fadeIn 1s ease-out 0.4s backwards;
 }
 
 /* CTA Button - Uses Accent */
 .cta-button {
-    display: inline-flex; /* Align icon */
-    align-items: center;
-    gap: 10px; /* Space between icon and text */
-    margin-top: 25px;
-    padding: 14px 35px; /* Adjust padding */
-    background: #E67E22; /* Accent Orange */
-    color: #FFFFFF; /* White text */
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    border-radius: 50px;
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(100, 50, 0, 0.4); /* Shadow using darker orange */
-    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 25px; padding: 14px 35px;
+    background: #E67E22; color: #FFFFFF; text-decoration: none;
+    font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700;
+    border-radius: 50px; border: none; transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(100, 50, 0, 0.4); cursor: pointer;
     animation: fadeIn 1s ease-out 0.6s backwards;
 }
-.cta-button i { font-size: 1em; } /* Adjust icon size if needed */
-
+.cta-button i { font-size: 1em; }
 .cta-button:hover {
-    background: #F39C12; /* Brighter Gold/Orange on hover */
-    transform: translateY(-3px);
+    background: #F39C12; transform: translateY(-3px);
     box-shadow: 0 7px 18px rgba(150, 75, 0, 0.5);
 }
 
-/* Navigation Tabs (Footer Style) - Light & Airy */
+/* Navigation Tabs (Footer Style) - Light Blue */
 .tabs {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 15px 0;
-    /* Matches header background */
-    background: rgba(235, 245, 255, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 -3px 10px rgba(100, 100, 150, 0.15);
-    border-top: 1px solid rgba(0, 86, 134, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 45px; /* Wider gap */
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    z-index: 1000; padding: 15px 0;
+    background: rgba(214, 234, 248, 0.9); /* Matches header */
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 -3px 10px rgba(174, 214, 241, 0.3);
+    border-top: 1px solid rgba(133, 193, 233, 0.3);
+    display: flex; justify-content: center; align-items: center; gap: 45px;
 }
-
 .tabs a {
     color: #1A5276; /* Dark Blue text */
-    text-decoration: none;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 500;
-    padding: 8px 10px;
-    transition: all 0.3s ease;
-    position: relative;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    text-decoration: none; font-family: 'EB Garamond', serif; font-size: 1.15rem;
+    font-weight: 500; padding: 8px 10px; transition: all 0.3s ease;
+    position: relative; text-transform: uppercase; letter-spacing: 1px;
 }
 .tabs a::after {
     content: ''; position: absolute; width: 0; height: 2.5px; bottom: -4px;
@@ -280,10 +212,7 @@ body.loaded {
     transition: width 0.4s ease; border-radius: 1px;
 }
 .tabs a:hover { color: #E67E22; /* Orange hover text */ }
-.tabs a.active {
-    color: #005686; /* Slightly darker blue for active */
-    font-weight: 700;
-}
+.tabs a.active { color: #005686; font-weight: 700; }
 .tabs a:hover::after, .tabs a.active::after { width: 70%; }
 
 /* Animations */

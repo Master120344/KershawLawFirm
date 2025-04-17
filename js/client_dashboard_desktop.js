@@ -1,38 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Desktop Client Dashboard JS Initialized.');
 
-    // --- Global State (Example Data - Replace with actual API data) ---
+    // --- Global State (Represents a NEW USER login) ---
+    // Accessed by other scripts like dashboard_modal_desktop.js
     const AppState = {
-        clientName: "Global Ag Services",
-        visaType: "H-2A", // H-2A or H-2B
-        caseId: "KLR-H2A-2025-002",
-        caseStatus: "dol_certified", // Matches keys in H2VisaSteps
-        caseProgressPercent: 55,
-        estimatedCompletion: "Q3 2025",
-        paymentStatus: "paid", // 'paid', 'due', 'error', 'signing_required'
-        feeAgreementSigned: true, // Example: Agreement already signed
-        lastPayment: { date: "2025-02-10", amount: "3000.00" },
-        nextPayment: { amount: "1200.00", dueDate: "2025-05-15", invoiceId: "invKLR812" },
-        receiptHistoryUrl: "#/billing/history",
-        feeAgreementUrl: "#/documents/fee-agreement",
-        unreadMessages: 1,
-        unreadNotifications: 0,
+        clientName: "New Client Example Inc.", // Changed name for clarity
+        visaType: "H-2A", // Or H-2B, can be set during onboarding potentially
+        caseId: null, // No case ID assigned yet initially
+        caseStatus: "initial_review", // Starting point
+        caseProgressPercent: 5, // Very low initial progress (e.g., account created)
+        estimatedCompletion: "TBD",
+        paymentStatus: "signing_required", // Assume fee agreement is the first step
+        feeAgreementSigned: false, // NEW USER: Fee agreement not signed yet
+        lastPayment: null, // NEW USER: No last payment
+        nextPayment: { amount: "1500.00", dueDate: null, invoiceId: "invKLR-Initial" }, // Initial retainer amount, no due date until agreement signed?
+        receiptHistoryUrl: "#/billing/history", // Link still exists, but history will be empty
+        feeAgreementUrl: "#/documents/fee-agreement", // Link to the agreement
+        unreadMessages: 0, // NEW USER: No messages
+        unreadNotifications: 0, // NEW USER: No specific notifications yet
         actionsRequired: [
-            // Example: No actions currently required
-             // { type: 'information', description: 'Provide updated employee list.', uploadId: 'emp-list-update' }
+            // NEW USER: Initial required actions
+            { type: 'signature', description: 'Review and sign the Fee Agreement to begin case processing.', docId: 'fee-agreement-initial', requiresAgreement: false }, // Action to sign the agreement itself
+            { type: 'payment', description: 'Initial retainer payment required after agreement signing.', invoiceId: 'invKLR-Initial', requiresAgreement: true } // Payment is dependent on signing
+            // Maybe add an 'information' type action if initial info is needed?
+            // { type: 'information', description: 'Complete your company profile.', link: '#/profile/edit' }
         ],
-        // URLs for navigation targets (placeholders)
+        // URLs remain the same structure
         dashboardUrl: "#dashboard",
-        caseDetailsUrl: "#/case/details", // Could link to a specific section or modal
+        caseDetailsUrl: "#/case/details", // Used by modal opener button
         documentsUrl: "#/documents",
         paymentsUrl: "#/payments",
         messagesUrl: "#/messaging",
         profileUrl: "#/profile",
         resourcesUrl: "#/resources", // Added resources link target
-        logoutUrl: "/logout" // Placeholder
+        logoutUrl: "/logout" // Placeholder for actual logout endpoint
     };
 
     // --- DOM Element References ---
+    // Accessed by other scripts like dashboard_modal_desktop.js
     const DOM = {
         // Sidebar
         sidebarNavLinks: document.querySelectorAll('.sidebar-nav .nav-link'),
@@ -60,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         progressPercentageDesktop: document.getElementById('progress-percentage-desktop'),
         estimatedCompletionDesktop: document.getElementById('estimated-completion-desktop'),
         visaTypeDesktop: document.getElementById('visa-type-desktop'),
-        viewCaseDetailsBtnDesktop: document.getElementById('view-case-details-btn-desktop'),
+        viewCaseDetailsBtnDesktop: document.getElementById('view-case-details-btn-desktop'), // Needed for modal setup
 
         // Payment Card
         paymentSummaryDesktop: document.getElementById('payment-summary-desktop'),
@@ -87,77 +92,41 @@ document.addEventListener('DOMContentLoaded', () => {
         profileLinkDesktop: document.getElementById('profile-link-desktop'),
         messagesQuickBadgeDesktop: document.getElementById('messages-quick-badge-desktop'),
 
-        // Case Details Modal
+        // Case Details Modal Elements (Needed for modal setup)
         modalDesktop: document.getElementById('case-details-modal-desktop'),
-        modalContentDesktop: document.querySelector('.modal-content-desktop'), // Use querySelector if ID not present
+        modalContentDesktop: document.querySelector('.modal-content-desktop'),
         modalCloseButtonDesktop: document.getElementById('case-details-close-btn-desktop'),
         modalTitleDesktop: document.getElementById('case-details-modal-title-desktop'),
         modalStepsListDesktop: document.getElementById('case-details-steps-list-desktop'),
 
         // Elements for Animation
-        elementsToAnimate: document.querySelectorAll('.card-style-desktop, .quick-link-card-desktop') // Target desktop classes
+        elementsToAnimate: document.querySelectorAll('.card-style-desktop, .quick-link-card-desktop')
     };
 
     // --- Helper Functions ---
-    function formatCurrency(amount) {
-        if (amount === null || amount === undefined) return '$0.00';
-        return `$${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    }
-
-    function formatDate(dateString) {
-        if (!dateString) return '--/--/----';
-        try {
-            const date = new Date(dateString);
-            const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-            return adjustedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-        } catch (e) { return dateString; }
-    }
-
-    function updateBadge(badgeElement, count) {
-        if (!badgeElement) return;
-        const numCount = parseInt(count, 10) || 0;
-        badgeElement.textContent = numCount; // Show full count on desktop? Or cap? Let's cap for now.
-        badgeElement.style.display = numCount > 0 ? 'inline-block' : 'none'; // Adjust display
-        if (numCount > 9) badgeElement.textContent = '9+'; // Cap at 9+
-    }
-
-    function getStatusTextAndClass(statusKey) {
-        const statuses = { // Same statuses as mobile
-            'initial_review': { text: 'Initial Document Review', class: 'info' },
-            'submitted_lca': { text: 'LCA Submitted to DOL', class: 'pending' },
-            'pending_dol': { text: 'Pending DOL Certification', class: 'pending' },
-            'dol_certified': { text: 'DOL Certified / Awaiting Filing', class: 'good' },
-            'submitted_uscis': { text: 'Petition Submitted to USCIS', class: 'pending' },
-            'rfe_issued': { text: 'Request for Evidence (RFE)', class: 'action' },
-            'pending_uscis_review': { text: 'Pending USCIS Decision', class: 'pending' },
-            'approved': { text: 'Case Approved', class: 'good' },
-            'denied': { text: 'Case Denied', class: 'action' },
-            'consular_processing': { text: 'Consular Processing', class: 'info' },
-            'action_required': { text: 'Action Required', class: 'action' },
-            'complete': { text: 'Process Complete', class: 'good' }
-        };
-        return statuses[statusKey] || { text: 'Status Unavailable', class: 'default' };
-    }
-
-    function updateStatusIcon(iconElement, statusClass) {
-        if (!iconElement) return;
-        iconElement.className = 'status-icon-large-desktop'; // Use desktop class
-        let iconClassFA = 'fa-question-circle';
-        switch (statusClass) {
-            case 'info': iconClassFA = 'fa-info-circle'; break;
-            case 'pending': iconClassFA = 'fa-hourglass-half'; break;
-            case 'good': iconClassFA = 'fa-check-circle'; break;
-            case 'action': iconClassFA = 'fa-triangle-exclamation'; break;
-            case 'default': iconClassFA = 'fa-circle-question'; break;
-        }
-        iconElement.classList.add(`status-${statusClass}`);
-        iconElement.innerHTML = `<i class="fa-solid ${iconClassFA}"></i>`;
-    }
+    // MOVED to js/dashboard_helpers_desktop.js
+    // - formatCurrency
+    // - formatDate
+    // - updateBadge
+    // - getStatusTextAndClass
+    // - updateStatusIcon
+    // - getActionTitle
+    // - getActionButtonText
 
     // --- Populating Sections ---
+
+    /**
+     * Populates the Action Items section based on AppState.actionsRequired.
+     * Uses helper functions getActionTitle and getActionButtonText.
+     * @param {Array} actions - The array of action objects from AppState.
+     */
     function populateActionItems(actions) {
-        if (!DOM.actionItemsListDesktop || !DOM.actionRequiredSectionDesktop) return;
-        DOM.actionItemsListDesktop.innerHTML = '';
+        // Ensure dependencies are ready
+        if (!DOM || !DOM.actionItemsListDesktop || !DOM.actionRequiredSectionDesktop || typeof getActionTitle === 'undefined' || typeof getActionButtonText === 'undefined') {
+            console.error("Cannot populate action items: DOM elements or helper functions missing.");
+            return;
+        }
+        DOM.actionItemsListDesktop.innerHTML = ''; // Clear previous items
         const relevantActions = actions || [];
 
         if (relevantActions.length > 0) {
@@ -177,93 +146,123 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (action.docId) actionButton.dataset.docId = action.docId;
                 if (action.invoiceId) actionButton.dataset.invoiceId = action.invoiceId;
                 if (action.uploadId) actionButton.dataset.uploadId = action.uploadId;
+                // Add requiresAgreement flag directly, will be checked in handler
                 if (action.requiresAgreement) actionButton.dataset.requiresAgreement = 'true';
 
                 itemDiv.appendChild(descP);
                 itemDiv.appendChild(actionButton);
                 DOM.actionItemsListDesktop.appendChild(itemDiv);
             });
-            DOM.actionRequiredSectionDesktop.style.display = 'block';
+            DOM.actionRequiredSectionDesktop.style.display = 'block'; // Show the section
         } else {
-            DOM.actionRequiredSectionDesktop.style.display = 'none';
+            DOM.actionRequiredSectionDesktop.style.display = 'none'; // Hide if no actions
         }
     }
 
-     function getActionTitle(type) { // Same as mobile
-        switch (type) {
-            case 'signature': return 'Signature Needed';
-            case 'payment': return 'Payment Due';
-            case 'information': return 'Information Required';
-            case 'upload': return 'Document Upload Needed';
-            default: return 'Action Needed';
-        }
-    }
-     function getActionButtonText(type) { // Same as mobile
-        switch (type) {
-            case 'signature': return 'Review & Sign';
-            case 'payment': return 'Make Payment';
-            case 'information': return 'Provide Info';
-            case 'upload': return 'Upload';
-            default: return 'View';
-        }
-    }
-
+    /**
+     * Updates the Payment Summary card based on AppState.
+     * Uses helper functions formatCurrency and formatDate.
+     * @param {object} state - The AppState object.
+     */
     function updatePaymentSection(state) {
-        if (!DOM.paymentSummaryDesktop) return;
+        // Ensure dependencies are ready
+        if (!DOM || !DOM.paymentSummaryDesktop || typeof formatCurrency === 'undefined' || typeof formatDate === 'undefined') {
+             console.error("Cannot update payment section: DOM elements or helper functions missing.");
+            return;
+        }
         // Hide all content divs initially
-        DOM.paymentLoadingDivDesktop.style.display = 'none';
-        DOM.paymentPaidDivDesktop.style.display = 'none';
-        DOM.paymentDueDivDesktop.style.display = 'none';
-        DOM.paymentErrorDivDesktop.style.display = 'none';
-        DOM.paymentAgreementNoticeDesktop.style.display = 'none';
-        DOM.signAgreementBtnDesktop.style.display = 'none';
+        if (DOM.paymentLoadingDivDesktop) DOM.paymentLoadingDivDesktop.style.display = 'none';
+        if (DOM.paymentPaidDivDesktop) DOM.paymentPaidDivDesktop.style.display = 'none';
+        if (DOM.paymentDueDivDesktop) DOM.paymentDueDivDesktop.style.display = 'none';
+        if (DOM.paymentErrorDivDesktop) DOM.paymentErrorDivDesktop.style.display = 'none';
+        if (DOM.paymentAgreementNoticeDesktop) DOM.paymentAgreementNoticeDesktop.style.display = 'none';
+        if (DOM.signAgreementBtnDesktop) DOM.signAgreementBtnDesktop.style.display = 'none';
+        // Reset make payment button state
+        if (DOM.makePaymentButtonMainDesktop) {
+             DOM.makePaymentButtonMainDesktop.disabled = false;
+             DOM.makePaymentButtonMainDesktop.style.opacity = '1';
+             DOM.makePaymentButtonMainDesktop.style.cursor = 'pointer';
+        }
+
 
         switch (state.paymentStatus) {
             case 'paid':
                 if (DOM.lastPaymentDateDesktop) DOM.lastPaymentDateDesktop.textContent = formatDate(state.lastPayment?.date);
                 if (DOM.lastPaymentAmountDesktop) DOM.lastPaymentAmountDesktop.textContent = formatCurrency(state.lastPayment?.amount);
                 if (DOM.viewReceiptsPaidDesktop) DOM.viewReceiptsPaidDesktop.dataset.url = state.receiptHistoryUrl || '#';
-                DOM.paymentPaidDivDesktop.style.display = 'block';
+                if (DOM.paymentPaidDivDesktop) DOM.paymentPaidDivDesktop.style.display = 'block';
                 break;
+
+            case 'signing_required': // Handle the state where agreement needs signing first
             case 'due':
-                if (DOM.nextPaymentAmountDesktop) DOM.nextPaymentAmountDesktop.textContent = formatCurrency(state.nextPayment?.amount);
-                if (DOM.paymentDueDateDesktop) DOM.paymentDueDateDesktop.textContent = formatDate(state.nextPayment?.dueDate);
-                if (DOM.viewReceiptsDueDesktop) DOM.viewReceiptsDueDesktop.dataset.url = state.receiptHistoryUrl || '#';
-                if (DOM.makePaymentButtonMainDesktop) DOM.makePaymentButtonMainDesktop.dataset.invoiceId = state.nextPayment?.invoiceId || '';
+                 if (DOM.nextPaymentAmountDesktop) DOM.nextPaymentAmountDesktop.textContent = formatCurrency(state.nextPayment?.amount);
+                 if (DOM.paymentDueDateDesktop) DOM.paymentDueDateDesktop.textContent = formatDate(state.nextPayment?.dueDate); // May be null initially
+                 if (DOM.viewReceiptsDueDesktop) DOM.viewReceiptsDueDesktop.dataset.url = state.receiptHistoryUrl || '#';
+                 if (DOM.makePaymentButtonMainDesktop) DOM.makePaymentButtonMainDesktop.dataset.invoiceId = state.nextPayment?.invoiceId || '';
 
-                const paymentAction = state.actionsRequired.find(a => a.type === 'payment' && a.invoiceId === state.nextPayment?.invoiceId);
-                const needsSigning = paymentAction?.requiresAgreement && !state.feeAgreementSigned;
+                 // Check if the primary action is signing or if payment depends on it
+                 const requiresSigning = !state.feeAgreementSigned;
 
-                if (needsSigning) {
-                    DOM.paymentAgreementNoticeDesktop.style.display = 'inline-flex'; // Show notice
-                    DOM.signAgreementBtnDesktop.style.display = 'inline-block'; // Show sign button
-                    DOM.makePaymentButtonMainDesktop.disabled = true;
-                    DOM.makePaymentButtonMainDesktop.style.opacity = '0.6';
-                    DOM.makePaymentButtonMainDesktop.style.cursor = 'not-allowed';
-                    if (DOM.feeAgreementLinkDesktop) DOM.feeAgreementLinkDesktop.href = state.feeAgreementUrl || '#';
-                } else {
-                    DOM.makePaymentButtonMainDesktop.disabled = false;
-                    DOM.makePaymentButtonMainDesktop.style.opacity = '1';
-                    DOM.makePaymentButtonMainDesktop.style.cursor = 'pointer';
-                    // Optionally show agreement link even if signed
-                    if (paymentAction?.requiresAgreement && state.feeAgreementSigned) {
-                        DOM.paymentAgreementNoticeDesktop.style.display = 'inline-flex';
-                        if (DOM.feeAgreementLinkDesktop) DOM.feeAgreementLinkDesktop.href = state.feeAgreementUrl || '#';
-                    }
-                }
-                DOM.paymentDueDivDesktop.style.display = 'block';
+                 if (requiresSigning) {
+                     // Update status text specifically for this state if needed
+                     const statusTextElement = DOM.paymentDueDivDesktop?.querySelector('.payment-status-text-desktop.warning i');
+                     if(statusTextElement) {
+                         // Optionally change icon/text if agreement is the blocker
+                         // statusTextElement.className = 'fa-solid fa-file-signature'; // Example icon change
+                     }
+
+                     // Show notice and sign button
+                     if (DOM.paymentAgreementNoticeDesktop) DOM.paymentAgreementNoticeDesktop.style.display = 'inline-flex';
+                     if (DOM.signAgreementBtnDesktop) DOM.signAgreementBtnDesktop.style.display = 'inline-block';
+                     if (DOM.feeAgreementLinkDesktop) DOM.feeAgreementLinkDesktop.href = state.feeAgreementUrl || '#';
+
+                     // Disable payment button
+                     if (DOM.makePaymentButtonMainDesktop) {
+                        DOM.makePaymentButtonMainDesktop.disabled = true;
+                        DOM.makePaymentButtonMainDesktop.style.opacity = '0.6';
+                        DOM.makePaymentButtonMainDesktop.style.cursor = 'not-allowed';
+                     }
+
+                 } else {
+                     // Fee agreement IS signed, but payment might still be due
+                     // Ensure payment button is enabled
+                      if (DOM.makePaymentButtonMainDesktop) {
+                         DOM.makePaymentButtonMainDesktop.disabled = false;
+                         DOM.makePaymentButtonMainDesktop.style.opacity = '1';
+                         DOM.makePaymentButtonMainDesktop.style.cursor = 'pointer';
+                     }
+                     // Hide signing specific elements if they were shown before
+                     if (DOM.paymentAgreementNoticeDesktop) DOM.paymentAgreementNoticeDesktop.style.display = 'none';
+                     if (DOM.signAgreementBtnDesktop) DOM.signAgreementBtnDesktop.style.display = 'none';
+
+                     // You might still want to show a link to the signed agreement for reference
+                     // if (state.feeAgreementSigned && state.feeAgreementUrl) { ... }
+                 }
+                 if (DOM.paymentDueDivDesktop) DOM.paymentDueDivDesktop.style.display = 'block';
                 break;
+
              case 'error':
-                 DOM.paymentErrorDivDesktop.style.display = 'block';
+                 if (DOM.paymentErrorDivDesktop) DOM.paymentErrorDivDesktop.style.display = 'block';
                  break;
-            default:
-                DOM.paymentLoadingDivDesktop.style.display = 'flex';
+
+            default: // Includes loading state potentially
+                if (DOM.paymentLoadingDivDesktop) DOM.paymentLoadingDivDesktop.style.display = 'flex';
         }
     }
 
     // --- Main Dashboard Population ---
+    /**
+     * Populates the entire dashboard with data from AppState.
+     * Calls sub-functions for specific sections and sets up initial state.
+     * @param {object} data - The AppState object.
+     */
     function populateDashboard(data) {
         if (!data) { console.error("Data missing for dashboard population!"); return; }
+         // Ensure helper functions are loaded
+        if (typeof updateBadge === 'undefined' || typeof getStatusTextAndClass === 'undefined' || typeof updateStatusIcon === 'undefined') {
+             console.error("Helper functions not loaded. Cannot populate dashboard.");
+             return;
+        }
 
         // Sidebar & Header Badges/Info
         if (DOM.clientNameSidebar) DOM.clientNameSidebar.textContent = data.clientName || 'Valued Client';
@@ -283,12 +282,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (DOM.progressPercentageDesktop) DOM.progressPercentageDesktop.textContent = `${progress}%`;
         if (DOM.estimatedCompletionDesktop) DOM.estimatedCompletionDesktop.textContent = data.estimatedCompletion || 'TBD';
         if (DOM.visaTypeDesktop) DOM.visaTypeDesktop.textContent = data.visaType || 'H-2A/B';
-        if (DOM.viewCaseDetailsBtnDesktop) DOM.viewCaseDetailsBtnDesktop.dataset.url = data.caseDetailsUrl || '#'; // URL used by modal opener
+        // Link the view details button URL (used by modal logic)
+        if (DOM.viewCaseDetailsBtnDesktop) DOM.viewCaseDetailsBtnDesktop.dataset.url = data.caseDetailsUrl || '#';
 
         // Payment Card
         updatePaymentSection(data);
 
-        // Setup Quick Access Links (hrefs)
+        // Setup Quick Access Links (hrefs - navigation handled by listeners)
         if (DOM.documentsLinkDesktop) DOM.documentsLinkDesktop.href = data.documentsUrl || '#';
         if (DOM.messagesLinkDesktop) DOM.messagesLinkDesktop.href = data.messagesUrl || '#';
         if (DOM.resourcesLinkDesktop) DOM.resourcesLinkDesktop.href = data.resourcesUrl || '#';
@@ -298,315 +298,324 @@ document.addEventListener('DOMContentLoaded', () => {
         if (DOM.pageTitleDesktop) DOM.pageTitleDesktop.textContent = 'Dashboard Overview'; // Default title
 
         // Initial setup of listeners (important after elements are populated)
-        setupActionListeners(data);
-        setupSidebarNavigation();
-        setupModalLogic(data); // Setup modal logic here
+        setupActionListeners(data); // Setup button/link clicks
+        setupSidebarNavigation(); // Setup main navigation
+
+        // Setup Modal Logic (Call the function from dashboard_modal_desktop.js)
+        if (typeof setupModalLogicDesktop === 'function') {
+            setupModalLogicDesktop();
+        } else {
+            console.error("setupModalLogicDesktop function not found. Modal will not work.");
+        }
+
+        // Setup animations (if desired)
+        setupScrollAnimations();
     }
 
     // --- Event Listeners & Navigation ---
+
+    /**
+     * Adds event listeners to static and dynamic elements on the dashboard.
+     * Uses a helper to prevent adding duplicate listeners.
+     * @param {object} state - The AppState object (for URLs, etc.).
+     */
     function setupActionListeners(state) {
-        const addClickListenerOnce = (element, handler) => { // Prevent multiple listeners
+        const addClickListenerOnce = (element, handler) => { // Helper to prevent multiple listeners
             if (element && !element.hasAttribute('data-listener-set')) {
                 element.addEventListener('click', handler);
                 element.setAttribute('data-listener-set', 'true');
+            } else if (!element) {
+                 // console.warn("Attempted to add listener to non-existent element.");
             }
         };
 
-        // Buttons inside cards/sections
+        // --- Static Element Listeners ---
         addClickListenerOnce(DOM.notificationsButtonDesktop, () => alert('Notifications Panel (Desktop Placeholder)'));
-        addClickListenerOnce(DOM.logoutButtonSidebar, () => {
-             if (confirm('Are you sure you want to logout?')) { window.location.href = state.logoutUrl || '/'; }
+        addClickListenerOnce(DOM.logoutButtonSidebar, (e) => {
+             e.preventDefault(); // Prevent default link behavior
+             if (confirm('Are you sure you want to logout?')) {
+                 console.log('Logging out...');
+                 // window.location.href = state.logoutUrl || '/'; // Uncomment for actual logout
+             }
         });
         addClickListenerOnce(DOM.makePaymentButtonMainDesktop, (e) => {
-             if (e.target.disabled) return;
+             if (e.target.disabled) return; // Don't process if disabled (e.g., needs agreement)
              initiatePayment(e.target.dataset.invoiceId);
         });
         addClickListenerOnce(DOM.viewReceiptsPaidDesktop, (e) => navigateTo(e.target.dataset.url, 'Payment History'));
         addClickListenerOnce(DOM.viewReceiptsDueDesktop, (e) => navigateTo(e.target.dataset.url, 'Payment History'));
         addClickListenerOnce(DOM.signAgreementBtnDesktop, () => navigateTo(state.feeAgreementUrl, 'Fee Agreement'));
         addClickListenerOnce(DOM.retryPaymentLoadDesktop, () => {
+             console.log("Retrying payment load...");
              if(DOM.paymentErrorDivDesktop) DOM.paymentErrorDivDesktop.style.display = 'none';
              if(DOM.paymentLoadingDivDesktop) DOM.paymentLoadingDivDesktop.style.display = 'flex';
-             fetchDashboardData(); // Simulate refetch
+             // In a real app, you'd call the API again here.
+             // Simulating refetch with existing state for now:
+             setTimeout(() => updatePaymentSection(AppState), 300);
          });
 
-         // Quick Access Links (using navigation function)
+         // --- Quick Access Links (using navigation function via click listener) ---
          addClickListenerOnce(DOM.documentsLinkDesktop, (e) => { e.preventDefault(); navigateTo(state.documentsUrl, 'Documents'); });
-         addClickListenerOnce(DOM.messagesLinkDesktop, (e) => { e.preventDefault(); navigateTo(state.messagesUrl, 'Messages'); });
-         addClickListenerOnce(DOM.resourcesLinkDesktop, (e) => { e.preventDefault(); navigateTo(state.resourcesUrl, 'Resources'); });
-         addClickListenerOnce(DOM.profileLinkDesktop, (e) => { e.preventDefault(); navigateTo(state.profileUrl, 'Profile'); });
+         addClickListenerOnce(DOM.messagesLinkDesktop, (e) => { e.preventDefault(); navigateTo(state.messagesUrl, 'Secure Messages'); }); // Updated text
+         addClickListenerOnce(DOM.resourcesLinkDesktop, (e) => { e.preventDefault(); navigateTo(state.resourcesUrl, 'H-2 Resources'); });
+         addClickListenerOnce(DOM.profileLinkDesktop, (e) => { e.preventDefault(); navigateTo(state.profileUrl, 'My Profile'); });
 
-
-        // Event delegation for dynamically added action items
+         // --- Dynamic Element Listener (Event Delegation on Action Items List) ---
         if (DOM.actionItemsListDesktop && !DOM.actionItemsListDesktop.hasAttribute('data-listener-set')) {
             DOM.actionItemsListDesktop.addEventListener('click', (event) => {
-                const button = event.target.closest('.cta-button-desktop'); // Target desktop button class
+                const button = event.target.closest('.cta-button-desktop'); // Target the button
                 if (button && button.dataset.action) {
-                    handleActionItemClick(button.dataset);
+                    handleActionItemClick(button.dataset); // Pass the dataset of the clicked button
                 }
             });
             DOM.actionItemsListDesktop.setAttribute('data-listener-set', 'true');
         }
     }
 
+    /**
+     * Sets up click handlers for the main sidebar navigation links.
+     * Handles showing/hiding content sections and updating the page title.
+     */
     function setupSidebarNavigation() {
         DOM.sidebarNavLinks.forEach(link => {
+            // Ensure listener is added only once per link
             if (!link.hasAttribute('data-listener-set')) {
                 link.addEventListener('click', (e) => {
-                    e.preventDefault();
+                    e.preventDefault(); // Stop default anchor behavior
 
                     const targetId = link.dataset.target;
                     const targetSection = document.getElementById(targetId);
-                    const pageTitle = link.querySelector('span')?.textContent || 'Section';
+                    // Find the span inside the link for the title, fallback to link text
+                    const pageTitle = link.querySelector('span')?.textContent || link.textContent || 'Section';
 
-                    // Update active link
+                    // Update active link styling
                     DOM.sidebarNavLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
 
                     // Show target section, hide others
                     DOM.allContentSections.forEach(section => {
-                        section.classList.remove('active');
+                        section.classList.remove('active'); // Hide all
                     });
+
                     if (targetSection) {
-                        targetSection.classList.add('active');
-                        // Trigger animation maybe?
+                        targetSection.classList.add('active'); // Show the target
+                        // Optional: Trigger fade-in or other transition if needed
+                        // targetSection.style.animation = 'fadeIn 0.5s ease-out'; // Re-trigger animation? careful with this.
                     } else {
-                        // Handle case where target section doesn't exist yet (e.g., load dynamically)
-                        // For now, show the main dashboard overview if target is missing
-                        document.getElementById('dashboard-overview').classList.add('active');
-                        console.warn(`Target section #${targetId} not found. Showing Dashboard.`);
-                         // Potentially load content dynamically here via fetch
-                         alert(`Placeholder: Load content for "${pageTitle}" into section #${targetId}`);
+                        // Fallback: If target section is missing, show dashboard overview
+                        const overview = document.getElementById('dashboard-overview');
+                        if(overview) overview.classList.add('active');
+                        console.warn(`Target section #${targetId} not found. Showing Dashboard Overview.`);
+                        // --- Placeholder for Dynamic Content Loading ---
+                        // If sections like 'documents-section' should load content dynamically:
+                        // if (targetId === 'documents-section') {
+                        //     loadDocumentsContent(DOM.contentArea); // Example function call
+                        // } else {
+                        //     alert(`Placeholder: Load dynamic content for "${pageTitle}" into section #${targetId}`);
+                        // }
+                        // For now, we only switch visibility of existing divs.
+                        alert(`Placeholder: Section "${pageTitle}" (${targetId}) content not implemented yet.`);
                     }
 
-                    // Update header title
+                    // Update header title to match the selected section
                     if (DOM.pageTitleDesktop) DOM.pageTitleDesktop.textContent = pageTitle;
 
-                    // Scroll to top of content area
-                    if(DOM.contentArea) DOM.contentArea.scrollTo(0, 0);
+                    // Scroll to top of the main content area for better UX
+                    if(DOM.contentArea) DOM.contentArea.scrollTo({ top: 0, behavior: 'smooth' });
                 });
-                link.setAttribute('data-listener-set', 'true');
+                link.setAttribute('data-listener-set', 'true'); // Mark listener as added
             }
         });
     }
 
-
-    function handleActionItemClick(dataset) { // Same logic as mobile
+    /**
+     * Handles clicks on buttons within the 'Action Required' list.
+     * @param {DOMStringMap} dataset - The dataset object from the clicked button.
+     */
+    function handleActionItemClick(dataset) {
         const { action, docId, invoiceId, uploadId, requiresAgreement } = dataset;
+        console.log("Handling action:", action, "Data:", dataset);
+
+        // Pass the requiresAgreement status to initiatePayment if it's a payment action
+        const needsAgreementCheck = requiresAgreement === 'true';
+
         switch (action) {
             case 'payment':
-                initiatePayment(invoiceId, requiresAgreement === 'true');
+                initiatePayment(invoiceId, needsAgreementCheck);
                 break;
             case 'signature':
-                navigateTo(`#/documents/sign/${docId}`, `Sign Document ${docId}`);
+                // Navigate to the specific document signing page/view
+                navigateTo(AppState.feeAgreementUrl || `#/documents/sign/${docId}`, `Sign Document ${docId || 'Fee Agreement'}`);
                 break;
             case 'information':
+                 // Navigate to a form or profile section
                  navigateTo(`#/forms/provide/${uploadId || 'info'}`, `Provide Information ${uploadId || ''}`);
                 break;
             case 'upload':
+                // Navigate to a document upload interface
                 navigateTo(`#/documents/upload/${uploadId}`, `Upload Document ${uploadId}`);
                 break;
             default:
-                console.warn(`Unhandled action: ${action}`);
-                alert(`Action: ${action} (Placeholder)`);
+                console.warn(`Unhandled action type: ${action}`);
+                alert(`Action: ${action} (Placeholder - No specific navigation defined)`);
         }
     }
 
-    function navigateTo(url, targetDescription) { // Basic navigation handler
+    /**
+     * Basic navigation handler (Simulates SPA routing or triggers alerts).
+     * @param {string|null|undefined} url - The target URL or hash.
+     * @param {string} targetDescription - A user-friendly description for logs/alerts.
+     */
+    function navigateTo(url, targetDescription) {
         console.log(`Navigating to ${targetDescription} at ${url}`);
-        if (url && url.startsWith('#/')) { // Simulate SPA routing or section loading
-            const sectionId = url.substring(2).split('/')[0] + '-section'; // e.g., #/documents -> documents-section
-            const targetLink = document.querySelector(`.nav-link[data-target='${sectionId}']`) || document.querySelector(`.nav-link[href='${url.split('/')[0]}']`); // Find corresponding sidebar link
-            if (targetLink) {
-                targetLink.click(); // Simulate clicking the sidebar link
-            } else {
-                 alert(`Placeholder Navigation to: ${targetDescription} (${url})`);
-            }
-        } else if (url && url.startsWith('#')) {
-            // Could be used for scrolling or simple hash changes
-            alert(`Placeholder Hash Navigation: ${targetDescription} (${url})`);
-        } else if (url) { // External or full page load
-            alert(`Opening external link or page: ${targetDescription} (URL: ${url})`);
-            // window.location.href = url; // Uncomment for actual redirection
-        } else {
-            alert(`${targetDescription} navigation URL not configured.`);
-        }
-    }
-
-    function initiatePayment(invoiceId, requiresAgreement = false) { // Same logic as mobile, potentially different UI feedback
-        if (!invoiceId) {
-            alert('Error: Invoice ID missing for payment.');
-            return;
-        }
-        if (requiresAgreement && !AppState.feeAgreementSigned) {
-             alert('Please review and sign the Fee Agreement before proceeding with payment.');
-             // Maybe add visual cue on desktop too
-             if(DOM.signAgreementBtnDesktop) {
-                 DOM.signAgreementBtnDesktop.focus(); // Bring focus to the button
-                 DOM.signAgreementBtnDesktop.style.outline = '2px solid var(--color-primary-accent)';
-                 setTimeout(() => { if(DOM.signAgreementBtnDesktop) DOM.signAgreementBtnDesktop.style.outline = 'none'; }, 3000);
-             }
+        if (!url) {
+             alert(`${targetDescription} navigation URL not configured or is invalid.`);
              return;
         }
-        // Simulate redirecting to a payment page
-        const paymentUrl = `#/payments/pay/${invoiceId}`; // Example SPA route
-        alert(`Redirecting to payment page for Invoice: ${invoiceId} (Placeholder URL: ${paymentUrl})`);
-        navigateTo(paymentUrl, `Payment for ${invoiceId}`);
+
+        // Check if URL corresponds to a sidebar section
+        let sidebarLinkClicked = false;
+        if (url.startsWith('#')) {
+            // Try to match #/section or #section-name to a data-target
+            const potentialTargetId = url.startsWith('#/') ? url.substring(2).split('/')[0] + '-section' : url.substring(1);
+            const targetLink = document.querySelector(`.nav-link[data-target='${potentialTargetId}']`);
+
+            if (targetLink) {
+                targetLink.click(); // Simulate clicking the sidebar link
+                sidebarLinkClicked = true;
+            }
+        }
+
+        // If it wasn't a direct sidebar link click, handle as placeholder/external
+        if (!sidebarLinkClicked) {
+            if (url.startsWith('#/')) {
+                // Placeholder for more complex SPA routing (e.g., loading specific payment form)
+                alert(`Placeholder SPA Navigation to: ${targetDescription} (${url})`);
+                // Example: If url is #/payments/pay/inv123, load payment form for inv123
+            } else if (url.startsWith('#')) {
+                // Simple hash change, maybe scroll? Not handled here currently.
+                alert(`Placeholder Hash Navigation: ${targetDescription} (${url})`);
+            } else { // Assume external link or full page load
+                alert(`Opening external link or page: ${targetDescription} (URL: ${url})`);
+                // window.location.href = url; // Uncomment for actual redirection
+            }
+        }
     }
 
-
-    // --- Case Details Modal Logic (Integrated) ---
-    const H2VisaStepsDesktop = { // Same steps definition as mobile, possibly more detail
-        'initial_review': [ { name: 'Initial Consultation', status: 'complete', details: 'Discussed case requirements and strategy.' }, { name: 'Document Collection', status: 'complete', details: 'Received initial business and job offer documents.' }, { name: 'Firm Review & Analysis', status: 'in-progress', details: 'Our team is reviewing your submitted information for eligibility.' }, { name: 'Fee Agreement Sent', status: 'pending', details: 'Awaiting signed agreement and initial payment.' }, { name: 'LCA Preparation', status: 'pending', details: 'Will commence upon receipt of signed agreement/payment.' } ],
-        'submitted_lca': [ { name: 'Initial Review & Fee Agreement', status: 'complete', details: 'Agreement signed and initial payment received.' }, { name: 'LCA Preparation (ETA 9035)', status: 'complete', details: 'Labor Condition Application prepared based on job offer.' }, { name: 'LCA Submitted to DOL', status: 'in-progress', details: 'Waiting for Department of Labor processing via FLAG system.' }, { name: 'Begin Recruitment (H-2A/B specific)', status: 'pending', details: 'Advertising and U.S. worker recruitment efforts start.' }, { name: 'Petition Preparation (I-129)', status: 'pending', details: 'Will prepare concurrently or upon LCA certification.' } ],
-        'pending_dol': [ { name: 'LCA Submitted to DOL', status: 'complete', details: 'Submitted on [Date Placeholder] via FLAG.' }, { name: 'DOL Review Period', status: 'in-progress', details: 'Currently under standard review by the Department of Labor.' }, { name: 'Recruitment Efforts', status: 'in-progress', details: 'Ongoing required advertising and recruitment activities.' }, { name: 'Petition Preparation (I-129)', status: 'pending', details: 'Preparing supporting documents.' }, { name: 'Await DOL Certification', status: 'pending', details: 'Decision expected within standard processing times.' } ],
-        'dol_certified': [ { name: 'DOL Certification Received', status: 'complete', details: 'Certified LCA received on [Date Placeholder].' }, { name: 'Recruitment Report Finalized', status: 'complete', details: 'Documented results of U.S. worker recruitment.' }, { name: 'Petition Preparation (I-129)', status: 'in-progress', details: 'Finalizing Form I-129 and supporting evidence package.' }, { name: 'Submit Petition to USCIS', status: 'pending', details: 'Ready for filing with appropriate USCIS service center.' } ],
-        'submitted_uscis': [ { name: 'DOL Certification Received', status: 'complete', details: '' }, { name: 'Petition Preparation (I-129)', status: 'complete', details: 'Form I-129 package assembled and reviewed.' }, { name: 'Petition Submitted to USCIS', status: 'in-progress', details: 'Filed on [Date Placeholder]. Awaiting Receipt Notice.' }, { name: 'USCIS Processing Begins', status: 'pending', details: 'Case enters USCIS queue.' } ],
-        'pending_uscis_review': [ { name: 'Petition Submitted to USCIS', status: 'complete', details: 'Receipt Notice #: [Placeholder]' }, { name: 'USCIS Adjudication', status: 'in-progress', details: 'Petition is under review by a USCIS officer.' }, { name: 'Await USCIS Decision', status: 'pending', details: 'Monitoring case status for updates.' } ],
-        'rfe_issued': [ { name: 'Petition Submitted to USCIS', status: 'complete', details: 'Receipt Notice #: [Placeholder]' }, { name: 'Request for Evidence (RFE) Issued', status: 'action', details: 'USCIS requires additional information/documents by deadline.' }, { name: 'Prepare RFE Response', status: 'in-progress', details: 'Gathering and preparing requested items. Deadline: [Date Placeholder]' }, { name: 'Submit RFE Response', status: 'pending', details: 'Response will be filed upon completion.' } ],
-        'approved': [ { name: 'DOL Certification', status: 'complete', details: '' }, { name: 'USCIS Petition Filing & Review', status: 'complete', details: '(Including RFE response, if applicable)' }, { name: 'USCIS Approval Received', status: 'complete', details: 'Approval Notice (I-797) issued. Valid Dates: [Start Date] - [End Date]' }, { name: 'Consular Processing / Next Steps', status: 'in-progress', details: 'Notifying consulate; preparing workers for visa interview/entry.' } ],
-        'denied': [ { name: 'DOL/USCIS Review Complete', status: 'complete', details: '' }, { name: 'Case Denied', status: 'action', details: 'Received denial notice. Reviewing options (Appeal/Motion/Refile).' }, { name: 'Consultation on Options', status: 'pending', details: 'Will schedule call to discuss next steps.' } ],
-        'consular_processing': [ { name: 'USCIS Approval Received', status: 'complete', details: '' }, { name: 'Case Sent to NVC/Consulate', status: 'complete', details: 'National Visa Center or specific consulate notified.' }, { name: 'Worker(s) Prepare for Interview', status: 'in-progress', details: 'Workers schedule appointments, gather documents (DS-160 etc.).' }, { name: 'Visa Interview / Issuance', status: 'pending', details: 'Awaiting interview outcome and visa stamping.' } ],
-        'complete': [ { name: 'DOL Certification', status: 'complete', details: '' }, { name: 'USCIS Approval', status: 'complete', details: '' }, { name: 'Consular Processing / Entry', status: 'complete', details: 'Worker(s) granted visa and entered U.S. or changed status.' }, { name: 'Case Concluded', status: 'complete', details: 'All primary stages completed successfully.' } ],
-        'default': [ { name: 'Status Unavailable', status: 'pending', details: 'Detailed steps cannot be displayed currently. Please contact us.' } ]
-    };
-
-    function getStatusStepsDesktop(statusKey) {
-        const currentStatus = AppState.caseStatus || statusKey || 'default';
-        return H2VisaStepsDesktop[currentStatus] || H2VisaStepsDesktop['default'];
-    }
-
-    function renderStepsDesktop(steps) {
-        if (!DOM.modalStepsListDesktop) return;
-        DOM.modalStepsListDesktop.innerHTML = '';
-        if (!steps || steps.length === 0) {
-            DOM.modalStepsListDesktop.innerHTML = '<li class="step-item-desktop status-pending"><i class="fa-solid fa-circle-info step-icon-desktop"></i><span class="step-text-desktop">No detailed steps available.</span></li>';
+    /**
+     * Simulates initiating a payment process. Checks for fee agreement requirement.
+     * @param {string|null|undefined} invoiceId - The ID of the invoice to pay.
+     * @param {boolean} [requiresAgreement=false] - Does this payment require a signed agreement first?
+     */
+    function initiatePayment(invoiceId, requiresAgreement = false) {
+        if (!invoiceId) {
+            alert('Error: Invoice ID is missing. Cannot initiate payment.');
+            console.error('Payment initiation failed: Missing invoiceId.');
             return;
         }
-        steps.forEach(step => {
-            const li = document.createElement('li');
-            li.className = `step-item-desktop status-${step.status}`; // Use desktop class
 
-            const iconSpan = document.createElement('span');
-            iconSpan.className = 'step-icon-desktop'; // Use desktop class
-            let iconClass = 'fa-circle-question';
-            if (step.status === 'complete') iconClass = 'fa-circle-check';
-            if (step.status === 'in-progress') iconClass = 'fa-spinner fa-spin';
-            if (step.status === 'pending') iconClass = 'fa-circle';
-            if (step.status === 'action') iconClass = 'fa-triangle-exclamation';
-            iconSpan.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
-
-            const textSpan = document.createElement('span');
-            textSpan.className = 'step-text-desktop'; // Use desktop class
-            textSpan.textContent = step.name;
-
-            let detailSpan = null;
-            if (step.details) {
-                detailSpan = document.createElement('span');
-                detailSpan.className = 'step-details-desktop'; // Use desktop class
-                detailSpan.textContent = step.details;
-            }
-
-            li.appendChild(iconSpan);
-            li.appendChild(textSpan);
-            if (detailSpan) li.appendChild(detailSpan);
-            DOM.modalStepsListDesktop.appendChild(li);
-        });
-    }
-
-    function openModalDesktop() {
-        if (!DOM.modalDesktop) return;
-        const currentStatusKey = AppState.caseStatus || 'default';
-        const steps = getStatusStepsDesktop(currentStatusKey);
-        renderStepsDesktop(steps);
-        const statusText = currentStatusKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-        if (DOM.modalTitleDesktop) DOM.modalTitleDesktop.textContent = `Detailed Case Steps (${statusText})`;
-        DOM.modalDesktop.classList.add('visible');
-        document.body.classList.add('modal-open-desktop');
-    }
-
-    function closeModalDesktop() {
-        if (!DOM.modalDesktop) return;
-        DOM.modalDesktop.classList.remove('visible');
-        document.body.classList.remove('modal-open-desktop');
-    }
-
-    function setupModalLogic(state) {
-        if (DOM.viewCaseDetailsBtnDesktop) {
-            DOM.viewCaseDetailsBtnDesktop.addEventListener('click', openModalDesktop);
-        } else { console.error("View Case Details Button not found for modal."); }
-
-        if (DOM.modalCloseButtonDesktop) {
-            DOM.modalCloseButtonDesktop.addEventListener('click', closeModalDesktop);
-        } else { console.error("Modal Close Button not found."); }
-
-        if (DOM.modalDesktop) {
-            DOM.modalDesktop.addEventListener('click', (event) => {
-                if (event.target === DOM.modalDesktop) { // Click on overlay background
-                    closeModalDesktop();
-                }
-            });
-        } else { console.error("Modal Overlay not found."); }
-
-        // Close with Escape key listener (add only once)
-        if (!document.body.hasAttribute('data-escape-listener-set')) {
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && DOM.modalDesktop?.classList.contains('visible')) {
-                     closeModalDesktop();
-                }
-            });
-            document.body.setAttribute('data-escape-listener-set', 'true');
+        // Check if agreement is required AND if it's not signed according to AppState
+        if (requiresAgreement && !AppState.feeAgreementSigned) {
+             alert('Please review and sign the Fee Agreement before proceeding with this payment.');
+             // Optional: Highlight the agreement notice/button
+             if(DOM.signAgreementBtnDesktop) {
+                 DOM.signAgreementBtnDesktop.focus();
+                 DOM.signAgreementBtnDesktop.style.outline = '2px solid var(--color-error)'; // Use error color for emphasis
+                 setTimeout(() => { if(DOM.signAgreementBtnDesktop) DOM.signAgreementBtnDesktop.style.outline = 'none'; }, 3500);
+             }
+             return; // Stop payment process
         }
+
+        // If agreement is signed or not required, proceed to payment navigation/simulation
+        const paymentUrl = `#/payments/pay/${invoiceId}`; // Example SPA route for payment form
+        console.log(`Initiating payment for Invoice: ${invoiceId}, Agreement required: ${requiresAgreement}, Signed: ${AppState.feeAgreementSigned}`);
+        alert(`Simulating navigation to payment page for Invoice: ${invoiceId}\n(Placeholder URL: ${paymentUrl})`);
+        navigateTo(paymentUrl, `Payment for ${invoiceId}`);
+        // In a real app, this would likely redirect to Stripe, LawPay, or show an embedded payment form.
     }
 
-    // --- Animations (Optional for Desktop) ---
+    // --- Case Details Modal Logic ---
+    // MOVED to js/dashboard_modal_desktop.js
+    // - H2VisaStepsDesktop object
+    // - getStatusStepsDesktop function
+    // - renderStepsDesktop function
+    // - openModalDesktop function
+    // - closeModalDesktop function
+    // - setupModalLogic function (now setupModalLogicDesktop)
+    // The CALL to setupModalLogicDesktop() happens within populateDashboard()
+
+    // --- Animations (Optional - Basic Fade/Slide In on Scroll) ---
     function setupScrollAnimations() {
-        // Same Intersection Observer logic can be used if desired
-         if (!('IntersectionObserver' in window) || DOM.elementsToAnimate.length === 0) {
-             console.warn("IntersectionObserver not supported or no elements to animate.");
-              // Make elements visible immediately if no animation
-             DOM.elementsToAnimate.forEach(el => el.style.opacity = 1);
+         // Check for IntersectionObserver support and elements to animate
+         if (!('IntersectionObserver' in window) || !DOM.elementsToAnimate || DOM.elementsToAnimate.length === 0) {
+             console.warn("IntersectionObserver not supported or no elements found to animate.");
+              // Make elements visible immediately if no animation support/targets
+             if (DOM.elementsToAnimate) {
+                DOM.elementsToAnimate.forEach(el => { el.style.opacity = 1; el.style.transform = 'translateY(0)'; });
+             }
              return;
          }
 
-         const observerOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 };
+         const observerOptions = {
+             root: null, // Use viewport as root
+             rootMargin: '0px 0px -10% 0px', // Trigger slightly before element is fully visible
+             threshold: 0.1 // 10% of element visible
+         };
+
          const observerCallback = (entries, observer) => {
-             entries.forEach((entry, index) => {
+             entries.forEach((entry) => {
                  if (entry.isIntersecting) {
                      const element = entry.target;
-                     // Use a different animation or simply make visible
-                     // element.style.transitionDelay = `${index * 0.05}s`; // Faster stagger?
+                     // Apply final state styles (defined in CSS or JS)
                      element.style.opacity = 1;
                      element.style.transform = 'translateY(0)';
-                     observer.unobserve(element);
+                     // Optional: Add a class instead of direct style manipulation if preferred
+                     // element.classList.add('is-visible');
+                     observer.unobserve(element); // Stop observing once animated
                  }
              });
          };
+
          const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
          DOM.elementsToAnimate.forEach(el => {
-             // Set initial state for animation (if using CSS transitions)
+             // Set initial state for animation (hidden)
              el.style.opacity = 0;
-             el.style.transform = 'translateY(15px)';
-             el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
-             scrollObserver.observe(el);
+             el.style.transform = 'translateY(20px)'; // Start slightly lower
+             el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out'; // Define transition
+             // Optional: Add a class for initial state if preferred
+             // el.classList.add('will-animate');
+             scrollObserver.observe(el); // Start observing
          });
     }
 
     // --- Initial Fetch and Render ---
+    /**
+     * Simulates fetching dashboard data and then populates the dashboard.
+     */
     function fetchDashboardData() {
-        console.log("Fetching desktop dashboard data...");
-        // Placeholder: Replace with actual API call
-        // Show loading states if needed
+        console.log("Fetching desktop dashboard data (simulation)...");
+        // Show loading states if needed (e.g., for payment card)
         if(DOM.paymentLoadingDivDesktop) DOM.paymentLoadingDivDesktop.style.display = 'flex';
+        if(DOM.paymentDueDivDesktop) DOM.paymentDueDivDesktop.style.display = 'none'; // Hide other states
+        if(DOM.paymentPaidDivDesktop) DOM.paymentPaidDivDesktop.style.display = 'none';
+        if(DOM.paymentErrorDivDesktop) DOM.paymentErrorDivDesktop.style.display = 'none';
 
-        setTimeout(() => { // Simulate network delay
-            console.log("Received data (using mock data for desktop).");
+        // Simulate network delay with setTimeout
+        setTimeout(() => {
+            console.log("Received data (using mock 'new user' data for desktop).");
+            // Hide loading indicator *before* populating sections that replace it
+            if(DOM.paymentLoadingDivDesktop) DOM.paymentLoadingDivDesktop.style.display = 'none';
+
+            // Populate dashboard with the AppState data
             populateDashboard(AppState);
-            setupScrollAnimations(); // Set up animations after initial data load
-        }, 500); // Slightly faster simulation for desktop?
+
+            // Note: Animations and modal setup are called within populateDashboard
+
+        }, 600); // Simulate 600ms delay
     }
 
     // --- Run Initialization ---
-    fetchDashboardData();
+    fetchDashboardData(); // Start the process when the DOM is ready
 
 }); // End DOMContentLoaded

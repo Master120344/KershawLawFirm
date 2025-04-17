@@ -1,7 +1,3 @@
-/* ==========================================================================
-   SERVICES DESKTOP JS (Bordered Content Theme)
-   ========================================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Services Desktop JS Initialized (Bordered Content Theme).");
 

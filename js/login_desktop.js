@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelResetButton = document.getElementById('cancel-reset-button');
 
     const loader = document.getElementById('loader');
+    const initErrorMessage = document.getElementById('init-error-message'); // Get init error element
 
     // --- Helper Functions ---
     const showLoader = () => { if (loader) loader.style.display = 'block'; };
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('firebaseReady', () => {
         console.log("Firebase is ready (Login Page - Dark Blue).");
+        hideLoader(); // Hide loader once Firebase confirms ready
         if (window.firebaseAuth) {
             auth = window.firebaseAuth;
             // Check initial auth state
@@ -53,35 +55,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.onAuthStateChanged(auth, (user) => {
                     if (user) {
                         console.log("User already logged in:", user.email, "Redirecting to dashboard.");
-                        window.location.href = 'client_dashboard_desktop.html'; // Redirect immediately
+                        // Prevent flicker: Ensure login form is hidden before redirect if it was briefly shown
+                        if(loginSection) loginSection.style.display = 'none';
+                        if(resetPasswordSection) resetPasswordSection.style.display = 'none';
+                        window.location.href = 'client_dashboard_desktop.html';
                     } else {
                         console.log("No user logged in. Showing login form.");
                          if (loginSection && resetPasswordSection) {
-                            loginSection.style.display = 'block';
+                            loginSection.style.display = 'block'; // Show login form now
                             resetPasswordSection.style.display = 'none';
                          }
-                         hideLoader(); // Ensure loader is hidden if no user
+                         // Loader is already hidden by this point
                     }
                 }, (error) => {
-                    // Handle potential errors during initial auth state check
                     console.error("Error checking auth state:", error);
                     showMessage(loginMessage, 'Could not check login status.', true);
-                    hideLoader();
+                    hideLoader(); // Ensure loader hidden on error too
+                    if(loginSection) loginSection.style.display = 'block'; // Show login form on error
                 });
             }
         } else {
             console.error("Firebase Auth object not found on window after firebaseReady event.");
             showMessage(loginMessage, 'Authentication service failed to load.', true);
-            hideLoader();
+            hideLoader(); // Hide loader if auth object not found
         }
     });
 
     document.addEventListener('firebaseError', () => {
         console.error("Firebase failed to initialize (Login Page - Dark Blue).");
-        // Message displayed by inline script
+        // Message is displayed by inline script
         disableButton(loginSubmitButton);
         disableButton(resetSubmitButton);
-        hideLoader();
+        hideLoader(); // Hide loader on init error
     });
 
     // --- Login Form Submission ---
@@ -109,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`Attempting login for: ${email}`);
                 const userCredential = await window.signInWithEmailAndPassword(auth, email, password);
                 console.log("Login successful. User:", userCredential.user.email);
-                // Redirect is handled by onAuthStateChanged listener
+                // Redirect is handled by onAuthStateChanged listener which fires upon successful login
 
             } catch (error) {
                 console.error("Login Error:", error.code, error.message);
@@ -143,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resetPasswordSection.style.display = 'block';
             clearMessage(loginMessage);
             clearMessage(resetMessage);
-            resetEmailInput.value = loginEmailInput.value; // Pre-fill email
+            resetEmailInput.value = loginEmailInput.value;
             resetEmailInput.focus();
         });
     }

@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelResetButton = document.getElementById('cancel-reset-button');
 
     const loader = document.getElementById('loader');
-    // const bodyElement = document.body; // Body class not used now
 
     // --- Helper Functions ---
     const showLoader = () => { if (loader) loader.style.display = 'block'; };
@@ -28,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!element) return;
         element.textContent = message;
         element.className = `message ${isError ? 'error' : 'success'} visible`;
+        // Auto-clear message after a delay
+        setTimeout(() => clearMessage(element), 5000); // Clear after 5 seconds
     };
 
     const clearMessage = (element) => {
@@ -44,37 +45,43 @@ document.addEventListener('DOMContentLoaded', () => {
     let auth; // Variable to hold Firebase auth instance
 
     document.addEventListener('firebaseReady', () => {
-        console.log("Firebase is ready (Login Page).");
+        console.log("Firebase is ready (Login Page - Dark Blue).");
         if (window.firebaseAuth) {
             auth = window.firebaseAuth;
-            // Check initial auth state (optional - redirect if already logged in)
+            // Check initial auth state
             if (window.onAuthStateChanged) {
                 window.onAuthStateChanged(auth, (user) => {
                     if (user) {
                         console.log("User already logged in:", user.email, "Redirecting to dashboard.");
-                        // Optionally show a quick message before redirect
-                        // showMessage(loginMessage, "Already logged in. Redirecting...");
-                        window.location.href = 'client_dashboard_desktop.html'; // Adjust path if needed
+                        window.location.href = 'client_dashboard_desktop.html'; // Redirect immediately
                     } else {
-                        console.log("No user logged in.");
-                         // Ensure login form is visible if reset was previously shown
+                        console.log("No user logged in. Showing login form.");
                          if (loginSection && resetPasswordSection) {
                             loginSection.style.display = 'block';
                             resetPasswordSection.style.display = 'none';
                          }
+                         hideLoader(); // Ensure loader is hidden if no user
                     }
+                }, (error) => {
+                    // Handle potential errors during initial auth state check
+                    console.error("Error checking auth state:", error);
+                    showMessage(loginMessage, 'Could not check login status.', true);
+                    hideLoader();
                 });
             }
         } else {
             console.error("Firebase Auth object not found on window after firebaseReady event.");
             showMessage(loginMessage, 'Authentication service failed to load.', true);
+            hideLoader();
         }
     });
 
     document.addEventListener('firebaseError', () => {
-        console.error("Firebase failed to initialize (Login Page).");
-        // Message already shown in HTML script catch block
-        disableButton(loginSubmitButton); // Disable login if Firebase fails
+        console.error("Firebase failed to initialize (Login Page - Dark Blue).");
+        // Message displayed by inline script
+        disableButton(loginSubmitButton);
+        disableButton(resetSubmitButton);
+        hideLoader();
     });
 
     // --- Login Form Submission ---
@@ -82,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!auth || !window.signInWithEmailAndPassword) {
-                showMessage(loginMessage, 'Authentication service not available.', true);
+                showMessage(loginMessage, 'Authentication service not ready. Please wait or refresh.', true);
                 return;
             }
 
@@ -100,31 +107,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 console.log(`Attempting login for: ${email}`);
-                await window.signInWithEmailAndPassword(auth, email, password);
-                console.log("Login successful.");
-                // showMessage(loginMessage, "Login successful! Redirecting..."); // Optional message
-                // onAuthStateChanged should trigger the redirect via the listener added in 'firebaseReady'
-                // Or redirect immediately here:
-                window.location.href = 'client_dashboard_desktop.html'; // Adjust path if needed
+                const userCredential = await window.signInWithEmailAndPassword(auth, email, password);
+                console.log("Login successful. User:", userCredential.user.email);
+                // Redirect is handled by onAuthStateChanged listener
 
             } catch (error) {
-                console.error("Login Error:", error);
-                let userMessage = 'Login failed. Please check your credentials.';
-                // Customize error messages based on Firebase error codes
+                console.error("Login Error:", error.code, error.message);
+                let userMessage = 'Login failed. Please try again.';
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
                     userMessage = 'Invalid email or password.';
                 } else if (error.code === 'auth/invalid-email') {
                     userMessage = 'Please enter a valid email address.';
                 } else if (error.code === 'auth/too-many-requests') {
-                    userMessage = 'Access temporarily disabled due to too many attempts. Please try again later.';
+                    userMessage = 'Access temporarily disabled (too many attempts). Try again later.';
+                } else if (error.code === 'auth/network-request-failed') {
+                     userMessage = 'Network error. Please check your connection.';
                 }
                 showMessage(loginMessage, userMessage, true);
+
+            } finally {
                 hideLoader();
                 enableButton(loginSubmitButton);
             }
-            // Hiding loader might happen before redirect completes, which is fine.
-            // If showing message before redirect, hide loader in the success case too.
-            // hideLoader();
         });
     } else {
         console.error("Login form not found.");
@@ -135,11 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
         forgotPasswordLink.addEventListener('click', (e) => {
             e.preventDefault();
             console.log("Forgot Password clicked.");
-            loginSection.style.display = 'none'; // Hide login form
-            resetPasswordSection.style.display = 'block'; // Show reset form
-            clearMessage(loginMessage); // Clear any previous login messages
-            clearMessage(resetMessage); // Clear any previous reset messages
-            resetEmailInput.value = loginEmailInput.value; // Pre-fill email if entered
+            loginSection.style.display = 'none';
+            resetPasswordSection.style.display = 'block';
+            clearMessage(loginMessage);
+            clearMessage(resetMessage);
+            resetEmailInput.value = loginEmailInput.value; // Pre-fill email
             resetEmailInput.focus();
         });
     }
@@ -148,9 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
      if (cancelResetButton && loginSection && resetPasswordSection) {
         cancelResetButton.addEventListener('click', () => {
             console.log("Cancel Reset clicked.");
-            resetPasswordSection.style.display = 'none'; // Hide reset form
-            loginSection.style.display = 'block'; // Show login form
+            resetPasswordSection.style.display = 'none';
+            loginSection.style.display = 'block';
             clearMessage(resetMessage);
+            loginEmailInput.focus();
         });
      }
 
@@ -159,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resetPasswordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
              if (!auth || !window.sendPasswordResetEmail) {
-                showMessage(resetMessage, 'Password reset service not available.', true);
+                showMessage(resetMessage, 'Password reset service not ready. Please wait or refresh.', true);
                 return;
             }
 
@@ -178,18 +183,21 @@ document.addEventListener('DOMContentLoaded', () => {
                  console.log(`Sending password reset email to: ${email}`);
                  await window.sendPasswordResetEmail(auth, email);
                  console.log("Password reset email sent successfully.");
-                 showMessage(resetMessage, 'Password reset link sent! Check your email inbox (and spam folder).');
-                 // Optionally hide form or redirect after success
-                 // setTimeout(() => {
-                 //    resetPasswordSection.style.display = 'none';
-                 //    loginSection.style.display = 'block';
-                 // }, 4000); // Show success for 4 seconds
+                 showMessage(resetMessage, 'Password reset link sent! Check your email (including spam).');
+                 // Hide reset form and show login form after a delay
+                 setTimeout(() => {
+                    if (resetPasswordSection.style.display !== 'none') {
+                        cancelResetButton.click(); // Simulate clicking cancel
+                    }
+                 }, 4000);
 
             } catch (error) {
-                console.error("Password Reset Error:", error);
+                console.error("Password Reset Error:", error.code, error.message);
                  let userMessage = 'Failed to send reset email. Please try again.';
                  if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-email') {
                      userMessage = 'Email address not found or invalid.';
+                 } else if (error.code === 'auth/network-request-failed') {
+                     userMessage = 'Network error. Please check your connection.';
                  }
                  showMessage(resetMessage, userMessage, true);
             } finally {
@@ -201,6 +209,5 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Reset password form not found.");
     }
 
-
-    console.log("Login Desktop JS Initialized and Setup.");
+    console.log("Login Desktop JS Initialized and Setup (Dark Blue Theme).");
 }); // End DOMContentLoaded

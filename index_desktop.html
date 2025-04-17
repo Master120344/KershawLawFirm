@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Kershaw Law Firm - H-2A & H-2B Visa Expertise (Light Blue)</title>
-    <meta name="description" content="The Kershaw Law Firm offers expert H-2A and H-2B visa processing with a bright, professional approach. Desktop optimized.">
+    <!-- Updated Title and Description -->
+    <title>The Kershaw Law Firm - H-2A & H-2B Visa Expertise</title>
+    <meta name="description" content="The Kershaw Law Firm offers expert H-2A and H-2B visa processing. Desktop optimized with an Austin skyline theme.">
     <!-- Link to desktop CSS -->
     <link rel="stylesheet" href="css/index_desktop.css">
     <!-- Google Fonts -->
@@ -15,59 +16,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <!-- Loading Spinner (Accent Color) -->
+    <!-- Loading Spinner (Updated Accent Color via CSS) -->
     <div id="loader" class="loader"></div>
 
     <!-- Background Image Container (Main Visual) -->
     <div id="background-static"></div>
     <!-- No separate overlay div needed -->
 
-    <!-- Header - Light Blue Theme -->
+    <!-- Header - Updated Theme -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
                  <a href="index_desktop.html" class="logo-link">
                     <h1>The Kershaw Law Firm</h1>
                  </a>
-                <div class="header-line"></div>
+                <div class="header-line"></div> <!-- Color updated via CSS -->
             </div>
             <div class="header-actions">
                  <!-- User Info / Login Button -->
                  <div id="user-info" class="user-info" style="display: none;">
-                    <span id="user-email">user@example.com</span>
-                    <a href="#" id="logout-button" class="logout-link">Logout</a>
+                    <span id="user-email">user@example.com</span> <!-- Text color updated via CSS -->
+                    <a href="#" id="logout-button" class="logout-link">Logout</a> <!-- Color updated via CSS -->
                 </div>
+                <!-- Button color updated via CSS -->
                 <a href="login_desktop.html" id="login-button" class="login-button">Client Login</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Area - Centered Hero with Light Blue Background -->
+    <!-- Main Content Area - Centered Hero -->
     <div class="main-content-area">
         <div class="main-content-container">
+            <!-- Updated Hero Section -->
             <section class="hero">
-                <!-- Heading uses dark blue text -->
-                <h2>Expert H-2A & H-2B Visa Solutions</h2>
-                 <!-- Tagline uses dark blue text -->
-                <p class="tagline">Navigating the complexities of temporary agricultural and non-agricultural work visas for employers nationwide.</p>
-                <!-- CTA Button -->
-                <a href="getstarted_desktop.html" class="cta-button">
-                    <i class="fa-solid fa-rocket"></i> Get Started Today
-                </a>
+                <!-- Heading updated: Text content, white color, bold, shadow (via CSS) -->
+                <h2>Expert H-2A & H-2B Visa</h2>
+                <!-- Tagline Removed -->
+                <!-- CTA Button Removed -->
             </section>
         </div>
     </div>
 
-    <!-- Navigation Tabs (Footer Style) - Light Blue Theme -->
+    <!-- Navigation Tabs (Footer Style) - Updated Theme -->
     <nav class="tabs">
         <a href="/KershawLawFirm/index_desktop.html" class="active">Home</a>
         <a href="/KershawLawFirm/services_desktop.html">Services</a>
         <a href="/KershawLawFirm/faq_desktop.html">FAQ</a>
         <a href="/KershawLawFirm/contact_desktop.html">Contact Us</a>
+        <!-- Colors updated via CSS -->
     </nav>
 
     <script type="module">
-      // Firebase initialization - Using confirmed working config
+      // Firebase initialization - No changes needed here
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -83,20 +83,20 @@
 
       try {
         const app = initializeApp(firebaseConfig);
-        console.log("Firebase Initialized (Index Desktop - Light Blue Theme).");
+        console.log("Firebase Initialized (Index Desktop - Austin Theme)."); // Updated log
         const auth = getAuth(app);
-        console.log("Firebase Auth Initialized (Index Desktop - Light Blue Theme).");
+        console.log("Firebase Auth Initialized (Index Desktop - Austin Theme)."); // Updated log
         window.firebaseApp = app;
         window.firebaseAuth = auth;
         window.firebaseOnAuthStateChanged = onAuthStateChanged;
         window.firebaseSignOut = signOut;
         document.dispatchEvent(new CustomEvent('firebaseAuthReady'));
       } catch (error) {
-        console.error("Error initializing Firebase (Index Desktop - Light Blue Theme):", error);
+        console.error("Error initializing Firebase (Index Desktop - Austin Theme):", error); // Updated log
          document.dispatchEvent(new CustomEvent('firebaseAuthError'));
       }
     </script>
-    <!-- Link to desktop JS, deferred -->
+    <!-- Link to desktop JS, deferred - No changes needed here -->
     <script src="js/index_desktop.js" defer></script>
 </body>
 </html>

@@ -1,207 +1,193 @@
-// js/login_desktop.js
+/* Global Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Elements ---
-    const loginSection = document.getElementById('login-section');
-    const loginForm = document.getElementById('login-form');
-    const loginEmailInput = document.getElementById('login-email');
-    const loginPasswordInput = document.getElementById('login-password');
-    const loginSubmitButton = document.getElementById('login-submit-button');
-    const loginMessage = document.getElementById('login-message');
+/* Define Polished DARK Blue/Neutral Palette */
+:root {
+    /* Header/Footer (Light) */
+    --color-bg-header-footer: rgba(250, 250, 250, 0.93);
+    --color-text-header-footer: #2c3e50;
+    --color-border-header-footer: rgba(44, 62, 80, 0.12);
 
-    const forgotPasswordLink = document.getElementById('forgot-password-link');
-    const resetPasswordSection = document.getElementById('reset-password-section');
-    const resetPasswordForm = document.getElementById('reset-password-form');
-    const resetEmailInput = document.getElementById('reset-email');
-    const resetSubmitButton = document.getElementById('reset-submit-button');
-    const resetMessage = document.getElementById('reset-message');
-    const cancelResetButton = document.getElementById('cancel-reset-button');
+    /* Main Content (Dark Blue Base) */
+    --color-text-on-dark-bg: #FFFFFF;
+    --color-text-heading: #FFFFFF;
+    --color-text-subtitle: rgba(255, 255, 255, 0.85);
+    --color-primary-dark-blue: #0B3D91; /* Darker Primary Blue */
+    --color-accent-lighter-blue: #4FC3F7; /* Lighter Accent Blue for hover/focus */
+    --color-border-container: rgba(79, 195, 247, 0.3); /* Light blue border for container */
+    --color-bg-login-container: rgba(11, 61, 145, 0.25); /* Dark blueish, more transparent bg */
 
-    const loader = document.getElementById('loader');
+    /* Form Elements */
+    --color-border-input: #78909C;
+    --color-border-input-focus: var(--color-accent-lighter-blue);
+    --color-bg-input: #FFFFFF;
+    --color-text-input: #263238;
+    --color-placeholder-text: #90A4AE;
+    --color-label-text: rgba(255, 255, 255, 0.9);
 
-    // --- Helper Functions ---
-    const showLoader = () => { if (loader) loader.style.display = 'block'; };
-    const hideLoader = () => { if (loader) loader.style.display = 'none'; };
+    /* Status Colors */
+    --color-text-error: #FF6B6B;
+    --color-text-success: #69F0AE;
 
-    const showMessage = (element, message, isError = false) => {
-        if (!element) return;
-        element.textContent = message;
-        element.className = `message ${isError ? 'error' : 'success'} visible`;
-         // Auto-clear message after a delay
-         setTimeout(() => clearMessage(element), 5000); // Clear after 5 seconds
-    };
+    /* Shadows */
+    --color-shadow-text: 1px 1px 8px rgba(0, 0, 0, 0.6);
+    --color-shadow-container: 0 12px 40px rgba(0, 0, 0, 0.2);
+    --color-shadow-input-focus: rgba(79, 195, 247, 0.4);
+    --color-shadow-button: 0 4px 14px rgba(11, 61, 145, 0.4);
+    --color-shadow-button-hover: 0 7px 20px rgba(79, 195, 247, 0.5);
 
-    const clearMessage = (element) => {
-        if (!element) return;
-        element.textContent = '';
-        element.className = 'message';
-    };
+    /* Fonts & Transitions */
+    --font-primary: 'Cinzel', serif;
+    --font-secondary: 'EB Garamond', serif;
+    --footer-height: 65px;
+    --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-form: all 0.25s ease-in-out;
+}
 
-    const disableButton = (button) => { if (button) button.disabled = true; };
-    const enableButton = (button) => { if (button) button.disabled = false; };
+/* Body Styling */
+body {
+    font-family: var(--font-secondary);
+    min-height: 100vh;
+    color: var(--color-text-on-dark-bg);
+    line-height: 1.7;
+    background-color: #0a192f; /* Dark blue fallback */
+    overflow-x: hidden; position: relative; opacity: 1;
+    padding-bottom: var(--footer-height);
+    display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
 
+/* Background */
+#background-static {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; background-size: cover; background-position: center center;
+    background-repeat: no-repeat; background-image: url('../assets/austinbackground.jpg');
+    filter: brightness(1.0) saturate(1.0);
+    animation: subtleZoom 45s infinite alternate ease-in-out;
+}
+@keyframes subtleZoom { from { transform: scale(1); } to { transform: scale(1.02); } }
 
-    // --- Firebase Readiness Check ---
-    let auth; // Variable to hold Firebase auth instance
+/* Header (Light Theme) */
+.header {
+    position: sticky; top: 0; left: 0; width: 100%; z-index: 1000;
+    height: auto; min-height: 75px; display: flex; align-items: center;
+    padding: 10px 0; background: var(--color-bg-header-footer);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+    border-bottom: 1px solid var(--color-border-header-footer);
+    color: var(--color-text-header-footer);
+}
+.header-content { width: 90%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.logo-container { text-align: left; flex-shrink: 0; }
+.logo-link { text-decoration: none; color: inherit; }
+.logo-container h1 { font-family: var(--font-primary); font-size: clamp(1.8rem, 3vw, 2.2rem); color: var(--color-text-header-footer); font-weight: 700; margin: 0; transition: color var(--transition-fast); text-shadow: none; letter-spacing: 1px; }
+.logo-container .logo-link:hover h1 { color: var(--color-primary-dark-blue); }
+.header-line { /* Uses DARK BLUE */
+    width: 70px; height: 2.5px; background: var(--color-primary-dark-blue);
+    margin: 5px 0 0 0; transition: width 0.3s ease; border-radius: 1px;
+}
+.logo-container:hover .header-line { width: 120px; }
+/* No header actions needed on this specific layout */
 
-    document.addEventListener('firebaseReady', () => {
-        console.log("Firebase is ready (Login Page - Dark Blue).");
-        if (window.firebaseAuth) {
-            auth = window.firebaseAuth;
-            // Check initial auth state
-            if (window.onAuthStateChanged) {
-                window.onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        console.log("User already logged in:", user.email, "Redirecting to dashboard.");
-                        window.location.href = 'client_dashboard_desktop.html'; // Redirect immediately
-                    } else {
-                        console.log("No user logged in. Showing login form.");
-                        if (loginSection && resetPasswordSection) {
-                            loginSection.style.display = 'block';
-                            resetPasswordSection.style.display = 'none';
-                         }
-                         hideLoader(); // Ensure loader is hidden if no user
-                    }
-                });
-            }
-        } else {
-            console.error("Firebase Auth object not found on window after firebaseReady event.");
-            showMessage(loginMessage, 'Authentication service failed to load.', true);
-        }
-    });
+/* Main Content Area */
+.main-content-area {
+    position: relative; z-index: 5; flex-grow: 1;
+    display: flex; justify-content: center; align-items: center;
+    padding: 50px 20px;
+}
 
-    document.addEventListener('firebaseError', () => {
-        console.error("Firebase failed to initialize (Login Page - Dark Blue).");
-        showMessage(loginMessage, 'Authentication service failed. Please refresh.', true);
-        disableButton(loginSubmitButton);
-        disableButton(resetSubmitButton);
-        hideLoader(); // Hide loader on init error
-    });
+/* Login Container Styling */
+.login-container {
+    width: 100%; max-width: 500px; margin: auto; padding: 40px 45px;
+    border: 1px solid var(--color-border-container);
+    border-radius: 12px; background-color: var(--color-bg-login-container);
+    box-shadow: var(--color-shadow-container);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    text-align: center; display: flex; flex-direction: column; gap: 25px;
+}
 
-    // --- Login Form Submission ---
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!auth || !window.signInWithEmailAndPassword) {
-                showMessage(loginMessage, 'Authentication service not ready. Please wait or refresh.', true);
-                return;
-            }
+/* Login Header inside container */
+.login-header { margin-bottom: 5px; }
+.login-header h2 { font-family: var(--font-primary); font-size: clamp(1.7rem, 4.5vw, 2.1rem); color: var(--color-text-heading); text-shadow: var(--color-shadow-text); margin-bottom: 8px; font-weight: 700; }
+.subtitle { font-family: var(--font-secondary); font-size: clamp(1rem, 2.8vw, 1.1rem); color: var(--color-text-subtitle); text-shadow: var(--color-shadow-text); margin-bottom: 0; font-weight: 400; }
 
-            const email = loginEmailInput.value.trim();
-            const password = loginPasswordInput.value.trim();
-            clearMessage(loginMessage);
+/* Form Sections */
+.login-section, .reset-password-section { width: 100%; }
 
-            if (!email || !password) {
-                showMessage(loginMessage, 'Please enter both email and password.', true);
-                return;
-            }
+/* Shared Form Styling */
+.login-form-element { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+.form-group { display: flex; flex-direction: column; text-align: left; }
+.form-group label { display: flex; align-items: center; gap: 9px; font-family: var(--font-secondary); font-size: 0.95rem; color: var(--color-label-text); margin-bottom: 6px; font-weight: 500; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+.form-group label .icon { font-size: 0.9em; width: 15px; text-align: center; opacity: 0.7; }
+.form-group input[type="email"],
+.form-group input[type="password"] { padding: 12px 15px; font-family: var(--font-secondary); font-size: 1rem; color: var(--color-text-input); background: var(--color-bg-input); border: 1px solid var(--color-border-input); border-radius: 6px; outline: none; transition: var(--transition-form); box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.07); }
+::placeholder { color: var(--color-placeholder-text); opacity: 1; }
+::-ms-input-placeholder { color: var(--color-placeholder-text); }
+:-ms-input-placeholder { color: var(--color-placeholder-text); }
 
-            showLoader();
-            disableButton(loginSubmitButton);
+.form-group input:focus { border-color: var(--color-border-input-focus); box-shadow: 0 0 9px var(--color-shadow-input-focus); }
+.submit-container { margin-top: 8px; }
 
-            try {
-                console.log(`Attempting login for: ${email}`);
-                await window.signInWithEmailAndPassword(auth, email, password);
-                console.log("Login successful. Redirect should be handled by onAuthStateChanged.");
-                // Redirect is now handled by the listener set up in 'firebaseReady'
+/* Login/Reset Buttons (Dark Blue) */
+.login-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 30px; background: var(--color-primary-dark-blue); color: var(--color-text-on-dark-bg); font-family: var(--font-primary); font-size: 1rem; font-weight: 700; border: none; border-radius: 50px; transition: var(--transition-smooth); box-shadow: var(--color-shadow-button); cursor: pointer; text-transform: uppercase; letter-spacing: 1px; text-shadow: none; }
+.login-button .icon { font-size: 1em; }
+.login-button:hover { background: var(--color-accent-lighter-blue); transform: translateY(-3px); box-shadow: var(--color-shadow-button-hover); }
+.login-button:disabled { background-color: #546E7A; color: #B0BEC5; cursor: not-allowed; box-shadow: none; transform: none; }
 
-            } catch (error) {
-                console.error("Login Error:", error.code, error.message);
-                let userMessage = 'Login failed. Please try again.';
-                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-                    userMessage = 'Invalid email or password.';
-                } else if (error.code === 'auth/invalid-email') {
-                    userMessage = 'Please enter a valid email address.';
-                } else if (error.code === 'auth/too-many-requests') {
-                    userMessage = 'Access temporarily disabled (too many attempts). Try again later.';
-                } else if (error.code === 'auth/network-request-failed') {
-                     userMessage = 'Network error. Please check your connection.';
-                }
-                showMessage(loginMessage, userMessage, true);
+/* Message Styling */
+.message { margin-top: 12px; font-size: 0.9rem; font-weight: 500; min-height: 1.4em; opacity: 0; transition: opacity 0.3s ease-in-out; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+.message.visible { opacity: 1; }
+.message.success { color: var(--color-text-success); }
+.message.error { color: var(--color-text-error); }
 
-            } finally { // Ensure loader is hidden and button enabled on success or failure
-                hideLoader();
-                enableButton(loginSubmitButton);
-            }
-        });
-    } else {
-        console.error("Login form not found.");
-    }
+/* Forgot Password Link */
+.forgot-password { margin-top: 18px; font-size: 0.9rem; }
+.forgot-password a { color: var(--color-accent-lighter-blue); text-decoration: none; transition: color var(--transition-fast); }
+.forgot-password a:hover { color: var(--color-text-on-dark-bg); text-decoration: underline; }
 
-    // --- Forgot Password Link ---
-    if (forgotPasswordLink && loginSection && resetPasswordSection) {
-        forgotPasswordLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            console.log("Forgot Password clicked.");
-            loginSection.style.display = 'none';
-            resetPasswordSection.style.display = 'block';
-            clearMessage(loginMessage);
-            clearMessage(resetMessage);
-            resetEmailInput.value = loginEmailInput.value; // Pre-fill email
-            resetEmailInput.focus();
-        });
-    }
+/* Reset Password Section */
+.reset-password-section { border-top: 1px solid rgba(79, 195, 247, 0.15); padding-top: 25px; }
+.reset-password-section h3 { font-family: var(--font-primary); font-size: 1.4rem; color: var(--color-text-heading); text-shadow: var(--color-shadow-text); margin-bottom: 8px; font-weight: 700; }
+.reset-password-section p { font-size: 0.9rem; color: var(--color-text-subtitle); margin-bottom: 20px; max-width: 95%; margin-left: auto; margin-right: auto; }
+.cancel-button { background: none; border: none; color: var(--color-text-subtitle); font-family: var(--font-secondary); font-size: 0.85rem; cursor: pointer; margin-top: 12px; padding: 5px; transition: color var(--transition-fast); }
+.cancel-button:hover { color: var(--color-text-on-dark-bg); }
 
-    // --- Cancel Password Reset ---
-     if (cancelResetButton && loginSection && resetPasswordSection) {
-        cancelResetButton.addEventListener('click', () => {
-            console.log("Cancel Reset clicked.");
-            resetPasswordSection.style.display = 'none';
-            loginSection.style.display = 'block';
-            clearMessage(resetMessage);
-            loginEmailInput.focus(); // Focus back on login email
-        });
-     }
+/* Tabs Styling (Light Background, Dark Blue Accent) */
+.tabs { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000; height: var(--footer-height); display: flex; align-items: center; justify-content: center; gap: 45px; padding: 0; background: var(--color-bg-header-footer); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.07); border-top: 1px solid var(--color-border-header-footer); color: var(--color-text-header-footer); }
+.tabs a { color: var(--color-text-header-footer); text-decoration: none; font-family: var(--font-secondary); font-size: 1.15rem; font-weight: 500; padding: 10px 15px; transition: all var(--transition-fast); position: relative; text-transform: uppercase; letter-spacing: 1.2px; }
+.tabs a::after { content: ''; position: absolute; width: 0; height: 2.5px; bottom: 5px; left: 50%; transform: translateX(-50%); background: var(--color-primary-dark-blue); transition: width 0.4s ease; border-radius: 1px; }
+.tabs a:hover, .tabs a.active { color: var(--color-primary-dark-blue); }
+.tabs a:hover::after, .tabs a.active::after { width: 70%; }
 
-    // --- Reset Password Form Submission ---
-    if (resetPasswordForm) {
-        resetPasswordForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-             if (!auth || !window.sendPasswordResetEmail) {
-                showMessage(resetMessage, 'Password reset service not ready. Please wait or refresh.', true);
-                return;
-            }
+/* Focus Styles (Lighter Blue Accent) */
+a:focus, button:focus, input:focus { outline: none; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px solid var(--color-accent-lighter-blue); outline-offset: 2px; border-radius: 3px; box-shadow: 0 0 10px var(--color-shadow-input-focus); }
+.form-group input:focus-visible { box-shadow: 0 0 10px var(--color-shadow-input-focus); }
 
-            const email = resetEmailInput.value.trim();
-            clearMessage(resetMessage);
+/* Loader (Lighter Blue Accent) */
+.loader { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; border: 4px solid rgba(79, 195, 247, 0.3); border-top: 4px solid var(--color-accent-lighter-blue); border-radius: 50%; animation: spin 1s linear infinite; z-index: 1001; }
+@keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 
-            if (!email) {
-                 showMessage(resetMessage, 'Please enter your email address.', true);
-                 return;
-            }
-
-            showLoader();
-            disableButton(resetSubmitButton);
-
-            try {
-                 console.log(`Sending password reset email to: ${email}`);
-                 await window.sendPasswordResetEmail(auth, email);
-                 console.log("Password reset email sent successfully.");
-                 showMessage(resetMessage, 'Password reset link sent! Check your email (including spam).');
-                 // Hide reset form and show login form after a delay
-                 setTimeout(() => {
-                    if (resetPasswordSection.style.display !== 'none') { // Check if still visible
-                        cancelResetButton.click(); // Simulate clicking cancel
-                    }
-                 }, 4000); // 4 seconds
-
-            } catch (error) {
-                console.error("Password Reset Error:", error.code, error.message);
-                 let userMessage = 'Failed to send reset email. Please try again.';
-                 if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-email') {
-                     userMessage = 'Email address not found or invalid.';
-                 } else if (error.code === 'auth/network-request-failed') {
-                     userMessage = 'Network error. Please check your connection.';
-                 }
-                 showMessage(resetMessage, userMessage, true);
-            } finally {
-                hideLoader();
-                enableButton(resetSubmitButton);
-            }
-        });
-    } else {
-        console.error("Reset password form not found.");
-    }
-
-    console.log("Login Desktop JS Initialized and Setup (Dark Blue Theme).");
-}); // End DOMContentLoaded
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-content-area { padding: 40px 15px; }
+    .login-container { padding: 35px 30px; max-width: 95%;}
+    .header { position: static; min-height: 0; padding: 15px 0;} /* Header becomes static */
+    .header-content { flex-direction: column; gap: 15px; }
+    .logo-container { text-align: center; }
+    .header-line { margin: 4px auto 0 auto; }
+    .tabs { gap: 25px; }
+    .tabs a { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+    .login-container { padding: 30px 20px; }
+    .login-header h2 { font-size: 1.5rem; }
+    .subtitle { font-size: 0.9rem; }
+    .form-group label { font-size: 0.9rem; }
+    .form-group input { font-size: 0.95rem; padding: 11px 14px; }
+    .login-button { font-size: 0.95rem; padding: 11px 28px; }
+    .tabs { gap: 15px; }
+    .tabs a { font-size: 0.9rem; padding: 8px 5px; }
+}

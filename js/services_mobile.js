@@ -1,7 +1,3 @@
-/* ==========================================================================
-   SERVICES MOBILE JS (Bordered Content Theme)
-   ========================================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
     // Updated log for Mobile context
     console.log("Services Mobile JS Initialized (Bordered Content Theme).");
